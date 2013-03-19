@@ -14,7 +14,7 @@ Maybe I'll take another look at it when my Python skills have improved.
 
 Then, I found [Pelican][pelican]. It is also written in Python, and it's [documentation][pelicandoc] is just delightful. It shows you how to get started easily, and also how to customized it as needed. Simply awesome. It is also super easy to setup. There is also a Make configuration file that can be used to automate a bunch of stuffs, but the basic commands are easy enough to use. There is a also a script to import data from other blogging platforms, which maybe I'll take a look at later.
 
-[jekyll]: http://www.jekyll.com
-[hyde]: http://www.hyde.com
+[jekyll]: https://github.com/mojombo/jekyll
+[hyde]: https://github.com/hyde/hyde
 [pelican]: http:///www.github.com/getpelican
 [pelicandoc]: http://docs.getpelican.com
