@@ -1,3 +1,5 @@
+## CONFIGURATION FILE FOR PELICAN
+
 AUTHOR = u'Hendra'
 SITENAME = u"the dumpster"
 SITEURL = 'http://www.hndr.me'
