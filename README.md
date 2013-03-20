@@ -18,3 +18,6 @@ To deploy to Heroku, just add an `.htaccess` file with the content:
 and also, add an file named `index.php` to the root directory. This will cause the server to consider the appication as a PHP application, but with the php engine turned off, will serve the static HTML instead. 
 
 or of course, set up whatever server neccesary.
+
+## Heroku Hosting state
+currently, the site is hosted on Heroku, in other words, the generated output are tracked with git. So if the content were to be wiped, the Output needs to be cloned in order to have be tracked to the same repository.
