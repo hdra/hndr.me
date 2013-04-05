@@ -1,0 +1,99 @@
+Title: Events in C#
+Date: 2012-05-30 00:27
+Tags: C#, programming
+
+Alright, last time I posted about `Delegate`, and together with event,
+they are one of the most important concept to understand in event driven
+application framework, such as WPF, Silverlight, and Silverlight for
+WP7, and maybe even WinRT as well (I haven’t tried it), so I believe it
+is important to understand how it work, especially when these two are
+pretty closely related.
+
+I find the explanation on [MSDN][link2] is pretty easy to understand, Event is
+a way for a class to provide notifications to clients when something
+interesting happens. Event is declared with a delegate, in fact, there
+aren’t much difference between a regular delegate and an event. Here is
+an example of an event declaration.
+
+    :::csharp
+    // declare the delegate
+    public delegate void SomethingHappenedEventHandler(object sender,EventArgs e);
+
+    // On the class that has the event
+    public class SomeClass
+    {
+        public event SomethingHappenedEventHandler SomethingHappened;
+    }
+
+It indeed looks like a regular delegate declaration, and indeed, it is
+indeed very similar to a regular delegate, and the 'event' keyword is
+something that we can think of like a modifier, which makes the delegate
+to behaves a little bit different. The first difference is, a delegate
+with an event modifier can be included in an interface, where a regular
+delegate can't. The second one is, a delegate with an event modifier can
+only be called from within the class, but it can be changed/assigned to
+other method that handle the event, where a regular delegate can be
+called by whoever that can access it.
+
+Finally, like what I mentioned on my previous post, event delegate must
+conform to a special restriction, where it must return void, and accepts
+two arguments, an object that invoke the event, and the information
+regarding the event that is derived from the EventArgs class, but this
+is a restriction placed by the .NET framework instead of the C# language
+itself, so, .NET framework has provided a delegate that can be used for
+this, the EventHandler. So, if your event doesn't provide any additional
+data that what is provided by the EventHandler, it is better to just use
+the provided delegate. If you do need to pass additional data, you can
+just inherit the EventArgs class and provide additional infomation in
+the class. There are some others differences between the two, but I
+think those are too advanced and not too relevant in practical usage.
+
+Since event is basically a delegate, a firing event is actually just an
+invocation of the method that the delegate points to, which we usually
+refer to as handling the event. So, in GUI programming, we often see
+this:
+
+    :::csharp
+    Button x = new Button();
+    x.Click += new RoutedEventHandler(x_Click);
+
+That means, somewhere in the Button class declaration, they have an
+event of RoutedEventHandler delegate, and will be called when the the
+necessary condition is fulfilled. Something like this:
+
+    :::csharp
+    public delegate void RoutedEventHandler(object sender,m RoutedEventArgs e);
+
+    public class Button
+    {
+        public event RoutedEventHandler Click;
+        public void checkCondition()
+        {
+            if(mouseOnButton && mouseUp)
+            {
+                if(Click != null)
+                    Click();
+            }
+        }
+    }
+
+Of course, it is not actually implemented like that, but I hope it can
+give you the idea. Maybe the button class will call the `checkCondition`
+periodically, and check if it fulfill the condition to detect a mouse
+click, if it does, it will call the `Click` delegate, which will invoke
+the method that it points to, where in our example, will call the
+`x_Click()` method which we assigned previously using the `+=` operator. In
+this case, we call the `Button` class the event provider, and the class
+that implemented the event handler, the event listener/subscriber.
+
+We can also see that the mouse click event uses a subclass of the
+`EventArgs` class, which may provide additional information of the
+event, such as the time it was triggered, etc. For example, the
+`RoutedEventArgs` class have a property called `Handled` that indicate
+whether the event is to be marked handled.
+
+## References:
+* <http://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx>
+* <http://www.codeproject.com/Articles/11541/The-Simplest-C-Events-Example-Imaginable>
+
+[link2]: http://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx

@@ -1,0 +1,71 @@
+Title: Python learning progress part.1
+Date: 2012-01-09 19:55
+Tags: programming, python
+
+Ok, so last time I mentioned that I began learning Python. with the Zed
+Shaw’s Learn Python The Hard Way as a guide, so far, it has been a
+pretty good experience. So, in this blog, I will try to summarize what I
+learned by trying to explain it in a way that I think easy to
+understand, in doing that I hope I can get more understanding about it.
+
+Before I begin, let me say my impression with it so far. With C++ as the
+first programming language I learned, and the majority of my codes
+written in fully object oriented language such as Java and C#, I find a
+scripting language such as Python to be “different”. To begin with, the
+dynamic typed variables, where a variable can be of any type, an
+integer, a floating point number, a string, or even a function. Most
+people says this is one of Python’s strength, but so far, I haven’t been
+able to figure out how this will help me in creating programs other than
+creating some confusion. Maybe its just me that hasn’t reached the point
+where I can actually take advantage of a dynamically type language such
+as Python.
+
+Anyway, lets go back to the main topic where I will try to explain
+Python in a way where I find easy to understand. I wont be talking about
+the installation of the Python, since its pretty straight forward both
+on Windows and Linux. So I will start with the coding part.
+
+Like most programming language guide, I will begin with a simple hello
+world application. The hello world in Python is very simple.
+
+    :::python
+    print "Hello, World"
+
+That’s all, save it as with a .py extension, and run the command `python filename.py`
+ in the cmd/terminal to run it. Another alternative is to run
+command python in the cmd/terminal to enter the python shell, where the
+python commands can be entered and run like a command prompt
+instruction.
+
+The print statement is pretty straight forward, it will produce the
+output to the screen. Each of the print statement will print the output
+in a new line, so,
+
+    :::python
+    #These will print these two things on a different line
+    print "Hello,"
+    print "Its a wonderful world"
+
+Will print ‘Hello, World’ and ’It’s a wonderful world.’ in a separate
+line, and by the way, the ‘#’ characters comments out the line, so that
+it will be ignored by the Python interpreter. Math are also very simple,
+as usual, combinations of operators and number will do the job.
+
+    :::python
+    print 2+(3-1)*9
+
+The variables in python are dynamically typed, so a variable can be an
+integer, a string, or any other type depending on the value.
+
+    :::python
+    x = 10
+    y = 5
+
+    #will print 15
+    print x+y
+
+    #and we can change it to a value of a different type
+    x = "Now this is a string"
+
+    #we can still print it in the same way
+    print x

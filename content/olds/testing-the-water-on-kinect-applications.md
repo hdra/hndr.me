@@ -1,0 +1,38 @@
+Title: Testing the water on Kinect Applications
+Date: 2011-10-02 16:01
+Tags: kinect, programming
+
+Okay, so I am started planning my final year project this semester, and
+for this first phase, I am only required to do the planning, the
+documentation and well, the report stuffs, but, since I don't have any
+pictures of the Microsoft Kinect application development, I decided to
+do some coding on it as well.
+
+Since there are so many possibilities on what the Kinect can do, there
+are several choices on what kind of application I am going to do, I need
+to narrow it down. My project is trying to use the Kinect to recognize
+sign language, and translate them. In other words, besides doing the
+skeleton tracking, I also need to do some form of gesture recognition,
+and also, I need to at least know a little bit of the sign language
+itself. Of course, I still know very little of those things.
+
+First thing to do, of course I need to look up for some samples of the
+Kinect hack itself, even though it is not doing the same thing, at least
+it can help me get an idea what the Kinect is capable of. It is not a
+difficult thing, a little bit of search on any search engine would get
+me a lot of results.
+
+Here is the one that impressed me the most: <http://www.youtube.com/watch?v=quGhaggn3cQ>
+
+The program can scan the room with the Kinect, and the program will
+process the input from the Kinect, and create a 3d scene with it.
+Imagine what it can do if the Kinect's image sensor have higher
+resolution. I wonder how they did that. Of course, that is much more
+sophisticated than what I am trying to do, just by looking at the people
+involved in the project, you can see how serious that project is.
+
+Here are some of the impressive works: <http://www.youtube.com/watch?v=ho8KVOe\_y08>
+
+and this video shows how it can be integrated with other devices from
+Microsoft: <http://www.youtube.com/watch?v=2mktWd0-WGs>
+

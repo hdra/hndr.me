@@ -1,7 +1,6 @@
 Title: Hello, Pelican
 Slug: hello_pelican
-Author: Hendra
-Summary: Well, time to start bloggin again, and of course, not without trying out new stuff
+Date: 2013-03-15 13:19
 
 Well, it has been a while since I posted anything or do anything with my website for that matter.
 I think I haven't posted anything since I moved to wordpress.com, but well, its time to start playing again.

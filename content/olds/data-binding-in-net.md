@@ -1,0 +1,295 @@
+Title: Data Binding in .NET
+Date: 2012-06-10 10:37
+Tags: C#, programming
+
+I am now trying to use the concept of MVVM in my applications, as I
+believe a proper separation of concerns is very important in building an
+application, as from I personally experienced when developing in PHP
+with CodeIgniter, it really makes development much easier.
+
+So, I think for an event driven application pattern such as WPF,
+Silverlight, and also WP7, (maybe Windows 8 as well), it seems pretty
+obvious to take advantage of the existing abstraction of the framework,
+so MVVM would go well with these kind of applications.
+
+I can understand the concept of the [MVVM pattern][link1] itself quite well,
+but I am not really able to grasp its implementation, I think it is
+because I don't really understand the basic features of the framework
+that the pattern rely on. One of which is the Data Binding. So, here it
+is, my attempt to get better understanding on it.
+
+
+    :::xml
+    <TextBlock Text="{Binding Name}"></TextBlock>
+
+while in the code behind,
+
+    :::csharp
+    namespace PhoneApp1
+    {
+        public partial class MainPage : PhoneApplicationPage
+        {
+            public MyClass dataSource;
+            public MainPage()
+            {
+                InitializeComponent();
+                dataSource = new MyClass();
+                dataSource.name = "Hello";
+                this.DataContext = this.dataSource;
+            }
+        }
+        
+        public class MyClass
+        {
+            private string _name;
+            public string name
+            {
+                get { return _name; }
+                set { _name = value; }
+            }
+        }
+    }
+
+There is one problem with this, when the value of the data source
+changes, the binding target on the UI won’t change along with it, so, to
+make the value of the binding target change along with the data source,
+we need to have our class implement `INotifyPropertyChanged`.
+
+Let’s add a button that will change the value of the data source.
+
+    ::xml
+    <TextBlock Text="{Binding name}"></TextBlock>
+    <Button Content="Button" Name="button1" Click="button1_Click"/>
+
+And change the code behind to:
+
+    :::csharp
+    namespace PhoneApp1
+    {
+        public partial class MainPage : PhoneApplicationPage
+        {
+            // Constructor
+            public MyClass dataSource;
+            public int i = 0;
+            public MainPage()
+            {
+                InitializeComponent();
+                dataSource = new MyClass();
+                dataSource.name = "Hello";
+                this.DataContext = this.dataSource;
+            }
+            private void button1_Click(object sender, RoutedEventArgs e)
+            {
+                i++;
+                this.dataSource.name = i.ToString();
+            }
+        }
+
+        public class MyClass : INotifyPropertyChanged
+        {
+            private string _name;
+            public string name
+            {
+                get { return _name; }
+                set
+                {
+                    if (value != _name)
+                    {
+                        _name = value;
+                        Notify("name");
+                    }
+                }
+            }
+            
+            public event PropertyChangedEventHandler PropertyChanged;
+            void Notify(string propertyName)
+            {
+                if (this.PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+        }
+    }
+
+Now, every time we click on the button, the value of the name property
+will change, and the `TextBlock` will change its content accordingly.
+
+The `INotifyPropertyChanged` interface exposes the `PropertyChanged` event,
+where we would raise when the value of the data is changed, and there
+are the event handler present. One might ask, why? It is because when
+the class is being used as a data source in a binding, the binding
+target will subscribe to the event, and call the necessary method to
+update the view.
+
+There are several modes of binding, the default is `OneWay`, which is a
+binding from the data source to the target, where any changes on the
+data source will be propagated to the target, but not vice versa,
+another mode is `TwoWay`, which is pretty much self descriptive, and also
+`OneTime`, which only set the data when the binding is created. So, if we
+add this textbox to the previous example,
+
+    :::xml
+    <TextBox Text="{Binding name,Mode=TwoWay}"/>
+
+Whenever the value of the textbox is changed, the textblock that is
+bound to the same data source will update its value accordingly. Note
+that we would still need to implement `INotifyPropertyChanged` for the
+view to update as the value changes. We can specify what triggers the
+update back to the source via the `UpdateSourceTrigger` property. Its
+values depends on the dependency properties of the target, on the
+example textbox above, the default trigger is `LostFocus`, so the data
+source will be notified of the new value when the textbox has lost its
+focus. We can also trigger the update manually by setting the property
+to `Explicit`, which will only update the value when the application calls
+`UpdateSource`, e.g. when the user clicks on a button.
+
+There are several [ways][link2] to specify a binding source, the examples
+above specified the data source by setting the `DataContext` property of
+the current page from the code behind. The child elements within the
+page inherit the `DataContext` from its parent, we can see that this
+method is very convenient when we have a single data source that we use
+across the page. We can also set the `DataContext` property directly on
+the element directly, instead of inheriting it from its parent. To
+specify the data source for an element individually, one of the is by
+setting the Source property of the element, by setting the Source
+property, the data will be able to get the data from the source that it
+specify without depending on the data source of its parent element.
+Other options are [RelativeSource][link3], which is used to specify the data
+source relative to the target, and [ElementName][link4] which is useful if you
+want to bind to another element in your view, e.g. binding the height of
+an element to a textbox value.
+
+The examples above shows binding among data source and target of the
+same data type, e.g. string to string, but there are times where we may
+want to bind a source of a different data type, for example, binding the
+background colour of an element to an hexadecimal value, or displaying
+the same date in several different format. One way would be to create an
+additional property with a getter that gets its value from the source,
+but that isn’t a very good way, for one thing, two-way binding and
+property changed notification got more complicated than it should be.
+One solution is to use the `ValueConverter`, which is creating a custom
+class that implements the [IValueConverter][link5] interface. I won’t talk
+about it too much in this post, maybe in some other post, you can read
+more about it on that link. .NET Framework also provide a number of
+converter that we can use.
+
+So far, the examples shows only binding to a single data type, but we
+often need to bind to a collection, for example, binding a listbox to a
+list of person. To implement a collection, we can use one of the generic
+collection classes, such as, `List<T>`, `Collection<T>` and others. We can
+also implement a custom collection by implementing the `IEnumerable`
+interface, but to enable automatic UI update on change, we need a way to
+provide notification on data changes, just as we did with the single
+instance data source. To do that, the collection need to implement the
+[INotifyPropertyChanged][link6] interface,
+but it is recommended to use the class provided by the .NET Framework
+which did the job for us, the `ObservabeCollection<T>` class. Let’s change
+the previous example to show a little bit of collection binding. Lets
+add a listbox to the our application.
+
+    :::xml
+    <ListBox Name="listBox1"ItemsSource="{Binding colls}"/>
+
+Now, let’s change the `MyClass` a little bit, and change the previous
+button click handler to add more element to the collection.
+
+    :::csharp
+    namespace PhoneApp1
+    {
+        public partial class MainPage : PhoneApplicationPage
+        {
+            // Constructor
+            public MyClass dataSource;
+            public int i = 0;
+            public MainPage()
+            {
+                InitializeComponent();
+                dataSource = new MyClass();
+                dataSource.name = "Hello";
+                dataSource.colls = new ObservableCollection<string>() { "string 1", "string 2"};
+                this.DataContext = this.dataSource;
+            }
+
+            private void button1_Click(object sender, RoutedEventArgs e)
+            {
+                i++;
+                this.dataSource.name = i.ToString();
+                dataSource.colls.Add(i.ToString());
+            }
+        }
+
+        public class MyClass : INotifyPropertyChanged
+        {
+            private string _name;
+            public string name
+            {
+                get { return _name; }
+                set
+                {
+                    if (value != _name)
+                    {
+                        _name = value;
+                        Notify("name");
+                    }
+                }
+            }
+
+            public ObservableCollection<string> colls { get; set; }
+            public event PropertyChangedEventHandler PropertyChanged;
+            void Notify(string propertyName)
+            {
+                if (this.PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+        }
+    }
+
+Now, whenever we click the button, a new string will be added to the
+collection, and the listbox content will reflect the changes as well
+because of the `INotifyCollectionChanged` that is implemented by the
+`ObservableCollection`. Note that to detect when the value of individual
+element change, we still need to implement `INotifyPropertyChanged`.
+
+Now, when we are working with a collection of data, often we need to
+filter, sort and group the data based on the current context of the
+application, to do that without changing the underlying data source, we
+can use collections view. I wouldn’t talk much about it in this post,
+but more information about it are available [here][link7] and [here][link8]
+
+On the examples above, we declared our data bindings mostly with XAML,
+and that is indeed the most common usage of data binding, so let’s talk
+more about it. On our examples above, we declared a binding with the
+`{Binding name}`. This is actually a shortcut to declare the binding, we
+know that the child element will get its binding `Source` from its parents
+`DataContext`, and we can actually declare a path to specify which
+property of the source that we want to bind to. So, that declaration
+just now can be written as `{Binding Source={StaticResource dataSource},Path=name}`. We can use StaticResource to refer to an
+instance that we declare in the XAML, so to declare our `dataSource` in
+XAML, we can use something like this:
+
+    :::xml
+    <Page xmlns:c="clr-namespace:PhoneApp1">
+    <phone:PhoneApplicationPage.Resources>
+      <c:MyClass x:Key="dataSource"/>
+    </phone:PhoneApplicationPage.Resources>
+
+If the the `dataContext` itself is the data source that we want to bind
+to, we can just declare the binding with simply `{Binding}`.
+
+## References:
+* <http://www.codeproject.com/Articles/3665/Data-binding-concepts-in-NET-windows-forms>
+* <http://msdn.microsoft.com/en-us/library/ms752347.aspx>
+* <http://www.codeproject.com/Articles/80555/Databinding-in-Silverlight-applications>
+* <http://msdn.microsoft.com/en-us/library/cc278072(v=vs.95).aspx>
+
+[link1]: http://msdn.microsoft.com/en-us/magazine/dd419663.aspx
+[link2]: http://msdn.microsoft.com/en-us/library/ms746695.aspx
+[link3]: http://msdn.microsoft.com/en-us/library/system.windows.data.binding.relativesource.aspx
+[link4]: http://msdn.microsoft.com/en-us/library/system.windows.data.binding.elementname.aspx
+[link5]: http://msdn.microsoft.com/en-us/library/system.windows.data.ivalueconverter.aspx
+[link6]: http://msdn.microsoft.com/en-us/library/system.collections.specialized.inotifycollectionchanged.aspx
+[link7]: http://msdn.microsoft.com/en-us/library/ms752347.aspx#how_to_implement_collections\
+[link8]: http://msdn.microsoft.com/en-us/library/system.windows.data.collectionviewsource.aspx

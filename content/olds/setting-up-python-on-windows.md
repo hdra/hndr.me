@@ -1,0 +1,96 @@
+Title: Setting Up Python on Windows
+Date: 2012-03-22 11:47
+Tags: programming, python, windows
+
+
+Well, it’s a bit late for posting this, considering I have been playing
+with Python for few months as I posted before, but, I recently
+reinstalled my Windows, so I need to setup everything once again. This
+time, I am trying to do it the right way, and my previous Python setup
+isn’t really completely setup anyway, since I did most of my python
+related works on my Linux Mint install. But recently, I have been
+spending more time on Windows because of various things, so, well, here
+goes. The distribution system in Python is a little but complicated, but
+you can read more about it [here][link1] and [here][link2].
+
+Basically, the standard Python distribution utilities is the distutils,
+with it, you can install from the package source with **python setup.py
+install**. But there some problems with it, one of them is that it has
+no way to track dependencies between packages, so there are other tools
+that try to solve that problem, one of which is the **setuptools**. When
+you install the setuptools, it allows you to package your scripts and
+specify any dependencies with it, which can be installed via its
+distribution system, `easy_install` which allows you to install
+packages with `easy_install package_name`. But, the setuptools
+introduces another set of problem, where it causes weird behaviour and
+some packages unusable unless it is installed via setuptools. So, the
+recommended way to package and distribute python package is to use plain
+vanilla distutils to package the scripts, and use **pip** for
+distribution. Instead of specifying dependencies in the setup.py file,
+it allows you to create a separate file to specify the dependencies, and
+process that instead. There are also **distribute** which is a fork of
+setuptools that tries to solve some of its shortcomings.
+
+Ok, now that we got clear, lets actually start setting up python, the
+first one is installing Python itself, simple enough, download the MSI
+installer, run it, and Python is now installed. The next step is adding
+the python directory to the PATH environment variables. This is so that
+you can run the various python commands without typing the full path.
+The first one to add is the Python root directory (C:\\Python27 in my
+case), and also the Scripts directory (C:\\Python27\\Scripts in my case). I
+didn’t add the second one to the PATH before, I wondered why can’t I run
+commands such as pip and virtualenv directly before. and another thing,
+I recently watched a video from pycon 2012 talking about the state of
+Python on Windows, and I think the speaker mentioned something about the
+new releases of Python installers for Windows includes the option to add
+the environment variables and also have some of the directory structure
+changed, but as I only watched the video briefly, I am not sure whether
+it only applies to the new Python 3.x release or to the 2.x release as
+well. I think I will just update it later.
+
+By now, you can say that Python is already completely setup on Windows,
+but there are several other packages that should be installed.
+
+The first one is to get a python package manager, which can be used to
+install and manage the installed packages on your system. There are
+several options you can choose, I am using distribute together with pip.
+To install distribute, the easiest way is download the
+[distribute_setup.py][link3], and run it. To install pip, you can download
+the zip files from http://pypi.python.org/pypi/pip, extract it, navigate
+to the folder, and run python setup.py install.
+
+The next thing you should do is to install virtualenv. virtualenv is
+basically a little python utility to setup a virtual isolated python
+installation apart from your main python installation. With it, you can
+install different version of the same libraries at the same time without
+having them conflicts with each other. To install it, the easiest would
+be to use pip that you installed before, so, run pip install virtualenv.
+
+After you install it, you can run the command virtualenv ENV to create a
+new virtualenv named ENV. Activate it by going into `ENV\scripts\activate`
+which should change your shell prompt accordingly. Now any new packages
+changes will be made locally to the active virtualenv without affecting
+the global installation. After you are done, you can deactivate it and
+switch back to the main python installation by running
+`ENV\scripts\deactivate.bat`.
+
+Next thing to do is to install django itself. Make sure your virtualenv
+is active, unless you want django to be installed to the main django
+installation. The easiest way to install django is to use pip: `pip install django`.
+
+And, you’re done! easy, isn’t it? You can test it by running the python
+shell, and type import django. If there is no error, then you’re good to
+go. Now, if you installed your django into your virtualenv, trying to
+run `django-admin.py` might gives you an `ImportError` saying the it can’t
+find the django.core module. This is because the .py file extensions are
+associated with the main Python installation in your computer, and
+running `django-admin.py` directly from the command line will cause it to
+run the script with that Python installation which doesn’t have django
+installed, so, what you can do is either run the script with python
+manually by specify the path of the `django-admin.py`, or you can modify
+your virtualenv activate script to change the file association, either
+way, its up to you.
+
+[link1]: http://www.b-list.org/weblog/2008/dec/14/packaging/
+[link2]: http://blog.ianbicking.org/2008/12/14/a-few-corrections-to-on-packaging/
+[link3]: http://python-distribute.org/distribute_setup.py

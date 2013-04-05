@@ -1,0 +1,67 @@
+Title: Basic Django Web Application
+Date: 2012-03-23 15:57
+Tags: django, programming, python
+
+For the past few weeks, I have been writing quite a lot in PHP, more
+specifically, CodeIgniter, and to be honest, writing web applications in
+CodeIgniter is really easy and intuitive, and even though I came across
+the MVC pattern (or MVT, for that matter) for the first time in Django,
+I quickly forgotten even the basics of Django. So, in to prevent myself
+from forgetting something like this again in the future, I am writing
+this blogpost, to explain the basic of rendering a web page with Django.
+I will only explain the most necessary functionality, so that means I
+will use shortcuts whenever possible, and I wont be using any model in
+this example, maybe I’ll write that sometime in the future.
+
+Okay, lets start. First of, after installing the django, run
+`django-admin.py startproject basicDjango` to start a new project. Next,
+move into the project directory, and create a new folder named
+`templates`. This will be the folder you use to store the template files
+for the project. We will come back here again later. Now, open up
+`settings.py` and find the line for `TEMPLATE_DIRS`, and add the path to
+the template directory there. Next, on your project’s root directory
+level, create a new file named `views.py`. Open up the file, and enter
+these code which are the basic  functionalities that are in a view
+function:
+
+    :::python
+    # import the necessary modules
+    from django.shortcuts import render_to_response
+
+    def index(request):
+        # render the template index.html with the context
+        # text equals to hello world
+        return render_to_response('index.html',{‘title’:’Index Page’,'text':'Hello, World!'})
+
+The way it works is, it loads up the template file(index.html), and will
+replace the special tags in the template file with dictionary data you
+passed in the second argument. Next, create the template file itself, in
+the templates folder that you made before, create a new file index.html,
+and put this inside it:
+
+    :::html
+    <html>
+        <head>
+            <title>{{title}}</title>
+        </head>
+        <body>
+            <h1>{{text}}</h1>
+        </body>
+    </html>
+
+Now, you got everything setup, and now, you just need to route the
+request to the view function to handle, so to do that, open up urls.py,
+and add this to the url pattern:
+
+    :::python
+    import views
+    urlpatterns = patterns('',(r'^hello/$',views.index),)
+
+Now, you can run `python manage.py runserver`, and navigate to your
+browser to `http://localhost:8000/hello`, and you should see the word
+‘Hello World’ printed out.
+
+Note: If you are on windows, make sure the template paths are written
+with forward slashes ‘/’. That’s all for now, but I think I will make
+another post about how the Template system works in django without
+shortcuts, and also about the model. Well, maybe next time.

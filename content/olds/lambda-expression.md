@@ -1,0 +1,106 @@
+Title: Lambda Expression with C#
+Date: 2012-05-30 21:40
+Tags: C#, programming
+
+Previous in my post regarding delegate, I talked a little about
+anonymous method that can be used with delegates, there are other forms
+to declare inline functions. Both of them are collectively known as
+anonymous functions of C#. Here is one example that shows how different
+method assignments are used with delegate.
+
+    :::csharp
+    class SampleClass
+    {
+        public delegate void SampleDelegate(string s);
+
+        public void SampleMethod(string s)
+        {
+            Console.WriteLine(s);
+        }
+
+        public static void Main(string[] args)
+        {
+            SampleDelegate a = SampleMethod;
+            SampleDelegate b = new SampleDelegate(SampleMethod);
+            SampleDelegate c = delegate(string s){Console.WriteLine(s);};
+            SampleDelegate d = (x) => {Console.WriteLine(x);};
+
+            a("hello");
+            b("hello");
+            c("hello");
+            d("hello");
+        }
+    }
+
+All those methods above do the exact same thing, SampleDelegate d is
+method with lambda expression. Lambda expressions are expressed with the
+lambda operator, “=>”. The left side of the lambda expression specifies
+any input parameter that it may have, and the right side holds the
+expression block.
+
+There are several usage pattern of lambda expression. First up is
+expression lambda, which basically is just a lambda expression with an
+expression on its right side, it return the result of the expression.
+Here is an example.
+
+    :::csharp
+    // parentheses can be omitted if it only has one parameter
+    x => x*x;
+
+    (x,y)=>x*y;
+
+    // use empty parenthese for expression without any parameter
+    ()=>9*9;
+
+The second one, statement lambda, is just a lambda expression with a
+statement on the right side.
+
+    :::csharp
+    x=>{ string s = "Hello,"+x;
+        Console.WriteLine(s);
+    };
+
+Well, that’s it for the most basics of the lambda expression, there are
+other uses of lambda expressions, such as for use with LINQ, but I will
+talk about that later, as that involves some C# features that I’m not
+familiar with yet. BTW, if you wondered why the lambda expressions above
+are missing the return/parameters type, that’s because it is able the
+infer the type from context, but of course, you can still specify the
+type explicitly if that’s what you want.
+
+Update: found an interesting example of the usage of the lambda
+expressions [here][l1], here is a code snippet from it:
+
+    :::csharp"
+    using System;
+    using System.Collections.Generic;
+
+    class Program
+    {
+        static List<T> MyWhereMethod<T>(IEnumerable<T> source, Func<T, bool> predicate)
+        {
+            List<T> l = new List<T>();
+            foreach (T item in source)
+                if (predicate(item))
+                    l.Add(item);
+            return l;
+        }
+
+        static void Main(string[] args)
+        {
+            int[] source = new[] { 3, 8, 4, 6, 1, 7, 9, 2, 4, 8 };
+            List<int> filteredList = MyWhereMethod(source, i => i >= 5);
+
+            foreach (int z in filteredList)
+                Console.WriteLine(z);
+        }
+    }
+
+So, well there is how some of the lambda queries are done.
+
+
+## References:
+* <http://msdn.microsoft.com/en-us/library/bb397687.aspx>
+* <http://www.codeproject.com/Articles/24255/Exploring-Lambda-Expression-in-C>
+
+[l1]:http://blogs.msdn.com/b/ericwhite/archive/2006/10/03/lambda-expressions.aspx

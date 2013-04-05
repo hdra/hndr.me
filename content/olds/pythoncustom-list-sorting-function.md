@@ -1,0 +1,62 @@
+Title: Python–Custom List Sorting Function
+Date: 2012-01-30 19:26
+Tags: programming, python
+
+
+There are several ways to sort a list, where the basic ones is to use
+the list.sort()  method to sort the list without returning anything, or
+use the sorted() function that returns a new sorted list, but this
+mostly works only on list that contains basic data types, if we want to
+sort a list that contains something else (another list, tuple,
+dictionary, custom classes, etc), we need to define a custom sorting
+function.
+
+Sorting in Python is pretty simple, the list class provides a `sort()`
+function that we can use by default.
+
+    :::python
+    ls = [2,3,1,4]
+    ls.sort()
+    print ls #[1,2,3,4]
+
+One of the example of scenario where we need a custom sorting function
+is where we have custom data structure and we want to define which of
+the class attribute that is used as they sorting key, in this case, we
+will specify the key argument of the sorting function. In the examples,
+the list.sort() method is used, but it can be used with the sorted()
+function as well.
+
+    :::python
+    # consider we want to sort a list of string by its length
+
+    ls = ['car','television','laptop','ok']
+
+    # specify key=len , for the len() function that will
+    # return its length given a string
+
+    ls.sort(key=len)
+    print ls # ['ok','car','laptop','television']
+
+The key arguments takes a function name that takes an
+argument and returns an object that will be used as the key, for
+example, to define a custom key function:
+
+    :::python
+    #for example, we want to sort a list of tuples based on its
+    # last element:
+
+    def lastElement(tuple):
+        return tuple[-1]
+
+    ls = [(3,4),(1,2),(5,3),(8,1)]
+    ls.sort(key = lastElement)
+    print ls #[(8,1),(1,2),(5,3),(3,4)]
+
+In addition, you can specify the reverse argument to true if you want it
+to sort the list in descending order.
+
+    :::python
+
+    ls = [1,3,2,4]
+    ls.sort[reversed=True]
+    print ls #[4,3,2,1]

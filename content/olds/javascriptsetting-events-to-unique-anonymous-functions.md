@@ -1,0 +1,34 @@
+Title: Javascript–Setting events to unique anonymous functions
+Date: 2012-05-22 22:24
+Tags: anonymous functions, javascript
+
+Ok, the easiest way to convey my point is with code, so:
+
+    :::javascript
+    function foo(bar){console.log(bar);}
+    for(var i=1;i<5;i++){
+      $('someDiv'+i).onclick=function(){foo(i);};
+    }
+
+Say you are trying to set the onclick event of an array of elements in
+your page, and each of these events need to trigger the same function,
+but passing different parameter, seems simple enough, but if you try to
+run the code above, all of the click events will print the value 5. The
+value of i is 5 because the value is incremented with the for loop
+before it stopped executing, simple enough, but it seems like the
+anonymous functions that we created refer to the same value as well.
+
+So, well, the first thing that comes to mind is I kind of need to create
+"instances" of these anonymous functions individually, with the help of
+this [stackoverflow thread][so], I got to know the answer is self executing
+anonymous function and a return statement, so here it is:
+
+    :::javascript
+    function foo(bar){
+      console.log(bar);
+    }
+    for(var i=1;i<5;i++){
+      $('someDiv'+i).onclick=function(i){return function(){foo(i);};}(i);
+    }
+
+[so]: http://stackoverflow.com/questions/4900029/javascript-context-in-anonymous-functions
