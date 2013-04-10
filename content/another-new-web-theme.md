@@ -8,16 +8,16 @@ Probably because of I have been trying to write a Pelican theme for my own websi
 use, I wanted the website to have a landing page, and also another design for the blog index. 
 I made another attempt at the design recently. Here is the landing page:
 
-[Landing page design][sc1]
+![Landing page design][sc1]
 
 and here is the blog index:
 
-[Blog index page design][sc2]
+![Blog index page design][sc2]
 
 I also managed to made the design responsive. Kind of. I just made the sidebar go to the top
 of the page when the window is resized to below 800 pixels of width. 
 
-[Blog index version 2][sc3]
+![Blog index version 2][sc3]
 
 The design itself is currently still a static HTML page that I made on top of the pretty
 cool [HTML5 Bootstrap][h5bp]. For some reason I got a feeling that I am not using it to its full 
