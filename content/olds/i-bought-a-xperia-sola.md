@@ -49,4 +49,3 @@ this phone.
 
 [sola]: http://api.sonymobile.com/files/xperia-sola-black-464x515.png
 [sola2]: https://farm8.staticflickr.com/7254/7554965796_574e699c83.jpg
-   :target: http://www.flickr.com/photos/hendra2392/7554965796/
