@@ -13,11 +13,19 @@ def init():
         local('git clone -b gh-pages {0} .'.format(remote_git))
 
 
+def update(commit_msg='update'):
+    local('git add -A')
+    local('git commit -m "{0}"'.format(commit_msg))
+    local('git push origin master')
+    local('git push bitbucket master')
+
+
 def pub(commit_msg='Post update'):
     # Update master branch
     local('git add -A')
     local('git commit -m "{0}"'.format(commit_msg))
     local('git push origin master')
+    local('git push bitbucket master')
     # Generate posts
     with prefix(activate):
         local('pelican -s configurations.py -v')

@@ -1,23 +1,22 @@
-HNDR.ME
-=======
+# Initial Setup
+After cloning the repo, setup the whatever theme necessary, set the virtualenv
+path, run:
 
-This is the content website of hndr.me, currently built with Pelican.
+    fab init
 
-To start re-using, install all of the requirements, and change the configurations as necessary.
-Setup the required themes.
+to clone the gh-pages branch. If there is no gh-pages branch in the remote repo, then
+set one up.
 
-To generate the blog:
+# Update
+    fab update:"commit msg"
 
-    pelican -s configurations.py
+Only update the master repository without generating new posts
 
-The content will be generated at `output`. To deploy, just use any static webserver.
-To deploy to Heroku, just add an `.htaccess` file with the content:
+# Publish
+Run:
 
-    php_flag engine off
+    fab pub:"commit msg"
 
-and also, add an file named `index.php` to the root directory. This will cause the server to consider the appication as a PHP application, but with the php engine turned off, will serve the static HTML instead. 
+This will push the updates to remote repos, generate the new posts,
+and publish to gh-pages.
 
-or of course, set up whatever server neccesary.
-
-## Heroku Hosting state
-currently, the site is hosted on Heroku, in other words, the generated output are tracked with git. So if the content were to be wiped, the Output needs to be cloned in order to have be tracked to the same repository.
