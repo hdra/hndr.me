@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr.me</title><link href="http://hdra.github.io/hndr.me/" rel="alternate"></link><link href="http://hdra.github.io/hndr.me/feeds%5Call-en.atom.xml" rel="self"></link><id>http://hdra.github.io/hndr.me/</id><updated>2013-04-13T19:33:00+08:00</updated><entry><title>New Site Design!</title><link href="http://hdra.github.io/hndr.me/blog/new-site-design" rel="alternate"></link><updated>2013-04-13T19:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-13:blog/new-site-design</id><summary type="html">&lt;p&gt;I finally got to converting the last site design I made to a Pelican theme. The &lt;a href="https://github.com/hdra/pelican-cait"&gt;theme&lt;/a&gt; should
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr.me</title><link href="http://hdra.github.io/hndr.me/" rel="alternate"></link><link href="http://hdra.github.io/hndr.me/feeds%5Call-en.atom.xml" rel="self"></link><id>http://hdra.github.io/hndr.me/</id><updated>2013-04-26T16:50:00+08:00</updated><entry><title>Setting up my GitHub Pages</title><link href="http://hdra.github.io/hndr.me/blog/setting-up-my-github-pages" rel="alternate"></link><updated>2013-04-26T16:50:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-26:blog/setting-up-my-github-pages</id><summary type="html">&lt;p&gt;Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just
+create an &lt;code&gt;index.php&lt;/code&gt; file, then add another &lt;code&gt;.htaccess&lt;/code&gt; file to the root of the site, push, and done.
+In this case, I maintained two separate repositories, one that contains the Pelican project, including
+the configuration file, the build script, etc. The other repositories contains the generated HTML
+files.&lt;/p&gt;
+&lt;p&gt;Now, I recently wanted to try hosting the site on GitHub Pages. Hosting on GitHub pages requires
+the content of my site to be in the root of &lt;code&gt;gh-pages&lt;/code&gt; branch. Of course, this would be simple enough
+if I just keep the project files and the generated HTML files in separate repositories just like I
+did before, but I would like to keep them in the same repository, and have a build script to do
+everything for me.&lt;/p&gt;
+&lt;p&gt;Turns out, it is not that simple to achieve that. The most straightforward way to do this is to 
+ create or checkout the &lt;code&gt;gh-pages&lt;/code&gt; branch, generate the HTML files on the same directory, commit, 
+and push as usual. But this would make the &lt;code&gt;gh-pages&lt;/code&gt; branch contains some of the project files. 
+Not a big problem, but it just doesn't feel too clean of a solution. I also tried other methods,
+but none of them feels satisfactory. Ideally, I wanted to have a solution similar what was done
+with &lt;a href="https://github.com/davisp/ghp-import"&gt;ghp-import&lt;/a&gt;, but there are some problems that prevents me from using it. I tried looking 
+at the source of the project, in attempting to understand how it works and try to do the same things
+manually, but well, it seems like my Git-fu are insufficient to understand it. In the end, ended up 
+doing the things similar as what outlined &lt;a href="https://gist.github.com/chrisjacob/833223"&gt;here&lt;/a&gt;. Basially, I am keeping the branches of the 
+same repository in separate directories, but instead of keeping the as a siblings, 
+I made the &lt;code&gt;gh-pages&lt;/code&gt; branch as a child of the child directory of the project. Here is the fabric 
+file I used to build the post:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;fabric.api&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;configurations&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;conf&lt;/span&gt;
+
+
+&lt;span class="n"&gt;output_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;OUTPUT_PATH&lt;/span&gt;
+&lt;span class="n"&gt;remote_git&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;git@github.com:hdra/hndr.me.git&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;activate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;env&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;Scripts&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;activate.bat&amp;#39;&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;init&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;mkdir {0}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_dir&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;lcd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_dir&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git clone -b gh-pages {0} .&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;remote_git&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;update&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git add -A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git commit -m &amp;quot;{0}&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git push origin master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git push bitbucket master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;pub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Post update&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c"&gt;# Update master branch&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git add -A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git commit -m &amp;quot;{0}&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git push origin master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git push bitbucket master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c"&gt;# Generate posts&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;activate&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;pelican -s configurations.py -v&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c"&gt;# Update gh-pages branch&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;lcd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;output&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git add -A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git commit -m &amp;quot;{0}&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;git push origin gh-pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That seems to work pretty cleanly so far. One problem is when creating a new project and its &lt;code&gt;gh-pages&lt;/code&gt;
+branch for the first time. In my case, I dealt with it by creating the a new branch as usual,
+and then deleting the project files in the &lt;code&gt;gh-pages&lt;/code&gt; branch manually, but I think it can be done by
+creating an orphan page with the &lt;code&gt;git checkout --orphan gh-pages&lt;/code&gt; command as well. Anyway, this 
+needs to be done only once, so it shouldn't be too much of a problem.&lt;/p&gt;</summary><category term="programming"></category></entry><entry><title>New Site Design!</title><link href="http://hdra.github.io/hndr.me/blog/new-site-design" rel="alternate"></link><updated>2013-04-13T19:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-13:blog/new-site-design</id><summary type="html">&lt;p&gt;I finally got to converting the last site design I made to a Pelican theme. The &lt;a href="https://github.com/hdra/pelican-cait"&gt;theme&lt;/a&gt; should
 be in use by the time this post is published. In its current state, I wouldn't say the theme is 
 compeletely finished. I tried to make it responsive to screen size changes, but during my
 testing, I found some problem viewing it in iOS Safari when there is a long line of continuos text

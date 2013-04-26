@@ -52,6 +52,29 @@
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
+                        <time class="post-time" datetime="2012-05-22T23:19:00" pubdate>
+                            Tue 22 May 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/c-optional-arguments-and-constructor-chaining" rel="bookmark"><h1>C#–Optional Arguments and Constructor Chaining</h1></a>
+                    </header>
+                    <section class="post-content">
+                        <p>Learned something new about C# today, first thing is Constructor
+Chaining.  Constructor chaining enables constructors to call another
+overloaded constructor, with it, the amount of duplicate code can be
+reduced significantly, here is an example:</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span><span class="p">{</span>
+    <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">address</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">Person</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">):</span><span class="k">this</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty ...</span></pre></div>
+                    </section>
+                </article>
+            </li>
+            <hr/>
+                        <li>
+                <article class="post-entry">
+                    <header class="entry-header">
                         <time class="post-time" datetime="2012-03-28T21:59:00" pubdate>
                             Wed 28 March 2012
                         </time>
@@ -113,24 +136,6 @@ the MVC pattern (or MVT, for that matter) for the first time in ...</p>
 with Python for few months as I posted before, but, I recently
 reinstalled my Windows, so I need to setup everything once again. This
 time, I am trying to do it the right way, and my ...</p>
-                    </section>
-                </article>
-            </li>
-            <hr/>
-                        <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2012-02-25T23:06:00" pubdate>
-                            Sat 25 February 2012
-                        </time>
-                        <a href="http://hdra.github.io/hndr.me/blog/python-generator-expression" rel="bookmark"><h1>Python Generator Expression</h1></a>
-                    </header>
-                    <section class="post-content">
-                        <p>Continuing the last post, another thing i would like to note is the
-generator expression in python. The function is almost the same as the
-list comprehension, but instead of processing the whole data structures
-at once, it performs the works one at a time. This would mean less
-memory ...</p>
                     </section>
                 </article>
             </li>

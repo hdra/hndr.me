@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Setting up my GitHub Pages
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2013-04-26T16:50:00" pubdate>
+                            Fri 26 April 2013
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/setting-up-my-github-pages" rel="bookmark"><h1>Setting up my GitHub Pages</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just
+create an <code>index.php</code> file, then add another <code>.htaccess</code> file to the root of the site, push, and done.
+In this case, I maintained two separate repositories, one that contains the Pelican project, including
+the configuration file, the build script, etc. The other repositories contains the generated HTML
+files.</p>
+<p>Now, I recently wanted to try hosting the site on GitHub Pages. Hosting on GitHub pages requires
+the content of my site to be in the root of <code>gh-pages</code> branch. Of course, this would be simple enough
+if I just keep the project files and the generated HTML files in separate repositories just like I
+did before, but I would like to keep them in the same repository, and have a build script to do
+everything for me.</p>
+<p>Turns out, it is not that simple to achieve that. The most straightforward way to do this is to 
+ create or checkout the <code>gh-pages</code> branch, generate the HTML files on the same directory, commit, 
+and push as usual. But this would make the <code>gh-pages</code> branch contains some of the project files. 
+Not a big problem, but it just doesn't feel too clean of a solution. I also tried other methods,
+but none of them feels satisfactory. Ideally, I wanted to have a solution similar what was done
+with <a href="https://github.com/davisp/ghp-import">ghp-import</a>, but there are some problems that prevents me from using it. I tried looking 
+at the source of the project, in attempting to understand how it works and try to do the same things
+manually, but well, it seems like my Git-fu are insufficient to understand it. In the end, ended up 
+doing the things similar as what outlined <a href="https://gist.github.com/chrisjacob/833223">here</a>. Basially, I am keeping the branches of the 
+same repository in separate directories, but instead of keeping the as a siblings, 
+I made the <code>gh-pages</code> branch as a child of the child directory of the project. Here is the fabric 
+file I used to build the post:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">configurations</span> <span class="kn">as</span> <span class="nn">conf</span>
+
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">OUTPUT_PATH</span>
+<span class="n">remote_git</span> <span class="o">=</span> <span class="s">&#39;git@github.com:hdra/hndr.me.git&#39;</span>
+<span class="n">activate</span> <span class="o">=</span> <span class="s">&#39;env</span><span class="se">\\</span><span class="s">Scripts</span><span class="se">\\</span><span class="s">activate.bat&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;mkdir {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_dir</span><span class="p">))</span>
+    <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="n">output_dir</span><span class="p">):</span>
+        <span class="n">local</span><span class="p">(</span><span class="s">&#39;git clone -b gh-pages {0} .&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remote_git</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="s">&#39;update&#39;</span><span class="p">):</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git add -A&#39;</span><span class="p">)</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git commit -m &quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">commit_msg</span><span class="p">))</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git push origin master&#39;</span><span class="p">)</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git push bitbucket master&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">pub</span><span class="p">(</span><span class="n">commit_msg</span><span class="o">=</span><span class="s">&#39;Post update&#39;</span><span class="p">):</span>
+    <span class="c"># Update master branch</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git add -A&#39;</span><span class="p">)</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git commit -m &quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">commit_msg</span><span class="p">))</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git push origin master&#39;</span><span class="p">)</span>
+    <span class="n">local</span><span class="p">(</span><span class="s">&#39;git push bitbucket master&#39;</span><span class="p">)</span>
+    <span class="c"># Generate posts</span>
+    <span class="k">with</span> <span class="n">prefix</span><span class="p">(</span><span class="n">activate</span><span class="p">):</span>
+        <span class="n">local</span><span class="p">(</span><span class="s">&#39;pelican -s configurations.py -v&#39;</span><span class="p">)</span>
+    <span class="c"># Update gh-pages branch</span>
+    <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="s">&#39;output&#39;</span><span class="p">):</span>
+        <span class="n">local</span><span class="p">(</span><span class="s">&#39;git add -A&#39;</span><span class="p">)</span>
+        <span class="n">local</span><span class="p">(</span><span class="s">&#39;git commit -m &quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">commit_msg</span><span class="p">))</span>
+        <span class="n">local</span><span class="p">(</span><span class="s">&#39;git push origin gh-pages&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>That seems to work pretty cleanly so far. One problem is when creating a new project and its <code>gh-pages</code>
+branch for the first time. In my case, I dealt with it by creating the a new branch as usual,
+and then deleting the project files in the <code>gh-pages</code> branch manually, but I think it can be done by
+creating an orphan page with the <code>git checkout --orphan gh-pages</code> command as well. Anyway, this 
+needs to be done only once, so it shouldn't be too much of a problem.</p>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/randoms.html">randoms</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/programming.html">programming</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>
