@@ -10,7 +10,7 @@ activate = 'env\\Scripts\\activate.bat'
 def init():
     local('mkdir {0}'.format(output_dir))
     with lcd(output_dir):
-        local('git clone -b gh-pages {0}'.format(remote_git))
+        local('git clone -b gh-pages {0} .'.format(remote_git))
 
 
 def pub(commit_msg='Post update'):
