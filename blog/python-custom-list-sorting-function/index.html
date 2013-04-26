@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Python–Custom List Sorting Function
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-01-30T19:26:00" pubdate>
+                            Mon 30 January 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/python-custom-list-sorting-function" rel="bookmark"><h1>Python–Custom List Sorting Function</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>There are several ways to sort a list, where the basic ones is to use
+the list.sort()  method to sort the list without returning anything, or
+use the sorted() function that returns a new sorted list, but this
+mostly works only on list that contains basic data types, if we want to
+sort a list that contains something else (another list, tuple,
+dictionary, custom classes, etc), we need to define a custom sorting
+function.</p>
+<p>Sorting in Python is pretty simple, the list class provides a <code>sort()</code>
+function that we can use by default.</p>
+<div class="highlight"><pre><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c">#[1,2,3,4]</span>
+</pre></div>
+
+
+<p>One of the example of scenario where we need a custom sorting function
+is where we have custom data structure and we want to define which of
+the class attribute that is used as they sorting key, in this case, we
+will specify the key argument of the sorting function. In the examples,
+the list.sort() method is used, but it can be used with the sorted()
+function as well.</p>
+<div class="highlight"><pre><span class="c"># consider we want to sort a list of string by its length</span>
+
+<span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;car&#39;</span><span class="p">,</span><span class="s">&#39;television&#39;</span><span class="p">,</span><span class="s">&#39;laptop&#39;</span><span class="p">,</span><span class="s">&#39;ok&#39;</span><span class="p">]</span>
+
+<span class="c"># specify key=len , for the len() function that will</span>
+<span class="c"># return its length given a string</span>
+
+<span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c"># [&#39;ok&#39;,&#39;car&#39;,&#39;laptop&#39;,&#39;television&#39;]</span>
+</pre></div>
+
+
+<p>The key arguments takes a function name that takes an
+argument and returns an object that will be used as the key, for
+example, to define a custom key function:</p>
+<div class="highlight"><pre><span class="c">#for example, we want to sort a list of tuples based on its</span>
+<span class="c"># last element:</span>
+
+<span class="k">def</span> <span class="nf">lastElement</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">ls</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="n">lastElement</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c">#[(8,1),(1,2),(5,3),(3,4)]</span>
+</pre></div>
+
+
+<p>In addition, you can specify the reverse argument to true if you want it
+to sort the list in descending order.</p>
+<div class="highlight"><pre><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">[</span><span class="nb">reversed</span><span class="o">=</span><span class="bp">True</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c">#[4,3,2,1]</span>
+</pre></div>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/olds.html">olds</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/programming.html">programming</a>, <a href="http://hdra.github.io/hndr.me/tag/python.html">python</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

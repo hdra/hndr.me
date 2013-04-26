@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr.me</title><link href="http://hdra.github.io/hndr.me/" rel="alternate"></link><link href="http://hdra.github.io/hndr.me/feeds%5Crandoms.atom.xml" rel="self"></link><id>http://hdra.github.io/hndr.me/</id><updated>2013-04-13T19:33:00+08:00</updated><entry><title>New Site Design!</title><link href="http://hdra.github.io/hndr.me/blog/new-site-design" rel="alternate"></link><updated>2013-04-13T19:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-13:blog/new-site-design</id><summary type="html">&lt;p&gt;I finally got to converting the last site design I made to a Pelican theme. The &lt;a href="https://github.com/hdra/pelican-cait"&gt;theme&lt;/a&gt; should
+be in use by the time this post is published. In its current state, I wouldn't say the theme is 
+compeletely finished. I tried to make it responsive to screen size changes, but during my
+testing, I found some problem viewing it in iOS Safari when there is a long line of continuos text
+in the page. For some reason &lt;code&gt;overflow-wrap: break-word;&lt;/code&gt; doesn't seem to work in it, even though
+it works fine in Chrome and Firefox for Android.&lt;/p&gt;
+&lt;p&gt;That aside, the are also a lot of repetition and duplicate codes in the CSS and Jinja2 template.
+The templates in particular aren't very flexible. There are a number of values that needs to be
+specified in the configuration file for it to be usable. Pages also can't be listed 
+the normal way since I turned one of the page template into the index page for my site.&lt;/p&gt;
+&lt;p&gt;All that said, I think it is ready to be put out there. If I sit on it any longer, I am pretty sure
+I would lose interest in it pretty soon. As they say, &lt;a href="http://www.codinghorror.com/blog/2009/12/version-1-sucks-but-ship-it-anyway.html"&gt;ship early, ship often&lt;/a&gt;. Maybe this
+shouldn't even be a version 1, but it is a start.&lt;/p&gt;</summary><category term="personal"></category></entry><entry><title>Made another design for the blog</title><link href="http://hdra.github.io/hndr.me/blog/made-another-design-for-the-blog" rel="alternate"></link><updated>2013-04-10T09:02:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-10:blog/made-another-design-for-the-blog</id><summary type="html">&lt;p&gt;Recently I have been spending my time messing around with website front-end development.
+Probably because of I have been trying to write a Pelican theme for my own website. For My own 
+use, I wanted the website to have a landing page, and also another design for the blog index. 
+I made another attempt at the design recently. Here is the landing page:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Landing page design" src="http://farm9.staticflickr.com/8254/8636534196_ac410cec50.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;and here is the blog index:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Blog index page design" src="http://farm9.staticflickr.com/8519/8636534164_497989410e.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;I also managed to made the design responsive. Kind of. I just made the sidebar go to the top
+of the page when the window is resized to below 800 pixels of width. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Blog index version 2" src="https://farm9.staticflickr.com/8248/8635873575_153dd6e05e.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;The design itself is currently still a static HTML page that I made on top of the pretty
+cool &lt;a href="http://html5boilerplate.com/"&gt;HTML5 Bootstrap&lt;/a&gt;. For some reason I got a feeling that I am not using it to its full 
+potential, as I don't really utilizes anything from it beyond the basic page structure and the 
+included &lt;code&gt;normalize.css&lt;/code&gt;. Obviously I am doing something wrong. One thing that I notice in the 
+main CSS file is this line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;@media&lt;/span&gt; &lt;span class="nt"&gt;only&lt;/span&gt; &lt;span class="nt"&gt;screen&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;35em&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I knew about the media query and used it before, but I used to use it with the &lt;code&gt;max-width&lt;/code&gt; instead.
+So, the idea here is to design for the mobile version first, then make the necessary changes for
+the larger screen. I have heard about this mobile-first approach a lot before, and I am aware 
+of the arguements for and against it, but I never really
+gave it any thought, mostly because I am not doing any serious front-end stuff anyway, but I am 
+thinking of trying this approach for my next try on web design. &lt;/p&gt;
+&lt;p&gt;I am also planning to play around more with front-end development. The past few days trying to make
+the HTML page to look exactly how I want it to look like made me realize that I don't really know much 
+about front-end development. Most of the time, web-development for me consists of dealing with generating
+HTML page from the server and maybe make a Javascript function to make a server call to change the 
+page dynamically, but I never really go deep into HTML and CSS itself. Looking into more than
+tools and frameworks that I can use to make the job easier.&lt;/p&gt;
+&lt;p&gt;Anyway, as mentioned before, the designs above are still in a static HTML form, and I think it 
+is good enough for me to use. Maybe I'll turn it into a proper Pelican theme soon.&lt;/p&gt;</summary><category term="programming"></category><category term="design"></category></entry><entry><title>Still Working</title><link href="http://hdra.github.io/hndr.me/blog/still-working" rel="alternate"></link><updated>2013-04-03T17:16:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-03:blog/still-working</id><summary type="html">&lt;p&gt;It has been a few weeks since I decided to start blogging again, but well, as usual not
+much has been done on it.
+For starter, I initially planned to host it on Heroku, following the tricks outline &lt;a href="http://kennethreitz.org/exposures/static-sites-on-heroku-cedar"&gt;here&lt;/a&gt;,
+and it is super simple to setup. I had created a new Heroku app, generated the blog, and pushed
+the generated content to Heroku in just a few minutes. In another minute, and I had setup the
+custom domain and had everything working nicely. &lt;/p&gt;
+&lt;p&gt;Problem is, even though the site itself is just a bunch of static files, the first time I visited 
+the site, it took a few seconds to load the content, but when I visit it again for the second time, 
+it served the site almost immediately. At first, I thought it was because of the site is cached by 
+the browser, so it loads much quicker, but even when I cleared the browser cache, it still loads the
+same way. After a bit of googling, I &lt;a href="https://devcenter.heroku.com/articles/dynos"&gt;found&lt;/a&gt; out that Heroku will turn off the dyno after an 
+hour of inactivity, so everytime I visit the site after a period of idling, the dyno will need to 
+be started again at that time. Not much of a problem, considering I am not even paying for the 
+amazing service that Heroku provide, and there &lt;a href="http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling"&gt;ways&lt;/a&gt; to get around it anyway. I probably won't 
+be using it, since I am still playing around with the hosting options around anyway.&lt;/p&gt;
+&lt;p&gt;Other popular service that people use to host their static site seems to be &lt;a href="http://pages.github.com/"&gt;Github Pages&lt;/a&gt;. After
+looking around on how to set it up, seems like it is pretty easy to set it up. The Pelican makefile
+even includes a build option for this setup. The site will be hosted in a repository just like any
+other git repo, but the site index will need to be on the &lt;code&gt;gh-pages&lt;/code&gt; branch. In other words, the 
+content of the site will be open source. Not a problem though, since any webpage that are publicly
+accessible are basically open source anyway. Maybe I'll move the site here after I am done setting
+the website itself.&lt;/p&gt;
+&lt;p&gt;On building the site itself, I just converted some of my old wordpress posts to Markdown, which 
+should be published along with this post. The automatic converter doesn't work too well, since many 
+of posts contains some really badly formed markups, so I ended up manually converting the most of 
+posts. I also took the chance to just remove many of the rants/silly posts, not saying that there 
+aren't any silly posts left anyway.&lt;/p&gt;
+&lt;p&gt;I am still playing around with the pelican configurations and options, on how to setup different
+static pages, building a theme, etc. Speaking about the theme, I drafted a theme of my own.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of the WIP theme" src="http://farm9.staticflickr.com/8394/8615163439_30ea63f405.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Initially I liked it quite a bit, but after leaving it there for a few days, when I came back to 
+work on it again, I found it to be not very attractive anymore. So, no need to say, I scrapped it,
+and started working from scratch. This time, planning the overall sites, starting from the landing 
+page, static pages, comments, and of course the blog itself. Of course, it won't be around anytime
+soon. For the time being, the default Pelican theme seems more than good enough for me.&lt;/p&gt;</summary><category term="personal"></category></entry><entry><title>Hello, Pelican</title><link href="http://hdra.github.io/hndr.me/blog/hello_pelican" rel="alternate"></link><updated>2013-03-15T13:19:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-03-15:blog/hello_pelican</id><summary type="html">&lt;p&gt;Well, it has been a while since I posted anything or do anything with my website for that matter.
+I think I haven't posted anything since I moved to wordpress.com, but well, its time to start playing again.&lt;/p&gt;
+&lt;p&gt;So, again, I moved almost everything. Hosting, domain, and also the blogging platform. I have been wanting to try out some of the static site generator for a while now. The most popular one seems to be &lt;a href="https://github.com/mojombo/jekyll"&gt;Jekyll&lt;/a&gt;. It is built on Ruby, and seems like a lot of people are using it. 
+Problem is, it is kind of a pain to setup on Windows, and I wanted to be able to built things for it, or at least my own theme for my blog, and my knowledge of Ruby doesn't go too far beyond the Hello World. So I continued my search, this time, specifically looking for a static site generator built on something that I can program in, maybe it is C#, Javascript, PHP, or of course Python.&lt;/p&gt;
+&lt;p&gt;And indeed I found quite a lot of awesome projects for Python. The most famous one seems to be &lt;a href="https://github.com/hyde/hyde"&gt;Hyde&lt;/a&gt;. One problem though, the documentation seems to be severely lacking. I went through the website for almost an hour, and I barely have any idea on how to use and customize it. 
+Maybe I'll take another look at it when my Python skills have improved.&lt;/p&gt;
+&lt;p&gt;Then, I found &lt;a href="http:///www.github.com/getpelican"&gt;Pelican&lt;/a&gt;. It is also written in Python, and it's &lt;a href="http://docs.getpelican.com"&gt;documentation&lt;/a&gt; is just delightful. It shows you how to get started easily, and also how to customized it as needed. Simply awesome. It is also super easy to setup. There is also a Make configuration file that can be used to automate a bunch of stuffs, but the basic commands are easy enough to use. There is a also a script to import data from other blogging platforms, which maybe I'll take a look at later.&lt;/p&gt;</summary></entry></feed>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Python Learning–Part 3
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-01-12T20:10:00" pubdate>
+                            Thu 12 January 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/python-learning-part-3" rel="bookmark"><h1>Python Learning–Part 3</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>Well, I was pretty busy this week, and I haven’t touch too much of
+Python these days, and even if if I done some exercise on Python, I was
+too lazy to write up a blog post for it, but I promised I will blog more
+to keep track of my progress, so here I am writing this.</p>
+<p>Ok, so this time, I want to talk about the getting input from the user,
+and  flow control in Python, in other words, I am going to talk about
+conditional statement and loop.</p>
+<p>Let’s start with the user input. The basic input function in python is
+<code>raw_input()</code>, which gets whatever the user entered, and process it as a
+string. You can pass an optional string argument that will be used as
+the prompt, here is an example code:</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;What is your name?&quot;</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Hello, </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">name</span>
+
+<span class="c">#or you can pass the prompt as an argument</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;What is your name?&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Hello, </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span><span class="o">%</span><span class="n">name</span>
+</pre></div>
+
+
+<p>Another option is to use the <code>input()</code>, which is is similar to the
+<code>raw_input</code>, except that the user input isn’t processed as a string, but
+as an expression. So, if you entered a number, it will process the input
+as a number, or if you entered an variable name, it will be processed as
+an variable, and so on</p>
+<div class="highlight"><pre><span class="c"># x is 5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a number: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;5&#39;</span>
+
+<span class="c"># x is 12</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter another number: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;4*3&#39;</span>
+
+<span class="c"># this will produce an error, because John is not defined as a variable</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a name: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;John&#39;</span>
+<span class="c"># y will be equal to x, because the input will be processed as avariable</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a letter: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;x&#39;</span>
+</pre></div>
+
+
+<p>Ok, the next part is where things start to get fun, the basic flow
+control in python using if, elif, and else. Before I begin, let me talk
+a little bit about code blocks and boolean values. Code blocks are
+basically a group of code, which can consist of one or more statements
+and declarations. In addition, the variables inside a code block are
+isolated from the code outside of the block, so a variable declared
+inside a code block cant be used outside of the block. Code blocks are
+used in many places in programming, one of them is the conditional and
+looping statements. Code blocks are expressed in various ways in
+different programming languages, some of them uses the curly braces { }
+(C++, C#, Java), some of them uses the BEGIN and END (VB) keyword, and
+in Python, we uses indentation (4 spaces), so the codes that are
+indented  are considered as a block of code, and to nest several levels
+of code blocks, just add more indentation to the lines of code.</p>
+<p>Boolean values are basically logical true or false values. Comparison
+operators will always return a boolean value of either true or false,
+even though comparison operators are not the only thing that can return
+a boolean value, it is the basics of it. Comparison operations in Python
+are pretty much self-explanatory, and it is similar to other programming
+language:</p>
+<div class="highlight"><pre><span class="c">#Equal</span>
+<span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span> <span class="c">#True</span>
+<span class="mi">5</span> <span class="o">!=</span> <span class="mi">5</span> <span class="c">#False</span>
+
+<span class="c">#Greater than/Equal</span>
+<span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="c">#False</span>
+<span class="mi">5</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="c">#True</span>
+
+<span class="c">#Less than/Equal</span>
+<span class="mi">5</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="c">#False</span>
+<span class="mi">5</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="c">#True</span>
+<span class="mi">3</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="c">#True</span>
+<span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="c">#True</span>
+<span class="mi">5</span> <span class="o">!=</span> <span class="mi">10</span> <span class="c">#True</span>
+
+<span class="c"># there are also the &#39;and&#39;, &#39;or&#39;, and &#39;not&#39; keyword</span>
+<span class="c"># and will evaluate to true if both are true</span>
+<span class="c"># or will evaluate to true if one of the is true</span>
+<span class="c"># and not will produce the reverse value</span>
+
+<span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="c">#True</span>
+<span class="mi">3</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="c">#False</span>
+<span class="mi">3</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">or</span> <span class="mi">2</span> <span class="o">&lt;</span><span class="mi">5</span> <span class="c">#True</span>
+<span class="ow">not</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span> <span class="c">#False</span>
+
+<span class="c">#and so on</span>
+</pre></div>
+
+
+<p>I am not sure how to explain code indentation in plain english, so let
+me just write some example if statement code,</p>
+<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Please enter a number: &quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;You entered a number greater than 10&quot;</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;You entered a number that is less than 5&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;You entered a number between 5 and 10&quot;</span>
+</pre></div>
+
+
+<p>As you can see, the if statement will test if the statement
+is true or not, followed by a colon and an indented lines to specify
+which code to execute if the statement evaluates to true, the next elif
+statement will be executed only if the first if statement is false, and
+it will test it the statement again. You can put as many elif statement
+as you want, and finally, an else statement is put there to specify
+which code to execute if all of the tests before it evaluate to false.
+The elif and the else statement are optional, which means you can write
+a code to only run when a certain condition is met, or do nothing if
+that certain condition is not met. </p>
+<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;Enter your name: &quot;</span><span class="p">)</span>
+
+<span class="c">#Only print these statements if the name is John</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s">&quot;John&quot;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;Hello, John! Good to see you again.&quot;</span>
+    <span class="k">print</span> <span class="s">&quot;What can I do for you today, </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">x</span>
+</pre></div>
+
+
+<p>The next thing I am going to talk about is looping. Similar
+to the conditional statement, looping uses code blocks to specify
+several statements of code to run as well. There are two ways to create
+a loop, the first one is the while loop, which will continue to run as
+long as the boolean statement remains true. </p>
+<div class="highlight"><pre><span class="c"># This one will run the loop endlessly, because the boolean statement</span>
+<span class="c"># is hardcoded as True</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;Never ending loop&quot;</span>
+    <span class="k">print</span> <span class="s">&quot;Press ctrl-c or ctrl-z to terminate&quot;</span>
+
+<span class="c"># You should add a statement to eventually cause the boolean statement</span>
+<span class="c"># turns False</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="c">#initialize x to 1</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c">#continue to run the loop as long as the value of x &lt; 10</span>
+    <span class="k">print</span> <span class="s">&quot;Count no.</span><span class="si">%d</span><span class="s">&quot;</span><span class="o">%</span><span class="n">x</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c">#increase the value of x by one on each iterations</span>
+           <span class="c">#so that eventually the x &lt; 10 statement will be false</span>
+</pre></div>
+
+
+<p>The second type of loop is the for loop, which will loop through the
+content of a list one by one. (I will talk about list in another post,
+but basically, a list is just a sequence of values that is identified by
+a single variable).</p>
+<div class="highlight"><pre><span class="c"># the basic syntax of a for loop is:</span>
+<span class="c"># for [variable name] in [list]:</span>
+<span class="c"># #codes for the loop</span>
+<span class="c"># for example:</span>
+
+<span class="c">#Defining a list, more on this later</span>
+<span class="n">nameList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;John&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Adam&#39;</span><span class="p">]</span>
+
+<span class="c"># running the loop, printing the content of the list</span>
+<span class="c"># one by one</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">nameList</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;Hello,</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">name</span>
+
+<span class="c"># The code above will print John,Jack and Adam on the console</span>
+<span class="c"># You can also generate a list of numbers by using the range function</span>
+<span class="c"># the range function takes two arguments, the beginning and the end of</span>
+<span class="n">the</span> <span class="nb">list</span>
+
+<span class="c"># Will print the numbers 2-10</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">i</span>
+</pre></div>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/olds.html">olds</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/programming.html">programming</a>, <a href="http://hdra.github.io/hndr.me/tag/python.html">python</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

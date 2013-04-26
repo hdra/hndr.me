@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Basic Django Web Application
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-03-23T15:57:00" pubdate>
+                            Fri 23 March 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/basic-django-web-application" rel="bookmark"><h1>Basic Django Web Application</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>For the past few weeks, I have been writing quite a lot in PHP, more
+specifically, CodeIgniter, and to be honest, writing web applications in
+CodeIgniter is really easy and intuitive, and even though I came across
+the MVC pattern (or MVT, for that matter) for the first time in Django,
+I quickly forgotten even the basics of Django. So, in to prevent myself
+from forgetting something like this again in the future, I am writing
+this blogpost, to explain the basic of rendering a web page with Django.
+I will only explain the most necessary functionality, so that means I
+will use shortcuts whenever possible, and I wont be using any model in
+this example, maybe I’ll write that sometime in the future.</p>
+<p>Okay, lets start. First of, after installing the django, run
+<code>django-admin.py startproject basicDjango</code> to start a new project. Next,
+move into the project directory, and create a new folder named
+<code>templates</code>. This will be the folder you use to store the template files
+for the project. We will come back here again later. Now, open up
+<code>settings.py</code> and find the line for <code>TEMPLATE_DIRS</code>, and add the path to
+the template directory there. Next, on your project’s root directory
+level, create a new file named <code>views.py</code>. Open up the file, and enter
+these code which are the basic  functionalities that are in a view
+function:</p>
+<div class="highlight"><pre><span class="c"># import the necessary modules</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c"># render the template index.html with the context</span>
+    <span class="c"># text equals to hello world</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;index.html&#39;</span><span class="p">,{</span><span class="err">‘</span><span class="n">title</span><span class="err">’</span><span class="p">:</span><span class="err">’</span><span class="n">Index</span> <span class="n">Page</span><span class="err">’</span><span class="p">,</span><span class="s">&#39;text&#39;</span><span class="p">:</span><span class="s">&#39;Hello, World!&#39;</span><span class="p">})</span>
+</pre></div>
+
+
+<p>The way it works is, it loads up the template file(index.html), and will
+replace the special tags in the template file with dictionary data you
+passed in the second argument. Next, create the template file itself, in
+the templates folder that you made before, create a new file index.html,
+and put this inside it:</p>
+<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>{{title}}<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>{{text}}<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+
+<p>Now, you got everything setup, and now, you just need to route the
+request to the view function to handle, so to do that, open up urls.py,
+and add this to the url pattern:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">views</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,(</span><span class="s">r&#39;^hello/$&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),)</span>
+</pre></div>
+
+
+<p>Now, you can run <code>python manage.py runserver</code>, and navigate to your
+browser to <code>http://localhost:8000/hello</code>, and you should see the word
+‘Hello World’ printed out.</p>
+<p>Note: If you are on windows, make sure the template paths are written
+with forward slashes ‘/’. That’s all for now, but I think I will make
+another post about how the Template system works in django without
+shortcuts, and also about the model. Well, maybe next time.</p>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/olds.html">olds</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/django.html">django</a>, <a href="http://hdra.github.io/hndr.me/tag/programming.html">programming</a>, <a href="http://hdra.github.io/hndr.me/tag/python.html">python</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

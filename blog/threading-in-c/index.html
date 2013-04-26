@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Threading in C#
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-05-31T23:05:00" pubdate>
+                            Thu 31 May 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/threading-in-c" rel="bookmark"><h1>Threading in C#</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>Well, this time, I am going to talk about thread, the concept of thread
+is pretty simple to understand, so I wont explain the here, but you can
+read more about it in this <a href="http://en.wikipedia.org/wiki/Thread_(computing)">wiki page</a>. Threading are used quite
+extensively in most modern computer programs, for example separating
+threads to handle button clicks on a GUI button from the one that
+handles data processing, or in chatting programs, where it separates
+threads to send messages from the one that handles incoming messages and
+display it on the screen.</p>
+<p>In .NET, threading is handled by the <code>Thread</code> class, which lives in
+the <code>System</code> namespace, so to use it, you need to add this first:</p>
+<div class="highlight"><pre><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
+</pre></div>
+
+
+<p>To create a new thread, we need to create a new Thread instance, which
+takes a <a href="http://www.myblog.name/2012/05/delegates-in-c-and-a-tiny-bits-of-events/">delegate</a> of type <code>ThreadStart</code> (remember that delegate is
+like a pointer to a method? this would mean that the thread will run the
+method that the delegate parameter points to.). ThreadStart itself is a
+delegate that does not return any value or accept any parameter. Here is
+an example:</p>
+<div class="highlight"><pre><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">ConsoleApplication1</span>
+<span class="p">{</span>
+    <span class="k">class</span> <span class="nc">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ThreadStart</span> <span class="n">someCode</span> <span class="p">=</span> <span class="k">delegate</span><span class="p">()</span> <span class="p">{</span> <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="m">5</span><span class="p">;</span><span class="n">i</span><span class="p">++)</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="p">};</span>
+            <span class="n">Thread</span> <span class="n">t1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">someCode</span><span class="p">);</span>
+            <span class="n">Thread</span> <span class="n">t2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">someCode</span><span class="p">);</span>
+            <span class="n">Thread</span> <span class="n">t3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">someCode</span><span class="p">);</span>
+
+            <span class="n">t1</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+            <span class="n">t2</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+            <span class="n">t3</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+
+            <span class="n">someCode</span><span class="p">();</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>You will see that the each number will be printed 4 times, but in no
+particular order, the operating decides which threads gets run at any
+given time, but you can see that the same method is being run in 4
+different threads. The three threads that we created with the Thread
+class, and the main thread of the program itself.</p>
+<p>In the example above, the threads are all accessing local variables,
+that is, they don’t share any data between them. This makes things
+pretty simple, but there are times where the threads are accessing a
+shared data, and this may cause a problem known as <a href="http://en.wikipedia.org/wiki/Race_condition">race condition</a>. To
+prevent, that, we need a way sync the data by locking the data to a
+thread during a section of the program that may cause a race condition.
+In .NET, the Threading namespace provides us with a Monitor class that
+we can use to lock an object. Here is an example.</p>
+<div class="highlight"><pre><span class="kt">var</span> <span class="n">sharedData</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
+
+<span class="c1">// lock the sharedData</span>
+<span class="n">Monitor</span><span class="p">.</span><span class="n">Enter</span><span class="p">(</span><span class="n">sharedData</span><span class="p">);</span>
+
+<span class="c1">// Write the critical codes here.</span>
+<span class="c1">// Codes between the Enter and Exit can only be performed by one thread</span>
+<span class="c1">// at a time,</span>
+
+<span class="c1">// release the sharedData</span>
+<span class="n">Monitor</span><span class="p">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">sharedData</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Thread synchronization is pretty complicated topic, I think will cover
+them in another post some time later, when I got a better understanding
+of it. <a href="http://msdn.microsoft.com/en-us/library/ms173179.aspx">Here</a> is an MSDN article on the topic.</p>
+<p>The Thread class provides several methods to control the execution of
+the thread, here are some of them:</p>
+<div class="highlight"><pre><span class="c1">// these examples are called from within the execution of another thread</span>
+<span class="c1">// e.g. t2</span>
+
+<span class="c1">// Pausing the current thread execution for 2 seconds</span>
+<span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="m">1000</span><span class="p">);</span>
+
+<span class="c1">// Wait for t1 thread to finish executing</span>
+<span class="n">t1</span><span class="p">.</span><span class="n">Join</span><span class="p">();</span>
+
+<span class="c1">// stop the execution of a thread</span>
+<span class="n">t1</span><span class="p">.</span><span class="n">Abort</span><span class="p">();</span>
+
+<span class="c1">// pause the thread</span>
+<span class="n">t1</span><span class="p">.</span><span class="n">Suspend</span><span class="p">();</span>
+
+<span class="c1">// resume the thread</span>
+<span class="n">t1</span><span class="p">.</span><span class="n">Resume</span><span class="p">();</span>
+
+<span class="c1">// accessing the thread state</span>
+<span class="n">t1</span><span class="p">.</span><span class="n">ThreadState</span>
+</pre></div>
+
+
+<p>C# also provides some methods to control the execution of another
+process via the <code>Process</code> class in the <code>System.Diagnostics</code> namespace,
+but I’m not too concerned about that for now, so this post ends here.</p>
+<h2>References:</h2>
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx">http://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx</a></li>
+<li><a href="http://www.albahari.com/threading/">http://www.albahari.com/threading/</a></li>
+<li><a href="http://www.c-sharpcorner.com/uploadfile/mgold/multithreadingintro10062005000439am/multithreadingintro.aspx">http://www.c-sharpcorner.com/uploadfile/mgold/multithreadingintro10062005000439am/multithreadingintro.aspx</a></li>
+</ul>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/olds.html">olds</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/c.html">C#</a>, <a href="http://hdra.github.io/hndr.me/tag/programming.html">programming</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

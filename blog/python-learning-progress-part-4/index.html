@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Python Learning Progress–Part 4
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-01-26T11:21:00" pubdate>
+                            Thu 26 January 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/python-learning-progress-part-4" rel="bookmark"><h1>Python Learning Progress–Part 4</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>Last time I talked about getting input and a little about conditional
+statement and looping that should’ve enabled you to start creating the
+basic application and implement some basic algorithm in Python. This
+time, I am going to do a review on some of the basic data structures in
+Python.</p>
+<p>The basic data structures in Python are: list, tuples, and dictionaries.</p>
+<p>Let me start with dictionaries. Dictionaries basically defines a
+one-to-one relationship between a key and a value, just like an ordinary
+dictionary, where a word is associated with its definition. To define a
+dictionary in Python, the code are:</p>
+<div class="highlight"><pre><span class="c"># to define a dictionary, declare a</span>
+<span class="c"># variable with its value enclosed</span>
+<span class="c"># between two curly braces &#39;{}&#39;, and declare the &#39;entries&#39; with</span>
+<span class="c"># the syntax, {key:value}, and separate each entry with a comma,</span>
+<span class="c"># as you can see, the key and value can be mixed of any data type</span>
+<span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span><span class="s">&#39;John&#39;</span><span class="p">,</span><span class="s">&#39;age&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="s">&#39;sex&#39;</span><span class="p">:</span><span class="s">&#39;male&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s">&#39;number&#39;</span><span class="p">}</span>
+
+<span class="c"># to access it, call the variable name with the key in a bracket &#39;[]&#39;</span>
+<span class="k">print</span> <span class="nb">dict</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="c">#will print John</span>
+<span class="k">print</span> <span class="nb">dict</span><span class="p">[</span><span class="s">&#39;age&#39;</span><span class="p">]</span> <span class="c">#will print 20</span>
+<span class="k">print</span> <span class="nb">dict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c">#will print number</span>
+
+<span class="c"># to change or delete the value, use the same method</span>
+<span class="nb">dict</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;jack&#39;</span>
+<span class="k">del</span> <span class="nb">dict</span><span class="p">[</span><span class="s">&#39;age&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Some things to note about dictionary are, dictionary keys are
+case-sensitive, and it is unordered.</p>
+<p>Next is the list. Lists are, well, lists, like dictionary, a list
+contains an array of items. It is like the array list of other
+programming languages. To define a list, declare the contents of the
+list within a square brackets and separate it with commas.</p>
+<div class="highlight"><pre><span class="c"># declare a list of fruits</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">,</span> <span class="s">&quot;orange&quot;</span><span class="p">,</span> <span class="s">&quot;banana&quot;</span><span class="p">,</span> <span class="s">&quot;pear&quot;</span><span class="p">]</span>
+
+<span class="c"># to access it, use the index, starting from 0</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c">#apple</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c">#banana</span>
+
+<span class="c"># enter a negative index to access the list from the last element</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c">#pear</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="c">#banana</span>
+
+<span class="c"># accessing a subset of the list (known as slicing)</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c">#access the list from index 0-2</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="c">#access the list from index 1-3</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="c">#access the list from the beginning until index 3</span>
+<span class="k">print</span> <span class="n">ls</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="c">#access the list from index 1 until the last element</span>
+
+<span class="c"># to change it, use the same syntax</span>
+<span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;mango&quot;</span>
+
+<span class="c"># or to delete it</span>
+<span class="k">del</span> <span class="n">ls</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="c"># to add an element to the end of the list, use append() method</span>
+<span class="n">ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;tomato&quot;</span><span class="p">)</span>
+
+<span class="c"># to extend the list with another list, use the extend() method</span>
+<span class="n">ls</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s">&quot;strawberry&quot;</span><span class="p">,</span><span class="s">&quot;grapes&quot;</span><span class="p">])</span>
+
+<span class="c"># to insert an element into the list, use the insert() method, which</span>
+<span class="c"># takes the index of the list to insert, and the item to insert</span>
+<span class="n">ls</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;lemon&quot;</span><span class="p">)</span> <span class="c">#insert lemon into index #1</span>
+</pre></div>
+
+
+<p>In addition to these basic operation, a list provides a lot of other
+functions as well, one of them is the function to search for an element
+inside a list.</p>
+<div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="s">&quot;banana&quot;</span><span class="p">,</span><span class="s">&quot;pear&quot;</span><span class="p">,</span><span class="s">&quot;mango&quot;</span><span class="p">]</span>
+
+<span class="c"># to search for an index of an element</span>
+<span class="n">li</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;banana&quot;</span><span class="p">)</span> <span class="c">#will return 1</span>
+<span class="n">li</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;orange&quot;</span><span class="p">)</span> <span class="c">#will throws an exception, because orange isnt in the list</span>
+
+<span class="c"># to check if an element is inside a list</span>
+<span class="s">&quot;apple&quot;</span> <span class="ow">in</span> <span class="n">li</span> <span class="c">#return true</span>
+<span class="s">&quot;orange&quot;</span> <span class="ow">in</span> <span class="n">li</span> <span class="c">#return false</span>
+</pre></div>
+
+
+<p>There are several variations in removing an item from a list:</p>
+<div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;apple&#39;</span><span class="p">,</span><span class="s">&#39;banana&#39;</span><span class="p">,</span><span class="s">&#39;orange&#39;</span><span class="p">,</span><span class="s">&#39;pear&#39;</span><span class="p">,</span><span class="s">&#39;grape&#39;</span><span class="p">]</span>
+
+<span class="c"># the basic del operation, which will remove an element at a specified index</span>
+<span class="k">del</span> <span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c">#will remove apple</span>
+
+<span class="c"># the remove() method, which will remove the first occurance of an element</span>
+<span class="c"># this statement will remove the first occurance of banana</span>
+<span class="c"># if there are more than one occurance of banana, only the first one will be removed</span>
+<span class="c"># if there isnt any banana inside the list, it will raise an exception</span>
+<span class="n">li</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;banana&#39;</span><span class="p">)</span>
+
+<span class="c"># the pop() method, which will remove the last value from the list,</span>
+<span class="c"># and at the same time return that value</span>
+<span class="n">li</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c"># will return grape, and remove it from the list</span>
+</pre></div>
+
+
+<p>There are other operations on a list as well,</p>
+<div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="c"># this will return the list[1,2,3,4,5,6,7,8]</span>
+<span class="c"># similar to the extend() method, but it returns a new list</span>
+<span class="c"># instead of directly performing the operation on the list</span>
+<span class="n">li</span> <span class="o">=</span> <span class="n">li</span><span class="o">+</span><span class="n">ls</span>
+
+<span class="c"># this will repeat the list 3 times, so the content of li</span>
+<span class="c"># will be [1,2,1,2,1,2]</span>
+<span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span>
+</pre></div>
+
+
+<p>Next is the tuple, a tuple is basically a list that cant be changed. It
+has almost the same function the same functions as a list, but the
+content can’t be changed, so a tuple doesn’t have the <code>remove()</code>, <code>pop()</code>,
+<code>append()</code> or any other method that make changes to a list. Tuples are
+usually used to create a constant list, whose values wont change. In
+general, tuples are faster than lists, and there are also other specific
+uses of a tuples that will be explored later. To create a tuple, the
+syntax is similar to a list, but instead of a square bracket, a tuple is
+declared with ordinary brackets.</p>
+<div class="highlight"><pre><span class="n">tp</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">)</span>
+<span class="c"># it can be accessed the same way</span>
+<span class="n">tp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c">#a</span>
+<span class="n">tp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c">#c</span>
+<span class="n">tp</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c">#will throw an error</span>
+</pre></div>
+
+
+<p>Those are the basic data structures in Python, each of those are kind of
+similar to each other, but they have specific purposes that are unique
+to each of them. For example, a tuple can contain a list of another
+list, and a list can also nest several level of lists.</p>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/olds.html">olds</a></p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

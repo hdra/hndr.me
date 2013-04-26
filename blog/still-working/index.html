@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Still Working
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2013-04-03T17:16:00" pubdate>
+                            Wed 03 April 2013
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/still-working" rel="bookmark"><h1>Still Working</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>It has been a few weeks since I decided to start blogging again, but well, as usual not
+much has been done on it.
+For starter, I initially planned to host it on Heroku, following the tricks outline <a href="http://kennethreitz.org/exposures/static-sites-on-heroku-cedar">here</a>,
+and it is super simple to setup. I had created a new Heroku app, generated the blog, and pushed
+the generated content to Heroku in just a few minutes. In another minute, and I had setup the
+custom domain and had everything working nicely. </p>
+<p>Problem is, even though the site itself is just a bunch of static files, the first time I visited 
+the site, it took a few seconds to load the content, but when I visit it again for the second time, 
+it served the site almost immediately. At first, I thought it was because of the site is cached by 
+the browser, so it loads much quicker, but even when I cleared the browser cache, it still loads the
+same way. After a bit of googling, I <a href="https://devcenter.heroku.com/articles/dynos">found</a> out that Heroku will turn off the dyno after an 
+hour of inactivity, so everytime I visit the site after a period of idling, the dyno will need to 
+be started again at that time. Not much of a problem, considering I am not even paying for the 
+amazing service that Heroku provide, and there <a href="http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling">ways</a> to get around it anyway. I probably won't 
+be using it, since I am still playing around with the hosting options around anyway.</p>
+<p>Other popular service that people use to host their static site seems to be <a href="http://pages.github.com/">Github Pages</a>. After
+looking around on how to set it up, seems like it is pretty easy to set it up. The Pelican makefile
+even includes a build option for this setup. The site will be hosted in a repository just like any
+other git repo, but the site index will need to be on the <code>gh-pages</code> branch. In other words, the 
+content of the site will be open source. Not a problem though, since any webpage that are publicly
+accessible are basically open source anyway. Maybe I'll move the site here after I am done setting
+the website itself.</p>
+<p>On building the site itself, I just converted some of my old wordpress posts to Markdown, which 
+should be published along with this post. The automatic converter doesn't work too well, since many 
+of posts contains some really badly formed markups, so I ended up manually converting the most of 
+posts. I also took the chance to just remove many of the rants/silly posts, not saying that there 
+aren't any silly posts left anyway.</p>
+<p>I am still playing around with the pelican configurations and options, on how to setup different
+static pages, building a theme, etc. Speaking about the theme, I drafted a theme of my own.</p>
+<p><img alt="Screenshot of the WIP theme" src="http://farm9.staticflickr.com/8394/8615163439_30ea63f405.jpg" /></p>
+<p>Initially I liked it quite a bit, but after leaving it there for a few days, when I came back to 
+work on it again, I found it to be not very attractive anymore. So, no need to say, I scrapped it,
+and started working from scratch. This time, planning the overall sites, starting from the landing 
+page, static pages, comments, and of course the blog itself. Of course, it won't be around anytime
+soon. For the time being, the default Pelican theme seems more than good enough for me.</p>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/randoms.html">randoms</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/personal.html">personal</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Data Binding in .NET
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-06-10T10:37:00" pubdate>
+                            Sun 10 June 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/data-binding-in-net" rel="bookmark"><h1>Data Binding in .NET</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>I am now trying to use the concept of MVVM in my applications, as I
+believe a proper separation of concerns is very important in building an
+application, as from I personally experienced when developing in PHP
+with CodeIgniter, it really makes development much easier.</p>
+<p>So, I think for an event driven application pattern such as WPF,
+Silverlight, and also WP7, (maybe Windows 8 as well), it seems pretty
+obvious to take advantage of the existing abstraction of the framework,
+so MVVM would go well with these kind of applications.</p>
+<p>I can understand the concept of the <a href="http://msdn.microsoft.com/en-us/magazine/dd419663.aspx">MVVM pattern</a> itself quite well,
+but I am not really able to grasp its implementation, I think it is
+because I don't really understand the basic features of the framework
+that the pattern rely on. One of which is the Data Binding. So, here it
+is, my attempt to get better understanding on it.</p>
+<div class="highlight"><pre><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;{Binding Name}&quot;</span><span class="nt">&gt;&lt;/TextBlock&gt;</span>
+</pre></div>
+
+
+<p>while in the code behind,</p>
+<div class="highlight"><pre><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">PhoneApplicationPage</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="n">MyClass</span> <span class="n">dataSource</span><span class="p">;</span>
+        <span class="k">public</span> <span class="nf">MainPage</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">InitializeComponent</span><span class="p">();</span>
+            <span class="n">dataSource</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">();</span>
+            <span class="n">dataSource</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="n">DataContext</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">dataSource</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">_name</span><span class="p">;</span>
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span>
+        <span class="p">{</span>
+            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_name</span><span class="p">;</span> <span class="p">}</span>
+            <span class="k">set</span> <span class="p">{</span> <span class="n">_name</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>There is one problem with this, when the value of the data source
+changes, the binding target on the UI won’t change along with it, so, to
+make the value of the binding target change along with the data source,
+we need to have our class implement <code>INotifyPropertyChanged</code>.</p>
+<p>Let’s add a button that will change the value of the data source.</p>
+<div class="highlight"><pre><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;{Binding name}&quot;</span><span class="nt">&gt;&lt;/TextBlock&gt;</span>
+<span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&quot;Button&quot;</span> <span class="na">Name=</span><span class="s">&quot;button1&quot;</span> <span class="na">Click=</span><span class="s">&quot;button1_Click&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+
+
+<p>And change the code behind to:</p>
+<div class="highlight"><pre><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">PhoneApplicationPage</span>
+    <span class="p">{</span>
+        <span class="c1">// Constructor</span>
+        <span class="k">public</span> <span class="n">MyClass</span> <span class="n">dataSource</span><span class="p">;</span>
+        <span class="k">public</span> <span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+        <span class="k">public</span> <span class="nf">MainPage</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">InitializeComponent</span><span class="p">();</span>
+            <span class="n">dataSource</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">();</span>
+            <span class="n">dataSource</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="n">DataContext</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">dataSource</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">private</span> <span class="k">void</span> <span class="nf">button1_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">i</span><span class="p">++;</span>
+            <span class="k">this</span><span class="p">.</span><span class="n">dataSource</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">i</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span> <span class="p">:</span> <span class="n">INotifyPropertyChanged</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">_name</span><span class="p">;</span>
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span>
+        <span class="p">{</span>
+            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_name</span><span class="p">;</span> <span class="p">}</span>
+            <span class="k">set</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="k">value</span> <span class="p">!=</span> <span class="n">_name</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">_name</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+                    <span class="n">Notify</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">event</span> <span class="n">PropertyChangedEventHandler</span> <span class="n">PropertyChanged</span><span class="p">;</span>
+        <span class="k">void</span> <span class="nf">Notify</span><span class="p">(</span><span class="kt">string</span> <span class="n">propertyName</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">PropertyChanged</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">PropertyChanged</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span> <span class="n">PropertyChangedEventArgs</span><span class="p">(</span><span class="n">propertyName</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Now, every time we click on the button, the value of the name property
+will change, and the <code>TextBlock</code> will change its content accordingly.</p>
+<p>The <code>INotifyPropertyChanged</code> interface exposes the <code>PropertyChanged</code> event,
+where we would raise when the value of the data is changed, and there
+are the event handler present. One might ask, why? It is because when
+the class is being used as a data source in a binding, the binding
+target will subscribe to the event, and call the necessary method to
+update the view.</p>
+<p>There are several modes of binding, the default is <code>OneWay</code>, which is a
+binding from the data source to the target, where any changes on the
+data source will be propagated to the target, but not vice versa,
+another mode is <code>TwoWay</code>, which is pretty much self descriptive, and also
+<code>OneTime</code>, which only set the data when the binding is created. So, if we
+add this textbox to the previous example,</p>
+<div class="highlight"><pre><span class="nt">&lt;TextBox</span> <span class="na">Text=</span><span class="s">&quot;{Binding name,Mode=TwoWay}&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+
+
+<p>Whenever the value of the textbox is changed, the textblock that is
+bound to the same data source will update its value accordingly. Note
+that we would still need to implement <code>INotifyPropertyChanged</code> for the
+view to update as the value changes. We can specify what triggers the
+update back to the source via the <code>UpdateSourceTrigger</code> property. Its
+values depends on the dependency properties of the target, on the
+example textbox above, the default trigger is <code>LostFocus</code>, so the data
+source will be notified of the new value when the textbox has lost its
+focus. We can also trigger the update manually by setting the property
+to <code>Explicit</code>, which will only update the value when the application calls
+<code>UpdateSource</code>, e.g. when the user clicks on a button.</p>
+<p>There are several <a href="http://msdn.microsoft.com/en-us/library/ms746695.aspx">ways</a> to specify a binding source, the examples
+above specified the data source by setting the <code>DataContext</code> property of
+the current page from the code behind. The child elements within the
+page inherit the <code>DataContext</code> from its parent, we can see that this
+method is very convenient when we have a single data source that we use
+across the page. We can also set the <code>DataContext</code> property directly on
+the element directly, instead of inheriting it from its parent. To
+specify the data source for an element individually, one of the is by
+setting the Source property of the element, by setting the Source
+property, the data will be able to get the data from the source that it
+specify without depending on the data source of its parent element.
+Other options are <a href="http://msdn.microsoft.com/en-us/library/system.windows.data.binding.relativesource.aspx">RelativeSource</a>, which is used to specify the data
+source relative to the target, and <a href="http://msdn.microsoft.com/en-us/library/system.windows.data.binding.elementname.aspx">ElementName</a> which is useful if you
+want to bind to another element in your view, e.g. binding the height of
+an element to a textbox value.</p>
+<p>The examples above shows binding among data source and target of the
+same data type, e.g. string to string, but there are times where we may
+want to bind a source of a different data type, for example, binding the
+background colour of an element to an hexadecimal value, or displaying
+the same date in several different format. One way would be to create an
+additional property with a getter that gets its value from the source,
+but that isn’t a very good way, for one thing, two-way binding and
+property changed notification got more complicated than it should be.
+One solution is to use the <code>ValueConverter</code>, which is creating a custom
+class that implements the <a href="http://msdn.microsoft.com/en-us/library/system.windows.data.ivalueconverter.aspx">IValueConverter</a> interface. I won’t talk
+about it too much in this post, maybe in some other post, you can read
+more about it on that link. .NET Framework also provide a number of
+converter that we can use.</p>
+<p>So far, the examples shows only binding to a single data type, but we
+often need to bind to a collection, for example, binding a listbox to a
+list of person. To implement a collection, we can use one of the generic
+collection classes, such as, <code>List&lt;T&gt;</code>, <code>Collection&lt;T&gt;</code> and others. We can
+also implement a custom collection by implementing the <code>IEnumerable</code>
+interface, but to enable automatic UI update on change, we need a way to
+provide notification on data changes, just as we did with the single
+instance data source. To do that, the collection need to implement the
+<a href="http://msdn.microsoft.com/en-us/library/system.collections.specialized.inotifycollectionchanged.aspx">INotifyPropertyChanged</a> interface,
+but it is recommended to use the class provided by the .NET Framework
+which did the job for us, the <code>ObservabeCollection&lt;T&gt;</code> class. Let’s change
+the previous example to show a little bit of collection binding. Lets
+add a listbox to the our application.</p>
+<div class="highlight"><pre><span class="nt">&lt;ListBox</span> <span class="na">Name=</span><span class="s">&quot;listBox1&quot;</span><span class="na">ItemsSource=</span><span class="s">&quot;{Binding colls}&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+
+
+<p>Now, let’s change the <code>MyClass</code> a little bit, and change the previous
+button click handler to add more element to the collection.</p>
+<div class="highlight"><pre><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">PhoneApplicationPage</span>
+    <span class="p">{</span>
+        <span class="c1">// Constructor</span>
+        <span class="k">public</span> <span class="n">MyClass</span> <span class="n">dataSource</span><span class="p">;</span>
+        <span class="k">public</span> <span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+        <span class="k">public</span> <span class="nf">MainPage</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">InitializeComponent</span><span class="p">();</span>
+            <span class="n">dataSource</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">();</span>
+            <span class="n">dataSource</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+            <span class="n">dataSource</span><span class="p">.</span><span class="n">colls</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ObservableCollection</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;()</span> <span class="p">{</span> <span class="s">&quot;string 1&quot;</span><span class="p">,</span> <span class="s">&quot;string 2&quot;</span><span class="p">};</span>
+            <span class="k">this</span><span class="p">.</span><span class="n">DataContext</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">dataSource</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">private</span> <span class="k">void</span> <span class="nf">button1_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">i</span><span class="p">++;</span>
+            <span class="k">this</span><span class="p">.</span><span class="n">dataSource</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">i</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+            <span class="n">dataSource</span><span class="p">.</span><span class="n">colls</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span> <span class="p">:</span> <span class="n">INotifyPropertyChanged</span>
+    <span class="p">{</span>
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">_name</span><span class="p">;</span>
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span>
+        <span class="p">{</span>
+            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_name</span><span class="p">;</span> <span class="p">}</span>
+            <span class="k">set</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="k">value</span> <span class="p">!=</span> <span class="n">_name</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">_name</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+                    <span class="n">Notify</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="n">ObservableCollection</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">colls</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="k">event</span> <span class="n">PropertyChangedEventHandler</span> <span class="n">PropertyChanged</span><span class="p">;</span>
+        <span class="k">void</span> <span class="nf">Notify</span><span class="p">(</span><span class="kt">string</span> <span class="n">propertyName</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">PropertyChanged</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">PropertyChanged</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span> <span class="n">PropertyChangedEventArgs</span><span class="p">(</span><span class="n">propertyName</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Now, whenever we click the button, a new string will be added to the
+collection, and the listbox content will reflect the changes as well
+because of the <code>INotifyCollectionChanged</code> that is implemented by the
+<code>ObservableCollection</code>. Note that to detect when the value of individual
+element change, we still need to implement <code>INotifyPropertyChanged</code>.</p>
+<p>Now, when we are working with a collection of data, often we need to
+filter, sort and group the data based on the current context of the
+application, to do that without changing the underlying data source, we
+can use collections view. I wouldn’t talk much about it in this post,
+but more information about it are available <a href="http://msdn.microsoft.com/en-us/library/ms752347.aspx#how_to_implement_collections\">here</a> and <a href="http://msdn.microsoft.com/en-us/library/system.windows.data.collectionviewsource.aspx">here</a></p>
+<p>On the examples above, we declared our data bindings mostly with XAML,
+and that is indeed the most common usage of data binding, so let’s talk
+more about it. On our examples above, we declared a binding with the
+<code>{Binding name}</code>. This is actually a shortcut to declare the binding, we
+know that the child element will get its binding <code>Source</code> from its parents
+<code>DataContext</code>, and we can actually declare a path to specify which
+property of the source that we want to bind to. So, that declaration
+just now can be written as <code>{Binding Source={StaticResource dataSource},Path=name}</code>. We can use StaticResource to refer to an
+instance that we declare in the XAML, so to declare our <code>dataSource</code> in
+XAML, we can use something like this:</p>
+<div class="highlight"><pre><span class="nt">&lt;Page</span> <span class="na">xmlns:c=</span><span class="s">&quot;clr-namespace:PhoneApp1&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;phone:PhoneApplicationPage.Resources&gt;</span>
+  <span class="nt">&lt;c:MyClass</span> <span class="na">x:Key=</span><span class="s">&quot;dataSource&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/phone:PhoneApplicationPage.Resources&gt;</span>
+</pre></div>
+
+
+<p>If the the <code>dataContext</code> itself is the data source that we want to bind
+to, we can just declare the binding with simply <code>{Binding}</code>.</p>
+<h2>References:</h2>
+<ul>
+<li><a href="http://www.codeproject.com/Articles/3665/Data-binding-concepts-in-NET-windows-forms">http://www.codeproject.com/Articles/3665/Data-binding-concepts-in-NET-windows-forms</a></li>
+<li><a href="http://msdn.microsoft.com/en-us/library/ms752347.aspx">http://msdn.microsoft.com/en-us/library/ms752347.aspx</a></li>
+<li><a href="http://www.codeproject.com/Articles/80555/Databinding-in-Silverlight-applications">http://www.codeproject.com/Articles/80555/Databinding-in-Silverlight-applications</a></li>
+<li><a href="http://msdn.microsoft.com/en-us/library/cc278072(v=vs.95).aspx">http://msdn.microsoft.com/en-us/library/cc278072(v=vs.95).aspx</a></li>
+</ul>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/olds.html">olds</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/c.html">C#</a>, <a href="http://hdra.github.io/hndr.me/tag/programming.html">programming</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

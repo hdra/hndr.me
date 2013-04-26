@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Some stuff I didn’t know about String in C#
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hdra.github.io/hndr.me/theme/css/github.css">
+                <link href="http://hdra.github.io/hndr.me/feeds\all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr.me Atom Feed" />
+                        <script src="http://hdra.github.io/hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hdra.github.io/hndr.me"><h1><i class="icon-coffee"></i> hndr.me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hdra.github.io/hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hdra.github.io/hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/">Pelican</a> and <a href="http://python.org/">Python</a>. Theme by<a href="https://github.com/hdra/pelican-cait">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-05-25T23:08:00" pubdate>
+                            Fri 25 May 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/some-stuff-i-didnt-know-about-string-in-c" rel="bookmark"><h1>Some stuff I didn’t know about String in C#</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>Well, its a bit strange getting to know something that I’ve used
+extensively for quite a while, but there are indeed some things that
+feels revealing.</p>
+<p>First of all, I knew that strings is a little bit special, in a way that
+it is a reference type, but it behaves very much like a value type, for
+example:</p>
+<div class="highlight"><pre><span class="n">SomeClass</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
+<span class="n">a</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">18</span><span class="p">;</span>
+<span class="n">SomeClass</span> <span class="n">b</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
+<span class="n">b</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">30</span><span class="p">;</span>
+
+<span class="c1">// a.age will be 40, since they are both referring to the same value</span>
+<span class="c1">// but,</span>
+
+<span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">y</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+<span class="n">y</span> <span class="p">=</span> <span class="s">&quot;world;  // x will stay as &quot;</span><span class="n">hello</span><span class="s">&quot;</span>
+</pre></div>
+
+
+<p>So, well, that’s about it. I also knew that string are immutable, as in,
+the value can’t be changed after they are set, so something like this
+would throw an error:</p>
+<div class="highlight"><pre><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<span class="n">x</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;j&#39;</span><span class="p">;</span>
+</pre></div>
+
+
+<p>But, since something like that didn’t get used much anyway, I never put
+too much thought into it, and I just learned that the two are actually
+related. In the first code snippet, since x is immutable, when y try to
+change the value, it will create a new string instead, so it will point
+to a new location in the memory, leaving x alone, and the two no longer
+refer to the same memory location.</p>
+<p>The value of the string itself are stored in the same memory location as
+well, so even if two strings are created separately, if they have the
+same value, they will still point to the same location.</p>
+<div class="highlight"><pre><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">y</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<span class="c1">// x == y is true</span>
+</pre></div>
+
+
+<p>I personally have ran into some bugs related to this behaviour, of course,
+I just tried do something else that works without understanding why. Until now.</p>
+<p>That mentioned, one thing to remember is that new string values are
+created each time the value change, so that means there would be a lot
+of temporary objects in the memory, and the garbage collection will run
+more often, so if there value of the change is something that is done
+very extensively in the program, it would be better to use a class
+called StringBuilder. It behaves almost the same way as a string, but it
+is not immutable, and it is designed to build string, as the name
+suggest. I wanted to talk more about it, but I found a <a href="http://www.dotnetperls.com/stringbuilder">better
+explanation</a> about it, so I’ll just use this post as a book mark to that
+post.</p>
+<p>Some other interesting stuffs about strings and the manipulation of
+strings as well:</p>
+<ul>
+<li><a href="http://www.codinghorror.com/blog/2009/01/the-sad-tragedy-of-micro-optimization-theater.html">http://www.codinghorror.com/blog/2009/01/the-sad-tragedy-of-micro-optimization-theater.html</a></li>
+<li><a href="http://www.codinghorror.com/blog/2006/07/i-heart-strings.html">http://www.codinghorror.com/blog/2006/07/i-heart-strings.html</a></li>
+<li><a href="http://www.codinghorror.com/blog/2005/03/if-you-like-regular-expressions-so-much-why-dont-you-marry-them.html">http://www.codinghorror.com/blog/2005/03/if-you-like-regular-expressions-so-much-why-dont-you-marry-them.html</a></li>
+<li><a href="http://blog.stevex.net/string-formatting-in-csharp/">http://blog.stevex.net/string-formatting-in-csharp/</a></li>
+<li><a href="http://blogs.msdn.com/b/kathykam/archive/2006/03/29/564426.aspx">http://blogs.msdn.com/b/kathykam/archive/2006/03/29/564426.aspx</a></li>
+</ul>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hdra.github.io/hndr.me/category/olds.html">olds</a></p>
+                                                <p>Tags: <a href="http://hdra.github.io/hndr.me/tag/c.html">C#</a>, <a href="http://hdra.github.io/hndr.me/tag/programming.html">programming</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hdra.github.io/hndr.me/theme/js/main.js"></script>
+    </body>
+</html>
