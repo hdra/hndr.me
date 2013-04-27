@@ -1,0 +1,6 @@
+Maintained by Hendra < http://www.hndr.me >
+
+Tech:
+    HTML5, CSS3, SASS, H5BP
+    Python, Pelican, Fabric
+    Sublime Text 2, Git
