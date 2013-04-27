@@ -42,4 +42,7 @@ CONTACT_EMAIL = "hendra2392@gmail.com"
 CONTACTS = (('facebook', 'https://www.facebook.com/b011010000110010101101110011001000111001001100001'),
             ('twitter', 'https://twitter.com/_hdra'),)
 
+FILES_TO_COPY = (('extra/favicon.ico', 'favicon.ico'),
+                 ('extra/robots.txt', 'robots.txt'))
+
 RELATIVE_URLS = False
