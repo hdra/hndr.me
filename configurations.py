@@ -43,6 +43,7 @@ CONTACTS = (('facebook', 'https://www.facebook.com/b0110100001100101011011100110
             ('twitter', 'https://twitter.com/_hdra'),)
 
 FILES_TO_COPY = (('extra/favicon.ico', 'favicon.ico'),
-                 ('extra/robots.txt', 'robots.txt'))
+                 ('extra/humans.txt', 'humans.txt'),
+                 ('extra/robots.txt', 'robots.txt'),)
 
 RELATIVE_URLS = False
