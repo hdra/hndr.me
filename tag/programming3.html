@@ -52,6 +52,34 @@
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
+                        <time class="post-time" datetime="2012-05-25T22:22:00" pubdate>
+                            Fri 25 May 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/some-standard-c-object-methods-that-you-might-want-to-override" rel="bookmark"><h1>Some Standard C# Object Methods that you might want to override</h1></a>
+                    </header>
+                    <section class="post-content">
+                        <p>Alright, I’ll get it straight to the point, since this is just a note to
+myself anyway,</p>
+<p>First one, the ToString() :</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">YourClass</span><span class="p">{</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&quot;Name: &quot;</span><span class="p">+</span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">+</span><span class="s">&quot;,Age: &quot;</span><span class="p">+</span><span class="k">this</span><span class="p">.</span><span class="n">age</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The reason to this is, simple, to have ...</p>
+                    </section>
+                </article>
+            </li>
+            <hr/>
+                        <li>
+                <article class="post-entry">
+                    <header class="entry-header">
                         <time class="post-time" datetime="2012-05-22T23:19:00" pubdate>
                             Tue 22 May 2012
                         </time>
@@ -119,23 +147,6 @@ many scenario where we might want to do it the manual ...</p>
 specifically, CodeIgniter, and to be honest, writing web applications in
 CodeIgniter is really easy and intuitive, and even though I came across
 the MVC pattern (or MVT, for that matter) for the first time in ...</p>
-                    </section>
-                </article>
-            </li>
-            <hr/>
-                        <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2012-03-22T11:47:00" pubdate>
-                            Thu 22 March 2012
-                        </time>
-                        <a href="http://hdra.github.io/hndr.me/blog/setting-up-python-on-windows" rel="bookmark"><h1>Setting Up Python on Windows</h1></a>
-                    </header>
-                    <section class="post-content">
-                        <p>Well, it’s a bit late for posting this, considering I have been playing
-with Python for few months as I posted before, but, I recently
-reinstalled my Windows, so I need to setup everything once again. This
-time, I am trying to do it the right way, and my ...</p>
                     </section>
                 </article>
             </li>

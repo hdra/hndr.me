@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr.me</title><link href="http://hdra.github.io/hndr.me/" rel="alternate"></link><link href="http://hdra.github.io/hndr.me/feeds%5Crandoms.atom.xml" rel="self"></link><id>http://hdra.github.io/hndr.me/</id><updated>2013-04-26T16:50:00+08:00</updated><entry><title>Setting up my GitHub Pages</title><link href="http://hdra.github.io/hndr.me/blog/setting-up-my-github-pages" rel="alternate"></link><updated>2013-04-26T16:50:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-26:blog/setting-up-my-github-pages</id><summary type="html">&lt;p&gt;Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr.me</title><link href="http://hdra.github.io/hndr.me/" rel="alternate"></link><link href="http://hdra.github.io/hndr.me/feeds%5Crandoms.atom.xml" rel="self"></link><id>http://hdra.github.io/hndr.me/</id><updated>2013-04-28T11:44:00+08:00</updated><entry><title>My First GitHub Pull Request!</title><link href="http://hdra.github.io/hndr.me/blog/my-first-github-pull-request" rel="alternate"></link><updated>2013-04-28T11:44:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-28:blog/my-first-github-pull-request</id><summary type="html">&lt;p&gt;I just had my first pull request! It was a change to the [Pelican theme][l1], where I added
+this [theme][l2] to the directory there. So, yeah, I didn't actually contribute a patch to an
+existing project, it was simply adding my repo to the list of theme.&lt;/p&gt;
+&lt;p&gt;I also learned about the whole pull request process itself. Of course, it is not
+that complicated in the first place anyway. Basically it involves forking the source repo,
+create a new branch, make changes on that branch, commit, push to github, and then after the new
+branch is created on github, there will be an option to initiate a pull request there. It is that
+simple.&lt;/p&gt;
+&lt;p&gt;I actually drafted this post around a week ago when I sent the pull request, and it just got merged
+to the master branch earlier today, so here I am updating this thing.&lt;/p&gt;
+&lt;p&gt;But, anyway, I got to say, it feels pretty good! and it is also quite a motivation booster for me. :D&lt;/p&gt;</summary><category term="programming"></category></entry><entry><title>Setting up my GitHub Pages</title><link href="http://hdra.github.io/hndr.me/blog/setting-up-my-github-pages" rel="alternate"></link><updated>2013-04-26T16:50:00+08:00</updated><author><name>Hendra</name></author><id>tag:hdra.github.io/hndr.me,2013-04-26:blog/setting-up-my-github-pages</id><summary type="html">&lt;p&gt;Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just
 create an &lt;code&gt;index.php&lt;/code&gt; file, then add another &lt;code&gt;.htaccess&lt;/code&gt; file to the root of the site, push, and done.
 In this case, I maintained two separate repositories, one that contains the Pelican project, including
 the configuration file, the build script, etc. The other repositories contains the generated HTML

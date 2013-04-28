@@ -52,6 +52,24 @@
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
+                        <time class="post-time" datetime="2012-05-31T23:05:00" pubdate>
+                            Thu 31 May 2012
+                        </time>
+                        <a href="http://hdra.github.io/hndr.me/blog/threading-in-c" rel="bookmark"><h1>Threading in C#</h1></a>
+                    </header>
+                    <section class="post-content">
+                        <p>Well, this time, I am going to talk about thread, the concept of thread
+is pretty simple to understand, so I wont explain the here, but you can
+read more about it in this <a href="http://en.wikipedia.org/wiki/Thread_(computing)">wiki page</a>. Threading are used quite
+extensively in most modern computer programs, for example separating
+threads ...</p>
+                    </section>
+                </article>
+            </li>
+            <hr/>
+                        <li>
+                <article class="post-entry">
+                    <header class="entry-header">
                         <time class="post-time" datetime="2012-05-30T23:16:00" pubdate>
                             Wed 30 May 2012
                         </time>
@@ -116,34 +134,6 @@ extensively for quite a while, but there are indeed some things that
 feels revealing.</p>
 <p>First of all, I knew that strings is a little bit special, in a way that
 it is a reference type, but it ...</p>
-                    </section>
-                </article>
-            </li>
-            <hr/>
-                        <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2012-05-25T22:22:00" pubdate>
-                            Fri 25 May 2012
-                        </time>
-                        <a href="http://hdra.github.io/hndr.me/blog/some-standard-c-object-methods-that-you-might-want-to-override" rel="bookmark"><h1>Some Standard C# Object Methods that you might want to override</h1></a>
-                    </header>
-                    <section class="post-content">
-                        <p>Alright, I’ll get it straight to the point, since this is just a note to
-myself anyway,</p>
-<p>First one, the ToString() :</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">YourClass</span><span class="p">{</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
-    <span class="k">private</span> <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
-    <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="s">&quot;Name: &quot;</span><span class="p">+</span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">+</span><span class="s">&quot;,Age: &quot;</span><span class="p">+</span><span class="k">this</span><span class="p">.</span><span class="n">age</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>The reason to this is, simple, to have ...</p>
                     </section>
                 </article>
             </li>
