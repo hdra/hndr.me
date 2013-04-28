@@ -1,7 +1,6 @@
 Title: My First GitHub Pull Request!
 Date: 2013-04-28 11:44
 Tags: programming
-status: draft
 
 I just had my first pull request! It was a change to the [Pelican theme][l1], where I added
 this [theme][l2] to the directory there. So, yeah, I didn't actually contribute a patch to an
