@@ -2,7 +2,7 @@ Title: My First GitHub Pull Request!
 Date: 2013-04-28 11:44
 Tags: programming
 
-I just had my first pull request! It was a change to the [Pelican theme][l1], where I added
+I just had my first pull request! It was a change to the [Pelican themes][l1], where I added
 this [theme][l2] to the directory there. So, yeah, I didn't actually contribute a patch to an
 existing project, it was simply adding my repo to the list of theme.
 
@@ -16,3 +16,6 @@ I actually drafted this post around a week ago when I sent the pull request, and
 to the master branch earlier today, so here I am updating this thing.
 
 But, anyway, I got to say, it feels pretty good! and it is also quite a motivation booster for me. :D
+
+[l1]: https://github.com/getpelican/pelican-themes
+[l2]: https://github.com/hdra/pelican-cait
