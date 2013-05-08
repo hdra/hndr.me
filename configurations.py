@@ -44,6 +44,7 @@ CONTACTS = (('facebook', 'https://www.facebook.com/b0110100001100101011011100110
 
 FILES_TO_COPY = (('extra/favicon.ico', 'favicon.ico'),
                  ('extra/humans.txt', 'humans.txt'),
+                 ('extra/CNAME', 'CNAME'),
                  ('extra/robots.txt', 'robots.txt'),)
 
 RELATIVE_URLS = False
