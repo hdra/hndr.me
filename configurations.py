@@ -1,7 +1,7 @@
 AUTHOR = u'Hendra'
 SITENAME = u"hndr.me"
 SITESUBTITLE = u"My blog. Consists of mostly broken english and rubbish"
-SITEURL = 'http://hdra.github.io/hndr.me'
+SITEURL = 'http://hndr.me'
 TIMEZONE = "Asia/Kuala_Lumpur"
 
 DEFAULT_CATEGORY = 'randoms'
