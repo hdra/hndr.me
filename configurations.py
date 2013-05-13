@@ -34,7 +34,6 @@ CUSTOM_MENUITEMS = (('Blog', INDEX_URL),
                     ('Projects', page_dir+'/projects'))
 
 SOCIAL = (('twitter', 'https://twitter.com/_hdra'),
-          ('facebook', 'https://www.facebook.com/b011010000110010101101110011001000111001001100001'),
           ('google-plus', 'https://plus.google.com/118295715125687342506'),
           ('github', 'https://github.com/hdra'),)
 
