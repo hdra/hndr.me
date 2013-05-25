@@ -23,7 +23,7 @@ page_dir = 'pages'
 PAGE_URL = page_dir+'/{slug}'
 PAGE_SAVE_AS = PAGE_URL+'/index.html'
 
-DEFAULT_PAGINATION = 5
+DEFAULT_PAGINATION = 8
 
 DISQUS_SITENAME = 'hndrblog'
 GOOGLE_ANALYTICS = 'UA-40075063-1'
