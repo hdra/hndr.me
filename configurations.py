@@ -1,5 +1,5 @@
 AUTHOR = u'Hendra'
-SITENAME = u"hndr.me"
+SITENAME = u"hndr (dot) me"
 SITESUBTITLE = u"My blog. Consists of mostly broken english and rubbish"
 SITEURL = 'http://hndr.me'
 TIMEZONE = "Asia/Kuala_Lumpur"
