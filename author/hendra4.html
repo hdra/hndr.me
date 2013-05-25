@@ -52,16 +52,16 @@
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
-                        <time class="post-time" datetime="2013-04-28T11:44:00" pubdate>
-                            Sun 28 April 2013
+                        <time class="post-time" datetime="2012-02-25T22:51:00" pubdate>
+                            Sat 25 February 2012
                         </time>
-                        <a href="http://hndr.me/blog/my-first-github-pull-request" rel="bookmark"><h1>My First GitHub Pull Request!</h1></a>
+                        <a href="http://hndr.me/blog/python-list-comprehension" rel="bookmark"><h1>Python List Comprehension</h1></a>
                     </header>
                     <section class="post-content">
-                        <p>I just had my first pull request! It was a change to the <a href="https://github.com/getpelican/pelican-themes">Pelican themes</a>, where I added
-this <a href="https://github.com/hdra/pelican-cait">theme</a> to the directory there. So, yeah, I didn't actually contribute a patch to an
-existing project, it was simply adding my repo to the list of theme.</p>
-<p>I also ...</p>
+                        <p>Ok, been wanting to write about this for a while, in case i forgot, but
+seems like I almost forgot about it. It's about a a feature of Python
+that I don't really see in other languages i use such as C#, so I wanted
+to write about ...</p>
                     </section>
                 </article>
             </li>
@@ -69,17 +69,15 @@ existing project, it was simply adding my repo to the list of theme.</p>
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
-                        <time class="post-time" datetime="2012-01-10T20:35:00" pubdate>
-                            Tue 10 January 2012
+                        <time class="post-time" datetime="2013-04-26T16:50:00" pubdate>
+                            Fri 26 April 2013
                         </time>
-                        <a href="http://hndr.me/blog/my-first-wp7-apps-on-the-marketplace-demotivator-7" rel="bookmark"><h1>My First WP7 Apps on the Marketplace–Demotivator 7</h1></a>
+                        <a href="http://hndr.me/blog/setting-up-my-github-pages" rel="bookmark"><h1>Setting up my GitHub Pages</h1></a>
                     </header>
                     <section class="post-content">
-                        <p>Ok, so I mentioned that I am developing several Windows Phone 7 Apps,
-and I actually got one of them published on the marketplace! Most of the
-others are still unpublished yet though, either its going on review, or
-well, I just didn’t finish it.</p>
-<p>So, here is the ...</p>
+                        <p>Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just
+create an <code>index.php</code> file, then add another <code>.htaccess</code> file to the root of the site, push, and done.
+In this case, I maintained two separate repositories, one that contains the Pelican ...</p>
                     </section>
                 </article>
             </li>
@@ -87,15 +85,16 @@ well, I just didn’t finish it.</p>
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
-                        <time class="post-time" datetime="2013-04-13T19:33:00" pubdate>
-                            Sat 13 April 2013
+                        <time class="post-time" datetime="2012-03-22T11:47:00" pubdate>
+                            Thu 22 March 2012
                         </time>
-                        <a href="http://hndr.me/blog/new-site-design" rel="bookmark"><h1>New Site Design!</h1></a>
+                        <a href="http://hndr.me/blog/setting-up-python-on-windows" rel="bookmark"><h1>Setting Up Python on Windows</h1></a>
                     </header>
                     <section class="post-content">
-                        <p>I finally got to converting the last site design I made to a Pelican theme. The <a href="https://github.com/hdra/pelican-cait">theme</a> should
-be in use by the time this post is published. In its current state, I wouldn't say the theme is 
-compeletely finished. I tried to make it responsive to screen size ...</p>
+                        <p>Well, it’s a bit late for posting this, considering I have been playing
+with Python for few months as I posted before, but, I recently
+reinstalled my Windows, so I need to setup everything once again. This
+time, I am trying to do it the right way, and my ...</p>
                     </section>
                 </article>
             </li>
@@ -103,16 +102,27 @@ compeletely finished. I tried to make it responsive to screen size ...</p>
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
-                        <time class="post-time" datetime="2012-03-28T21:59:00" pubdate>
-                            Wed 28 March 2012
+                        <time class="post-time" datetime="2012-05-25T22:22:00" pubdate>
+                            Fri 25 May 2012
                         </time>
-                        <a href="http://hndr.me/blog/phonegap-in-visual-studio-there-is-no-script-engine-for-file-extension-js" rel="bookmark"><h1>Phonegap in Visual Studio–There is no script engine for file extension ‘.js’</h1></a>
+                        <a href="http://hndr.me/blog/some-standard-c-object-methods-that-you-might-want-to-override" rel="bookmark"><h1>Some Standard C# Object Methods that you might want to override</h1></a>
                     </header>
                     <section class="post-content">
-                        <p>As I recently reinstalled my Windows system, I had to re-install almost
-every programs I usually use again, one of them is the Visual Studio, and
-since I have been messing around with Phonegap these days, I had to set
-it up again. I did what I did before, copying ...</p>
+                        <p>Alright, I’ll get it straight to the point, since this is just a note to
+myself anyway,</p>
+<p>First one, the ToString() :</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">YourClass</span><span class="p">{</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&quot;Name: &quot;</span><span class="p">+</span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">+</span><span class="s">&quot;,Age: &quot;</span><span class="p">+</span><span class="k">this</span><span class="p">.</span><span class="n">age</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The reason to this is, simple, to have ...</p>
                     </section>
                 </article>
             </li>
@@ -120,16 +130,69 @@ it up again. I did what I did before, copying ...</p>
                         <li>
                 <article class="post-entry">
                     <header class="entry-header">
-                        <time class="post-time" datetime="2012-01-30T19:26:00" pubdate>
-                            Mon 30 January 2012
+                        <time class="post-time" datetime="2012-05-25T23:08:00" pubdate>
+                            Fri 25 May 2012
                         </time>
-                        <a href="http://hndr.me/blog/python-custom-list-sorting-function" rel="bookmark"><h1>Python–Custom List Sorting Function</h1></a>
+                        <a href="http://hndr.me/blog/some-stuff-i-didnt-know-about-string-in-c" rel="bookmark"><h1>Some stuff I didn’t know about String in C#</h1></a>
                     </header>
                     <section class="post-content">
-                        <p>There are several ways to sort a list, where the basic ones is to use
-the list.sort()  method to sort the list without returning anything, or
-use the sorted() function that returns a new sorted list, but this
-mostly works only on list that contains basic data types, if ...</p>
+                        <p>Well, its a bit strange getting to know something that I’ve used
+extensively for quite a while, but there are indeed some things that
+feels revealing.</p>
+<p>First of all, I knew that strings is a little bit special, in a way that
+it is a reference type, but it ...</p>
+                    </section>
+                </article>
+            </li>
+            <hr/>
+                        <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-08-14T14:17:00" pubdate>
+                            Tue 14 August 2012
+                        </time>
+                        <a href="http://hndr.me/blog/some-xaml-syntax-to-remember" rel="bookmark"><h1>Some XAML syntax to remember</h1></a>
+                    </header>
+                    <section class="post-content">
+                        <p>After developing for WPF/ Silverlight for a while, most people will be
+familiar with using XAML to declare UI elements, but even though I have
+been comfortable with XAML for quite a while, I don’t really know what
+is going on behind the stage. Reading Programming Windows by Charles ...</p>
+                    </section>
+                </article>
+            </li>
+            <hr/>
+                        <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2013-04-03T17:16:00" pubdate>
+                            Wed 03 April 2013
+                        </time>
+                        <a href="http://hndr.me/blog/still-working" rel="bookmark"><h1>Still Working</h1></a>
+                    </header>
+                    <section class="post-content">
+                        <p>It has been a few weeks since I decided to start blogging again, but well, as usual not
+much has been done on it.
+For starter, I initially planned to host it on Heroku, following the tricks outline <a href="http://kennethreitz.org/exposures/static-sites-on-heroku-cedar">here</a>,
+and it is super simple to setup. I had created a ...</p>
+                    </section>
+                </article>
+            </li>
+            <hr/>
+                        <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2011-10-02T16:01:00" pubdate>
+                            Sun 02 October 2011
+                        </time>
+                        <a href="http://hndr.me/blog/testing-the-water-on-kinect-applications" rel="bookmark"><h1>Testing the water on Kinect Applications</h1></a>
+                    </header>
+                    <section class="post-content">
+                        <p>Okay, so I am started planning my final year project this semester, and
+for this first phase, I am only required to do the planning, the
+documentation and well, the report stuffs, but, since I don't have any
+pictures of the Microsoft Kinect application development, I decided to
+do ...</p>
                     </section>
                 </article>
             </li>
@@ -139,7 +202,7 @@ mostly works only on list that contains basic data types, if ...</p>
                                                 <a href="http://hndr.me/author/hendra3.html">
                         <i class="icon-circle-arrow-left"></i>
                     </a>
-                                        Page 4 / 8
+                                        Page 4 / 5
                             <a href="http://hndr.me/author/hendra5.html">
                     <i class="icon-circle-arrow-right"></i>
                 </a>
