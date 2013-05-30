@@ -3,7 +3,7 @@ Slug: linux-again
 Date: 2013-05-29 20:57
 
 
-I tried again and again to [setup a Linux OS on my laptop][lin], hoping to eventually making it my 
+I tried again and again to setup a Linux OS on my laptop, hoping to eventually making it my 
 main operating system, but, again and again, I find it just not practical enough. There was 
 always something that doesn't work correctly. Things like programs that kept crashing, windows 
 that suddenly froze, drivers not working, or simply, everything being sluggish. All that time, I 
@@ -18,7 +18,7 @@ that are user friendly are nowhere near lightweight, and many of them aren't eve
 by design, in the name of user friendliness. I do believe that overall, they are all moving to
 the right direction. Especially the work Linux Mint team done with [Cinnamon][cin] has been very
 exciting. Canonical has also been hard at work with Ubuntu, coming up with all kinds of stuff that
-makes Linux more and more viable as a desktop OS. They even plan to develop their own display server.
+makes Linux more and more viable as a desktop OS. They even plan to develop [their own display server][mir].
 The trends are going towards an OS that is tightly integrated, better hardware support, and of 
 course, easier to use. Customizability might be the only thing that are going away. I personally
 don't really care for it, as long as they work well enough for me, I wouldn't really need to
@@ -66,9 +66,12 @@ just have the command to enter presented to me via the great wisdom of Google.
 is the priority.
 * Document everything. I want to know the steps I took to achieve something, and I want to make 
 sure it can be easily reproduced. Maybe write a build script for it.
-
+ 
 All that covered, I have some plan in mind on how to do it. Lightweight, customizable, reasonably
-low-level, stable, friendly. Next will be on setting it up. 
+low-level, stable, friendly. Next will be on setting it up. By the way, while I was writing this 
+post, Linux Mint 15 "Olivia" was announced! and look at [them][olivia]! So pretty! This can be
+harder than I expected with that kind of temptation.
 
-[lin]: 
-[cin]: cinnamon.linuxmint.com
+[cin]: http://cinnamon.linuxmint.com
+[mir]: http://www.omgubuntu.co.uk/2013/03/canonical-announce-custom-display-server-mir-not-wayland-not-x
+[olivia]: http://www.linuxmint.com/rel_olivia_whatsnew.php
