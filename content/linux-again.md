@@ -1,0 +1,74 @@
+Title: Setting up my Linux on my laptop, changing my approach
+Slug: linux-again
+Date: 2013-05-29 20:57
+
+
+I tried again and again to [setup a Linux OS on my laptop][lin], hoping to eventually making it my 
+main operating system, but, again and again, I find it just not practical enough. There was 
+always something that doesn't work correctly. Things like programs that kept crashing, windows 
+that suddenly froze, drivers not working, or simply, everything being sluggish. All that time, I 
+always kept thinking that Linux on desktop is good enough to be used the same way I use Windows, 
+or maybe, OSX. I was wrong. So, why am I doing this again this time? Well, for one thing, final
+exams are coming, and I should be studying instead of messing with my computer, so yeah, that 
+dreadful 'P' word. But, other than that, I also want to try a different approach this time.
+
+The usual pitch with Linux on desktop is that they are no longer hard to use as they used to. 
+They require less resources to run. They can be made whatever you want them to. Truth: the ones 
+that are user friendly are nowhere near lightweight, and many of them aren't even that configurable
+by design, in the name of user friendliness. I do believe that overall, they are all moving to
+the right direction. Especially the work Linux Mint team done with [Cinnamon][cin] has been very
+exciting. Canonical has also been hard at work with Ubuntu, coming up with all kinds of stuff that
+makes Linux more and more viable as a desktop OS. They even plan to develop their own display server.
+The trends are going towards an OS that is tightly integrated, better hardware support, and of 
+course, easier to use. Customizability might be the only thing that are going away. I personally
+don't really care for it, as long as they work well enough for me, I wouldn't really need to
+configure much anyway.
+
+Seems like easy enough for me to just pick a distribution and use it. Too bad, it is not that simple
+for me. Here are some of my problem with the existing 'mainstream linux':
+* I mentioned that the ability to configure the OS doesn't matter that much to me, as long as it 
+works well enough. Problem is, none of them are good enough, so my only option is to use one
+that I can customize to suit my use.
+* My laptop is almost 4 years old. It runs Windows 8 smoothly. It can even run some of the recent 
+heavyweight games with no problem. But, surprisingly,  believe it or not, running vanilla Ubuntu
+with Unity doesn't come without noticeable lags. I believe the hardware drivers play quite a part
+in this. Looking around, seems like most people seems pretty happy with the open source graphic card
+driver, so I guess its time for me to upgrade, but, I am still saving up.
+* Related to my first point, in my attempt trying to bend the OS to suit my taste, many things
+became a tangled mess. This makes unexpected things to stop working during unexpected times. Since
+many of the distribution tried to make things easy to use, many things became hidden away. This 
+also makes it hard to reproduce the configuration because I am not even sure what I changed.
+
+So, with all that in mind, I decided how I want this attempt on using Linux would be:
+* Lightweight. A must. I don't think I can use an OS that aren't at least as fast as Windows.
+* Customizable. I think I was looking for the wrong thing if I focus on ease of use when trying
+out Linux out of the box. For now. This time, I would look for something that may requires some 
+configuration overhead, but overall, would make everything easier to use.
+* Works. Of course, By this I mean I don't want having to install codecs to play music, or not 
+audio jack not working, having to dig for drivers for wireless card, multi-monitor configuration, etc.
+* Doesn't hide things from me. I want to know what is going on in as many places as possible.
+As little magic as possible. I want to be able to reproduce my configuration easily.
+* Makes me more productive. The whole point of me thinking to switch to Linux is so that I can
+do things, especially programming related things, faster, easier, and better. I want to take
+full advantage of UNIX. I want to use as many keyboard shortcuts as possible. I don't expect this
+to be there out of the box, but I want it to be at least configurable to achieve this.
+* Looks good. I don't need shiny and fancy, but at the very least, I don't want it to be unbearably
+ugly.
+
+Of course, I can't simply blame everything on the OS. There are also mistakes in the way I 
+approached this in the past. I just expected everything to work without making an effort to know
+what is happening behind the scene. So, this time, here is how I am going to do it.
+* No configuration tool such as ubuntu-tweak and such. If there is a file that I need to edit,
+I want to know what it is, and how to change it.
+* Read the `man`. I always avoided having to read the help page of most tools, as I preferred to
+just have the command to enter presented to me via the great wisdom of Google.
+* Take it slow. No need to rush to make the OS for me to use. Making sure things work properly 
+is the priority.
+* Document everything. I want to know the steps I took to achieve something, and I want to make 
+sure it can be easily reproduced. Maybe write a build script for it.
+
+All that covered, I have some plan in mind on how to do it. Lightweight, customizable, reasonably
+low-level, stable, friendly. Next will be on setting it up. 
+
+[lin]: 
+[cin]: cinnamon.linuxmint.com
