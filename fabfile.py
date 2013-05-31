@@ -23,6 +23,9 @@ def update(commit_msg='update'):
         local('git commit -m "{0}"'.format(commit_msg))
         local('git push origin master')
         local('git push bitbucket master')
+        print "Success updating source"
+    else:
+        print "No changes on source"
 
 
 def pub(commit_msg='Post update'):
@@ -31,8 +34,10 @@ def pub(commit_msg='Post update'):
     # Generate posts
     with prefix(activate):
         local('pelican -s configurations.py -v')
+        print "Site generated successfully"
     # Update gh-pages branch
     with lcd('output'):
         local('git add -A')
         local('git commit -m "{0}"'.format(commit_msg))
         local('git push origin gh-pages')
+        print "Site published successfully"
