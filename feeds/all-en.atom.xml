@@ -1,5 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds%5Call-en.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-05-29T20:57:00+08:00</updated><entry><title>Setting up my Linux on my laptop, changing my approach</title><link href="http://hndr.me/blog/linux-again" rel="alternate"></link><updated>2013-05-29T20:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-05-29:blog/linux-again</id><summary type="html">&lt;p&gt;I tried again and again to setup a Linux OS on my laptop, hoping to eventually making it my 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds%5Call-en.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-06-01T14:57:00+08:00</updated><entry><title>Setting up my Linux to be less ugly</title><link href="http://hndr.me/blog/making-my-new-linux-less-ugly" rel="alternate"></link><updated>2013-06-01T14:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-01:blog/making-my-new-linux-less-ugly</id><summary type="html">&lt;p&gt;As I &lt;a href="(filename|linux-again.md)"&gt;decided&lt;/a&gt; to setup a new Linux installation that is lightweight, customizable to my taste,
+can be made look pretty, and of course, usable, I started looking around for the suitable 
+setup.&lt;/p&gt;
+&lt;p&gt;First thing I need to decide on is which Linux distribution to use. I can either look for something
+bare bone like the Arch, and then build up everything I need, or I can just take something that
+is ready to use, like Ubuntu, and take out whatever I don't need and replace anything I don't like.
+I am tempted to take the former approach, but looking at some youtube videos on the stuffs I would
+need to do, there seems to be just way too many things to do before I can even do anything. Even 
+for basic things like network access needs to be setup. So, well, no thanks. Maybe next time.&lt;/p&gt;
+&lt;p&gt;I ended up deciding on the distribution I am familiar with, Linux Mint 13 XFCE. Now, even as it is,
+the XFCE distribution is lightweight enough for me to use smoothly. It doesn't look bad, and it
+is very customizable. I was tempted to settle on it, but for some reason, I had frequent crashes
+during my use with it. Anyway, it is good enough for me to use as a base. &lt;/p&gt;
+&lt;p&gt;I had been read a lot about tiling window manager, and has been wanting to try it out. &lt;a href="http://www.xmonad.org"&gt;XMonad&lt;/a&gt; 
+seems to be the one that is mentioned most frequently, but setting it up seems like a pain. Not to 
+mention the  500MB I am supposed to download with it. I found another option, &lt;a href="http://www.i3wm.org"&gt;i3&lt;/a&gt;. And it seems 
+to be a lot easier to setup and use. The configuration is done with plain text file instead of 
+a scripting language like Haskell as is the case with XMonad. People had good things to say
+about how easy it is to use as well. Once I saw the video demo, I am sold.&lt;/p&gt;
+&lt;iframe width="480" height="360" src="http://www.youtube.com/embed/Wx0eNaGzAZU" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h2&gt;Installing i3&lt;/h2&gt;
+&lt;p&gt;Installing i3 is easy enough. It is listed in the Ubuntu package repository, so it is also available
+for Linux Mint that is based on Ubuntu, but I find the version available in the repository to be
+severely outdated and have some problem with rendering some fonts, so installing the latest 
+stable version from i3's repository is recommended. The instruction on their download page is easy 
+enough to follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo &amp;quot;deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;
+&lt;span class="c"&gt;# apt-get update&lt;/span&gt;
+&lt;span class="c"&gt;# apt-get --allow-unauthenticated install sur5r-keyring&lt;/span&gt;
+&lt;span class="c"&gt;# apt-get update&lt;/span&gt;
+&lt;span class="c"&gt;# apt-get install i3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One thing to take notice here is the first line, which is used to add the repository to our
+sources. Only problem is, the &lt;code&gt;lsb_release -c -s&lt;/code&gt; in my system will output &lt;code&gt;maya&lt;/code&gt;, since that is
+indeed what my system is. That will cause the link to return me an 404, since, of course, the 
+repository was meant for Ubuntu, and there is not Ubuntu version code named &lt;code&gt;maya&lt;/code&gt;. Since I 
+know Linux Mint 13 was build on Ubuntu Precise, I can just replace it with that.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo &amp;quot;deb http://debian.sur5r.net/i3/ maya universe&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;After the installation is done, I log out, log in again, this time selecting i3 in the session
+manager, and I am in.&lt;/p&gt;
+&lt;h2&gt;Making it less ugly&lt;/h2&gt;
+&lt;p&gt;Out of the box, i3 looks pretty hideous. I didn't take any screenshot because at that point
+I haven't even figured out how to take a screenshot yet. But it is just a black screen with a 
+little black bar at the bottom anyway. In any case, it is time to to do some makeover. The 
+documentation for the i3 is really clear and nice to read. So, there wasn't much problem to 
+figure out what to do. The configuration file is stored at &lt;code&gt;~/.i3/config&lt;/code&gt;. First thing to change
+is the color. I don't know much about design, but I do know when to avoid using the pure black and
+pure white color. Thing #1 to change: the window title color.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;focused&lt;/span&gt;          &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mf"&gt;3F&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="n"&gt;AC2&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;096&lt;/span&gt;&lt;span class="n"&gt;BAA&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mo"&gt;00&lt;/span&gt;&lt;span class="n"&gt;BAA7&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mo"&gt;00&lt;/span&gt;&lt;span class="n"&gt;DA8E&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;focused_inactive&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;333333&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mf"&gt;5F&lt;/span&gt;&lt;span class="mi"&gt;676&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;ffffff&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mf"&gt;484e50&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unfocused&lt;/span&gt;        &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;333333&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;424242&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;888888&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;292&lt;/span&gt;&lt;span class="n"&gt;d2e&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urgent&lt;/span&gt;           &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;C10004&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;900000&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;ffffff&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;900000&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, the status bar. I prefer mine on top of the screen. Also, the color.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;bar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;position&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt;
+    &lt;span class="n"&gt;status_command&lt;/span&gt; &lt;span class="n"&gt;i3status&lt;/span&gt;
+    &lt;span class="n"&gt;tray_output&lt;/span&gt; &lt;span class="n"&gt;LVDS&lt;/span&gt;
+    &lt;span class="n"&gt;colors&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;background&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;232323&lt;/span&gt;
+        &lt;span class="n"&gt;statusline&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;DCDCDC&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next thing, time to change that 80s font face.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;font&lt;/span&gt; &lt;span class="n"&gt;pango&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Ubuntu&lt;/span&gt; &lt;span class="n"&gt;Mono&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;By now, it looks much better. Next is the wallpaper. I use &lt;code&gt;feh&lt;/code&gt; to set my wallpaper.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;exec&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;startup&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="n"&gt;feh&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;bg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fill&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hdra&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Pictures&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Wallpapers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;city&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is how the 'desktop' looks like right now.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Desktop" src="https://farm4.staticflickr.com/3665/8910945270_db72193fae.jpg" /&gt;&lt;/p&gt;
+&lt;h1&gt;Setting up GTK&lt;/h1&gt;
+&lt;p&gt;By now my desktop doesn't look half bad, but if I open any gtk-based application, especially
+gtk3 application, it looks like complete crap. So, next thing to deal with is the gtk theme
+and icons. The configuration file for gtk2 is located at &lt;code&gt;~/.gtkrc-2.0&lt;/code&gt;, while for gtk3 is located
+at &lt;code&gt;~/.config/gtk-3.0/settings.ini&lt;/code&gt;. I want the applications to look consistent, so I had to
+look for one that can provide similar looks for both. There are some of the built-in theme that can
+do this, but I want something else. I decided on the MediterraneanLight from &lt;a href="http://www.gnome-look.org"&gt;gnome-look&lt;/a&gt;.
+I also picked up an icon set from there. Next thing to do is to change the font. I never liked
+how fonts in Linux OS are always unnecessarily big. So, I switched to a lower font size.&lt;/p&gt;
+&lt;p&gt;Here is my gtk2 configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;gtk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;MediterraneanLight&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;gtk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;font&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Open Sans 8&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;gtk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;icon&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Faenza-Dark&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And here is the gtk3 configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[Settings]&lt;/span&gt;
+&lt;span class="na"&gt;gtk-theme-name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;MediterraneanLight&lt;/span&gt;
+&lt;span class="na"&gt;gtk-font-name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Open Sans 8&lt;/span&gt;
+&lt;span class="na"&gt;gtk-fallback-icon-theme&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Mint-X&lt;/span&gt;
+&lt;span class="na"&gt;gtk-icon-theme-name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Faenza-Dark&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And now here is how it looks like:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="File Manager" src="https://farm6.staticflickr.com/5459/8910222885_22f206f546.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Here is some more screenshots with the tiling in action:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Tiling 1" src="https://farm6.staticflickr.com/5444/8901017483_1e29ac330a.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Tiling 2" src="https://farm4.staticflickr.com/3724/8901630850_57c45b5fd2.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Next is on setting it up to be more usable!&lt;/p&gt;</summary></entry><entry><title>Setting up my Linux on my laptop, changing my approach</title><link href="http://hndr.me/blog/linux-again" rel="alternate"></link><updated>2013-05-29T20:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-05-29:blog/linux-again</id><summary type="html">&lt;p&gt;I tried again and again to setup a Linux OS on my laptop, hoping to eventually making it my 
 main operating system, but, again and again, I find it just not practical enough. There was 
 always something that doesn't work correctly. Things like programs that kept crashing, windows 
 that suddenly froze, drivers not working, or simply, everything being sluggish. All that time, I 
