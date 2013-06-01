@@ -134,4 +134,4 @@ Next is on setting it up to be more usable!
 [l1]: http://www.xmonad.org
 [l2]: http://www.i3wm.org
 [l3]: http://www.gnome-look.org
-[lin](|filename|/linux-again.md)
+[lin]: |filename|/linux-again.md
