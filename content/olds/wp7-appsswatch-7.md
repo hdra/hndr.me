@@ -7,12 +7,8 @@ Another WP app on the marketplace,
 <http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34>.
 It’s a pretty simple color picker that lets you pick a color, and provide you with the RGB value and HEX code. There are two kind of picker available, the usual color slider and a honeycomb picker.
 
-![app screenshot 1][sc1]
-![app screenshot 2][sc2]
-![app screenshot 3][sc3]
-![app screenshot 4][sc4]
+<a href="http://www.flickr.com/photos/hendra2392/6720680373/" title="4 by p.hdra, on Flickr"><img src="http://farm8.staticflickr.com/7164/6720680373_4ddbfcb8ef_b.jpg" width="480" height="800" alt="4"></a>
 
-[sc1]: http://farm8.staticflickr.com/7164/6720680373_4ddbfcb8ef.jpg
-[sc2]: http://farm8.staticflickr.com/7155/6720679391_a66aaf368d.jpg
-[sc3]: http://farm8.staticflickr.com/7031/6720678217_b76d9c449a.jpg
-[sc4]: http://farm8.staticflickr.com/7026/6720672637_5e07a9d8e4.jpg
+<a href="http://www.flickr.com/photos/hendra2392/6720679391/" title="3 by p.hdra, on Flickr"><img src="http://farm8.staticflickr.com/7155/6720679391_a66aaf368d_b.jpg" width="480" height="800" alt="3"></a>
+
+<a href="http://www.flickr.com/photos/hendra2392/6720678217/" title="2 by p.hdra, on Flickr"><img src="http://farm8.staticflickr.com/7031/6720678217_b76d9c449a_b.jpg" width="480" height="800" alt="2"></a>

@@ -11,14 +11,12 @@ So, here is the one that got it to the marketplace. Demotivator 7, it’s
 a application to create demotivator posters from the pictures stored in
 the phone. The download link is [here][store].
 
-![Screenshot 1][sc1]
+<a href="http://www.flickr.com/photos/hendra2392/6672744873/" title="2 by p.hdra, on Flickr"><img src="http://farm8.staticflickr.com/7158/6672744873_a06b651ce4_b.jpg" width="480" height="800" alt="2"></a>
 
-![Screenshot 2][sc2]
+<a href="http://www.flickr.com/photos/hendra2392/6672743421/" title="1 by p.hdra, on Flickr"><img src="http://farm8.staticflickr.com/7149/6672743421_d035f82905_b.jpg" width="480" height="800" alt="1"></a>
 
 There are some bugs when creating a portrait poster, I already fixed
 that, but I just don’t feel like updating it yet because of the
 troublesome upload process, so, maybe later.
 
 [store]: http://www.windowsphone.com/en-US/apps/f7f72a6f-15b6-408c-9b25-80b5651ef501
-[sc1]: https://farm8.staticflickr.com/7158/6672744873_a06b651ce4.jpg
-[sc2]: https://farm8.staticflickr.com/7149/6672743421_d035f82905.jpg

@@ -2,7 +2,7 @@ Title: Kinect Project Status Update I - Tools for building a Kinect Applications
 Date: 2011-10-14 12:24
 Tags: kinect, programming
 
-![Kinect][ph]
+<a href="http://www.flickr.com/photos/hendra2392/6266069590/" title="Kinect by p.hdra, on Flickr"><img src="http://farm7.staticflickr.com/6177/6266069590_5f69b81c46_b.jpg" width="1024" height="681" alt="Kinect"></a>
 
 Previously, I wrote about testing the water with Kinect, and well, it
 seems like I am drowning now. The development process is much more
@@ -108,5 +108,3 @@ solutions on the other two alternatives.
 [link3]: http://www.openkinect.org
 [link4]: https://github.com/avin2/SensorKinect
 [link5]: http://channel9.msdn.com/coding4fun/kinect/Getting-started-with-the-Kinect-for-Windows-SDK-quickly-with-the-Kinect-Quickstarts
-
-[ph]: http://farm7.static.flickr.com/6177/6266069590_5f69b81c46.jpg

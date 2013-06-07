@@ -45,7 +45,4 @@ tools and frameworks that I can use to make the job easier.
 Anyway, as mentioned before, the designs above are still in a static HTML form, and I think it 
 is good enough for me to use. Maybe I'll turn it into a proper Pelican theme soon.
 
-[sc1]: http://farm9.staticflickr.com/8254/8636534196_ac410cec50.jpg
-[sc2]: http://farm9.staticflickr.com/8519/8636534164_497989410e.jpg
-[sc3]: https://farm9.staticflickr.com/8248/8635873575_153dd6e05e.jpg
 [h5bp]: http://html5boilerplate.com/

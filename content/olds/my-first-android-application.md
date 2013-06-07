@@ -11,7 +11,7 @@ encryption algorithm, RSA, meaning that the key exchange needs to be
 done before sending any encrypted message. The encryption and decryption
 can only be done within the apps itself.
 
-![Screenshot][sc1]
+<a href="http://www.flickr.com/photos/hendra2392/6678908805/" title="Untitled by p.hdra, on Flickr"><img src="http://farm8.staticflickr.com/7015/6678908805_b0da41bdb0_z.jpg" width="517" height="282" alt="Untitled"></a>
 
 The development process aren’t very intuitive IMO, the emulator are just
 plain unusable, and eclipse integration just didn’t feel ‘native’.
@@ -28,5 +28,3 @@ future.
 Well, as mentioned before, its not a really usable app, I don’t really
 understand the RSA algorithm, and I don’t put any effort in making the
 interface good looking either. But then, whatever,
-
-[sc1]: https://farm8.staticflickr.com/7015/6678908805_b0da41bdb0.jpg
