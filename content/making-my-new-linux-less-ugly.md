@@ -88,8 +88,7 @@ By now, it looks much better. Next is the wallpaper. I use `feh` to set my wallp
 
 This is how the 'desktop' looks like right now.
 
-![Desktop][p1]
-
+<a href="http://www.flickr.com/photos/hendra2392/8910945270/" title="desktop by p.hdra, on Flickr"><img src="https://farm4.staticflickr.com/3665/8910945270_db72193fae_c.jpg" width="800" height="447" alt="desktop"></a>
 
 # Setting up GTK
 By now my desktop doesn't look half bad, but if I open any gtk-based application, especially
@@ -117,20 +116,16 @@ And here is the gtk3 configuration:
 
 And now here is how it looks like:
 
-![File Manager][p2]
+<a href="http://www.flickr.com/photos/hendra2392/8910222885/" title="marlin by p.hdra, on Flickr"><img src="https://farm6.staticflickr.com/5459/8910222885_22f206f546_c.jpg" width="800" height="450" alt="marlin"></a>
 
 Here is some more screenshots with the tiling in action:
 
-![Tiling 1][p3]
+<a href="http://www.flickr.com/photos/hendra2392/8901017483/" title="capt-2013-05-30-114812 by p.hdra, on Flickr"><img src="https://farm6.staticflickr.com/5444/8901017483_1e29ac330a_c.jpg" width="800" height="450" alt="capt-2013-05-30-114812"></a>
 
-![Tiling 2][p4]
+<a href="http://www.flickr.com/photos/hendra2392/8901630850/" title="capt-2013-05-31-193656 by p.hdra, on Flickr"><img src="https://farm4.staticflickr.com/3724/8901630850_57c45b5fd2_c.jpg" width="800" height="450" alt="capt-2013-05-31-193656"></a>
 
 Next is on setting it up to be more usable!
 
-[p1]: https://farm4.staticflickr.com/3665/8910945270_db72193fae.jpg
-[p2]: https://farm6.staticflickr.com/5459/8910222885_22f206f546.jpg
-[p3]: https://farm6.staticflickr.com/5444/8901017483_1e29ac330a.jpg
-[p4]: https://farm4.staticflickr.com/3724/8901630850_57c45b5fd2.jpg
 [l1]: http://www.xmonad.org
 [l2]: http://www.i3wm.org
 [l3]: http://www.gnome-look.org

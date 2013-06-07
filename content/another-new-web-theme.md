@@ -8,16 +8,16 @@ Probably because of I have been trying to write a Pelican theme for my own websi
 use, I wanted the website to have a landing page, and also another design for the blog index. 
 I made another attempt at the design recently. Here is the landing page:
 
-![Landing page design][sc1]
+<a href="http://www.flickr.com/photos/hendra2392/8636534196/" title="Screenshot (69) by p.hdra, on Flickr"><img src="http://farm9.staticflickr.com/8254/8636534196_ac410cec50_c.jpg" width="800" height="414" alt="Screenshot (69)"></a>
 
 and here is the blog index:
 
-![Blog index page design][sc2]
+<a href="http://www.flickr.com/photos/hendra2392/8636534164/" title="Screenshot (70) by p.hdra, on Flickr"><img src="http://farm9.staticflickr.com/8519/8636534164_497989410e_c.jpg" width="800" height="415" alt="Screenshot (70)"></a>
 
 I also managed to made the design responsive. Kind of. I just made the sidebar go to the top
 of the page when the window is resized to below 800 pixels of width. 
 
-![Blog index version 2][sc3]
+<a href="http://www.flickr.com/photos/hendra2392/8635873575/" title="Snap 2013-04-10 at 12.49.21 by p.hdra, on Flickr"><img src="http://farm9.staticflickr.com/8248/8635873575_153dd6e05e_b.jpg" width="317" height="1024" alt="Snap 2013-04-10 at 12.49.21"></a>
 
 The design itself is currently still a static HTML page that I made on top of the pretty
 cool [HTML5 Bootstrap][h5bp]. For some reason I got a feeling that I am not using it to its full 

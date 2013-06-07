@@ -37,7 +37,7 @@ aren't any silly posts left anyway.
 I am still playing around with the pelican configurations and options, on how to setup different
 static pages, building a theme, etc. Speaking about the theme, I drafted a theme of my own.
 
-![Screenshot of the WIP theme][sc]
+<a href="http://www.flickr.com/photos/hendra2392/8615163439/" title="Snap 2013-04-01 at 11.50.50 by p.hdra, on Flickr"><img src="http://farm9.staticflickr.com/8394/8615163439_30ea63f405_c.jpg" width="800" height="788" alt="Screenshot"></a>
 
 Initially I liked it quite a bit, but after leaving it there for a few days, when I came back to 
 work on it again, I found it to be not very attractive anymore. So, no need to say, I scrapped it,
@@ -50,4 +50,3 @@ soon. For the time being, the default Pelican theme seems more than good enough 
 [l2]: https://devcenter.heroku.com/articles/dynos
 [l3]: http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling
 [l4]: http://pages.github.com/
-[sc]: http://farm9.staticflickr.com/8394/8615163439_30ea63f405.jpg

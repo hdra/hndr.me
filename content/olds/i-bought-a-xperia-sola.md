@@ -37,7 +37,7 @@ the phone, I had several apps crash and freezes for no reason, only
 cause I can think of is because the many process it is running at once,
 which also causes the battery life to be quite short.
 
-![my Xperia Sola][sola2]
+<a href="http://www.flickr.com/photos/hendra2392/7554965796/" title="IMG_0007 by p.hdra, on Flickr"><img src="http://farm8.staticflickr.com/7254/7554965796_574e699c83_b.jpg" width="933" height="622" alt="IMG_0007"></a>
 
 Well, that’s all for now, I am looking forward to discovering more of
 this phone.
@@ -48,4 +48,3 @@ this phone.
 [app2]:https://play.google.com/store/apps/details?id=flipboard.app&feature=search_result
 
 [sola]: http://api.sonymobile.com/files/xperia-sola-black-464x515.png
-[sola2]: https://farm8.staticflickr.com/7254/7554965796_574e699c83.jpg
