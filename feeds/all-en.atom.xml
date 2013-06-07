@@ -1991,10 +1991,9 @@ to each of them. For example, a tuple can contain a list of another
 list, and a list can also nest several level of lists.&lt;/p&gt;</summary></entry><entry><title>WP7 Apps–Swatch 7</title><link href="http://hndr.me/blog/wp7-apps-swatch-7" rel="alternate"></link><updated>2012-01-17T00:14:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-17:blog/wp7-apps-swatch-7</id><summary type="html">&lt;p&gt;Another WP app on the marketplace,
 &lt;a href="http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34"&gt;http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34&lt;/a&gt;.
 It’s a pretty simple color picker that lets you pick a color, and provide you with the RGB value and HEX code. There are two kind of picker available, the usual color slider and a honeycomb picker.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="app screenshot 1" src="http://farm8.staticflickr.com/7164/6720680373_4ddbfcb8ef.jpg" /&gt;
-&lt;img alt="app screenshot 2" src="http://farm8.staticflickr.com/7155/6720679391_a66aaf368d.jpg" /&gt;
-&lt;img alt="app screenshot 3" src="http://farm8.staticflickr.com/7031/6720678217_b76d9c449a.jpg" /&gt;
-&lt;img alt="app screenshot 4" src="http://farm8.staticflickr.com/7026/6720672637_5e07a9d8e4.jpg" /&gt;&lt;/p&gt;</summary><category term="apps"></category><category term="windows-phone"></category></entry><entry><title>Python Learning–Part 3</title><link href="http://hndr.me/blog/python-learning-part-3" rel="alternate"></link><updated>2012-01-12T20:10:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-12:blog/python-learning-part-3</id><summary type="html">&lt;p&gt;Well, I was pretty busy this week, and I haven’t touch too much of
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720680373/" title="4 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7164/6720680373_4ddbfcb8ef_b.jpg" width="480" height="800" alt="4"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720679391/" title="3 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7155/6720679391_a66aaf368d_b.jpg" width="480" height="800" alt="3"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720678217/" title="2 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7031/6720678217_b76d9c449a_b.jpg" width="480" height="800" alt="2"&gt;&lt;/a&gt;&lt;/p&gt;</summary><category term="apps"></category><category term="windows-phone"></category></entry><entry><title>Python Learning–Part 3</title><link href="http://hndr.me/blog/python-learning-part-3" rel="alternate"></link><updated>2012-01-12T20:10:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-12:blog/python-learning-part-3</id><summary type="html">&lt;p&gt;Well, I was pretty busy this week, and I haven’t touch too much of
 Python these days, and even if if I done some exercise on Python, I was
 too lazy to write up a blog post for it, but I promised I will blog more
 to keep track of my progress, so here I am writing this.&lt;/p&gt;
@@ -2171,8 +2170,8 @@ well, I just didn’t finish it.&lt;/p&gt;
 &lt;p&gt;So, here is the one that got it to the marketplace. Demotivator 7, it’s
 a application to create demotivator posters from the pictures stored in
 the phone. The download link is &lt;a href="http://www.windowsphone.com/en-US/apps/f7f72a6f-15b6-408c-9b25-80b5651ef501"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot 1" src="https://farm8.staticflickr.com/7158/6672744873_a06b651ce4.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot 2" src="https://farm8.staticflickr.com/7149/6672743421_d035f82905.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6672744873/" title="2 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7158/6672744873_a06b651ce4_b.jpg" width="480" height="800" alt="2"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6672743421/" title="1 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7149/6672743421_d035f82905_b.jpg" width="480" height="800" alt="1"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;There are some bugs when creating a portrait poster, I already fixed
 that, but I just don’t feel like updating it yet because of the
 troublesome upload process, so, maybe later.&lt;/p&gt;</summary><category term="apps"></category><category term="windows-phone"></category></entry><entry><title>Python learning progress part.1</title><link href="http://hndr.me/blog/python-learning-progress-part1" rel="alternate"></link><updated>2012-01-09T19:55:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-09:blog/python-learning-progress-part1</id><summary type="html">&lt;p&gt;Ok, so last time I mentioned that I began learning Python. with the Zed
@@ -2236,7 +2235,7 @@ integer, a string, or any other type depending on the value.&lt;/p&gt;
 
 &lt;span class="c"&gt;#we can still print it in the same way&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Kinect Project Status Update I - Tools for building a Kinect Applications</title><link href="http://hndr.me/blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications" rel="alternate"></link><updated>2011-10-14T12:24:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-14:blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications</id><summary type="html">&lt;p&gt;&lt;img alt="Kinect" src="http://farm7.static.flickr.com/6177/6266069590_5f69b81c46.jpg" /&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Kinect Project Status Update I - Tools for building a Kinect Applications</title><link href="http://hndr.me/blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications" rel="alternate"></link><updated>2011-10-14T12:24:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-14:blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications</id><summary type="html">&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6266069590/" title="Kinect by p.hdra, on Flickr"&gt;&lt;img src="http://farm7.staticflickr.com/6177/6266069590_5f69b81c46_b.jpg" width="1024" height="681" alt="Kinect"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Previously, I wrote about testing the water with Kinect, and well, it
 seems like I am drowning now. The development process is much more
 complicated that I thought.&lt;/p&gt;
@@ -2361,7 +2360,7 @@ is, its finished, but not a really usable apps though.&lt;/p&gt;
 encryption algorithm, RSA, meaning that the key exchange needs to be
 done before sending any encrypted message. The encryption and decryption
 can only be done within the apps itself.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot" src="https://farm8.staticflickr.com/7015/6678908805_b0da41bdb0.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6678908805/" title="Untitled by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7015/6678908805_b0da41bdb0_z.jpg" width="517" height="282" alt="Untitled"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The development process aren’t very intuitive IMO, the emulator are just
 plain unusable, and eclipse integration just didn’t feel ‘native’.
 Switching between code view and design view takes several seconds to
