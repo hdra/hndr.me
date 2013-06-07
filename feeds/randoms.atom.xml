@@ -114,7 +114,7 @@ pure white color. Thing #1 to change: the window title color.&lt;/p&gt;
 
 
 &lt;p&gt;This is how the 'desktop' looks like right now.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Desktop" src="https://farm4.staticflickr.com/3665/8910945270_db72193fae.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8910945270/" title="desktop by p.hdra, on Flickr"&gt;&lt;img src="https://farm4.staticflickr.com/3665/8910945270_db72193fae_c.jpg" width="800" height="447" alt="desktop"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1&gt;Setting up GTK&lt;/h1&gt;
 &lt;p&gt;By now my desktop doesn't look half bad, but if I open any gtk-based application, especially
 gtk3 application, it looks like complete crap. So, next thing to deal with is the gtk theme
@@ -141,10 +141,10 @@ how fonts in Linux OS are always unnecessarily big. So, I switched to a lower fo
 
 
 &lt;p&gt;And now here is how it looks like:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="File Manager" src="https://farm6.staticflickr.com/5459/8910222885_22f206f546.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8910222885/" title="marlin by p.hdra, on Flickr"&gt;&lt;img src="https://farm6.staticflickr.com/5459/8910222885_22f206f546_c.jpg" width="800" height="450" alt="marlin"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here is some more screenshots with the tiling in action:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Tiling 1" src="https://farm6.staticflickr.com/5444/8901017483_1e29ac330a.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Tiling 2" src="https://farm4.staticflickr.com/3724/8901630850_57c45b5fd2.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8901017483/" title="capt-2013-05-30-114812 by p.hdra, on Flickr"&gt;&lt;img src="https://farm6.staticflickr.com/5444/8901017483_1e29ac330a_c.jpg" width="800" height="450" alt="capt-2013-05-30-114812"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8901630850/" title="capt-2013-05-31-193656 by p.hdra, on Flickr"&gt;&lt;img src="https://farm4.staticflickr.com/3724/8901630850_57c45b5fd2_c.jpg" width="800" height="450" alt="capt-2013-05-31-193656"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Next is on setting it up to be more usable!&lt;/p&gt;</summary></entry><entry><title>Setting up my Linux on my laptop, changing my approach</title><link href="http://hndr.me/blog/linux-again" rel="alternate"></link><updated>2013-05-29T20:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-05-29:blog/linux-again</id><summary type="html">&lt;p&gt;I tried again and again to setup a Linux OS on my laptop, hoping to eventually making it my 
 main operating system, but, again and again, I find it just not practical enough. There was 
 always something that doesn't work correctly. Things like programs that kept crashing, windows 
@@ -298,12 +298,12 @@ shouldn't even be a version 1, but it is a start.&lt;/p&gt;</summary><category t
 Probably because of I have been trying to write a Pelican theme for my own website. For My own 
 use, I wanted the website to have a landing page, and also another design for the blog index. 
 I made another attempt at the design recently. Here is the landing page:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Landing page design" src="http://farm9.staticflickr.com/8254/8636534196_ac410cec50.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8636534196/" title="Screenshot (69) by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8254/8636534196_ac410cec50_c.jpg" width="800" height="414" alt="Screenshot (69)"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;and here is the blog index:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Blog index page design" src="http://farm9.staticflickr.com/8519/8636534164_497989410e.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8636534164/" title="Screenshot (70) by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8519/8636534164_497989410e_c.jpg" width="800" height="415" alt="Screenshot (70)"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I also managed to made the design responsive. Kind of. I just made the sidebar go to the top
 of the page when the window is resized to below 800 pixels of width. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Blog index version 2" src="https://farm9.staticflickr.com/8248/8635873575_153dd6e05e.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8635873575/" title="Snap 2013-04-10 at 12.49.21 by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8248/8635873575_153dd6e05e_b.jpg" width="317" height="1024" alt="Snap 2013-04-10 at 12.49.21"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The design itself is currently still a static HTML page that I made on top of the pretty
 cool &lt;a href="http://html5boilerplate.com/"&gt;HTML5 Bootstrap&lt;/a&gt;. For some reason I got a feeling that I am not using it to its full 
 potential, as I don't really utilizes anything from it beyond the basic page structure and the 
@@ -355,7 +355,7 @@ posts. I also took the chance to just remove many of the rants/silly posts, not 
 aren't any silly posts left anyway.&lt;/p&gt;
 &lt;p&gt;I am still playing around with the pelican configurations and options, on how to setup different
 static pages, building a theme, etc. Speaking about the theme, I drafted a theme of my own.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot of the WIP theme" src="http://farm9.staticflickr.com/8394/8615163439_30ea63f405.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8615163439/" title="Snap 2013-04-01 at 11.50.50 by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8394/8615163439_30ea63f405_c.jpg" width="800" height="788" alt="Screenshot"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Initially I liked it quite a bit, but after leaving it there for a few days, when I came back to 
 work on it again, I found it to be not very attractive anymore. So, no need to say, I scrapped it,
 and started working from scratch. This time, planning the overall sites, starting from the landing 
