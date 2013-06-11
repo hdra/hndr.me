@@ -1,6 +1,5 @@
 from fabric.api import *
-import configurations as conf
-
+import publishconf as conf
 
 output_dir = conf.OUTPUT_PATH
 remote_git = 'git@github.com:hdra/hndr.me.git'
@@ -33,7 +32,7 @@ def pub(commit_msg='Post update'):
     update(commit_msg)
     # Generate posts
     with prefix(activate):
-        local('pelican -s configurations.py -v')
+        local('pelican -s publishconf.py -v')
         print "Site generated successfully"
     # Update gh-pages branch
     with lcd('output'):
