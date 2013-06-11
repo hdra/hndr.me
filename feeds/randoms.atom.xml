@@ -1,5 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-06-07T11:22:00+08:00</updated><entry><title>WordPress is big</title><link href="http://hndr.me/blog/wordpress-is-big" rel="alternate"></link><updated>2013-06-07T11:22:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-07:blog/wordpress-is-big</id><summary type="html">&lt;p&gt;Well, WordPress is big. Yes, that sounds silly, I know how &lt;a href="http://yoast.com/wordpress-stats/"&gt;big&lt;/a&gt; WordPress is, I just 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-06-11T13:04:00+08:00</updated><entry><title>More fun with Linux</title><link href="http://hndr.me/blog/more-fun-with-linux" rel="alternate"></link><updated>2013-06-11T13:04:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-11:blog/more-fun-with-linux</id><summary type="html">&lt;h1&gt;Terminal&lt;/h1&gt;
+&lt;p&gt;The best feature of a Linux system is its CLI tools, so of course, the terminal is an important
+tool to have. My first choice was &lt;a href="http://software.schmorp.de/pkg/rxvt-unicode.html"&gt;urxvt&lt;/a&gt;, it was lightweight, supports unicode, have quite
+an active community with various customization with it, and it doesn't have a menu bar, which
+is perfect for the i3wm I am using. Copy and pasting aren't as straightforward as I hoped, as I
+need to setup some script to get the basic function working, but I could live with that. The deal
+breaker problem is that it for some weird reason produces weird text artifacts when I resizes
+the window, which is really important to me, since one of the main the reason I am using a 
+tiling window manager is for the flexibility and ability to quickly resize windows using 
+keyboard.&lt;/p&gt;
+&lt;p&gt;So, I settled for Terminator. It wasn't ideal, it was rather packed with features I don't really
+need, such as tabs and split windows. I have no need for these features, as I am already using 
+a tiling window manager anyway. But at least it works, and it got a bad ass name.&lt;/p&gt;
+&lt;p&gt;There isn't much of a terminal to customize, so I only set the font type, hid the title bar,
+and changed the color scheme. I wrote a &lt;a href="https://github.com/hdra/itermcolors2terminator"&gt;script&lt;/a&gt; to convert iTerm color schemes to the terminator
+palettes, since seems like the iTerm users enjoy a great list of color schemes around.&lt;/p&gt;
+&lt;h2&gt;Shell&lt;/h2&gt;
+&lt;p&gt;To be honest, I don't really need to change my shell to anything other than what was provided 
+as the default (that is, bash). Its not like I have overgrown bash and need something more
+powerful anyway. But, since all the cool people are saying &lt;a href="http://fendrich.se/blog/2012/09/28/no/"&gt;how&lt;/a&gt; &lt;a href="http://mikegrouchy.com/blog/2012/01/zsh-is-your-friend.html"&gt;awesome&lt;/a&gt; it is, so I jumped
+ on the &lt;a href="http://www.zsh.org/"&gt;ZSH&lt;/a&gt; bandwagon anyway. And it turns out, it really is cool, among other things,
+ one that I enjoy the most is its autocompletion. Just awesome. I was about to dive deeper
+and have fun customizing almost every aspects of it, but somewhere along the way, I realized:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/9014788639/" title="its a trap by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8275/9014788639_93815e99c4_o.jpg" width="197" height="256" alt="its a trap"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I am about to spend too much time customizing the system again. So, I simply turned to the 
+awesome &lt;a href="https://github.com/robbyrussell/oh-my-zsh"&gt;oh-my-zsh&lt;/a&gt; package, the default is more than good enough for me, all I need to
+do is to just add a couple of extra lines to the &lt;code&gt;.zshrc&lt;/code&gt; file to set some alias and environment
+variables.&lt;/p&gt;
+&lt;h1&gt;Text Editor&lt;/h1&gt;
+&lt;p&gt;The last few times I tried to work in Linux, I never really tried to setup a nice text editor
+to use. Big mistake. IMO the text editor is the most important tool in a programmer's pocket.
+Last time, I settled with something way too simple, such as gedit, or something way too complex
+to get to work, vim. No need to say, I never even got any real productivity working in it.&lt;/p&gt;
+&lt;p&gt;This time, the I have a wonderful text editor that I have been using from Windows. Yep,
+&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text 2&lt;/a&gt;. It really is the best text editor I have ever used. The plugins, the
+themes and color schemes, and the community around it are simply awesome. Even without
+any plugin, it is still a solid text editor, with its command palette, multi-cursor, and
+many others. Best thing of all? It is cross-platform, available on all 3 major OSes, not
+the Mono or Java kind of cross platform, but a native application all way through.&lt;/p&gt;
+&lt;p&gt;Installing it in Linux, it is pretty straightforward, downloading it from the website, 
+extracting it, and thats it. For those who are too lazy to go to the website and download the
+archive, there is this command that you can use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;
+&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//c758482.r82.cf2.rackcdn.com/Sublime Text 2.0.1 x64.tar.bz2&lt;/span&gt;
+&lt;span class="n"&gt;tar&lt;/span&gt; &lt;span class="n"&gt;vxjf&lt;/span&gt; &lt;span class="n"&gt;Sublime&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt; &lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt; &lt;span class="mf"&gt;2.0.1&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bz2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There is also an unofficial repository maintained by the people at webupd8:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="n"&gt;ppa&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;webupd8team&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sublime&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;sublime&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next thing, adding the the executable to path so that it can be easily started:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;ln&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;Sublime&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt; &lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sublime_text&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;subl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There is a problem with the script above though. Running the command on the terminal
+will make the shell to wait for the program to exit, making us unable to do anything else
+on that terminal. So, to fix that, I made a little script to run it in the background,
+independent of the terminal.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;subl &lt;span class="s2"&gt;&amp;quot;$*&amp;quot;&lt;/span&gt; &amp;amp;&amp;gt; /dev/null &amp;amp;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;All I got to do left is to install the packages that I have been using on Windows.
+Installing my packages from Windows aren't that hard, since I installed my sublime text 
+extras from the &lt;a href="http://wbond.net/sublime_packages/package_control"&gt;Package Control&lt;/a&gt;, all of my installed packages are listed in the 
+&lt;code&gt;Package Control.sublime-settings&lt;/code&gt;, and the only thing left I need to do was to copy all
+my other configurations over, and just modify a little from the hotkey configuration.&lt;/p&gt;
+&lt;h1&gt;LAMP Stack&lt;/h1&gt;
+&lt;p&gt;I still do a lot of PHP development, however uncool that may be nowadays. From messing around with
+WordPress and general web development, I still find PHP irreplaceable. I even intend to
+pick up &lt;a href="http://laravel.com/"&gt;Laravel&lt;/a&gt; to see what it can do.&lt;/p&gt;
+&lt;p&gt;So, easiest way to do it is of course, the combination of Apache web server, MySQL, and
+the PHP stack. On Windows, I have been spoiled with ease of setup that is &lt;a href="http://sourceforge.net/projects/xampp/"&gt;XAMPP&lt;/a&gt;.
+Good thing is, it is also available on Linux, but this time, I would like to take the
+opportunity to do it differently. I want to the parts manually so that I know how they work together.
+Fortunately, it is not that hard to setup on Linux, as most of the packages needed are
+readily available on the software repository.&lt;/p&gt;
+&lt;p&gt;So, here are the packages needed, first of all, is the Apache web server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;apache2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;By now, visiting &lt;code&gt;localhost&lt;/code&gt; on your web browser should give you something to be happy about.
+Next thing to install is the MySQL.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When the install is finished, you should get asked to perform the initial setup for the MySQL
+server, including setting up the user authentication and stuffs. Now the last piece of the stack
+is to install php.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;php5&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, for them to work together, there are a couple more packages to be installed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;libapache2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mod&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;php5&lt;/span&gt; &lt;span class="n"&gt;libapache2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mod&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mysql&lt;/span&gt; &lt;span class="n"&gt;php5&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mysql&lt;/span&gt; &lt;span class="n"&gt;phpmyadmin&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, restart apache with &lt;code&gt;sudo /etc/init.d/apache2 restart&lt;/code&gt;, and try to put some PHP code in
+&lt;code&gt;/var/www&lt;/code&gt; and navigate to the address to see if it executed properly. Also, add this line
+to &lt;code&gt;/etc/php5/apache2/php.ini&lt;/code&gt;: &lt;code&gt;extension=mysql.so&lt;/code&gt; to get PHP to work with MySQL. Also,
+add the line &lt;code&gt;Include /etc/phpmyadmin/apache.conf&lt;/code&gt; to &lt;code&gt;/etc/apache2/apache2.conf&lt;/code&gt; so that
+the server know where to find phpmyadmin. Restart the server again, and the server is set to go.&lt;/p&gt;
+&lt;p&gt;Now, the server is ready to use, but there are still a few things to do to make it pleasant to
+use. One is the document root of the apache web server is located at the not so easy to access
+location of &lt;code&gt;/var/www&lt;/code&gt;, so its better to move that to somewhere inside the home directory.
+To do that. the file to edit is &lt;code&gt;/etc/apache2/sites-available/default&lt;/code&gt;. It should be pretty 
+obvious which lines to edit once you open that file. Also, while this might not be necessary,
+you can create an alias for &lt;code&gt;/etc/init.d/apache2&lt;/code&gt; so that it can be easily accessed.&lt;/p&gt;</summary><category term="linux"></category></entry><entry><title>WordPress is big</title><link href="http://hndr.me/blog/wordpress-is-big" rel="alternate"></link><updated>2013-06-07T11:22:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-07:blog/wordpress-is-big</id><summary type="html">&lt;p&gt;Well, WordPress is big. Yes, that sounds silly, I know how &lt;a href="http://yoast.com/wordpress-stats/"&gt;big&lt;/a&gt; WordPress is, I just 
 never really cared about the opportunity that it provides. I am currently looking for some
 freelance work to do, and I was pretty disappointed that most of what I found are WordPress
 jobs. Not that there is any problem with that, it was a wonderful blogging software, but
