@@ -1,0 +1,98 @@
+Title: Setting up stuffs on Linux
+Date: 2013-06-14 19:41
+Tags: linux, python, ruby, node
+
+My Linux system has been pretty much set up for most things I need, since of course, Linux Mint
+itself comes with a lot of stuffs such as python, and such. I myself am pretty surprised
+how much I have settled in. Still, there are still a number of stuffs that I need to add.
+First of, the utilities that includes stuffs such as gcc, cmake, curl, and all the stuff.
+
+    sudo apt-get install build-essential curl
+
+#Python
+Python 2.7 comes pre-installed on most Linux system, so there isn't much to do here. Python 3 has
+started to gain more traction these days, with a lot of projects has been ported to it, and some
+new ones that are written in it. The day where I would have to deal with Python versions aren't
+too far, but for now, I don't have much use for it yet, so 2.7 is good enough for me. I do
+need to install the development header for some of the libraries that might need it though, so:
+
+    sudo apt-get install python-dev
+
+## pip, virtualenv, virtualenvwrapper
+The apt-get for Python, tool to manage isolated Python packages, and a wrapper to make using it
+easy. 
+
+    sudo apt-get install python-pip
+    sudo pip install --upgrade pip
+    sudo pip install virtualenv
+    sudo pip install virtualenvwrapper
+
+Those command first install `pip` from the software repository, then use `pip` to update itself
+from the PyPI since the one in the software repository can be severely outdated, and then install
+`virtualenv` and `virtualenvwrapper`. To finish up installing `virtualenvwrapper`, put this
+somewhere in the startup script (`~/.zshrc` in my case). Of course change the path according the
+the configuration.
+
+    export WORKON_HOME=$HOME/.venvs
+    export PROJECT_HOME=$HOME/Projects
+    source /usr/local/bin/virtualenvwrapper.sh
+
+
+#Ruby
+I don't actually know how to program in Ruby. At All. But, there are a bunch of cools tools written
+in Ruby that are simply can't be replaced easily, things like [SCSS][l1] and [guard-livereload][l2].
+I don't want to spend too much time on this, so I just took the first guide I found and follow it.
+I am supposed to use [rvm][l3] to to manage the ruby versions. So, the stuff I did:
+
+curl -L https://get.rvm.io | bash
+
+And wait for it to finish, it might take a while. In my case, I ran into an error about it not being
+able to install some of the requirements, so what I did was check the log, and take the stuffs that
+failed to install and install them manually via apt-get. Worked for me. After it is done doing its
+things, put this somewhere in the startup script:
+
+    source $HOME/.rvm/scripts/rvm
+
+Then, install the version of ruby you want to use:
+
+    rvm install 1.9.3
+    rvm -default use 1.9.3
+
+It is done. Maybe install some essential gems:
+
+    gem install bundler, sass, guard
+
+
+#Node.js
+I am actually not sure what I am going to do with Node.js, but it is an interesting piece of 
+technology with its full-async execution model. So, I just installed it, maybe I'll play with
+it at sometime. There are many ways to install node.js on a linux system. The official way
+is to download and install it from source, but since I am don't want to spend too much 
+time dealing with something that I am not sure I will use anyway, I installed it from an un-official
+PPA:
+
+    sudo add-apt-repository ppa:chris-lea/node.js
+    sudo apt-get update
+    sudo apt-get install nodejs
+
+And that will install `npm` as well. kind of like `pip` of the node.js world I guess.
+
+
+#Others
+##Mono
+The open source .NET implementation. Ability to use the awesome C# and MonoGame.
+
+    sudo apt-get install mono-complete
+
+##Android-SDK?
+I know I am going to need this sooner or later, but dealing with Java isn't just my favorite thing
+to do. I think the new Android Studio is supposed to make installing the SDKs and Android system
+images easier without having to deal with eclipse plugins and stuff, but still, removing OpenJDK,
+installing Oracle-JDK, and stuff... later, I guess.
+
+##Go?
+I am not sure if I want to install this. The hype around it has been drawing my attention to it.
+
+[l1]: https://github.com/nex3/sass
+[l2]: https://github.com/guard/guard-livereload
+[l3]: https//rvm.io
