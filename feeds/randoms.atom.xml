@@ -1,5 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-06-11T13:04:00+08:00</updated><entry><title>More fun with Linux</title><link href="http://hndr.me/blog/more-fun-with-linux" rel="alternate"></link><updated>2013-06-11T13:04:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-11:blog/more-fun-with-linux</id><summary type="html">&lt;h1&gt;Terminal&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-06-14T19:41:00+08:00</updated><entry><title>Setting up stuffs on Linux</title><link href="http://hndr.me/blog/setting-up-stuffs-on-linux" rel="alternate"></link><updated>2013-06-14T19:41:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-14:blog/setting-up-stuffs-on-linux</id><summary type="html">&lt;p&gt;My Linux system has been pretty much set up for most things I need, since of course, Linux Mint
+itself comes with a lot of stuffs such as python, and such. I myself am pretty surprised
+how much I have settled in. Still, there are still a number of stuffs that I need to add.
+First of, the utilities that includes stuffs such as gcc, cmake, curl, and all the stuff.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;essential&lt;/span&gt; &lt;span class="n"&gt;curl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Python&lt;/h1&gt;
+&lt;p&gt;Python 2.7 comes pre-installed on most Linux system, so there isn't much to do here. Python 3 has
+started to gain more traction these days, with a lot of projects has been ported to it, and some
+new ones that are written in it. The day where I would have to deal with Python versions aren't
+too far, but for now, I don't have much use for it yet, so 2.7 is good enough for me. I do
+need to install the development header for some of the libraries that might need it though, so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;pip, virtualenv, virtualenvwrapper&lt;/h2&gt;
+&lt;p&gt;The apt-get for Python, tool to manage isolated Python packages, and a wrapper to make using it
+easy. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;upgrade&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenv&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenvwrapper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Those command first install &lt;code&gt;pip&lt;/code&gt; from the software repository, then use &lt;code&gt;pip&lt;/code&gt; to update itself
+from the PyPI since the one in the software repository can be severely outdated, and then install
+&lt;code&gt;virtualenv&lt;/code&gt; and &lt;code&gt;virtualenvwrapper&lt;/code&gt;. To finish up installing &lt;code&gt;virtualenvwrapper&lt;/code&gt;, put this
+somewhere in the startup script (&lt;code&gt;~/.zshrc&lt;/code&gt; in my case). Of course change the path according the
+the configuration.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;WORKON_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;venvs&lt;/span&gt;
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PROJECT_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Projects&lt;/span&gt;
+&lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;virtualenvwrapper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Ruby&lt;/h1&gt;
+&lt;p&gt;I don't actually know how to program in Ruby. At All. But, there are a bunch of cools tools written
+in Ruby that are simply can't be replaced easily, things like &lt;a href="https://github.com/nex3/sass"&gt;SCSS&lt;/a&gt; and &lt;a href="https://github.com/guard/guard-livereload"&gt;guard-livereload&lt;/a&gt;.
+I don't want to spend too much time on this, so I just took the first guide I found and follow it.
+I am supposed to use &lt;a href="https//rvm.io"&gt;rvm&lt;/a&gt; to to manage the ruby versions. So, the stuff I did:&lt;/p&gt;
+&lt;p&gt;curl -L https://get.rvm.io | bash&lt;/p&gt;
+&lt;p&gt;And wait for it to finish, it might take a while. In my case, I ran into an error about it not being
+able to install some of the requirements, so what I did was check the log, and take the stuffs that
+failed to install and install them manually via apt-get. Worked for me. After it is done doing its
+things, put this somewhere in the startup script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rvm&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;scripts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rvm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then, install the version of ruby you want to use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;rvm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="mf"&gt;1.9.3&lt;/span&gt;
+&lt;span class="n"&gt;rvm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="mf"&gt;1.9.3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It is done. Maybe install some essential gems:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;bundler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;guard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Node.js&lt;/h1&gt;
+&lt;p&gt;I am actually not sure what I am going to do with Node.js, but it is an interesting piece of 
+technology with its full-async execution model. So, I just installed it, maybe I'll play with
+it at sometime. There are many ways to install node.js on a linux system. The official way
+is to download and install it from source, but since I am don't want to spend too much 
+time dealing with something that I am not sure I will use anyway, I installed it from an un-official
+PPA:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="n"&gt;ppa&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;chris&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lea&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nodejs&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And that will install &lt;code&gt;npm&lt;/code&gt; as well. kind of like &lt;code&gt;pip&lt;/code&gt; of the node.js world I guess.&lt;/p&gt;
+&lt;h1&gt;Others&lt;/h1&gt;
+&lt;h2&gt;Mono&lt;/h2&gt;
+&lt;p&gt;The open source .NET implementation. Ability to use the awesome C# and MonoGame.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;mono&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;complete&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Android-SDK?&lt;/h2&gt;
+&lt;p&gt;I know I am going to need this sooner or later, but dealing with Java isn't just my favorite thing
+to do. I think the new Android Studio is supposed to make installing the SDKs and Android system
+images easier without having to deal with eclipse plugins and stuff, but still, removing OpenJDK,
+installing Oracle-JDK, and stuff... later, I guess.&lt;/p&gt;
+&lt;h2&gt;Go?&lt;/h2&gt;
+&lt;p&gt;I am not sure if I want to install this. The hype around it has been drawing my attention to it.&lt;/p&gt;</summary><category term="linux"></category><category term="python"></category><category term="ruby"></category><category term="node"></category></entry><entry><title>More fun with Linux</title><link href="http://hndr.me/blog/more-fun-with-linux" rel="alternate"></link><updated>2013-06-11T13:04:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-11:blog/more-fun-with-linux</id><summary type="html">&lt;h1&gt;Terminal&lt;/h1&gt;
 &lt;p&gt;The best feature of a Linux system is its CLI tools, so of course, the terminal is an important
 tool to have. My first choice was &lt;a href="http://software.schmorp.de/pkg/rxvt-unicode.html"&gt;urxvt&lt;/a&gt;, it was lightweight, supports unicode, have quite
 an active community with various customization with it, and it doesn't have a menu bar, which
