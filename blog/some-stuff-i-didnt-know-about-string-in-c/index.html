@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Some stuff I didn’t know about String in C#
+        <title>    Some stuff I didn’t know about String in C#
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -56,16 +56,15 @@
                         <time class="post-time" datetime="2012-05-25T23:08:00" pubdate>
                             Fri 25 May 2012
                         </time>
-                        <a href="http://hndr.me/blog/some-stuff-i-didnt-know-about-string-in-c" rel="bookmark"><h1>Some stuff I didn’t know about String in C#</h1></a>
+                        <a href="http://hndr.me/blog/some-stuff-i-didnt-know-about-string-in-c" rel="bookmark"><h1>Some stuff I didn’t know about String in&nbsp;C#</h1></a>
                     </header>
 
                     <section class="post-content">
                         <p>Well, its a bit strange getting to know something that I’ve used
 extensively for quite a while, but there are indeed some things that
-feels revealing.</p>
+feels&nbsp;revealing.</p>
 <p>First of all, I knew that strings is a little bit special, in a way that
-it is a reference type, but it behaves very much like a value type, for
-example:</p>
+it is a reference type, but it behaves very much like a value type, for&nbsp;example:</p>
 <div class="highlight"><pre><span class="n">SomeClass</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
 <span class="n">a</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">18</span><span class="p">;</span>
 <span class="n">SomeClass</span> <span class="n">b</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
@@ -82,7 +81,7 @@ example:</p>
 
 <p>So, well, that’s about it. I also knew that string are immutable, as in,
 the value can’t be changed after they are set, so something like this
-would throw an error:</p>
+would throw an&nbsp;error:</p>
 <div class="highlight"><pre><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
 <span class="n">x</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;j&#39;</span><span class="p">;</span>
 </pre></div>
@@ -93,10 +92,10 @@ too much thought into it, and I just learned that the two are actually
 related. In the first code snippet, since x is immutable, when y try to
 change the value, it will create a new string instead, so it will point
 to a new location in the memory, leaving x alone, and the two no longer
-refer to the same memory location.</p>
+refer to the same memory&nbsp;location.</p>
 <p>The value of the string itself are stored in the same memory location as
 well, so even if two strings are created separately, if they have the
-same value, they will still point to the same location.</p>
+same value, they will still point to the same&nbsp;location.</p>
 <div class="highlight"><pre><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">y</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
 <span class="c1">// x == y is true</span>
@@ -104,7 +103,7 @@ same value, they will still point to the same location.</p>
 
 
 <p>I personally have ran into some bugs related to this behaviour, of course,
-I just tried do something else that works without understanding why. Until now.</p>
+I just tried do something else that works without understanding why. Until&nbsp;now.</p>
 <p>That mentioned, one thing to remember is that new string values are
 created each time the value change, so that means there would be a lot
 of temporary objects in the memory, and the garbage collection will run
@@ -113,10 +112,9 @@ very extensively in the program, it would be better to use a class
 called StringBuilder. It behaves almost the same way as a string, but it
 is not immutable, and it is designed to build string, as the name
 suggest. I wanted to talk more about it, but I found a <a href="http://www.dotnetperls.com/stringbuilder">better
-explanation</a> about it, so I’ll just use this post as a book mark to that
-post.</p>
+explanation</a> about it, so I’ll just use this post as a book mark to that&nbsp;post.</p>
 <p>Some other interesting stuffs about strings and the manipulation of
-strings as well:</p>
+strings as&nbsp;well:</p>
 <ul>
 <li><a href="http://www.codinghorror.com/blog/2009/01/the-sad-tragedy-of-micro-optimization-theater.html">http://www.codinghorror.com/blog/2009/01/the-sad-tragedy-of-micro-optimization-theater.html</a></li>
 <li><a href="http://www.codinghorror.com/blog/2006/07/i-heart-strings.html">http://www.codinghorror.com/blog/2006/07/i-heart-strings.html</a></li>

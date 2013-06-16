@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Windows Phone–Context Menu on a ListBox
+        <title>    Windows Phone–Context Menu on a ListBox
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -56,7 +56,7 @@
                         <time class="post-time" datetime="2012-02-23T22:04:00" pubdate>
                             Thu 23 February 2012
                         </time>
-                        <a href="http://hndr.me/blog/windows-phone-context-menu-on-a-listbox" rel="bookmark"><h1>Windows Phone–Context Menu on a ListBox</h1></a>
+                        <a href="http://hndr.me/blog/windows-phone-context-menu-on-a-listbox" rel="bookmark"><h1>Windows Phone–Context Menu on a&nbsp;ListBox</h1></a>
                     </header>
 
                     <section class="post-content">
@@ -70,7 +70,7 @@ access the selected item of the <code>ListBox</code> the ordinary way ( the
 selectedIndex returns –1, so that means holding down a listbox item
 doesn’t count as selecting it). So, I need a way to get information
 about which item to remove, and after a bit of internet search, here is
-how I do it:</p>
+how I do&nbsp;it:</p>
 <div class="highlight"><pre><span class="nt">&lt;ListBox</span> <span class="na">Name=</span><span class="s">&quot;paletteList&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;ListBox.ItemTemplate&gt;</span>
         <span class="nt">&lt;DataTemplate&gt;</span>
@@ -89,7 +89,7 @@ how I do it:</p>
 
 
 <p>Those are the code to set the context menu for the listbox, and here is
-how the C# code on the click event:</p>
+how the C# code on the click&nbsp;event:</p>
 <div class="highlight"><pre><span class="k">private</span> <span class="k">void</span> <span class="nf">removeFromPalette_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">Item</span> <span class="n">selectedItem</span> <span class="p">=</span> <span class="p">(</span><span class="n">sender</span> <span class="k">as</span> <span class="n">MenuItem</span><span class="p">).</span><span class="n">DataContext</span> <span class="k">as</span> <span class="n">Item</span><span class="p">;</span>

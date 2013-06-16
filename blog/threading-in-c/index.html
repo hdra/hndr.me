@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Threading in C#
+        <title>    Threading in C#
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -56,7 +56,7 @@
                         <time class="post-time" datetime="2012-05-31T23:05:00" pubdate>
                             Thu 31 May 2012
                         </time>
-                        <a href="http://hndr.me/blog/threading-in-c" rel="bookmark"><h1>Threading in C#</h1></a>
+                        <a href="http://hndr.me/blog/threading-in-c" rel="bookmark"><h1>Threading in&nbsp;C#</h1></a>
                     </header>
 
                     <section class="post-content">
@@ -64,12 +64,12 @@
 is pretty simple to understand, so I wont explain the here, but you can
 read more about it in this <a href="http://en.wikipedia.org/wiki/Thread_(computing)">wiki page</a>. Threading are used quite
 extensively in most modern computer programs, for example separating
-threads to handle button clicks on a GUI button from the one that
+threads to handle button clicks on a <span class="caps">GUI</span> button from the one that
 handles data processing, or in chatting programs, where it separates
 threads to send messages from the one that handles incoming messages and
-display it on the screen.</p>
-<p>In .NET, threading is handled by the <code>Thread</code> class, which lives in
-the <code>System</code> namespace, so to use it, you need to add this first:</p>
+display it on the&nbsp;screen.</p>
+<p>In .<span class="caps">NET</span>, threading is handled by the <code>Thread</code> class, which lives in
+the <code>System</code> namespace, so to use it, you need to add this&nbsp;first:</p>
 <div class="highlight"><pre><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
 </pre></div>
 
@@ -79,7 +79,7 @@ takes a <a href="http://www.myblog.name/2012/05/delegates-in-c-and-a-tiny-bits-o
 like a pointer to a method? this would mean that the thread will run the
 method that the delegate parameter points to.). ThreadStart itself is a
 delegate that does not return any value or accept any parameter. Here is
-an example:</p>
+an&nbsp;example:</p>
 <div class="highlight"><pre><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
 <span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
 <span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
@@ -113,15 +113,15 @@ an example:</p>
 particular order, the operating decides which threads gets run at any
 given time, but you can see that the same method is being run in 4
 different threads. The three threads that we created with the Thread
-class, and the main thread of the program itself.</p>
+class, and the main thread of the program&nbsp;itself.</p>
 <p>In the example above, the threads are all accessing local variables,
 that is, they don’t share any data between them. This makes things
 pretty simple, but there are times where the threads are accessing a
 shared data, and this may cause a problem known as <a href="http://en.wikipedia.org/wiki/Race_condition">race condition</a>. To
 prevent, that, we need a way sync the data by locking the data to a
 thread during a section of the program that may cause a race condition.
-In .NET, the Threading namespace provides us with a Monitor class that
-we can use to lock an object. Here is an example.</p>
+In .<span class="caps">NET</span>, the Threading namespace provides us with a Monitor class that
+we can use to lock an object. Here is an&nbsp;example.</p>
 <div class="highlight"><pre><span class="kt">var</span> <span class="n">sharedData</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
 
 <span class="c1">// lock the sharedData</span>
@@ -138,9 +138,9 @@ we can use to lock an object. Here is an example.</p>
 
 <p>Thread synchronization is pretty complicated topic, I think will cover
 them in another post some time later, when I got a better understanding
-of it. <a href="http://msdn.microsoft.com/en-us/library/ms173179.aspx">Here</a> is an MSDN article on the topic.</p>
+of it. <a href="http://msdn.microsoft.com/en-us/library/ms173179.aspx">Here</a> is an <span class="caps">MSDN</span> article on the&nbsp;topic.</p>
 <p>The Thread class provides several methods to control the execution of
-the thread, here are some of them:</p>
+the thread, here are some of&nbsp;them:</p>
 <div class="highlight"><pre><span class="c1">// these examples are called from within the execution of another thread</span>
 <span class="c1">// e.g. t2</span>
 
@@ -166,7 +166,7 @@ the thread, here are some of them:</p>
 
 <p>C# also provides some methods to control the execution of another
 process via the <code>Process</code> class in the <code>System.Diagnostics</code> namespace,
-but I’m not too concerned about that for now, so this post ends here.</p>
+but I’m not too concerned about that for now, so this post ends&nbsp;here.</p>
 <h2>References:</h2>
 <ul>
 <li><a href="http://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx">http://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx</a></li>

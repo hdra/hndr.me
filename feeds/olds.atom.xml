@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/olds.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2012-08-14T14:17:00+08:00</updated><entry><title>Some XAML syntax to remember</title><link href="http://hndr.me/blog/some-xaml-syntax-to-remember" rel="alternate"></link><updated>2012-08-14T14:17:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-08-14:blog/some-xaml-syntax-to-remember</id><summary type="html">&lt;p&gt;After developing for WPF/ Silverlight for a while, most people will be
-familiar with using XAML to declare UI elements, but even though I have
-been comfortable with XAML for quite a while, I don’t really know what
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/olds.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2012-08-14T14:17:00+08:00</updated><entry><title>Some XAML syntax to remember</title><link href="http://hndr.me/blog/some-xaml-syntax-to-remember" rel="alternate"></link><updated>2012-08-14T14:17:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-08-14:blog/some-xaml-syntax-to-remember</id><summary type="html">&lt;p&gt;After developing for &lt;span class="caps"&gt;WPF&lt;/span&gt;/ Silverlight for a while, most people will be
+familiar with using &lt;span class="caps"&gt;XAML&lt;/span&gt; to declare &lt;span class="caps"&gt;UI&lt;/span&gt; elements, but even though I have
+been comfortable with &lt;span class="caps"&gt;XAML&lt;/span&gt; for quite a while, I don’t really know what
 is going on behind the stage. Reading Programming Windows by Charles
 Petzold shed some lights on it for me, so this post is here again so
-that I won’t forget.&lt;/p&gt;
-&lt;p&gt;One important thing I didn't know before is that XAML file more or less is just
-another way to express the C# code, and the XAML elements in it are
-actually .NET objects, and anything that can be declared in XAML can be
+that I won’t&amp;nbsp;forget.&lt;/p&gt;
+&lt;p&gt;One important thing I didn&amp;#8217;t know before is that &lt;span class="caps"&gt;XAML&lt;/span&gt; file more or less is just
+another way to express the C# code, and the &lt;span class="caps"&gt;XAML&lt;/span&gt; elements in it are
+actually .&lt;span class="caps"&gt;NET&lt;/span&gt; objects, and anything that can be declared in &lt;span class="caps"&gt;XAML&lt;/span&gt; can be
 done in C# as well. Most page consists of two files, a &lt;code&gt;.xaml&lt;/code&gt; file and a
 &lt;code&gt;.xaml.cs&lt;/code&gt; file, as the partial keyword in the C# file suggest, the
 &lt;code&gt;.xaml.cs&lt;/code&gt; file only consist a part of the class declaration. As we can
-guess, the rest are declared in the XAML file. If we look at the
+guess, the rest are declared in the &lt;span class="caps"&gt;XAML&lt;/span&gt; file. If we look at the
 &lt;code&gt;obj/Debug&lt;/code&gt; folder of the Project, we can see there are several files with
 the name of &lt;code&gt;PageName.g.cs&lt;/code&gt; and &lt;code&gt;PageName.g.i.cs&lt;/code&gt;. During compile time, the
-XAML file is parsed to get the elements and other information declared
+&lt;span class="caps"&gt;XAML&lt;/span&gt; file is parsed to get the elements and other information declared
 in it to generate the intermediate C# file, which will then be compiled
 together with our &lt;code&gt;.xaml.cs&lt;/code&gt; file to generate the class declaration for a
 particular page. In the &lt;code&gt;PageName.g.i.cs&lt;/code&gt; file, we can actually see the
 declaration for the &lt;code&gt;InitializeComponent&lt;/code&gt; method that we always call in
 the constructor of our &lt;code&gt;.xaml.cs&lt;/code&gt; file. The method basically initiates all
-objects declared in the XAML file, which is why if we try to get to
-access an element declared in the XAML before the method is called, we
+objects declared in the &lt;span class="caps"&gt;XAML&lt;/span&gt; file, which is why if we try to get to
+access an element declared in the &lt;span class="caps"&gt;XAML&lt;/span&gt; before the method is called, we
 would get a &lt;code&gt;NullReferenceException&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;That’s enough for the backstage stuff, lets move on to the syntax. Most
-XAML pages looks similar to this:&lt;/p&gt;
+&lt;span class="caps"&gt;XAML&lt;/span&gt; pages looks similar to&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;Page&lt;/span&gt;
     &lt;span class="na"&gt;x:Class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;App2.MainPage&amp;quot;&lt;/span&gt;
     &lt;span class="na"&gt;IsTabStop=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;
@@ -42,12 +42,12 @@ XAML pages looks similar to this:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;As mentioned before, a XAML declaration can be expressed in C#, since
-the elements in XAML file are .NET objects. The Page declaration above
+&lt;p&gt;As mentioned before, a &lt;span class="caps"&gt;XAML&lt;/span&gt; declaration can be expressed in C#, since
+the elements in &lt;span class="caps"&gt;XAML&lt;/span&gt; file are .&lt;span class="caps"&gt;NET&lt;/span&gt; objects. The Page declaration above
 basically declare an instance of &lt;code&gt;MainPage&lt;/code&gt; in the &lt;code&gt;App2&lt;/code&gt; namespace which is
 a subclass from the &lt;code&gt;Page&lt;/code&gt; class. The &lt;code&gt;xmlns&lt;/code&gt; statements are standard xml
 namespace inclusion which would allows us to use various elements.
-Similarly, with these declaration:&lt;/p&gt;
+Similarly, with these&amp;nbsp;declaration:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;Page&lt;/span&gt;
     &lt;span class="na"&gt;x:Class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;App2.MainPage&amp;quot;&lt;/span&gt;
     &lt;span class="na"&gt;IsTabStop=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;
@@ -68,7 +68,7 @@ Similarly, with these declaration:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The same result can be produced with these C# code:&lt;/p&gt;
+&lt;p&gt;The same result can be produced with these C#&amp;nbsp;code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;sealed&lt;/span&gt; &lt;span class="k"&gt;partial&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MainPage&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Page&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;MainPage&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -76,14 +76,14 @@ Similarly, with these declaration:&lt;/p&gt;
         &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;InitializeComponent&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
         &lt;span class="n"&gt;Grid&lt;/span&gt; &lt;span class="n"&gt;contentGrid&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Grid&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;Background&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;SolidColorBrush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Colors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CadetBlue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;Background&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;SolidColorBrush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;&lt;span class="caps"&gt;UI&lt;/span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Colors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CadetBlue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="p"&gt;};&lt;/span&gt;
 
         &lt;span class="n"&gt;TextBlock&lt;/span&gt; &lt;span class="n"&gt;txtBlk&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;TextBlock&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="p"&gt;{&lt;/span&gt;
             &lt;span class="n"&gt;Text&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
             &lt;span class="n"&gt;FontSize&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;96&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="n"&gt;Foreground&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;SolidColorBrush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Colors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BlanchedAlmond&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+            &lt;span class="n"&gt;Foreground&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;SolidColorBrush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;&lt;span class="caps"&gt;UI&lt;/span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Colors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BlanchedAlmond&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
             &lt;span class="n"&gt;HorizontalAlignment&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HorizontalAlignment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Center&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
             &lt;span class="n"&gt;VerticalAlignment&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VerticalAlignment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Center&lt;/span&gt;
         &lt;span class="p"&gt;};&lt;/span&gt;
@@ -94,20 +94,19 @@ Similarly, with these declaration:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;As we can see, the XAML element properties are just another way to set
+&lt;p&gt;As we can see, the &lt;span class="caps"&gt;XAML&lt;/span&gt; element properties are just another way to set
 the values of the member variables of the objects. As we can see on the
 C# code above, the the Foreground property of a TextBlock is of type
 &lt;code&gt;SolidColorBrush&lt;/code&gt; (or any subclass of the &lt;code&gt;Brush&lt;/code&gt; class actually), but in
-the XAML syntax, it seems like we are assigning a string to it. This is
-because the compiler will parse and assign the appropriate attribute for
-us.&lt;/p&gt;
-&lt;p&gt;The XAML code above shows two ways of setting a property of an XAML
+the &lt;span class="caps"&gt;XAML&lt;/span&gt; syntax, it seems like we are assigning a string to it. This is
+because the compiler will parse and assign the appropriate attribute for&amp;nbsp;us.&lt;/p&gt;
+&lt;p&gt;The &lt;span class="caps"&gt;XAML&lt;/span&gt; code above shows two ways of setting a property of an &lt;span class="caps"&gt;XAML&lt;/span&gt;
 element, namely the usual property attributes syntax, and the other one
 is one known as the Property Element syntax. The property-element syntax
 can be used to define some more complex attributes such as defining a
 gradient background that requires defining more than one colours and
 points. For example, the &lt;code&gt;TextBlock&lt;/code&gt; above can be defined as such with the
-property-element syntax:&lt;/p&gt;
+property-element&amp;nbsp;syntax:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;TextBlock&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;TextBlock.Foreground&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;SolidColorBrush&amp;gt;&lt;/span&gt;
@@ -140,17 +139,16 @@ We don’t need to explicitly create a element of type &lt;code&gt;Double&lt;/co
 the alignment properties. We are still relying on the compiler to
 actually recognize that the &lt;code&gt;Black&lt;/code&gt; inside the tag is actually referring
 to the colour enumeration, but there are times where would need to
-explicitly define the property with the usual property-attributes
-syntax.&lt;/p&gt;
+explicitly define the property with the usual property-attributes&amp;nbsp;syntax.&lt;/p&gt;
 &lt;p&gt;In the previous example, we explicitly define what are the properties
-and its value, but as we see on most XAML we see, there are many cases
+and its value, but as we see on most &lt;span class="caps"&gt;XAML&lt;/span&gt; we see, there are many cases
 where we don’t do that. For example, we didn’t explicitly define the
 &lt;code&gt;rootGrid&lt;/code&gt; element of our page is the value for the Content property of
 the page, nor we need to explicitly define that our &lt;code&gt;TextBlock&lt;/code&gt; is a
 member of the &lt;code&gt;Children&lt;/code&gt; property of the &lt;code&gt;Grid&lt;/code&gt;. This is because every
-classes referenced in XAML can have one and only one property that is
+classes referenced in &lt;span class="caps"&gt;XAML&lt;/span&gt; can have one and only one property that is
 defined as its &lt;code&gt;ContentProperty&lt;/code&gt;, where for these properties, the property
-element tags are not required. So, instead of writing&lt;/p&gt;
+element tags are not required. So, instead of&amp;nbsp;writing&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;Page&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;Page.Content&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;Grid&amp;gt;&lt;/span&gt;
@@ -165,7 +163,7 @@ element tags are not required. So, instead of writing&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We can simply write:&lt;/p&gt;
+&lt;p&gt;We can simply&amp;nbsp;write:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;Page&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;Grid&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;TextBlock/&amp;gt;&lt;/span&gt;
@@ -178,7 +176,7 @@ element tags are not required. So, instead of writing&lt;/p&gt;
 
 &lt;p&gt;And it would produce the same result. For the same reason, we can use
 the same thing to define the &lt;code&gt;Text&lt;/code&gt; property of a &lt;code&gt;TextBlock&lt;/code&gt; without
-creating property element tag for it, So,&lt;/p&gt;
+creating property element tag for it,&amp;nbsp;So,&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;TextBlock&lt;/span&gt; &lt;span class="na"&gt;Text=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
 
 &lt;span class="c"&gt;&amp;lt;!-- Is the same as: --&amp;gt;&lt;/span&gt;
@@ -198,34 +196,34 @@ creating property element tag for it, So,&lt;/p&gt;
 
 
 &lt;p&gt;I guess thats enough for now. Learning about all this made me realise 
-that XAML is a very flexible and powerful language and can
+that &lt;span class="caps"&gt;XAML&lt;/span&gt; is a very flexible and powerful language and can
 be used for many things that can be done with C#, so knowing it would hopefully
-be very useful in developing for the some of the latest Microsoft platforms (Win 8, WP 8, etc).
+be very useful in developing for the some of the latest Microsoft platforms (Win 8, &lt;span class="caps"&gt;WP&lt;/span&gt; 8, etc).
 But of course, it is still a markup language, and it has several limitations, 
 such as lack of logic processing, and inability to create instances of objects that requires
-parameters in its contructor.&lt;/p&gt;</summary><category term="programming"></category><category term="xaml"></category><category term="c#"></category></entry><entry><title>I Bought a Xperia Sola</title><link href="http://hndr.me/blog/i-bought-a-xperia-sola" rel="alternate"></link><updated>2012-07-12T17:40:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-07-12:blog/i-bought-a-xperia-sola</id><summary type="html">&lt;p&gt;&lt;img alt="Xperia Sola" src="http://api.sonymobile.com/files/xperia-sola-black-464x515.png" /&gt;&lt;/p&gt;
+parameters in its&amp;nbsp;contructor.&lt;/p&gt;</summary><category term="programming"></category><category term="xaml"></category><category term="c#"></category></entry><entry><title>I Bought a Xperia Sola</title><link href="http://hndr.me/blog/i-bought-a-xperia-sola" rel="alternate"></link><updated>2012-07-12T17:40:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-07-12:blog/i-bought-a-xperia-sola</id><summary type="html">&lt;p&gt;&lt;img alt="Xperia Sola" src="http://api.sonymobile.com/files/xperia-sola-black-464x515.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Few days ago, I bought a new phone, &lt;a href="http://www.sonymobile.com/global-en/products/phones/xperia-sola/"&gt;Sony Xperia Sola&lt;/a&gt;. Yes, its an
 Android phone. The Lumia phones are simply fucked up, no upgrade path to
-WP8, and the price that for some reason aren’t going down, I simply
+&lt;span class="caps"&gt;WP8&lt;/span&gt;, and the price that for some reason aren’t going down, I simply
 can’t objectively spend my money on it. In addition, without even any
 news of when the new Windows Phone 8 are coming out and their price, I
 don’t think I can wait. This doesn’t mean that I will stop developing
-for WP, I might buy one for development purpose if they offer a solid
-phone at a reasonable price when WP8 comes out, but then again, without
+for &lt;span class="caps"&gt;WP&lt;/span&gt;, I might buy one for development purpose if they offer a solid
+phone at a reasonable price when &lt;span class="caps"&gt;WP8&lt;/span&gt; comes out, but then again, without
 any news on the new development platform either, it doesn’t mean I will
-continue developing for WP either.&lt;/p&gt;
-&lt;p&gt;Well, enough about WP, lets talk about the new phone instead. The reason
+continue developing for &lt;span class="caps"&gt;WP&lt;/span&gt;&amp;nbsp;either.&lt;/p&gt;
+&lt;p&gt;Well, enough about &lt;span class="caps"&gt;WP&lt;/span&gt;, lets talk about the new phone instead. The reason
 for me choosing this phone is of course, the price-value ratio. It has a
-dual-core CPU, SD card slot, NFC, and even a promise of ICS upgrade by
-Sony. I also considered other options such as HTC One V and Samsung
+dual-core &lt;span class="caps"&gt;CPU&lt;/span&gt;, &lt;span class="caps"&gt;SD&lt;/span&gt; card slot, &lt;span class="caps"&gt;NFC&lt;/span&gt;, and even a promise of &lt;span class="caps"&gt;ICS&lt;/span&gt; upgrade by
+Sony. I also considered other options such as &lt;span class="caps"&gt;HTC&lt;/span&gt; One V and Samsung
 Galaxy S Advance, but after pondering about all kinds of stuff, I
 decided that the Xperia Sola is the best option after all. Now I can
-play with Android without dealing with the PITA emulator that is
-included with the SDK. The screen is pretty bright and clear, and the
-loudspeaker are also pretty loud. It also came with 4 NFC tags that I
-can play with.&lt;/p&gt;
+play with Android without dealing with the &lt;span class="caps"&gt;PITA&lt;/span&gt; emulator that is
+included with the &lt;span class="caps"&gt;SDK&lt;/span&gt;. The screen is pretty bright and clear, and the
+loudspeaker are also pretty loud. It also came with 4 &lt;span class="caps"&gt;NFC&lt;/span&gt; tags that I
+can play&amp;nbsp;with.&lt;/p&gt;
 &lt;p&gt;Using Android is pretty fun. Most of the essential apps out there are
-available for Android, and I can almost do most things that I do on a PC
+available for Android, and I can almost do most things that I do on a &lt;span class="caps"&gt;PC&lt;/span&gt;
 with my phone. I installed several reading apps, such as &lt;a href="https://play.google.com/store/apps/details?id=com.aldiko.android&amp;amp;feature=search_result"&gt;Aldiko&lt;/a&gt;,
 &lt;a href="https://play.google.com/store/apps/details?id=flipboard.app&amp;amp;feature=search_result"&gt;Flipboard&lt;/a&gt;, and several others. The email client is also pretty
 awesome. Other than that, I still need to get used to the on-screen
@@ -233,64 +231,63 @@ keyboard, but I think it will be manageable. Although it seems like the
 power of Android is also its weak points, in less than a day of using
 the phone, I had several apps crash and freezes for no reason, only
 cause I can think of is because the many process it is running at once,
-which also causes the battery life to be quite short.&lt;/p&gt;
+which also causes the battery life to be quite&amp;nbsp;short.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/7554965796/" title="IMG_0007 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7254/7554965796_574e699c83_b.jpg" width="933" height="622" alt="IMG_0007"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Well, that’s all for now, I am looking forward to discovering more of
-this phone.&lt;/p&gt;</summary><category term="android"></category><category term="phone"></category><category term="xperia sola"></category></entry><entry><title>End of Internship</title><link href="http://hndr.me/blog/end-of-internship" rel="alternate"></link><updated>2012-07-07T16:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-07-07:blog/end-of-internship</id><summary type="html">&lt;p&gt;Yesterday was the last day of my internship at Terato Tech, 20 weeks has
+this&amp;nbsp;phone.&lt;/p&gt;</summary><category term="android"></category><category term="phone"></category><category term="xperia sola"></category></entry><entry><title>End of Internship</title><link href="http://hndr.me/blog/end-of-internship" rel="alternate"></link><updated>2012-07-07T16:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-07-07:blog/end-of-internship</id><summary type="html">&lt;p&gt;Yesterday was the last day of my internship at Terato Tech, 20 weeks has
 passed by so quickly. I had a lot of fun, learned a lot of new stuffs,
-and last but not least, met a lot of interesting people.&lt;/p&gt;
+and last but not least, met a lot of interesting&amp;nbsp;people.&lt;/p&gt;
 &lt;p&gt;I had to leave the project I was working on, and that is a little bit
 sad, but I hope I can at least tie up some of the loose ends before I
 stop working on it to move on the next project. There are many things
 that I wished I had done better, I wish that I actually write a proper
 framework for  the game instead of just writing a bunch of messy codes,
-but I hope the code that I wrote won’t cause too much trouble.&lt;/p&gt;
+but I hope the code that I wrote won’t cause too much&amp;nbsp;trouble.&lt;/p&gt;
 &lt;p&gt;So, well, all in all, I enjoyed my internship very much, and I am very
-grateful for the company for having me. Thank you Terato.&lt;/p&gt;
+grateful for the company for having me. Thank you&amp;nbsp;Terato.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/7559541998/" title="IMG_20120705_230845 by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8294/7559541998_b7f235f911_b.jpg" width="1024" height="768" alt="IMG_20120705_230845"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I would have to go back to UTM to wait for my visa to be ready before I
-go back, so well, we’ll see.&lt;/p&gt;</summary><category term="internship"></category></entry><entry><title>Blocking time-sucking sites</title><link href="http://hndr.me/blog/blocking-time-sucking-sites" rel="alternate"></link><updated>2012-06-26T23:25:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-26:blog/blocking-time-sucking-sites</id><summary type="html">&lt;p&gt;This is just one thing that I do, and it involves some editing on a
+&lt;p&gt;I would have to go back to &lt;span class="caps"&gt;UTM&lt;/span&gt; to wait for my visa to be ready before I
+go back, so well, we’ll&amp;nbsp;see.&lt;/p&gt;</summary><category term="internship"></category></entry><entry><title>Blocking time-sucking sites</title><link href="http://hndr.me/blog/blocking-time-sucking-sites" rel="alternate"></link><updated>2012-06-26T23:25:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-26:blog/blocking-time-sucking-sites</id><summary type="html">&lt;p&gt;This is just one thing that I do, and it involves some editing on a
 system file, so do it on your own risk. Alright, so one thing that I do to avoid wasting too much time on a
-&lt;a href="http://www.9gag.com"&gt;just-for-fun&lt;/a&gt; site, is to completely block it on my OS. Of course, I
+&lt;a href="http://www.9gag.com"&gt;just-for-fun&lt;/a&gt; site, is to completely block it on my &lt;span class="caps"&gt;OS&lt;/span&gt;. Of course, I
 can still easily unblock it, but since I am very lazy, most of the time
-I simply won’t bother doing it.&lt;/p&gt;
-&lt;p&gt;Ok, the way I do this is by editing the host file on my OS, and point
+I simply won’t bother doing&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Ok, the way I do this is by editing the host file on my &lt;span class="caps"&gt;OS&lt;/span&gt;, and point
 the domain name of the website that I wanted to stop visiting to the
 localhost, which unless I am running a web server at the time, will
-simply point to nothing.&lt;/p&gt;
+simply point to&amp;nbsp;nothing.&lt;/p&gt;
 &lt;p&gt;On Windows, the hosts file is located at
 &lt;code&gt;C:\Windows\System32\drivers\etc\hosts&lt;/code&gt;. Open up that file, and you should
 see some description of the file, and an example of the host entry for
 the localhost, which points to 127.0.0.1. The format for the host file
-is like this:&lt;/p&gt;
+is like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Destination&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;route&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Url&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;want&lt;/span&gt; &lt;span class="n"&gt;toroute&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;So, for example, in my hosts file, I have this line:&lt;/p&gt;
+&lt;p&gt;So, for example, in my hosts file, I have this&amp;nbsp;line:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="mf"&gt;127.0.0.1&lt;/span&gt; &lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="mf"&gt;.9&lt;/span&gt;&lt;span class="n"&gt;gag&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;So, whenever I enter &lt;code&gt;www.9gag.com&lt;/code&gt;
-to my browser, I would get routed to my localhost. Simple enough.&lt;/p&gt;
+to my browser, I would get routed to my localhost. Simple&amp;nbsp;enough.&lt;/p&gt;
 &lt;p&gt;On Linux, the steps are the same, the hosts file is located at
-&lt;code&gt;/etc/hosts&lt;/code&gt;. The format are the same as it is on Windows.&lt;/p&gt;
+&lt;code&gt;/etc/hosts&lt;/code&gt;. The format are the same as it is on&amp;nbsp;Windows.&lt;/p&gt;
 &lt;p&gt;Note that to edit these files, you need to have administrator or root
-access on the OS.&lt;/p&gt;
+access on the&amp;nbsp;&lt;span class="caps"&gt;OS&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;If you don’t want to edit individual hosts file on every computer you
 own, an alternative is to use a service such as &lt;code&gt;OpenDNS&lt;/code&gt;_. You can
 register for an account, customize the filtering, and simply configure
-the internet access on your computer to use the service. That’s all for
-now.&lt;/p&gt;</summary><category term="hosts"></category></entry><entry><title>Windows Phone 8, WinRT, and so on.</title><link href="http://hndr.me/blog/windows-phone-8-winrt-and-so-on" rel="alternate"></link><updated>2012-06-24T13:01:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-24:blog/windows-phone-8-winrt-and-so-on</id><summary type="html">&lt;p&gt;This post is basically a rant. TLDR:&lt;/p&gt;
+the internet access on your computer to use the service. That’s all for&amp;nbsp;now.&lt;/p&gt;</summary><category term="hosts"></category></entry><entry><title>Windows Phone 8, WinRT, and so on.</title><link href="http://hndr.me/blog/windows-phone-8-winrt-and-so-on" rel="alternate"></link><updated>2012-06-24T13:01:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-24:blog/windows-phone-8-winrt-and-so-on</id><summary type="html">&lt;p&gt;This post is basically a rant.&amp;nbsp;&lt;span class="caps"&gt;TLDR&lt;/span&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;AWESOME: WP8 is awesome! Native code support, multicore processors,
-simply awesome!&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;AWESOME&lt;/span&gt;: &lt;span class="caps"&gt;WP8&lt;/span&gt; is awesome! Native code support, multicore processors,
+simply&amp;nbsp;awesome!&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;LAME: Current WP7 devices just got screwed. No clear date on release
-data, no clear information on development model for the new OS.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;LAME&lt;/span&gt;: Current &lt;span class="caps"&gt;WP7&lt;/span&gt; devices just got screwed. No clear date on release
+data, no clear information on development model for the new&amp;nbsp;&lt;span class="caps"&gt;OS&lt;/span&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Well, it’s a bit late for a blog post, but I just got the time to write
@@ -298,14 +295,14 @@ about it, so here it goes, the Windows Phone 8 announcement thoughts.
 Few days ago, on the 20th (or 21st here where I live), Microsoft finally
 unveiled the game plan for Windows Phone with Windows Phone 8. I myself
 followed the announcement live in the middle of night here, and well,
-overall, I have mixed feelings about it.&lt;/p&gt;
+overall, I have mixed feelings about&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Windows Phone 8 Start Screen" src="http://windowsteamblog.com/cfs-filesystemfile.ashx/__key/CommunityServer-Blogs-Components-WeblogFiles/00-00-00-53-71-metablogapi/4477.StartScreen_5F00_Dave22_5F00_630D4973.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Let’s start with the awesome and exciting stuff. Windows Phone
-8 is going to be AWESOME. Really. To be honest I didn’t think Windows
-Phone 7 is a full fledged phone OS. I love it, but to be honest, it has
+8 is going to be &lt;span class="caps"&gt;AWESOME&lt;/span&gt;. Really. To be honest I didn’t think Windows
+Phone 7 is a full fledged phone &lt;span class="caps"&gt;OS&lt;/span&gt;. I love it, but to be honest, it has
 too many flaws that would make me wouldn’t even consider it as my main
-phone OS if it weren’t for it being so beautiful. From the lack of basic
-phone features such as USSD support to native code support, it even has
+phone &lt;span class="caps"&gt;OS&lt;/span&gt; if it weren’t for it being so beautiful. From the lack of basic
+phone features such as &lt;span class="caps"&gt;USSD&lt;/span&gt; support to native code support, it even has
 some really stupid flaw such as the inability to separate music volume
 control from alert volume. &lt;a href="http://windowsteamblog.com/windows_phone/b/windowsphone/archive/2012/06/20/announcing-windows-phone-8.aspx"&gt;Windows Phone 8&lt;/a&gt; is a break that would
 allows Windows Phone to actually compete with iOS and Android on an even
@@ -313,13 +310,13 @@ level. One thing that excite me the most is that it will allow
 developers to run native C and C++ codes on it, this will open up
 Windows Phone 8 to some really awesome apps that can’t exist on WIndows
 Phone 7 because of its restrictions, from the many popular game engines
-such as Unity and UDK, and it also allows developers to actually develop
-its own DirectX based games. This is one BIG plus.&lt;/p&gt;
+such as Unity and &lt;span class="caps"&gt;UDK&lt;/span&gt;, and it also allows developers to actually develop
+its own DirectX based games. This is one &lt;span class="caps"&gt;BIG&lt;/span&gt;&amp;nbsp;plus.&lt;/p&gt;
 &lt;p&gt;Other awesome stuffs includes multicore-support, Nokia maps integration,
-NFC support, and SD-card support. These are mostly end-user features
+&lt;span class="caps"&gt;NFC&lt;/span&gt; support, and &lt;span class="caps"&gt;SD&lt;/span&gt;-card support. These are mostly end-user features
 that is pretty awesome as well, but it would also allows developers to
-take advantage of these capabilities for more variety of applications.&lt;/p&gt;
-&lt;p&gt;Now, lets move on to the bad thing. One really really BAD thing IMO, the
+take advantage of these capabilities for more variety of&amp;nbsp;applications.&lt;/p&gt;
+&lt;p&gt;Now, lets move on to the bad thing. One really really &lt;span class="caps"&gt;BAD&lt;/span&gt; thing &lt;span class="caps"&gt;IMO&lt;/span&gt;, the
 current Windows Phone 7 devices will not be able to receive upgrades to
 Windows Phone 8. In other words, the new applications that take
 advantage of the new Windows Phone 8 native code support will not be
@@ -343,7 +340,7 @@ things that Microsoft emphasized was that the Windows Phone 8 will share
 a lot of code with Windows 8, but it seems like its not that simple. The
 &lt;a href="http://wildermuth.com/2012/6/22/Windows_Phone_8_-_What_do_I_think"&gt;blog post here&lt;/a&gt; sums it up pretty nicely. With a lot of things being
 so unclear here, I doubt people will feel like developing for Windows
-Phone 8 for now.&lt;/p&gt;
+Phone 8 for&amp;nbsp;now.&lt;/p&gt;
 &lt;p&gt;The consolation that they offer to the current Windows Phone device
 owners are the intermediate Windows Phone 7.8 update that says will
 bring new features from the Windows Phone 8. But with the lack of native
@@ -351,31 +348,31 @@ code support, I don’t think that will make much change anyway. The only
 thing they promise in the Windows Phone 7.8 update is the new
 homescreen, which allows for new size and colors for the live tiles,
 which I personally think sucks anyway. It makes the homescreen too messy
-for my taste.&lt;/p&gt;
+for my&amp;nbsp;taste.&lt;/p&gt;
 &lt;p&gt;Other new features that I am not too sure about it the new screen
 resolutions support. Windows Phone 8 will support two new screen
 resolutions, 1280x768 and 1280x720, which is cool, except that why do
-they have to make it in a different aspect ratio?? WHY??. Another thing
+they have to make it in a different aspect ratio?? &lt;span class="caps"&gt;WHY&lt;/span&gt;??. Another thing
 is, in-app purchase support. Cool, except that even the Windows Phone
 marketplace is not even available where I live yet. So, its meaningless
-to me.&lt;/p&gt;</summary><category term="rants"></category><category term="windows phone"></category><category term="wp7"></category><category term="wp8"></category></entry><entry><title>Data Binding in .NET</title><link href="http://hndr.me/blog/data-binding-in-net" rel="alternate"></link><updated>2012-06-10T10:37:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-10:blog/data-binding-in-net</id><summary type="html">&lt;p&gt;I am now trying to use the concept of MVVM in my applications, as I
+to&amp;nbsp;me.&lt;/p&gt;</summary><category term="rants"></category><category term="windows phone"></category><category term="wp7"></category><category term="wp8"></category></entry><entry><title>Data Binding in .NET</title><link href="http://hndr.me/blog/data-binding-in-net" rel="alternate"></link><updated>2012-06-10T10:37:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-10:blog/data-binding-in-net</id><summary type="html">&lt;p&gt;I am now trying to use the concept of &lt;span class="caps"&gt;MVVM&lt;/span&gt; in my applications, as I
 believe a proper separation of concerns is very important in building an
-application, as from I personally experienced when developing in PHP
-with CodeIgniter, it really makes development much easier.&lt;/p&gt;
-&lt;p&gt;So, I think for an event driven application pattern such as WPF,
-Silverlight, and also WP7, (maybe Windows 8 as well), it seems pretty
+application, as from I personally experienced when developing in &lt;span class="caps"&gt;PHP&lt;/span&gt;
+with CodeIgniter, it really makes development much&amp;nbsp;easier.&lt;/p&gt;
+&lt;p&gt;So, I think for an event driven application pattern such as &lt;span class="caps"&gt;WPF&lt;/span&gt;,
+Silverlight, and also &lt;span class="caps"&gt;WP7&lt;/span&gt;, (maybe Windows 8 as well), it seems pretty
 obvious to take advantage of the existing abstraction of the framework,
-so MVVM would go well with these kind of applications.&lt;/p&gt;
-&lt;p&gt;I can understand the concept of the &lt;a href="http://msdn.microsoft.com/en-us/magazine/dd419663.aspx"&gt;MVVM pattern&lt;/a&gt; itself quite well,
+so &lt;span class="caps"&gt;MVVM&lt;/span&gt; would go well with these kind of&amp;nbsp;applications.&lt;/p&gt;
+&lt;p&gt;I can understand the concept of the &lt;a href="http://msdn.microsoft.com/en-us/magazine/dd419663.aspx"&gt;&lt;span class="caps"&gt;MVVM&lt;/span&gt; pattern&lt;/a&gt; itself quite well,
 but I am not really able to grasp its implementation, I think it is
-because I don't really understand the basic features of the framework
+because I don&amp;#8217;t really understand the basic features of the framework
 that the pattern rely on. One of which is the Data Binding. So, here it
-is, my attempt to get better understanding on it.&lt;/p&gt;
+is, my attempt to get better understanding on&amp;nbsp;it.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;TextBlock&lt;/span&gt; &lt;span class="na"&gt;Text=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{Binding Name}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/TextBlock&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;while in the code behind,&lt;/p&gt;
+&lt;p&gt;while in the code&amp;nbsp;behind,&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;namespace&lt;/span&gt; &lt;span class="nn"&gt;PhoneApp1&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;partial&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MainPage&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;PhoneApplicationPage&lt;/span&gt;
@@ -404,16 +401,16 @@ is, my attempt to get better understanding on it.&lt;/p&gt;
 
 
 &lt;p&gt;There is one problem with this, when the value of the data source
-changes, the binding target on the UI won’t change along with it, so, to
+changes, the binding target on the &lt;span class="caps"&gt;UI&lt;/span&gt; won’t change along with it, so, to
 make the value of the binding target change along with the data source,
 we need to have our class implement &lt;code&gt;INotifyPropertyChanged&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Let’s add a button that will change the value of the data source.&lt;/p&gt;
+&lt;p&gt;Let’s add a button that will change the value of the data&amp;nbsp;source.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;TextBlock&lt;/span&gt; &lt;span class="na"&gt;Text=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{Binding name}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/TextBlock&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;Button&lt;/span&gt; &lt;span class="na"&gt;Content=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Button&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;button1&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Click=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;button1_Click&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;And change the code behind to:&lt;/p&gt;
+&lt;p&gt;And change the code behind&amp;nbsp;to:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;namespace&lt;/span&gt; &lt;span class="nn"&gt;PhoneApp1&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;partial&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MainPage&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;PhoneApplicationPage&lt;/span&gt;
@@ -465,19 +462,19 @@ we need to have our class implement &lt;code&gt;INotifyPropertyChanged&lt;/code&
 
 
 &lt;p&gt;Now, every time we click on the button, the value of the name property
-will change, and the &lt;code&gt;TextBlock&lt;/code&gt; will change its content accordingly.&lt;/p&gt;
+will change, and the &lt;code&gt;TextBlock&lt;/code&gt; will change its content&amp;nbsp;accordingly.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;INotifyPropertyChanged&lt;/code&gt; interface exposes the &lt;code&gt;PropertyChanged&lt;/code&gt; event,
 where we would raise when the value of the data is changed, and there
 are the event handler present. One might ask, why? It is because when
 the class is being used as a data source in a binding, the binding
 target will subscribe to the event, and call the necessary method to
-update the view.&lt;/p&gt;
+update the&amp;nbsp;view.&lt;/p&gt;
 &lt;p&gt;There are several modes of binding, the default is &lt;code&gt;OneWay&lt;/code&gt;, which is a
 binding from the data source to the target, where any changes on the
 data source will be propagated to the target, but not vice versa,
 another mode is &lt;code&gt;TwoWay&lt;/code&gt;, which is pretty much self descriptive, and also
 &lt;code&gt;OneTime&lt;/code&gt;, which only set the data when the binding is created. So, if we
-add this textbox to the previous example,&lt;/p&gt;
+add this textbox to the previous&amp;nbsp;example,&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;TextBox&lt;/span&gt; &lt;span class="na"&gt;Text=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{Binding name,Mode=TwoWay}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -492,7 +489,7 @@ example textbox above, the default trigger is &lt;code&gt;LostFocus&lt;/code&gt;
 source will be notified of the new value when the textbox has lost its
 focus. We can also trigger the update manually by setting the property
 to &lt;code&gt;Explicit&lt;/code&gt;, which will only update the value when the application calls
-&lt;code&gt;UpdateSource&lt;/code&gt;, e.g. when the user clicks on a button.&lt;/p&gt;
+&lt;code&gt;UpdateSource&lt;/code&gt;, e.g. when the user clicks on a&amp;nbsp;button.&lt;/p&gt;
 &lt;p&gt;There are several &lt;a href="http://msdn.microsoft.com/en-us/library/ms746695.aspx"&gt;ways&lt;/a&gt; to specify a binding source, the examples
 above specified the data source by setting the &lt;code&gt;DataContext&lt;/code&gt; property of
 the current page from the code behind. The child elements within the
@@ -507,7 +504,7 @@ specify without depending on the data source of its parent element.
 Other options are &lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.data.binding.relativesource.aspx"&gt;RelativeSource&lt;/a&gt;, which is used to specify the data
 source relative to the target, and &lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.data.binding.elementname.aspx"&gt;ElementName&lt;/a&gt; which is useful if you
 want to bind to another element in your view, e.g. binding the height of
-an element to a textbox value.&lt;/p&gt;
+an element to a textbox&amp;nbsp;value.&lt;/p&gt;
 &lt;p&gt;The examples above shows binding among data source and target of the
 same data type, e.g. string to string, but there are times where we may
 want to bind a source of a different data type, for example, binding the
@@ -519,27 +516,27 @@ property changed notification got more complicated than it should be.
 One solution is to use the &lt;code&gt;ValueConverter&lt;/code&gt;, which is creating a custom
 class that implements the &lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.data.ivalueconverter.aspx"&gt;IValueConverter&lt;/a&gt; interface. I won’t talk
 about it too much in this post, maybe in some other post, you can read
-more about it on that link. .NET Framework also provide a number of
-converter that we can use.&lt;/p&gt;
+more about it on that link. .&lt;span class="caps"&gt;NET&lt;/span&gt; Framework also provide a number of
+converter that we can&amp;nbsp;use.&lt;/p&gt;
 &lt;p&gt;So far, the examples shows only binding to a single data type, but we
 often need to bind to a collection, for example, binding a listbox to a
 list of person. To implement a collection, we can use one of the generic
 collection classes, such as, &lt;code&gt;List&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code&gt;Collection&amp;lt;T&amp;gt;&lt;/code&gt; and others. We can
 also implement a custom collection by implementing the &lt;code&gt;IEnumerable&lt;/code&gt;
-interface, but to enable automatic UI update on change, we need a way to
+interface, but to enable automatic &lt;span class="caps"&gt;UI&lt;/span&gt; update on change, we need a way to
 provide notification on data changes, just as we did with the single
 instance data source. To do that, the collection need to implement the
 &lt;a href="http://msdn.microsoft.com/en-us/library/system.collections.specialized.inotifycollectionchanged.aspx"&gt;INotifyPropertyChanged&lt;/a&gt; interface,
-but it is recommended to use the class provided by the .NET Framework
+but it is recommended to use the class provided by the .&lt;span class="caps"&gt;NET&lt;/span&gt; Framework
 which did the job for us, the &lt;code&gt;ObservabeCollection&amp;lt;T&amp;gt;&lt;/code&gt; class. Let’s change
 the previous example to show a little bit of collection binding. Lets
-add a listbox to the our application.&lt;/p&gt;
+add a listbox to the our&amp;nbsp;application.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;ListBox&lt;/span&gt; &lt;span class="na"&gt;Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;listBox1&amp;quot;&lt;/span&gt;&lt;span class="na"&gt;ItemsSource=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{Binding colls}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now, let’s change the &lt;code&gt;MyClass&lt;/code&gt; a little bit, and change the previous
-button click handler to add more element to the collection.&lt;/p&gt;
+button click handler to add more element to the&amp;nbsp;collection.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;namespace&lt;/span&gt; &lt;span class="nn"&gt;PhoneApp1&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;partial&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MainPage&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;PhoneApplicationPage&lt;/span&gt;
@@ -604,7 +601,7 @@ filter, sort and group the data based on the current context of the
 application, to do that without changing the underlying data source, we
 can use collections view. I wouldn’t talk much about it in this post,
 but more information about it are available &lt;a href="http://msdn.microsoft.com/en-us/library/ms752347.aspx#how_to_implement_collections\"&gt;here&lt;/a&gt; and &lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.data.collectionviewsource.aspx"&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;On the examples above, we declared our data bindings mostly with XAML,
+&lt;p&gt;On the examples above, we declared our data bindings mostly with &lt;span class="caps"&gt;XAML&lt;/span&gt;,
 and that is indeed the most common usage of data binding, so let’s talk
 more about it. On our examples above, we declared a binding with the
 &lt;code&gt;{Binding name}&lt;/code&gt;. This is actually a shortcut to declare the binding, we
@@ -612,8 +609,8 @@ know that the child element will get its binding &lt;code&gt;Source&lt;/code&gt;
 &lt;code&gt;DataContext&lt;/code&gt;, and we can actually declare a path to specify which
 property of the source that we want to bind to. So, that declaration
 just now can be written as &lt;code&gt;{Binding Source={StaticResource dataSource},Path=name}&lt;/code&gt;. We can use StaticResource to refer to an
-instance that we declare in the XAML, so to declare our &lt;code&gt;dataSource&lt;/code&gt; in
-XAML, we can use something like this:&lt;/p&gt;
+instance that we declare in the &lt;span class="caps"&gt;XAML&lt;/span&gt;, so to declare our &lt;code&gt;dataSource&lt;/code&gt; in
+&lt;span class="caps"&gt;XAML&lt;/span&gt;, we can use something like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;Page&lt;/span&gt; &lt;span class="na"&gt;xmlns:c=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;clr-namespace:PhoneApp1&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;phone:PhoneApplicationPage.Resources&amp;gt;&lt;/span&gt;
   &lt;span class="nt"&gt;&amp;lt;c:MyClass&lt;/span&gt; &lt;span class="na"&gt;x:Key=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dataSource&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
@@ -625,20 +622,20 @@ XAML, we can use something like this:&lt;/p&gt;
 to, we can just declare the binding with simply &lt;code&gt;{Binding}&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;References:&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://www.codeproject.com/Articles/3665/Data-binding-concepts-in-NET-windows-forms"&gt;http://www.codeproject.com/Articles/3665/Data-binding-concepts-in-NET-windows-forms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.codeproject.com/Articles/3665/Data-binding-concepts-in-NET-windows-forms"&gt;http://www.codeproject.com/Articles/3665/Data-binding-concepts-in-&lt;span class="caps"&gt;NET&lt;/span&gt;-windows-forms&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms752347.aspx"&gt;http://msdn.microsoft.com/en-us/library/ms752347.aspx&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.codeproject.com/Articles/80555/Databinding-in-Silverlight-applications"&gt;http://www.codeproject.com/Articles/80555/Databinding-in-Silverlight-applications&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/cc278072(v=vs.95).aspx"&gt;http://msdn.microsoft.com/en-us/library/cc278072(v=vs.95).aspx&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Threading in C#</title><link href="http://hndr.me/blog/threading-in-c" rel="alternate"></link><updated>2012-05-31T23:05:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-31:blog/threading-in-c</id><summary type="html">&lt;p&gt;Well, this time, I am going to talk about thread, the concept of thread
+&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Threading in C#</title><link href="http://hndr.me/blog/threading-in-c" rel="alternate"></link><updated>2012-05-31T23:05:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-31:blog/threading-in-c</id><summary type="html">&lt;p&gt;Well, this time, I am going to talk about thread, the concept of thread
 is pretty simple to understand, so I wont explain the here, but you can
 read more about it in this &lt;a href="http://en.wikipedia.org/wiki/Thread_(computing)"&gt;wiki page&lt;/a&gt;. Threading are used quite
 extensively in most modern computer programs, for example separating
-threads to handle button clicks on a GUI button from the one that
+threads to handle button clicks on a &lt;span class="caps"&gt;GUI&lt;/span&gt; button from the one that
 handles data processing, or in chatting programs, where it separates
 threads to send messages from the one that handles incoming messages and
-display it on the screen.&lt;/p&gt;
-&lt;p&gt;In .NET, threading is handled by the &lt;code&gt;Thread&lt;/code&gt; class, which lives in
-the &lt;code&gt;System&lt;/code&gt; namespace, so to use it, you need to add this first:&lt;/p&gt;
+display it on the&amp;nbsp;screen.&lt;/p&gt;
+&lt;p&gt;In .&lt;span class="caps"&gt;NET&lt;/span&gt;, threading is handled by the &lt;code&gt;Thread&lt;/code&gt; class, which lives in
+the &lt;code&gt;System&lt;/code&gt; namespace, so to use it, you need to add this&amp;nbsp;first:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;System.Threading&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -648,7 +645,7 @@ takes a &lt;a href="http://www.myblog.name/2012/05/delegates-in-c-and-a-tiny-bit
 like a pointer to a method? this would mean that the thread will run the
 method that the delegate parameter points to.). ThreadStart itself is a
 delegate that does not return any value or accept any parameter. Here is
-an example:&lt;/p&gt;
+an&amp;nbsp;example:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;System&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;System.Collections.Generic&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;System.Linq&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -682,15 +679,15 @@ an example:&lt;/p&gt;
 particular order, the operating decides which threads gets run at any
 given time, but you can see that the same method is being run in 4
 different threads. The three threads that we created with the Thread
-class, and the main thread of the program itself.&lt;/p&gt;
+class, and the main thread of the program&amp;nbsp;itself.&lt;/p&gt;
 &lt;p&gt;In the example above, the threads are all accessing local variables,
 that is, they don’t share any data between them. This makes things
 pretty simple, but there are times where the threads are accessing a
 shared data, and this may cause a problem known as &lt;a href="http://en.wikipedia.org/wiki/Race_condition"&gt;race condition&lt;/a&gt;. To
 prevent, that, we need a way sync the data by locking the data to a
 thread during a section of the program that may cause a race condition.
-In .NET, the Threading namespace provides us with a Monitor class that
-we can use to lock an object. Here is an example.&lt;/p&gt;
+In .&lt;span class="caps"&gt;NET&lt;/span&gt;, the Threading namespace provides us with a Monitor class that
+we can use to lock an object. Here is an&amp;nbsp;example.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;var&lt;/span&gt; &lt;span class="n"&gt;sharedData&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 
 &lt;span class="c1"&gt;// lock the sharedData&lt;/span&gt;
@@ -707,9 +704,9 @@ we can use to lock an object. Here is an example.&lt;/p&gt;
 
 &lt;p&gt;Thread synchronization is pretty complicated topic, I think will cover
 them in another post some time later, when I got a better understanding
-of it. &lt;a href="http://msdn.microsoft.com/en-us/library/ms173179.aspx"&gt;Here&lt;/a&gt; is an MSDN article on the topic.&lt;/p&gt;
+of it. &lt;a href="http://msdn.microsoft.com/en-us/library/ms173179.aspx"&gt;Here&lt;/a&gt; is an &lt;span class="caps"&gt;MSDN&lt;/span&gt; article on the&amp;nbsp;topic.&lt;/p&gt;
 &lt;p&gt;The Thread class provides several methods to control the execution of
-the thread, here are some of them:&lt;/p&gt;
+the thread, here are some of&amp;nbsp;them:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// these examples are called from within the execution of another thread&lt;/span&gt;
 &lt;span class="c1"&gt;// e.g. t2&lt;/span&gt;
 
@@ -735,30 +732,30 @@ the thread, here are some of them:&lt;/p&gt;
 
 &lt;p&gt;C# also provides some methods to control the execution of another
 process via the &lt;code&gt;Process&lt;/code&gt; class in the &lt;code&gt;System.Diagnostics&lt;/code&gt; namespace,
-but I’m not too concerned about that for now, so this post ends here.&lt;/p&gt;
+but I’m not too concerned about that for now, so this post ends&amp;nbsp;here.&lt;/p&gt;
 &lt;h2&gt;References:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx"&gt;http://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.albahari.com/threading/"&gt;http://www.albahari.com/threading/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.c-sharpcorner.com/uploadfile/mgold/multithreadingintro10062005000439am/multithreadingintro.aspx"&gt;http://www.c-sharpcorner.com/uploadfile/mgold/multithreadingintro10062005000439am/multithreadingintro.aspx&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Implicitly Typed Language and Anonymous Types in C#</title><link href="http://hndr.me/blog/implicitly-typed-language-and-anonymous-types-in-c" rel="alternate"></link><updated>2012-05-30T23:16:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-30:blog/implicitly-typed-language-and-anonymous-types-in-c</id><summary type="html">&lt;p&gt;In C#, there is this &lt;code&gt;var&lt;/code&gt; keyword, which allows you to declare a
+&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Implicitly Typed Language and Anonymous Types in C#</title><link href="http://hndr.me/blog/implicitly-typed-language-and-anonymous-types-in-c" rel="alternate"></link><updated>2012-05-30T23:16:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-30:blog/implicitly-typed-language-and-anonymous-types-in-c</id><summary type="html">&lt;p&gt;In C#, there is this &lt;code&gt;var&lt;/code&gt; keyword, which allows you to declare a
 variable without explicitly specifying its data type. It is important to
 note, that this doesn’t mean that it is dynamically typed, it simply
 means that the compiler will infer the data type for you, and it is also
 important to note, that it is strongly typed. So, this code below, will
-simply create a variable called x, with the data type of string.&lt;/p&gt;
+simply create a variable called x, with the data type of&amp;nbsp;string.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;var&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Since &lt;code&gt;x&lt;/code&gt; is a strongly typed &lt;code&gt;string&lt;/code&gt;, if you try to assign &lt;code&gt;x&lt;/code&gt; to an
 &lt;code&gt;int&lt;/code&gt;, it will throw an error. Even though it may seems inflexible, it
-is necessary when we are using anonymous types.&lt;/p&gt;
+is necessary when we are using anonymous&amp;nbsp;types.&lt;/p&gt;
 &lt;p&gt;Anonymous Types allows you to query a set of data, without having to
 create a class/struct to hold it. For example, if I wanted to to query a
 Car database, if I want to put it in a proper data structure,
 I can either put it in a hash table object, or I would have to declare
-a class first.&lt;/p&gt;
+a class&amp;nbsp;first.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Car&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -768,7 +765,7 @@ a class first.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;With anonymous type, we can do something like this:&lt;/p&gt;
+&lt;p&gt;With anonymous type, we can do something like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;myCar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1990&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;price&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;unknown&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -776,15 +773,15 @@ a class first.&lt;/p&gt;
 &lt;p&gt;Behind the scene, the compiler will actually generate a class for us,
 with all of the necessary properties with it. This can be especially
 useful if we need to query just a subset of the properties, and creating
-the new objects without all of its properties isn’t very feasible.&lt;/p&gt;
+the new objects without all of its properties isn’t very&amp;nbsp;feasible.&lt;/p&gt;
 &lt;h2&gt;References:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/bb397696"&gt;http://msdn.microsoft.com/en-us/library/bb397696&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Lambda Expression with C#</title><link href="http://hndr.me/blog/lambda-expression-with-c" rel="alternate"></link><updated>2012-05-30T21:40:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-30:blog/lambda-expression-with-c</id><summary type="html">&lt;p&gt;Previous in my post regarding delegate, I talked a little about
+&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Lambda Expression with C#</title><link href="http://hndr.me/blog/lambda-expression-with-c" rel="alternate"></link><updated>2012-05-30T21:40:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-30:blog/lambda-expression-with-c</id><summary type="html">&lt;p&gt;Previous in my post regarding delegate, I talked a little about
 anonymous method that can be used with delegates, there are other forms
 to declare inline functions. Both of them are collectively known as
 anonymous functions of C#. Here is one example that shows how different
-method assignments are used with delegate.&lt;/p&gt;
+method assignments are used with&amp;nbsp;delegate.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SampleClass&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;delegate&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;SampleDelegate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -814,11 +811,11 @@ method assignments are used with delegate.&lt;/p&gt;
 method with lambda expression. Lambda expressions are expressed with the
 lambda operator, “=&amp;gt;”. The left side of the lambda expression specifies
 any input parameter that it may have, and the right side holds the
-expression block.&lt;/p&gt;
+expression&amp;nbsp;block.&lt;/p&gt;
 &lt;p&gt;There are several usage pattern of lambda expression. First up is
 expression lambda, which basically is just a lambda expression with an
 expression on its right side, it return the result of the expression.
-Here is an example.&lt;/p&gt;
+Here is an&amp;nbsp;example.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// parentheses can be omitted if it only has one parameter&lt;/span&gt;
 &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
@@ -830,7 +827,7 @@ Here is an example.&lt;/p&gt;
 
 
 &lt;p&gt;The second one, statement lambda, is just a lambda expression with a
-statement on the right side.&lt;/p&gt;
+statement on the right&amp;nbsp;side.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;{&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;+&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="n"&gt;Console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WriteLine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
@@ -838,14 +835,14 @@ statement on the right side.&lt;/p&gt;
 
 
 &lt;p&gt;Well, that’s it for the most basics of the lambda expression, there are
-other uses of lambda expressions, such as for use with LINQ, but I will
+other uses of lambda expressions, such as for use with &lt;span class="caps"&gt;LINQ&lt;/span&gt;, but I will
 talk about that later, as that involves some C# features that I’m not
-familiar with yet. BTW, if you wondered why the lambda expressions above
+familiar with yet. &lt;span class="caps"&gt;BTW&lt;/span&gt;, if you wondered why the lambda expressions above
 are missing the return/parameters type, that’s because it is able the
 infer the type from context, but of course, you can still specify the
-type explicitly if that’s what you want.&lt;/p&gt;
+type explicitly if that’s what you&amp;nbsp;want.&lt;/p&gt;
 &lt;p&gt;Update: found an interesting example of the usage of the lambda
-expressions &lt;a href="http://blogs.msdn.com/b/ericwhite/archive/2006/10/03/lambda-expressions.aspx"&gt;here&lt;/a&gt;, here is a code snippet from it:&lt;/p&gt;
+expressions &lt;a href="http://blogs.msdn.com/b/ericwhite/archive/2006/10/03/lambda-expressions.aspx"&gt;here&lt;/a&gt;, here is a code snippet from&amp;nbsp;it:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;System&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;System.Collections.Generic&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
@@ -872,22 +869,22 @@ expressions &lt;a href="http://blogs.msdn.com/b/ericwhite/archive/2006/10/03/lam
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;So, well there is how some of the lambda queries are done.&lt;/p&gt;
+&lt;p&gt;So, well there is how some of the lambda queries are&amp;nbsp;done.&lt;/p&gt;
 &lt;h2&gt;References:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/bb397687.aspx"&gt;http://msdn.microsoft.com/en-us/library/bb397687.aspx&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.codeproject.com/Articles/24255/Exploring-Lambda-Expression-in-C"&gt;http://www.codeproject.com/Articles/24255/Exploring-Lambda-Expression-in-C&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Events in C#</title><link href="http://hndr.me/blog/events-in-c" rel="alternate"></link><updated>2012-05-30T00:27:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-30:blog/events-in-c</id><summary type="html">&lt;p&gt;Alright, last time I posted about &lt;code&gt;Delegate&lt;/code&gt;, and together with event,
+&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Events in C#</title><link href="http://hndr.me/blog/events-in-c" rel="alternate"></link><updated>2012-05-30T00:27:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-30:blog/events-in-c</id><summary type="html">&lt;p&gt;Alright, last time I posted about &lt;code&gt;Delegate&lt;/code&gt;, and together with event,
 they are one of the most important concept to understand in event driven
-application framework, such as WPF, Silverlight, and Silverlight for
-WP7, and maybe even WinRT as well (I haven’t tried it), so I believe it
+application framework, such as &lt;span class="caps"&gt;WPF&lt;/span&gt;, Silverlight, and Silverlight for
+&lt;span class="caps"&gt;WP7&lt;/span&gt;, and maybe even WinRT as well (I haven’t tried it), so I believe it
 is important to understand how it work, especially when these two are
-pretty closely related.&lt;/p&gt;
-&lt;p&gt;I find the explanation on &lt;a href="http://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx"&gt;MSDN&lt;/a&gt; is pretty easy to understand, Event is
+pretty closely&amp;nbsp;related.&lt;/p&gt;
+&lt;p&gt;I find the explanation on &lt;a href="http://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx"&gt;&lt;span class="caps"&gt;MSDN&lt;/span&gt;&lt;/a&gt; is pretty easy to understand, Event is
 a way for a class to provide notifications to clients when something
 interesting happens. Event is declared with a delegate, in fact, there
 aren’t much difference between a regular delegate and an event. Here is
-an example of an event declaration.&lt;/p&gt;
+an example of an event&amp;nbsp;declaration.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// declare the delegate&lt;/span&gt;
 &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;delegate&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;SomethingHappenedEventHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EventArgs&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
@@ -900,30 +897,29 @@ an example of an event declaration.&lt;/p&gt;
 
 
 &lt;p&gt;It indeed looks like a regular delegate declaration, and indeed, it is
-indeed very similar to a regular delegate, and the 'event' keyword is
+indeed very similar to a regular delegate, and the &amp;#8216;event&amp;#8217; keyword is
 something that we can think of like a modifier, which makes the delegate
 to behaves a little bit different. The first difference is, a delegate
 with an event modifier can be included in an interface, where a regular
-delegate can't. The second one is, a delegate with an event modifier can
+delegate can&amp;#8217;t. The second one is, a delegate with an event modifier can
 only be called from within the class, but it can be changed/assigned to
 other method that handle the event, where a regular delegate can be
-called by whoever that can access it.&lt;/p&gt;
+called by whoever that can access&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;Finally, like what I mentioned on my previous post, event delegate must
 conform to a special restriction, where it must return void, and accepts
 two arguments, an object that invoke the event, and the information
 regarding the event that is derived from the EventArgs class, but this
-is a restriction placed by the .NET framework instead of the C# language
-itself, so, .NET framework has provided a delegate that can be used for
-this, the EventHandler. So, if your event doesn't provide any additional
+is a restriction placed by the .&lt;span class="caps"&gt;NET&lt;/span&gt; framework instead of the C# language
+itself, so, .&lt;span class="caps"&gt;NET&lt;/span&gt; framework has provided a delegate that can be used for
+this, the EventHandler. So, if your event doesn&amp;#8217;t provide any additional
 data that what is provided by the EventHandler, it is better to just use
 the provided delegate. If you do need to pass additional data, you can
 just inherit the EventArgs class and provide additional infomation in
 the class. There are some others differences between the two, but I
-think those are too advanced and not too relevant in practical usage.&lt;/p&gt;
+think those are too advanced and not too relevant in practical&amp;nbsp;usage.&lt;/p&gt;
 &lt;p&gt;Since event is basically a delegate, a firing event is actually just an
 invocation of the method that the delegate points to, which we usually
-refer to as handling the event. So, in GUI programming, we often see
-this:&lt;/p&gt;
+refer to as handling the event. So, in &lt;span class="caps"&gt;GUI&lt;/span&gt; programming, we often see&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Button&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Button&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Click&lt;/span&gt; &lt;span class="p"&gt;+=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;RoutedEventHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_Click&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -931,7 +927,7 @@ this:&lt;/p&gt;
 
 &lt;p&gt;That means, somewhere in the Button class declaration, they have an
 event of RoutedEventHandler delegate, and will be called when the the
-necessary condition is fulfilled. Something like this:&lt;/p&gt;
+necessary condition is fulfilled. Something like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;delegate&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;RoutedEventHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;RoutedEventArgs&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
 &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Button&lt;/span&gt;
@@ -956,22 +952,21 @@ click, if it does, it will call the &lt;code&gt;Click&lt;/code&gt; delegate, whi
 the method that it points to, where in our example, will call the
 &lt;code&gt;x_Click()&lt;/code&gt; method which we assigned previously using the &lt;code&gt;+=&lt;/code&gt; operator. In
 this case, we call the &lt;code&gt;Button&lt;/code&gt; class the event provider, and the class
-that implemented the event handler, the event listener/subscriber.&lt;/p&gt;
+that implemented the event handler, the event&amp;nbsp;listener/subscriber.&lt;/p&gt;
 &lt;p&gt;We can also see that the mouse click event uses a subclass of the
 &lt;code&gt;EventArgs&lt;/code&gt; class, which may provide additional information of the
 event, such as the time it was triggered, etc. For example, the
 &lt;code&gt;RoutedEventArgs&lt;/code&gt; class have a property called &lt;code&gt;Handled&lt;/code&gt; that indicate
-whether the event is to be marked handled.&lt;/p&gt;
+whether the event is to be marked&amp;nbsp;handled.&lt;/p&gt;
 &lt;h2&gt;References:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx"&gt;http://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.codeproject.com/Articles/11541/The-Simplest-C-Events-Example-Imaginable"&gt;http://www.codeproject.com/Articles/11541/The-Simplest-C-Events-Example-Imaginable&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Some stuff I didn’t know about String in C#</title><link href="http://hndr.me/blog/some-stuff-i-didnt-know-about-string-in-c" rel="alternate"></link><updated>2012-05-25T23:08:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-25:blog/some-stuff-i-didnt-know-about-string-in-c</id><summary type="html">&lt;p&gt;Well, its a bit strange getting to know something that I’ve used
+&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Some stuff I didn’t know about String in C#</title><link href="http://hndr.me/blog/some-stuff-i-didnt-know-about-string-in-c" rel="alternate"></link><updated>2012-05-25T23:08:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-25:blog/some-stuff-i-didnt-know-about-string-in-c</id><summary type="html">&lt;p&gt;Well, its a bit strange getting to know something that I’ve used
 extensively for quite a while, but there are indeed some things that
-feels revealing.&lt;/p&gt;
+feels&amp;nbsp;revealing.&lt;/p&gt;
 &lt;p&gt;First of all, I knew that strings is a little bit special, in a way that
-it is a reference type, but it behaves very much like a value type, for
-example:&lt;/p&gt;
+it is a reference type, but it behaves very much like a value type, for&amp;nbsp;example:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;SomeClass&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;age&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="n"&gt;SomeClass&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -988,7 +983,7 @@ example:&lt;/p&gt;
 
 &lt;p&gt;So, well, that’s about it. I also knew that string are immutable, as in,
 the value can’t be changed after they are set, so something like this
-would throw an error:&lt;/p&gt;
+would throw an&amp;nbsp;error:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;j&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -999,10 +994,10 @@ too much thought into it, and I just learned that the two are actually
 related. In the first code snippet, since x is immutable, when y try to
 change the value, it will create a new string instead, so it will point
 to a new location in the memory, leaving x alone, and the two no longer
-refer to the same memory location.&lt;/p&gt;
+refer to the same memory&amp;nbsp;location.&lt;/p&gt;
 &lt;p&gt;The value of the string itself are stored in the same memory location as
 well, so even if two strings are created separately, if they have the
-same value, they will still point to the same location.&lt;/p&gt;
+same value, they will still point to the same&amp;nbsp;location.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="c1"&gt;// x == y is true&lt;/span&gt;
@@ -1010,7 +1005,7 @@ same value, they will still point to the same location.&lt;/p&gt;
 
 
 &lt;p&gt;I personally have ran into some bugs related to this behaviour, of course,
-I just tried do something else that works without understanding why. Until now.&lt;/p&gt;
+I just tried do something else that works without understanding why. Until&amp;nbsp;now.&lt;/p&gt;
 &lt;p&gt;That mentioned, one thing to remember is that new string values are
 created each time the value change, so that means there would be a lot
 of temporary objects in the memory, and the garbage collection will run
@@ -1019,19 +1014,18 @@ very extensively in the program, it would be better to use a class
 called StringBuilder. It behaves almost the same way as a string, but it
 is not immutable, and it is designed to build string, as the name
 suggest. I wanted to talk more about it, but I found a &lt;a href="http://www.dotnetperls.com/stringbuilder"&gt;better
-explanation&lt;/a&gt; about it, so I’ll just use this post as a book mark to that
-post.&lt;/p&gt;
+explanation&lt;/a&gt; about it, so I’ll just use this post as a book mark to that&amp;nbsp;post.&lt;/p&gt;
 &lt;p&gt;Some other interesting stuffs about strings and the manipulation of
-strings as well:&lt;/p&gt;
+strings as&amp;nbsp;well:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.codinghorror.com/blog/2009/01/the-sad-tragedy-of-micro-optimization-theater.html"&gt;http://www.codinghorror.com/blog/2009/01/the-sad-tragedy-of-micro-optimization-theater.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.codinghorror.com/blog/2006/07/i-heart-strings.html"&gt;http://www.codinghorror.com/blog/2006/07/i-heart-strings.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.codinghorror.com/blog/2005/03/if-you-like-regular-expressions-so-much-why-dont-you-marry-them.html"&gt;http://www.codinghorror.com/blog/2005/03/if-you-like-regular-expressions-so-much-why-dont-you-marry-them.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.stevex.net/string-formatting-in-csharp/"&gt;http://blog.stevex.net/string-formatting-in-csharp/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blogs.msdn.com/b/kathykam/archive/2006/03/29/564426.aspx"&gt;http://blogs.msdn.com/b/kathykam/archive/2006/03/29/564426.aspx&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Some Standard C# Object Methods that you might want to override</title><link href="http://hndr.me/blog/some-standard-c-object-methods-that-you-might-want-to-override" rel="alternate"></link><updated>2012-05-25T22:22:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-25:blog/some-standard-c-object-methods-that-you-might-want-to-override</id><summary type="html">&lt;p&gt;Alright, I’ll get it straight to the point, since this is just a note to
-myself anyway,&lt;/p&gt;
-&lt;p&gt;First one, the ToString() :&lt;/p&gt;
+&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Some Standard C# Object Methods that you might want to override</title><link href="http://hndr.me/blog/some-standard-c-object-methods-that-you-might-want-to-override" rel="alternate"></link><updated>2012-05-25T22:22:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-25:blog/some-standard-c-object-methods-that-you-might-want-to-override</id><summary type="html">&lt;p&gt;Alright, I’ll get it straight to the point, since this is just a note to
+myself&amp;nbsp;anyway,&lt;/p&gt;
+&lt;p&gt;First one, the ToString()&amp;nbsp;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1048,8 +1042,8 @@ representation of your object. Of course, in a way, you can also create
 a new method to return the same thing, but it is a good idea to do it
 the “C# way”, and the ToString method is always there, so why create two
 methods that serve the same purpose? This is similar to the
-&lt;code&gt;__string__&lt;/code&gt; method in Python.&lt;/p&gt;
-&lt;p&gt;The second one, Equals():&lt;/p&gt;
+&lt;code&gt;__string__&lt;/code&gt; method in&amp;nbsp;Python.&lt;/p&gt;
+&lt;p&gt;The second one,&amp;nbsp;Equals():&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyClass&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1076,10 +1070,10 @@ C#, as objects are stored as references, a ‘==’ comparison will always
 return false, even if they have the same properties values, unless they
 actually refer to the same object. The reason to override this method
 instead of creating a new one, is the same as the reason to override the
-ToString() method I mentioned above.&lt;/p&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>C#–Optional Arguments and Constructor Chaining</title><link href="http://hndr.me/blog/c-optional-arguments-and-constructor-chaining" rel="alternate"></link><updated>2012-05-22T23:19:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-22:blog/c-optional-arguments-and-constructor-chaining</id><summary type="html">&lt;p&gt;Learned something new about C# today, first thing is Constructor
+ToString() method I mentioned&amp;nbsp;above.&lt;/p&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>C#–Optional Arguments and Constructor Chaining</title><link href="http://hndr.me/blog/c-optional-arguments-and-constructor-chaining" rel="alternate"></link><updated>2012-05-22T23:19:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-22:blog/c-optional-arguments-and-constructor-chaining</id><summary type="html">&lt;p&gt;Learned something new about C# today, first thing is Constructor
 Chaining.  Constructor chaining enables constructors to call another
 overloaded constructor, with it, the amount of duplicate code can be
-reduced significantly, here is an example:&lt;/p&gt;
+reduced significantly, here is an&amp;nbsp;example:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1125,7 +1119,7 @@ still get the options of passing only the argument that I need to the
 constructors. There is another way to do this, starting with C# 4.0, it
 introduced optional arguments that is common in dynamic languages, and
 it is pretty awesome, and it can be combined with the constructors
-chaining above for more power!&lt;/p&gt;
+chaining above for more&amp;nbsp;power!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Person&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1155,7 +1149,7 @@ chaining above for more power!&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://stackoverflow.com/questions/199761/how-can-you-use-optional-parameters-in-c"&gt;http://stackoverflow.com/questions/199761/how-can-you-use-optional-parameters-in-c&lt;/a&gt;  &lt;/li&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/dd264739.aspx"&gt;http://msdn.microsoft.com/en-us/library/dd264739.aspx&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Javascript–Setting events to unique anonymous functions</title><link href="http://hndr.me/blog/javascript-setting-events-to-unique-anonymous-functions" rel="alternate"></link><updated>2012-05-22T22:24:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-22:blog/javascript-setting-events-to-unique-anonymous-functions</id><summary type="html">&lt;p&gt;Ok, the easiest way to convey my point is with code, so:&lt;/p&gt;
+&lt;/ul&gt;</summary><category term="C#"></category><category term="programming"></category></entry><entry><title>Javascript–Setting events to unique anonymous functions</title><link href="http://hndr.me/blog/javascript-setting-events-to-unique-anonymous-functions" rel="alternate"></link><updated>2012-05-22T22:24:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-22:blog/javascript-setting-events-to-unique-anonymous-functions</id><summary type="html">&lt;p&gt;Ok, the easiest way to convey my point is with code,&amp;nbsp;so:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;);}&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
   &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;someDiv&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;onclick&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;&lt;span class="nx"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);};&lt;/span&gt;
@@ -1169,40 +1163,40 @@ but passing different parameter, seems simple enough, but if you try to
 run the code above, all of the click events will print the value 5. The
 value of i is 5 because the value is incremented with the for loop
 before it stopped executing, simple enough, but it seems like the
-anonymous functions that we created refer to the same value as well.&lt;/p&gt;
+anonymous functions that we created refer to the same value as&amp;nbsp;well.&lt;/p&gt;
 &lt;p&gt;So, well, the first thing that comes to mind is I kind of need to create
-"instances" of these anonymous functions individually, with the help of
+&amp;#8220;instances&amp;#8221; of these anonymous functions individually, with the help of
 this &lt;a href="http://stackoverflow.com/questions/4900029/javascript-context-in-anonymous-functions"&gt;stackoverflow thread&lt;/a&gt;, I got to know the answer is self executing
-anonymous function and a return statement, so here it is:&lt;/p&gt;
+anonymous function and a return statement, so here it&amp;nbsp;is:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
   &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
   &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;someDiv&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;onclick&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;&lt;span class="nx"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);};}(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="anonymous functions"></category><category term="javascript"></category></entry><entry><title>C# Back to Basics</title><link href="http://hndr.me/blog/c-back-to-basics" rel="alternate"></link><updated>2012-05-20T23:12:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-20:blog/c-back-to-basics</id><summary type="html">&lt;p&gt;I have been programming C# for quite some time, but when I think about
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="anonymous functions"></category><category term="javascript"></category></entry><entry><title>C# Back to Basics</title><link href="http://hndr.me/blog/c-back-to-basics" rel="alternate"></link><updated>2012-05-20T23:12:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-05-20:blog/c-back-to-basics</id><summary type="html">&lt;p&gt;I have been programming C# for quite some time, but when I think about
 it, I have never really tried to learn C# as a language, instead what
-I’ve been playing with around are mostly the .NET framework itself, this
+I’ve been playing with around are mostly the .&lt;span class="caps"&gt;NET&lt;/span&gt; framework itself, this
 result in me having to guess the magic behind many of the operations in
-the programs I wrote myself, and that sucks.&lt;/p&gt;
-&lt;p&gt;I think this is a problem that plagues many .NET developers, because the
-.NET framework is so powerful, many people can get away not knowing how
+the programs I wrote myself, and that&amp;nbsp;sucks.&lt;/p&gt;
+&lt;p&gt;I think this is a problem that plagues many .&lt;span class="caps"&gt;NET&lt;/span&gt; developers, because the
+.&lt;span class="caps"&gt;NET&lt;/span&gt; framework is so powerful, many people can get away not knowing how
 it works, but that can causes a lot of problems when I try to read on
 some more advanced stuff, and not being able to even guess how that
 work. Not to mention that relying on magic that I don’t understand don’t
-really make me feel satisfied in writing programs.&lt;/p&gt;
+really make me feel satisfied in writing&amp;nbsp;programs.&lt;/p&gt;
 &lt;p&gt;So, that’s why I decided to learn C# from the basics, and I will be
 posting some of the stuff that I think I should remember here. I will be
 using the &lt;a href="http://www.robmiles.com/c-yellow-book/"&gt;C# Yellow Book by Rob Miles&lt;/a&gt; for my reference, so a lot of
 the posting that I will be doing may be similar to what’s in the book,
-but I will be writing it in a way that I can easily understand myself.&lt;/p&gt;
-&lt;p&gt;Well, that’s all for now, hope I can pull it off.&lt;/p&gt;</summary><category term="C#"></category><category term="Programming"></category></entry><entry><title>Phonegap in Visual Studio–There is no script engine for file extension ‘.js’</title><link href="http://hndr.me/blog/phonegap-in-visual-studio-there-is-no-script-engine-for-file-extension-js" rel="alternate"></link><updated>2012-03-28T21:59:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-03-28:blog/phonegap-in-visual-studio-there-is-no-script-engine-for-file-extension-js</id><summary type="html">&lt;p&gt;As I recently reinstalled my Windows system, I had to re-install almost
+but I will be writing it in a way that I can easily understand&amp;nbsp;myself.&lt;/p&gt;
+&lt;p&gt;Well, that’s all for now, hope I can pull it&amp;nbsp;off.&lt;/p&gt;</summary><category term="C#"></category><category term="Programming"></category></entry><entry><title>Phonegap in Visual Studio–There is no script engine for file extension ‘.js’</title><link href="http://hndr.me/blog/phonegap-in-visual-studio-there-is-no-script-engine-for-file-extension-js" rel="alternate"></link><updated>2012-03-28T21:59:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-03-28:blog/phonegap-in-visual-studio-there-is-no-script-engine-for-file-extension-js</id><summary type="html">&lt;p&gt;As I recently reinstalled my Windows system, I had to re-install almost
 every programs I usually use again, one of them is the Visual Studio, and
 since I have been messing around with Phonegap these days, I had to set
 it up again. I did what I did before, copying the project template zip
 file to my templates folder, and I tried to create a new Phonegap
 project, but when I try to build it, Visual Studio gives me an error
-saying : “There is no script engine for file extension .js”.&lt;/p&gt;
+saying : “There is no script engine for file extension&amp;nbsp;.js”.&lt;/p&gt;
 &lt;p&gt;This is pretty weird, since I set it up the same way last time, and it
 works perfectly, so I did a bit of internet search, some other people
 are having the same problem as well, and most of them suggested the fix
@@ -1210,11 +1204,11 @@ are having the same problem as well, and most of them suggested the fix
 to this &lt;a href="https://answers.microsoft.com/en-us/windows/forum/windows_7-system/fix-there-is-no-script-engine-for-file-extension/95d58867-3f31-45e3-aeaf-32ecea4d33c1"&gt;page&lt;/a&gt;, and this is the solution that worked for me. I changed
 the file association for .js files back to the Microsoft Window Based
 Script host ( it was associated with notepad++ before), and I tried to
-compile it again, and everything is good again.&lt;/p&gt;</summary><category term="phonegap"></category><category term="programming"></category><category term="visual studio"></category><category term="windows 7"></category><category term="wp7"></category></entry><entry><title>Django Template System</title><link href="http://hndr.me/blog/django-template-system" rel="alternate"></link><updated>2012-03-23T20:19:00+08:00</updated><author><name>Hdra</name></author><id>tag:hndr.me,2012-03-23:blog/django-template-system</id><summary type="html">&lt;p&gt;Okay, last time I talked about the basic web page in Django, and it used
+compile it again, and everything is good&amp;nbsp;again.&lt;/p&gt;</summary><category term="phonegap"></category><category term="programming"></category><category term="visual studio"></category><category term="windows 7"></category><category term="wp7"></category></entry><entry><title>Django Template System</title><link href="http://hndr.me/blog/django-template-system" rel="alternate"></link><updated>2012-03-23T20:19:00+08:00</updated><author><name>Hdra</name></author><id>tag:hndr.me,2012-03-23:blog/django-template-system</id><summary type="html">&lt;p&gt;Okay, last time I talked about the basic web page in Django, and it used
 the shortest shortcut with the &lt;code&gt;render_to_reponse&lt;/code&gt;, but there are manual
 way to do the same thing using &lt;code&gt;Template&lt;/code&gt; and &lt;code&gt;Context&lt;/code&gt; class, and there are
 many scenario where we might want to do it the manual way to have more
-control, so to do it manually, here is the code:&lt;/p&gt;
+control, so to do it manually, here is the&amp;nbsp;code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.http&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HttpResponse&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.template&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Template&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.template.loader&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_template&lt;/span&gt;
@@ -1231,16 +1225,16 @@ control, so to do it manually, here is the code:&lt;/p&gt;
     &lt;span class="c"&gt;# return the http request, and pass html as the&lt;/span&gt;
     &lt;span class="c"&gt;# body of the response&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;HttpResponse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="django"></category><category term="programming"></category><category term="python"></category></entry><entry><title>Basic Django Web Application</title><link href="http://hndr.me/blog/basic-django-web-application" rel="alternate"></link><updated>2012-03-23T15:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-03-23:blog/basic-django-web-application</id><summary type="html">&lt;p&gt;For the past few weeks, I have been writing quite a lot in PHP, more
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="django"></category><category term="programming"></category><category term="python"></category></entry><entry><title>Basic Django Web Application</title><link href="http://hndr.me/blog/basic-django-web-application" rel="alternate"></link><updated>2012-03-23T15:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-03-23:blog/basic-django-web-application</id><summary type="html">&lt;p&gt;For the past few weeks, I have been writing quite a lot in &lt;span class="caps"&gt;PHP&lt;/span&gt;, more
 specifically, CodeIgniter, and to be honest, writing web applications in
 CodeIgniter is really easy and intuitive, and even though I came across
-the MVC pattern (or MVT, for that matter) for the first time in Django,
+the &lt;span class="caps"&gt;MVC&lt;/span&gt; pattern (or &lt;span class="caps"&gt;MVT&lt;/span&gt;, for that matter) for the first time in Django,
 I quickly forgotten even the basics of Django. So, in to prevent myself
 from forgetting something like this again in the future, I am writing
 this blogpost, to explain the basic of rendering a web page with Django.
 I will only explain the most necessary functionality, so that means I
 will use shortcuts whenever possible, and I wont be using any model in
-this example, maybe I’ll write that sometime in the future.&lt;/p&gt;
+this example, maybe I’ll write that sometime in the&amp;nbsp;future.&lt;/p&gt;
 &lt;p&gt;Okay, lets start. First of, after installing the django, run
 &lt;code&gt;django-admin.py startproject basicDjango&lt;/code&gt; to start a new project. Next,
 move into the project directory, and create a new folder named
@@ -1249,8 +1243,7 @@ for the project. We will come back here again later. Now, open up
 &lt;code&gt;settings.py&lt;/code&gt; and find the line for &lt;code&gt;TEMPLATE_DIRS&lt;/code&gt;, and add the path to
 the template directory there. Next, on your project’s root directory
 level, create a new file named &lt;code&gt;views.py&lt;/code&gt;. Open up the file, and enter
-these code which are the basic  functionalities that are in a view
-function:&lt;/p&gt;
+these code which are the basic  functionalities that are in a view&amp;nbsp;function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# import the necessary modules&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.shortcuts&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;render_to_response&lt;/span&gt;
 
@@ -1265,7 +1258,7 @@ function:&lt;/p&gt;
 replace the special tags in the template file with dictionary data you
 passed in the second argument. Next, create the template file itself, in
 the templates folder that you made before, create a new file index.html,
-and put this inside it:&lt;/p&gt;
+and put this inside&amp;nbsp;it:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;{{title}}&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
@@ -1279,7 +1272,7 @@ and put this inside it:&lt;/p&gt;
 
 &lt;p&gt;Now, you got everything setup, and now, you just need to route the
 request to the view function to handle, so to do that, open up urls.py,
-and add this to the url pattern:&lt;/p&gt;
+and add this to the url&amp;nbsp;pattern:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;views&lt;/span&gt;
 &lt;span class="n"&gt;urlpatterns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;patterns&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,(&lt;/span&gt;&lt;span class="s"&gt;r&amp;#39;^hello/$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;views&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;),)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1287,11 +1280,11 @@ and add this to the url pattern:&lt;/p&gt;
 
 &lt;p&gt;Now, you can run &lt;code&gt;python manage.py runserver&lt;/code&gt;, and navigate to your
 browser to &lt;code&gt;http://localhost:8000/hello&lt;/code&gt;, and you should see the word
-‘Hello World’ printed out.&lt;/p&gt;
+‘Hello World’ printed&amp;nbsp;out.&lt;/p&gt;
 &lt;p&gt;Note: If you are on windows, make sure the template paths are written
 with forward slashes ‘/’. That’s all for now, but I think I will make
 another post about how the Template system works in django without
-shortcuts, and also about the model. Well, maybe next time.&lt;/p&gt;</summary><category term="django"></category><category term="programming"></category><category term="python"></category></entry><entry><title>Setting Up Python on Windows</title><link href="http://hndr.me/blog/setting-up-python-on-windows" rel="alternate"></link><updated>2012-03-22T11:47:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-03-22:blog/setting-up-python-on-windows</id><summary type="html">&lt;p&gt;Well, it’s a bit late for posting this, considering I have been playing
+shortcuts, and also about the model. Well, maybe next&amp;nbsp;time.&lt;/p&gt;</summary><category term="django"></category><category term="programming"></category><category term="python"></category></entry><entry><title>Setting Up Python on Windows</title><link href="http://hndr.me/blog/setting-up-python-on-windows" rel="alternate"></link><updated>2012-03-22T11:47:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-03-22:blog/setting-up-python-on-windows</id><summary type="html">&lt;p&gt;Well, it’s a bit late for posting this, considering I have been playing
 with Python for few months as I posted before, but, I recently
 reinstalled my Windows, so I need to setup everything once again. This
 time, I am trying to do it the right way, and my previous Python setup
@@ -1316,15 +1309,15 @@ vanilla distutils to package the scripts, and use &lt;strong&gt;pip&lt;/strong&g
 distribution. Instead of specifying dependencies in the setup.py file,
 it allows you to create a separate file to specify the dependencies, and
 process that instead. There are also &lt;strong&gt;distribute&lt;/strong&gt; which is a fork of
-setuptools that tries to solve some of its shortcomings.&lt;/p&gt;
+setuptools that tries to solve some of its&amp;nbsp;shortcomings.&lt;/p&gt;
 &lt;p&gt;Ok, now that we got clear, lets actually start setting up python, the
-first one is installing Python itself, simple enough, download the MSI
+first one is installing Python itself, simple enough, download the &lt;span class="caps"&gt;MSI&lt;/span&gt;
 installer, run it, and Python is now installed. The next step is adding
-the python directory to the PATH environment variables. This is so that
+the python directory to the &lt;span class="caps"&gt;PATH&lt;/span&gt; environment variables. This is so that
 you can run the various python commands without typing the full path.
 The first one to add is the Python root directory (C:\Python27 in my
 case), and also the Scripts directory (C:\Python27\Scripts in my case). I
-didn’t add the second one to the PATH before, I wondered why can’t I run
+didn’t add the second one to the &lt;span class="caps"&gt;PATH&lt;/span&gt; before, I wondered why can’t I run
 commands such as pip and virtualenv directly before. and another thing,
 I recently watched a video from pycon 2012 talking about the state of
 Python on Windows, and I think the speaker mentioned something about the
@@ -1332,24 +1325,24 @@ new releases of Python installers for Windows includes the option to add
 the environment variables and also have some of the directory structure
 changed, but as I only watched the video briefly, I am not sure whether
 it only applies to the new Python 3.x release or to the 2.x release as
-well. I think I will just update it later.&lt;/p&gt;
+well. I think I will just update it&amp;nbsp;later.&lt;/p&gt;
 &lt;p&gt;By now, you can say that Python is already completely setup on Windows,
-but there are several other packages that should be installed.&lt;/p&gt;
+but there are several other packages that should be&amp;nbsp;installed.&lt;/p&gt;
 &lt;p&gt;The first one is to get a python package manager, which can be used to
 install and manage the installed packages on your system. There are
 several options you can choose, I am using distribute together with pip.
 To install distribute, the easiest way is download the
 &lt;a href="http://python-distribute.org/distribute_setup.py"&gt;distribute_setup.py&lt;/a&gt;, and run it. To install pip, you can download
 the zip files from http://pypi.python.org/pypi/pip, extract it, navigate
-to the folder, and run python setup.py install.&lt;/p&gt;
+to the folder, and run python setup.py&amp;nbsp;install.&lt;/p&gt;
 &lt;p&gt;The next thing you should do is to install virtualenv. virtualenv is
 basically a little python utility to setup a virtual isolated python
 installation apart from your main python installation. With it, you can
 install different version of the same libraries at the same time without
 having them conflicts with each other. To install it, the easiest would
-be to use pip that you installed before, so, run pip install virtualenv.&lt;/p&gt;
-&lt;p&gt;After you install it, you can run the command virtualenv ENV to create a
-new virtualenv named ENV. Activate it by going into &lt;code&gt;ENV\scripts\activate&lt;/code&gt;
+be to use pip that you installed before, so, run pip install&amp;nbsp;virtualenv.&lt;/p&gt;
+&lt;p&gt;After you install it, you can run the command virtualenv &lt;span class="caps"&gt;ENV&lt;/span&gt; to create a
+new virtualenv named &lt;span class="caps"&gt;ENV&lt;/span&gt;. Activate it by going into &lt;code&gt;ENV\scripts\activate&lt;/code&gt;
 which should change your shell prompt accordingly. Now any new packages
 changes will be made locally to the active virtualenv without affecting
 the global installation. After you are done, you can deactivate it and
@@ -1369,13 +1362,12 @@ run the script with that Python installation which doesn’t have django
 installed, so, what you can do is either run the script with python
 manually by specify the path of the &lt;code&gt;django-admin.py&lt;/code&gt;, or you can modify
 your virtualenv activate script to change the file association, either
-way, its up to you.&lt;/p&gt;</summary><category term="programming"></category><category term="python"></category><category term="windows"></category></entry><entry><title>Python Generator Expression</title><link href="http://hndr.me/blog/python-generator-expression" rel="alternate"></link><updated>2012-02-25T23:06:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-02-25:blog/python-generator-expression</id><summary type="html">&lt;p&gt;Continuing the last post, another thing i would like to note is the
+way, its up to&amp;nbsp;you.&lt;/p&gt;</summary><category term="programming"></category><category term="python"></category><category term="windows"></category></entry><entry><title>Python Generator Expression</title><link href="http://hndr.me/blog/python-generator-expression" rel="alternate"></link><updated>2012-02-25T23:06:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-02-25:blog/python-generator-expression</id><summary type="html">&lt;p&gt;Continuing the last post, another thing i would like to note is the
 generator expression in python. The function is almost the same as the
 list comprehension, but instead of processing the whole data structures
 at once, it performs the works one at a time. This would mean less
 memory usage and performance when dealing with a massive amount of data.
-To use it, just replace the square brackets on list comprehension with
-parentheses.&lt;/p&gt;
+To use it, just replace the square brackets on list comprehension with&amp;nbsp;parentheses.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;evens&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;evens&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;evens&lt;/span&gt;
@@ -1383,20 +1375,20 @@ parentheses.&lt;/p&gt;
 &lt;span class="c"&gt;# more example, this can apply to list comprehension as well&lt;/span&gt;
 &lt;span class="c"&gt;# generate a tuple of possible combinations of odd and even number in the range&lt;/span&gt;
 &lt;span class="n"&gt;permutation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="Python"></category><category term="programming"></category></entry><entry><title>Python List Comprehension</title><link href="http://hndr.me/blog/python-list-comprehension" rel="alternate"></link><updated>2012-02-25T22:51:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-02-25:blog/python-list-comprehension</id><summary type="html">&lt;p&gt;Ok, been wanting to write about this for a while, in case i forgot, but
-seems like I almost forgot about it. It's about a a feature of Python
-that I don't really see in other languages i use such as C#, so I wanted
-to write about this in case i forgot.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="Python"></category><category term="programming"></category></entry><entry><title>Python List Comprehension</title><link href="http://hndr.me/blog/python-list-comprehension" rel="alternate"></link><updated>2012-02-25T22:51:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-02-25:blog/python-list-comprehension</id><summary type="html">&lt;p&gt;Ok, been wanting to write about this for a while, in case i forgot, but
+seems like I almost forgot about it. It&amp;#8217;s about a a feature of Python
+that I don&amp;#8217;t really see in other languages i use such as C#, so I wanted
+to write about this in case i&amp;nbsp;forgot.&lt;/p&gt;
 &lt;p&gt;Ok, so the list comprehension is a python feature that, as the name
-suggest, create a new list based on an existing list. Well, I think it's
+suggest, create a new list based on an existing list. Well, I think it&amp;#8217;s
 much easier for me to just write an example, this post is meant for
-myself anyway.&lt;/p&gt;
+myself&amp;nbsp;anyway.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#basically, to use list comprehension, surround the expression in square brackets&lt;/span&gt;
 &lt;span class="n"&gt;aList&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
 &lt;span class="c"&gt;# create a new list of even numbers, the conditional operation is optional though.&lt;/span&gt;
 &lt;span class="n"&gt;evens&lt;/span&gt; &lt;span class="err"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;aList&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Windows Phone–Context Menu on a ListBox</title><link href="http://hndr.me/blog/windows-phone-context-menu-on-a-listbox" rel="alternate"></link><updated>2012-02-23T22:04:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-02-23:blog/windows-phone-context-menu-on-a-listbox</id><summary type="html">&lt;p&gt;Ok, I have been working on updating one of my windows phone app,
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Windows Phone–Context Menu on a ListBox</title><link href="http://hndr.me/blog/windows-phone-context-menu-on-a-listbox" rel="alternate"></link><updated>2012-02-23T22:04:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-02-23:blog/windows-phone-context-menu-on-a-listbox</id><summary type="html">&lt;p&gt;Ok, I have been working on updating one of my windows phone app,
 &lt;a href="http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34"&gt;Swatch 7&lt;/a&gt;. I added a feature that allows user to save the color they
 picked. I have write more on that on another post, maybe after the app
 on the marketplace is updated. So, to remove one finished doing that,
@@ -1406,7 +1398,7 @@ access the selected item of the &lt;code&gt;ListBox&lt;/code&gt; the ordinary wa
 selectedIndex returns –1, so that means holding down a listbox item
 doesn’t count as selecting it). So, I need a way to get information
 about which item to remove, and after a bit of internet search, here is
-how I do it:&lt;/p&gt;
+how I do&amp;nbsp;it:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;ListBox&lt;/span&gt; &lt;span class="na"&gt;Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;paletteList&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;ListBox.ItemTemplate&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;DataTemplate&amp;gt;&lt;/span&gt;
@@ -1425,21 +1417,20 @@ how I do it:&lt;/p&gt;
 
 
 &lt;p&gt;Those are the code to set the context menu for the listbox, and here is
-how the C# code on the click event:&lt;/p&gt;
+how the C# code on the click&amp;nbsp;event:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;removeFromPalette_Click&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RoutedEventArgs&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;Item&lt;/span&gt; &lt;span class="n"&gt;selectedItem&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;MenuItem&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;DataContext&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="c1"&gt;// Do whatever with the selectedItem&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="windows-phone"></category><category term="programming"></category></entry><entry><title>Python–Custom List Sorting Function</title><link href="http://hndr.me/blog/python-custom-list-sorting-function" rel="alternate"></link><updated>2012-01-30T19:26:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-30:blog/python-custom-list-sorting-function</id><summary type="html">&lt;p&gt;There are several ways to sort a list, where the basic ones is to use
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="windows-phone"></category><category term="programming"></category></entry><entry><title>Python–Custom List Sorting Function</title><link href="http://hndr.me/blog/python-custom-list-sorting-function" rel="alternate"></link><updated>2012-01-30T19:26:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-30:blog/python-custom-list-sorting-function</id><summary type="html">&lt;p&gt;There are several ways to sort a list, where the basic ones is to use
 the list.sort()  method to sort the list without returning anything, or
 use the sorted() function that returns a new sorted list, but this
 mostly works only on list that contains basic data types, if we want to
 sort a list that contains something else (another list, tuple,
-dictionary, custom classes, etc), we need to define a custom sorting
-function.&lt;/p&gt;
+dictionary, custom classes, etc), we need to define a custom sorting&amp;nbsp;function.&lt;/p&gt;
 &lt;p&gt;Sorting in Python is pretty simple, the list class provides a &lt;code&gt;sort()&lt;/code&gt;
-function that we can use by default.&lt;/p&gt;
+function that we can use by&amp;nbsp;default.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="c"&gt;#[1,2,3,4]&lt;/span&gt;
@@ -1451,7 +1442,7 @@ is where we have custom data structure and we want to define which of
 the class attribute that is used as they sorting key, in this case, we
 will specify the key argument of the sorting function. In the examples,
 the list.sort() method is used, but it can be used with the sorted()
-function as well.&lt;/p&gt;
+function as&amp;nbsp;well.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# consider we want to sort a list of string by its length&lt;/span&gt;
 
 &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;car&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;television&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;laptop&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;ok&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -1466,7 +1457,7 @@ function as well.&lt;/p&gt;
 
 &lt;p&gt;The key arguments takes a function name that takes an
 argument and returns an object that will be used as the key, for
-example, to define a custom key function:&lt;/p&gt;
+example, to define a custom key&amp;nbsp;function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#for example, we want to sort a list of tuples based on its&lt;/span&gt;
 &lt;span class="c"&gt;# last element:&lt;/span&gt;
 
@@ -1480,20 +1471,19 @@ example, to define a custom key function:&lt;/p&gt;
 
 
 &lt;p&gt;In addition, you can specify the reverse argument to true if you want it
-to sort the list in descending order.&lt;/p&gt;
+to sort the list in descending&amp;nbsp;order.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;reversed&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="c"&gt;#[4,3,2,1]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Python Learning Progress–Part 4</title><link href="http://hndr.me/blog/python-learning-progress-part-4" rel="alternate"></link><updated>2012-01-26T11:21:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-26:blog/python-learning-progress-part-4</id><summary type="html">&lt;p&gt;Last time I talked about getting input and a little about conditional
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Python Learning Progress–Part 4</title><link href="http://hndr.me/blog/python-learning-progress-part-4" rel="alternate"></link><updated>2012-01-26T11:21:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-26:blog/python-learning-progress-part-4</id><summary type="html">&lt;p&gt;Last time I talked about getting input and a little about conditional
 statement and looping that should’ve enabled you to start creating the
 basic application and implement some basic algorithm in Python. This
-time, I am going to do a review on some of the basic data structures in
-Python.&lt;/p&gt;
-&lt;p&gt;The basic data structures in Python are: list, tuples, and dictionaries.&lt;/p&gt;
+time, I am going to do a review on some of the basic data structures in&amp;nbsp;Python.&lt;/p&gt;
+&lt;p&gt;The basic data structures in Python are: list, tuples, and&amp;nbsp;dictionaries.&lt;/p&gt;
 &lt;p&gt;Let me start with dictionaries. Dictionaries basically defines a
 one-to-one relationship between a key and a value, just like an ordinary
 dictionary, where a word is associated with its definition. To define a
-dictionary in Python, the code are:&lt;/p&gt;
+dictionary in Python, the code&amp;nbsp;are:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# to define a dictionary, declare a&lt;/span&gt;
 &lt;span class="c"&gt;# variable with its value enclosed&lt;/span&gt;
 &lt;span class="c"&gt;# between two curly braces &amp;#39;{}&amp;#39;, and declare the &amp;#39;entries&amp;#39; with&lt;/span&gt;
@@ -1513,11 +1503,11 @@ dictionary in Python, the code are:&lt;/p&gt;
 
 
 &lt;p&gt;Some things to note about dictionary are, dictionary keys are
-case-sensitive, and it is unordered.&lt;/p&gt;
+case-sensitive, and it is&amp;nbsp;unordered.&lt;/p&gt;
 &lt;p&gt;Next is the list. Lists are, well, lists, like dictionary, a list
 contains an array of items. It is like the array list of other
 programming languages. To define a list, declare the contents of the
-list within a square brackets and separate it with commas.&lt;/p&gt;
+list within a square brackets and separate it with&amp;nbsp;commas.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# declare a list of fruits&lt;/span&gt;
 &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;apple&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;orange&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;banana&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;pear&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
@@ -1555,7 +1545,7 @@ list within a square brackets and separate it with commas.&lt;/p&gt;
 
 &lt;p&gt;In addition to these basic operation, a list provides a lot of other
 functions as well, one of them is the function to search for an element
-inside a list.&lt;/p&gt;
+inside a&amp;nbsp;list.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;li&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;apple&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;banana&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pear&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;mango&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
 &lt;span class="c"&gt;# to search for an index of an element&lt;/span&gt;
@@ -1568,7 +1558,7 @@ inside a list.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;There are several variations in removing an item from a list:&lt;/p&gt;
+&lt;p&gt;There are several variations in removing an item from a&amp;nbsp;list:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;li&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;apple&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;banana&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;orange&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;pear&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;grape&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
 &lt;span class="c"&gt;# the basic del operation, which will remove an element at a specified index&lt;/span&gt;
@@ -1586,7 +1576,7 @@ inside a list.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;There are other operations on a list as well,&lt;/p&gt;
+&lt;p&gt;There are other operations on a list as&amp;nbsp;well,&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;li&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
@@ -1609,7 +1599,7 @@ usually used to create a constant list, whose values wont change. In
 general, tuples are faster than lists, and there are also other specific
 uses of a tuples that will be explored later. To create a tuple, the
 syntax is similar to a list, but instead of a square bracket, a tuple is
-declared with ordinary brackets.&lt;/p&gt;
+declared with ordinary&amp;nbsp;brackets.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;tp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="c"&gt;# it can be accessed the same way&lt;/span&gt;
 &lt;span class="n"&gt;tp&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c"&gt;#a&lt;/span&gt;
@@ -1621,22 +1611,22 @@ declared with ordinary brackets.&lt;/p&gt;
 &lt;p&gt;Those are the basic data structures in Python, each of those are kind of
 similar to each other, but they have specific purposes that are unique
 to each of them. For example, a tuple can contain a list of another
-list, and a list can also nest several level of lists.&lt;/p&gt;</summary></entry><entry><title>WP7 Apps–Swatch 7</title><link href="http://hndr.me/blog/wp7-apps-swatch-7" rel="alternate"></link><updated>2012-01-17T00:14:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-17:blog/wp7-apps-swatch-7</id><summary type="html">&lt;p&gt;Another WP app on the marketplace,
-&lt;a href="http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34"&gt;http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34&lt;/a&gt;.
-It’s a pretty simple color picker that lets you pick a color, and provide you with the RGB value and HEX code. There are two kind of picker available, the usual color slider and a honeycomb picker.&lt;/p&gt;
+list, and a list can also nest several level of&amp;nbsp;lists.&lt;/p&gt;</summary></entry><entry><title>WP7 Apps–Swatch 7</title><link href="http://hndr.me/blog/wp7-apps-swatch-7" rel="alternate"></link><updated>2012-01-17T00:14:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-17:blog/wp7-apps-swatch-7</id><summary type="html">&lt;p&gt;Another &lt;span class="caps"&gt;WP&lt;/span&gt; app on the marketplace,
+&lt;a href="http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34"&gt;http://www.windowsphone.com/en-&lt;span class="caps"&gt;US&lt;/span&gt;/apps/dca01efc-aaf9-4785-a165-642d8b8def34&lt;/a&gt;.
+It’s a pretty simple color picker that lets you pick a color, and provide you with the &lt;span class="caps"&gt;RGB&lt;/span&gt; value and &lt;span class="caps"&gt;HEX&lt;/span&gt; code. There are two kind of picker available, the usual color slider and a honeycomb&amp;nbsp;picker.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720680373/" title="4 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7164/6720680373_4ddbfcb8ef_b.jpg" width="480" height="800" alt="4"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720679391/" title="3 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7155/6720679391_a66aaf368d_b.jpg" width="480" height="800" alt="3"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720678217/" title="2 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7031/6720678217_b76d9c449a_b.jpg" width="480" height="800" alt="2"&gt;&lt;/a&gt;&lt;/p&gt;</summary><category term="apps"></category><category term="windows-phone"></category></entry><entry><title>Python Learning–Part 3</title><link href="http://hndr.me/blog/python-learning-part-3" rel="alternate"></link><updated>2012-01-12T20:10:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-12:blog/python-learning-part-3</id><summary type="html">&lt;p&gt;Well, I was pretty busy this week, and I haven’t touch too much of
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720678217/" title="2 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7031/6720678217_b76d9c449a_b.jpg" width="480" height="800" alt="2"&gt;&lt;/a&gt;&lt;/p&gt;</summary><category term="apps"></category><category term="windows-phone"></category></entry><entry><title>Python Learning–Part 3</title><link href="http://hndr.me/blog/python-learning-part-3" rel="alternate"></link><updated>2012-01-12T20:10:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-12:blog/python-learning-part-3</id><summary type="html">&lt;p&gt;Well, I was pretty busy this week, and I haven’t touch too much of
 Python these days, and even if if I done some exercise on Python, I was
 too lazy to write up a blog post for it, but I promised I will blog more
-to keep track of my progress, so here I am writing this.&lt;/p&gt;
+to keep track of my progress, so here I am writing&amp;nbsp;this.&lt;/p&gt;
 &lt;p&gt;Ok, so this time, I want to talk about the getting input from the user,
 and  flow control in Python, in other words, I am going to talk about
-conditional statement and loop.&lt;/p&gt;
+conditional statement and&amp;nbsp;loop.&lt;/p&gt;
 &lt;p&gt;Let’s start with the user input. The basic input function in python is
 &lt;code&gt;raw_input()&lt;/code&gt;, which gets whatever the user entered, and process it as a
 string. You can pass an optional string argument that will be used as
-the prompt, here is an example code:&lt;/p&gt;
+the prompt, here is an example&amp;nbsp;code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;What is your name?&amp;quot;&lt;/span&gt;
 
 &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -1653,7 +1643,7 @@ the prompt, here is an example code:&lt;/p&gt;
 &lt;code&gt;raw_input&lt;/code&gt;, except that the user input isn’t processed as a string, but
 as an expression. So, if you entered a number, it will process the input
 as a number, or if you entered an variable name, it will be processed as
-an variable, and so on&lt;/p&gt;
+an variable, and so&amp;nbsp;on&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# x is 5&lt;/span&gt;
 &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter a number: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;#enter &amp;#39;5&amp;#39;&lt;/span&gt;
 
@@ -1679,16 +1669,15 @@ inside a code block cant be used outside of the block. Code blocks are
 used in many places in programming, one of them is the conditional and
 looping statements. Code blocks are expressed in various ways in
 different programming languages, some of them uses the curly braces { }
-(C++, C#, Java), some of them uses the BEGIN and END (VB) keyword, and
+(C++, C#, Java), some of them uses the &lt;span class="caps"&gt;BEGIN&lt;/span&gt; and &lt;span class="caps"&gt;END&lt;/span&gt; (&lt;span class="caps"&gt;VB&lt;/span&gt;) keyword, and
 in Python, we uses indentation (4 spaces), so the codes that are
 indented  are considered as a block of code, and to nest several levels
-of code blocks, just add more indentation to the lines of code.&lt;/p&gt;
+of code blocks, just add more indentation to the lines of&amp;nbsp;code.&lt;/p&gt;
 &lt;p&gt;Boolean values are basically logical true or false values. Comparison
 operators will always return a boolean value of either true or false,
 even though comparison operators are not the only thing that can return
 a boolean value, it is the basics of it. Comparison operations in Python
-are pretty much self-explanatory, and it is similar to other programming
-language:&lt;/p&gt;
+are pretty much self-explanatory, and it is similar to other programming&amp;nbsp;language:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#Equal&lt;/span&gt;
 &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="c"&gt;#True&lt;/span&gt;
 &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="c"&gt;#False&lt;/span&gt;
@@ -1719,7 +1708,7 @@ language:&lt;/p&gt;
 
 
 &lt;p&gt;I am not sure how to explain code indentation in plain english, so let
-me just write some example if statement code,&lt;/p&gt;
+me just write some example if statement&amp;nbsp;code,&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Please enter a number: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;You entered a number greater than 10&amp;quot;&lt;/span&gt;
@@ -1739,7 +1728,7 @@ as you want, and finally, an else statement is put there to specify
 which code to execute if all of the tests before it evaluate to false.
 The elif and the else statement are optional, which means you can write
 a code to only run when a certain condition is met, or do nothing if
-that certain condition is not met. &lt;/p&gt;
+that certain condition is not&amp;nbsp;met. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter your name: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c"&gt;#Only print these statements if the name is John&lt;/span&gt;
@@ -1753,7 +1742,7 @@ that certain condition is not met. &lt;/p&gt;
 to the conditional statement, looping uses code blocks to specify
 several statements of code to run as well. There are two ways to create
 a loop, the first one is the while loop, which will continue to run as
-long as the boolean statement remains true. &lt;/p&gt;
+long as the boolean statement remains&amp;nbsp;true. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# This one will run the loop endlessly, because the boolean statement&lt;/span&gt;
 &lt;span class="c"&gt;# is hardcoded as True&lt;/span&gt;
 &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -1773,7 +1762,7 @@ long as the boolean statement remains true. &lt;/p&gt;
 &lt;p&gt;The second type of loop is the for loop, which will loop through the
 content of a list one by one. (I will talk about list in another post,
 but basically, a list is just a sequence of values that is identified by
-a single variable).&lt;/p&gt;
+a single&amp;nbsp;variable).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# the basic syntax of a for loop is:&lt;/span&gt;
 &lt;span class="c"&gt;# for [variable name] in [list]:&lt;/span&gt;
 &lt;span class="c"&gt;# #codes for the loop&lt;/span&gt;
@@ -1796,10 +1785,10 @@ a single variable).&lt;/p&gt;
 &lt;span class="c"&gt;# Will print the numbers 2-10&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>My First WP7 Apps on the Marketplace–Demotivator 7</title><link href="http://hndr.me/blog/my-first-wp7-apps-on-the-marketplace-demotivator-7" rel="alternate"></link><updated>2012-01-10T20:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-10:blog/my-first-wp7-apps-on-the-marketplace-demotivator-7</id><summary type="html">&lt;p&gt;Ok, so I mentioned that I am developing several Windows Phone 7 Apps,
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>My First WP7 Apps on the Marketplace–Demotivator 7</title><link href="http://hndr.me/blog/my-first-wp7-apps-on-the-marketplace-demotivator-7" rel="alternate"></link><updated>2012-01-10T20:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-10:blog/my-first-wp7-apps-on-the-marketplace-demotivator-7</id><summary type="html">&lt;p&gt;Ok, so I mentioned that I am developing several Windows Phone 7 Apps,
 and I actually got one of them published on the marketplace! Most of the
 others are still unpublished yet though, either its going on review, or
-well, I just didn’t finish it.&lt;/p&gt;
+well, I just didn’t finish&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;So, here is the one that got it to the marketplace. Demotivator 7, it’s
 a application to create demotivator posters from the pictures stored in
 the phone. The download link is &lt;a href="http://www.windowsphone.com/en-US/apps/f7f72a6f-15b6-408c-9b25-80b5651ef501"&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -1807,11 +1796,11 @@ the phone. The download link is &lt;a href="http://www.windowsphone.com/en-US/ap
 &lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6672743421/" title="1 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7149/6672743421_d035f82905_b.jpg" width="480" height="800" alt="1"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;There are some bugs when creating a portrait poster, I already fixed
 that, but I just don’t feel like updating it yet because of the
-troublesome upload process, so, maybe later.&lt;/p&gt;</summary><category term="apps"></category><category term="windows-phone"></category></entry><entry><title>Python learning progress part.1</title><link href="http://hndr.me/blog/python-learning-progress-part1" rel="alternate"></link><updated>2012-01-09T19:55:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-09:blog/python-learning-progress-part1</id><summary type="html">&lt;p&gt;Ok, so last time I mentioned that I began learning Python. with the Zed
+troublesome upload process, so, maybe&amp;nbsp;later.&lt;/p&gt;</summary><category term="apps"></category><category term="windows-phone"></category></entry><entry><title>Python learning progress part.1</title><link href="http://hndr.me/blog/python-learning-progress-part1" rel="alternate"></link><updated>2012-01-09T19:55:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-09:blog/python-learning-progress-part1</id><summary type="html">&lt;p&gt;Ok, so last time I mentioned that I began learning Python. with the Zed
 Shaw’s Learn Python The Hard Way as a guide, so far, it has been a
 pretty good experience. So, in this blog, I will try to summarize what I
 learned by trying to explain it in a way that I think easy to
-understand, in doing that I hope I can get more understanding about it.&lt;/p&gt;
+understand, in doing that I hope I can get more understanding about&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;Before I begin, let me say my impression with it so far. With C++ as the
 first programming language I learned, and the majority of my codes
 written in fully object oriented language such as Java and C#, I find a
@@ -1822,13 +1811,13 @@ people says this is one of Python’s strength, but so far, I haven’t been
 able to figure out how this will help me in creating programs other than
 creating some confusion. Maybe its just me that hasn’t reached the point
 where I can actually take advantage of a dynamically type language such
-as Python.&lt;/p&gt;
+as&amp;nbsp;Python.&lt;/p&gt;
 &lt;p&gt;Anyway, lets go back to the main topic where I will try to explain
 Python in a way where I find easy to understand. I wont be talking about
 the installation of the Python, since its pretty straight forward both
-on Windows and Linux. So I will start with the coding part.&lt;/p&gt;
+on Windows and Linux. So I will start with the coding&amp;nbsp;part.&lt;/p&gt;
 &lt;p&gt;Like most programming language guide, I will begin with a simple hello
-world application. The hello world in Python is very simple.&lt;/p&gt;
+world application. The hello world in Python is very&amp;nbsp;simple.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello, World&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -1836,11 +1825,10 @@ world application. The hello world in Python is very simple.&lt;/p&gt;
 &lt;p&gt;That’s all, save it as with a .py extension, and run the command &lt;code&gt;python filename.py&lt;/code&gt;
  in the cmd/terminal to run it. Another alternative is to run
 command python in the cmd/terminal to enter the python shell, where the
-python commands can be entered and run like a command prompt
-instruction.&lt;/p&gt;
+python commands can be entered and run like a command prompt&amp;nbsp;instruction.&lt;/p&gt;
 &lt;p&gt;The print statement is pretty straight forward, it will produce the
 output to the screen. Each of the print statement will print the output
-in a new line, so,&lt;/p&gt;
+in a new line,&amp;nbsp;so,&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#These will print these two things on a different line&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello,&amp;quot;&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Its a wonderful world&amp;quot;&lt;/span&gt;
@@ -1850,13 +1838,13 @@ in a new line, so,&lt;/p&gt;
 &lt;p&gt;Will print ‘Hello, World’ and ’It’s a wonderful world.’ in a separate
 line, and by the way, the ‘#’ characters comments out the line, so that
 it will be ignored by the Python interpreter. Math are also very simple,
-as usual, combinations of operators and number will do the job.&lt;/p&gt;
+as usual, combinations of operators and number will do the&amp;nbsp;job.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The variables in python are dynamically typed, so a variable can be an
-integer, a string, or any other type depending on the value.&lt;/p&gt;
+integer, a string, or any other type depending on the&amp;nbsp;value.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
 &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
 
@@ -1868,18 +1856,18 @@ integer, a string, or any other type depending on the value.&lt;/p&gt;
 
 &lt;span class="c"&gt;#we can still print it in the same way&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Kinect Project Status Update I - Tools for building a Kinect Applications</title><link href="http://hndr.me/blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications" rel="alternate"></link><updated>2011-10-14T12:24:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-14:blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications</id><summary type="html">&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6266069590/" title="Kinect by p.hdra, on Flickr"&gt;&lt;img src="http://farm7.staticflickr.com/6177/6266069590_5f69b81c46_b.jpg" width="1024" height="681" alt="Kinect"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="programming"></category><category term="python"></category></entry><entry><title>Kinect Project Status Update I - Tools for building a Kinect Applications</title><link href="http://hndr.me/blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications" rel="alternate"></link><updated>2011-10-14T12:24:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-14:blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications</id><summary type="html">&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6266069590/" title="Kinect by p.hdra, on Flickr"&gt;&lt;img src="http://farm7.staticflickr.com/6177/6266069590_5f69b81c46_b.jpg" width="1024" height="681" alt="Kinect"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Previously, I wrote about testing the water with Kinect, and well, it
 seems like I am drowning now. The development process is much more
-complicated that I thought.&lt;/p&gt;
+complicated that I&amp;nbsp;thought.&lt;/p&gt;
 &lt;p&gt;To begin with, there are several drivers available for the Kinect, the
-most commonly used are the official &lt;a href="http://research.microsoft.com/en-us/um/redmond/projects/kinectsdk/"&gt;Kinect for Windows SDK from
+most commonly used are the official &lt;a href="http://research.microsoft.com/en-us/um/redmond/projects/kinectsdk/"&gt;Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt; from
 Microsoft&lt;/a&gt;, the &lt;a href="http://www.openni.org"&gt;OpenNI&lt;/a&gt; from PrimeSense, and the community maintained
 &lt;a href="http://www.openkinect.org"&gt;OpenKinect&lt;/a&gt; (libfreenect). So, the first problem is choosing which one
 to install on your system, sounds easy enough, but it is not. All of
-them have their own pro and cons, and they can't be installed on the
-same system side by side, so let's talk about them one by one.&lt;/p&gt;
-&lt;p&gt;First, the Kinect for Windows SDK from Microsoft, as expected, this SDK
+them have their own pro and cons, and they can&amp;#8217;t be installed on the
+same system side by side, so let&amp;#8217;s talk about them one by&amp;nbsp;one.&lt;/p&gt;
+&lt;p&gt;First, the Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt; from Microsoft, as expected, this &lt;span class="caps"&gt;SDK&lt;/span&gt;
 only support Windows systems, so its pretty straight forward to use it.
 The installation is pretty simple as well, download the installer, and
 run it on your computer, then you are ready to develop your own Kinect
@@ -1888,123 +1876,122 @@ Visual Studio, add the reference to the Kinect libraries, and start
 using it. Microsoft also provided us with a series of &lt;a href="http://channel9.msdn.com/coding4fun/kinect/Getting-started-with-the-Kinect-for-Windows-SDK-quickly-with-the-Kinect-Quickstarts"&gt;quick start
 videos&lt;/a&gt;, making it even easier for us get started. Developers also have
 the choice to program in either C# or C++. For the time being this is
-the one installed in my Windows system.&lt;/p&gt;
-&lt;p&gt;But, there are several downsides to this, the SDK is still relatively
+the one installed in my Windows&amp;nbsp;system.&lt;/p&gt;
+&lt;p&gt;But, there are several downsides to this, the &lt;span class="caps"&gt;SDK&lt;/span&gt; is still relatively
 new, so there are limited 3rd party libraries and projects, in addition,
-the license agreement that come with the SDK is pretty restricting,
-added with the fact the the source are not available, the aren't many
+the license agreement that come with the &lt;span class="caps"&gt;SDK&lt;/span&gt; is pretty restricting,
+added with the fact the the source are not available, the aren&amp;#8217;t many
 hackers out there are experimenting with it compared with the other two
 options. Another catch is that it has a minimum range of 850mm from the
 sensor for the depth camera to work, this is very important, as I think
 there is a possibility that I am going to deal with finger gestures
 pretty often, the distance would make it difficult to track the fingers.
-I also haven't seen any libraries for gesture recognition provided for
-this, even the AForge.NET libraries only support the libfreenect. But
-then, the SDK is still in its beta stage, so I hope Microsoft can get
+I also haven&amp;#8217;t seen any libraries for gesture recognition provided for
+this, even the AForge.&lt;span class="caps"&gt;NET&lt;/span&gt; libraries only support the libfreenect. But
+then, the &lt;span class="caps"&gt;SDK&lt;/span&gt; is still in its beta stage, so I hope Microsoft can get
 the official release out soon, with more features and less restricting
-license agreement.&lt;/p&gt;
-&lt;p&gt;Next up is the PrimeSense's OpenNI. PrimeSense is the company who
+license&amp;nbsp;agreement.&lt;/p&gt;
+&lt;p&gt;Next up is the PrimeSense&amp;#8217;s OpenNI. PrimeSense is the company who
 developed the Kinect hardware for Microsoft. The are three primary
 components of the driver they provide. They are the OpenNI library
-itself, the NITE libraries, and the Sensor Driver. The Sensor Driver are
+itself, the &lt;span class="caps"&gt;NITE&lt;/span&gt; libraries, and the Sensor Driver. The Sensor Driver are
 used so that the computer can recognize the sensor hardware (the OpenNI
-doesn't only support the Microsoft Kinect, but it also support other
-PrimeSense compliant hardware, such as Asus's Xtion), an alternative to
-this is the &lt;a href="https://github.com/avin2/SensorKinect"&gt;avin's Sensor Kinect&lt;/a&gt; which is a fork of the OpenNI's
-Sensor driver. Next is the NITE libraries, the NITE libraries is an
+doesn&amp;#8217;t only support the Microsoft Kinect, but it also support other
+PrimeSense compliant hardware, such as Asus&amp;#8217;s Xtion), an alternative to
+this is the &lt;a href="https://github.com/avin2/SensorKinect"&gt;avin&amp;#8217;s Sensor Kinect&lt;/a&gt; which is a fork of the OpenNI&amp;#8217;s
+Sensor driver. Next is the &lt;span class="caps"&gt;NITE&lt;/span&gt; libraries, the &lt;span class="caps"&gt;NITE&lt;/span&gt; libraries is an
 optional component, it provides the algorithms for skeletal tracking and
 other functionalities, and this library is not open source. Last, is the
 OpenNI library itself, this component provides the functionality so that
 the computer can consume the audio, color video, and depth video data
-from the sensor.&lt;/p&gt;
+from the&amp;nbsp;sensor.&lt;/p&gt;
 &lt;p&gt;OpenNI has been around for quite a while, and there are a lot of
 projects developed using it, it is also cross-platform. There are many
 software components that are built for it, such as the Point Cloud
 Library, and OpenCV and many others. Of course, those libraries can also
 be used for other drivers, but it would take quite a lot of work to do
-it. The main language used in this SDK is C, but there are wrappers for
+it. The main language used in this &lt;span class="caps"&gt;SDK&lt;/span&gt; is C, but there are wrappers for
 other languages provided. The driver is open source, and the license
 provide quite a lot of freedom for the developers, so there are a lot of
-projects built on it.&lt;/p&gt;
+projects built on&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;There is a installer wizard for Windows provided, but since I already
-installed the Kinect for Windows SDK, I can't install it on my Windows
+installed the Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt;, I can&amp;#8217;t install it on my Windows
 system. Since I also have Ubuntu installed on my laptop, I tried to
 install it on it, but it is not as easy as I thought, after several
 build errors and other stuff, I downloaded the binaries of all three
 components, and installed it, but when i try to run any of the samples,
-bit it gives me this error:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;InitFromXml&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Failed&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;USB&lt;/span&gt; &lt;span class="n"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+bit it gives me this&amp;nbsp;error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;InitFromXml&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Failed&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;&lt;span class="caps"&gt;USB&lt;/span&gt;&lt;/span&gt; &lt;span class="n"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I tried to build manually from the source, same error. Tried to built
-with the RedistMaker provided with the source, same error. So, I haven't
-been able to try it out.&lt;/p&gt;
+with the RedistMaker provided with the source, same error. So, I haven&amp;#8217;t
+been able to try it&amp;nbsp;out.&lt;/p&gt;
 &lt;p&gt;Last but not least, is the OpenKinect. This one is open source as well,
-and since it was one of the first Kinect hack available, there aren't
+and since it was one of the first Kinect hack available, there aren&amp;#8217;t
 any shortage of project samples and 3rd party software components, the
-AForge.NET framework also support this driver. Like the OpenNI,
+AForge.&lt;span class="caps"&gt;NET&lt;/span&gt; framework also support this driver. Like the OpenNI,
 OpenKinect is also a cross platform sofware, so we can install it on
-Windows, Linux, or Mac OSX. The installation is much more
+Windows, Linux, or Mac &lt;span class="caps"&gt;OSX&lt;/span&gt;. The installation is much more
 straightforward compared to OpenNI, there are only one component to
 install, which is the libfreenect. The other dependencies can be easily
 found as well. The one of the optional component is the
 libfreenect-demos, which provides you with several sample project. Just
 like the OpenNI, i tried to install it on my Ubuntu system. Tried to run
-the sample, an error:&lt;/p&gt;
+the sample, an&amp;nbsp;error:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;claim&lt;/span&gt; &lt;span class="n"&gt;interface&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;camera&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
 &lt;span class="n"&gt;Could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;So, I haven't been able to run this one either.&lt;/p&gt;
-&lt;p&gt;So for now, I only have access to the Kinect for Windows SDK, I guess I
-should just meddle with the Kinect SDK for now, and keep looking for
-solutions on the other two alternatives.&lt;/p&gt;</summary><category term="kinect"></category><category term="programming"></category></entry><entry><title>Testing the water on Kinect Applications</title><link href="http://hndr.me/blog/testing-the-water-on-kinect-applications" rel="alternate"></link><updated>2011-10-02T16:01:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-02:blog/testing-the-water-on-kinect-applications</id><summary type="html">&lt;p&gt;Okay, so I am started planning my final year project this semester, and
+&lt;p&gt;So, I haven&amp;#8217;t been able to run this one&amp;nbsp;either.&lt;/p&gt;
+&lt;p&gt;So for now, I only have access to the Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt;, I guess I
+should just meddle with the Kinect &lt;span class="caps"&gt;SDK&lt;/span&gt; for now, and keep looking for
+solutions on the other two&amp;nbsp;alternatives.&lt;/p&gt;</summary><category term="kinect"></category><category term="programming"></category></entry><entry><title>Testing the water on Kinect Applications</title><link href="http://hndr.me/blog/testing-the-water-on-kinect-applications" rel="alternate"></link><updated>2011-10-02T16:01:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-02:blog/testing-the-water-on-kinect-applications</id><summary type="html">&lt;p&gt;Okay, so I am started planning my final year project this semester, and
 for this first phase, I am only required to do the planning, the
-documentation and well, the report stuffs, but, since I don't have any
+documentation and well, the report stuffs, but, since I don&amp;#8217;t have any
 pictures of the Microsoft Kinect application development, I decided to
-do some coding on it as well.&lt;/p&gt;
+do some coding on it as&amp;nbsp;well.&lt;/p&gt;
 &lt;p&gt;Since there are so many possibilities on what the Kinect can do, there
 are several choices on what kind of application I am going to do, I need
 to narrow it down. My project is trying to use the Kinect to recognize
 sign language, and translate them. In other words, besides doing the
 skeleton tracking, I also need to do some form of gesture recognition,
 and also, I need to at least know a little bit of the sign language
-itself. Of course, I still know very little of those things.&lt;/p&gt;
+itself. Of course, I still know very little of those&amp;nbsp;things.&lt;/p&gt;
 &lt;p&gt;First thing to do, of course I need to look up for some samples of the
 Kinect hack itself, even though it is not doing the same thing, at least
 it can help me get an idea what the Kinect is capable of. It is not a
 difficult thing, a little bit of search on any search engine would get
-me a lot of results.&lt;/p&gt;
+me a lot of&amp;nbsp;results.&lt;/p&gt;
 &lt;p&gt;Here is the one that impressed me the most: &lt;a href="http://www.youtube.com/watch?v=quGhaggn3cQ"&gt;http://www.youtube.com/watch?v=quGhaggn3cQ&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The program can scan the room with the Kinect, and the program will
 process the input from the Kinect, and create a 3d scene with it.
-Imagine what it can do if the Kinect's image sensor have higher
+Imagine what it can do if the Kinect&amp;#8217;s image sensor have higher
 resolution. I wonder how they did that. Of course, that is much more
 sophisticated than what I am trying to do, just by looking at the people
-involved in the project, you can see how serious that project is.&lt;/p&gt;
+involved in the project, you can see how serious that project&amp;nbsp;is.&lt;/p&gt;
 &lt;p&gt;Here are some of the impressive works: &lt;a href="http://www.youtube.com/watch?v=ho8KVOe_y08"&gt;http://www.youtube.com/watch?v=ho8KVOe_y08&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;and this video shows how it can be integrated with other devices from
-Microsoft: &lt;a href="http://www.youtube.com/watch?v=2mktWd0-WGs"&gt;http://www.youtube.com/watch?v=2mktWd0-WGs&lt;/a&gt;&lt;/p&gt;</summary><category term="kinect"></category><category term="programming"></category></entry><entry><title>My First Android Application</title><link href="http://hndr.me/blog/my-first-android-application" rel="alternate"></link><updated>2011-07-02T22:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-07-02:blog/my-first-android-application</id><summary type="html">&lt;p&gt;Ok, I think I mentioned that I (with a partner in my group) am
+Microsoft: &lt;a href="http://www.youtube.com/watch?v=2mktWd0-WGs"&gt;http://www.youtube.com/watch?v=2mktWd0-WGs&lt;/a&gt;&lt;/p&gt;</summary><category term="kinect"></category><category term="programming"></category></entry><entry><title>My First Android Application</title><link href="http://hndr.me/blog/my-first-android-application" rel="alternate"></link><updated>2011-07-02T22:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-07-02:blog/my-first-android-application</id><summary type="html">&lt;p&gt;Ok, I think I mentioned that I (with a partner in my group) am
 developing an Android application for a class assignment, and here it
-is, its finished, but not a really usable apps though.&lt;/p&gt;
-&lt;p&gt;It’s a app to encrypt SMS before sending it. It uses an asymmetric
-encryption algorithm, RSA, meaning that the key exchange needs to be
+is, its finished, but not a really usable apps&amp;nbsp;though.&lt;/p&gt;
+&lt;p&gt;It’s a app to encrypt &lt;span class="caps"&gt;SMS&lt;/span&gt; before sending it. It uses an asymmetric
+encryption algorithm, &lt;span class="caps"&gt;RSA&lt;/span&gt;, meaning that the key exchange needs to be
 done before sending any encrypted message. The encryption and decryption
-can only be done within the apps itself.&lt;/p&gt;
+can only be done within the apps&amp;nbsp;itself.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6678908805/" title="Untitled by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7015/6678908805_b0da41bdb0_z.jpg" width="517" height="282" alt="Untitled"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The development process aren’t very intuitive IMO, the emulator are just
+&lt;p&gt;The development process aren’t very intuitive &lt;span class="caps"&gt;IMO&lt;/span&gt;, the emulator are just
 plain unusable, and eclipse integration just didn’t feel ‘native’.
 Switching between code view and design view takes several seconds to
 load, but then, maybe that’s just my laptop. The main programming
 language used is Java, so there isn’t too much problem there, but I am
-not really used to the UI markup system, maybe I need more experience to
+not really used to the &lt;span class="caps"&gt;UI&lt;/span&gt; markup system, maybe I need more experience to
 get into it. Still, the biggest problem is the emulator, honestly,
 during the development process, whenever I did some change, I always
 feel reluctant to test it, because everything is just so slow. I don’t
-have any plan yet, but maybe I will look more into this sometime in the
-future.&lt;/p&gt;
+have any plan yet, but maybe I will look more into this sometime in the&amp;nbsp;future.&lt;/p&gt;
 &lt;p&gt;Well, as mentioned before, its not a really usable app, I don’t really
-understand the RSA algorithm, and I don’t put any effort in making the
-interface good looking either. But then, whatever,&lt;/p&gt;</summary><category term="android"></category><category term="programming"></category><category term="school"></category></entry></feed>
+understand the &lt;span class="caps"&gt;RSA&lt;/span&gt; algorithm, and I don’t put any effort in making the
+interface good looking either. But then,&amp;nbsp;whatever,&lt;/p&gt;</summary><category term="android"></category><category term="programming"></category><category term="school"></category></entry></feed>

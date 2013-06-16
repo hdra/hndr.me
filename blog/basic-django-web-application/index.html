@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Basic Django Web Application
+        <title>    Basic Django Web Application
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -56,20 +56,20 @@
                         <time class="post-time" datetime="2012-03-23T15:57:00" pubdate>
                             Fri 23 March 2012
                         </time>
-                        <a href="http://hndr.me/blog/basic-django-web-application" rel="bookmark"><h1>Basic Django Web Application</h1></a>
+                        <a href="http://hndr.me/blog/basic-django-web-application" rel="bookmark"><h1>Basic Django Web&nbsp;Application</h1></a>
                     </header>
 
                     <section class="post-content">
-                        <p>For the past few weeks, I have been writing quite a lot in PHP, more
+                        <p>For the past few weeks, I have been writing quite a lot in <span class="caps">PHP</span>, more
 specifically, CodeIgniter, and to be honest, writing web applications in
 CodeIgniter is really easy and intuitive, and even though I came across
-the MVC pattern (or MVT, for that matter) for the first time in Django,
+the <span class="caps">MVC</span> pattern (or <span class="caps">MVT</span>, for that matter) for the first time in Django,
 I quickly forgotten even the basics of Django. So, in to prevent myself
 from forgetting something like this again in the future, I am writing
 this blogpost, to explain the basic of rendering a web page with Django.
 I will only explain the most necessary functionality, so that means I
 will use shortcuts whenever possible, and I wont be using any model in
-this example, maybe I’ll write that sometime in the future.</p>
+this example, maybe I’ll write that sometime in the&nbsp;future.</p>
 <p>Okay, lets start. First of, after installing the django, run
 <code>django-admin.py startproject basicDjango</code> to start a new project. Next,
 move into the project directory, and create a new folder named
@@ -78,8 +78,7 @@ for the project. We will come back here again later. Now, open up
 <code>settings.py</code> and find the line for <code>TEMPLATE_DIRS</code>, and add the path to
 the template directory there. Next, on your project’s root directory
 level, create a new file named <code>views.py</code>. Open up the file, and enter
-these code which are the basic  functionalities that are in a view
-function:</p>
+these code which are the basic  functionalities that are in a view&nbsp;function:</p>
 <div class="highlight"><pre><span class="c"># import the necessary modules</span>
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
 
@@ -94,7 +93,7 @@ function:</p>
 replace the special tags in the template file with dictionary data you
 passed in the second argument. Next, create the template file itself, in
 the templates folder that you made before, create a new file index.html,
-and put this inside it:</p>
+and put this inside&nbsp;it:</p>
 <div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
     <span class="nt">&lt;head&gt;</span>
         <span class="nt">&lt;title&gt;</span>{{title}}<span class="nt">&lt;/title&gt;</span>
@@ -108,7 +107,7 @@ and put this inside it:</p>
 
 <p>Now, you got everything setup, and now, you just need to route the
 request to the view function to handle, so to do that, open up urls.py,
-and add this to the url pattern:</p>
+and add this to the url&nbsp;pattern:</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">views</span>
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,(</span><span class="s">r&#39;^hello/$&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),)</span>
 </pre></div>
@@ -116,11 +115,11 @@ and add this to the url pattern:</p>
 
 <p>Now, you can run <code>python manage.py runserver</code>, and navigate to your
 browser to <code>http://localhost:8000/hello</code>, and you should see the word
-‘Hello World’ printed out.</p>
+‘Hello World’ printed&nbsp;out.</p>
 <p>Note: If you are on windows, make sure the template paths are written
 with forward slashes ‘/’. That’s all for now, but I think I will make
 another post about how the Template system works in django without
-shortcuts, and also about the model. Well, maybe next time.</p>
+shortcuts, and also about the model. Well, maybe next&nbsp;time.</p>
                     </section>
                     <hr/>
                     <aside class="post-meta">

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Python–Custom List Sorting Function
+        <title>    Python–Custom List Sorting Function
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -56,7 +56,7 @@
                         <time class="post-time" datetime="2012-01-30T19:26:00" pubdate>
                             Mon 30 January 2012
                         </time>
-                        <a href="http://hndr.me/blog/python-custom-list-sorting-function" rel="bookmark"><h1>Python–Custom List Sorting Function</h1></a>
+                        <a href="http://hndr.me/blog/python-custom-list-sorting-function" rel="bookmark"><h1>Python–Custom List Sorting&nbsp;Function</h1></a>
                     </header>
 
                     <section class="post-content">
@@ -65,10 +65,9 @@ the list.sort()  method to sort the list without returning anything, or
 use the sorted() function that returns a new sorted list, but this
 mostly works only on list that contains basic data types, if we want to
 sort a list that contains something else (another list, tuple,
-dictionary, custom classes, etc), we need to define a custom sorting
-function.</p>
+dictionary, custom classes, etc), we need to define a custom sorting&nbsp;function.</p>
 <p>Sorting in Python is pretty simple, the list class provides a <code>sort()</code>
-function that we can use by default.</p>
+function that we can use by&nbsp;default.</p>
 <div class="highlight"><pre><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="k">print</span> <span class="n">ls</span> <span class="c">#[1,2,3,4]</span>
@@ -80,7 +79,7 @@ is where we have custom data structure and we want to define which of
 the class attribute that is used as they sorting key, in this case, we
 will specify the key argument of the sorting function. In the examples,
 the list.sort() method is used, but it can be used with the sorted()
-function as well.</p>
+function as&nbsp;well.</p>
 <div class="highlight"><pre><span class="c"># consider we want to sort a list of string by its length</span>
 
 <span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;car&#39;</span><span class="p">,</span><span class="s">&#39;television&#39;</span><span class="p">,</span><span class="s">&#39;laptop&#39;</span><span class="p">,</span><span class="s">&#39;ok&#39;</span><span class="p">]</span>
@@ -95,7 +94,7 @@ function as well.</p>
 
 <p>The key arguments takes a function name that takes an
 argument and returns an object that will be used as the key, for
-example, to define a custom key function:</p>
+example, to define a custom key&nbsp;function:</p>
 <div class="highlight"><pre><span class="c">#for example, we want to sort a list of tuples based on its</span>
 <span class="c"># last element:</span>
 
@@ -109,7 +108,7 @@ example, to define a custom key function:</p>
 
 
 <p>In addition, you can specify the reverse argument to true if you want it
-to sort the list in descending order.</p>
+to sort the list in descending&nbsp;order.</p>
 <div class="highlight"><pre><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">[</span><span class="nb">reversed</span><span class="o">=</span><span class="bp">True</span><span class="p">]</span>
 <span class="k">print</span> <span class="n">ls</span> <span class="c">#[4,3,2,1]</span>

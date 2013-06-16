@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Python Learning–Part 3
+        <title>    Python Learning–Part 3
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -56,21 +56,21 @@
                         <time class="post-time" datetime="2012-01-12T20:10:00" pubdate>
                             Thu 12 January 2012
                         </time>
-                        <a href="http://hndr.me/blog/python-learning-part-3" rel="bookmark"><h1>Python Learning–Part 3</h1></a>
+                        <a href="http://hndr.me/blog/python-learning-part-3" rel="bookmark"><h1>Python Learning–Part&nbsp;3</h1></a>
                     </header>
 
                     <section class="post-content">
                         <p>Well, I was pretty busy this week, and I haven’t touch too much of
 Python these days, and even if if I done some exercise on Python, I was
 too lazy to write up a blog post for it, but I promised I will blog more
-to keep track of my progress, so here I am writing this.</p>
+to keep track of my progress, so here I am writing&nbsp;this.</p>
 <p>Ok, so this time, I want to talk about the getting input from the user,
 and  flow control in Python, in other words, I am going to talk about
-conditional statement and loop.</p>
+conditional statement and&nbsp;loop.</p>
 <p>Let’s start with the user input. The basic input function in python is
 <code>raw_input()</code>, which gets whatever the user entered, and process it as a
 string. You can pass an optional string argument that will be used as
-the prompt, here is an example code:</p>
+the prompt, here is an example&nbsp;code:</p>
 <div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;What is your name?&quot;</span>
 
 <span class="n">name</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
@@ -87,7 +87,7 @@ the prompt, here is an example code:</p>
 <code>raw_input</code>, except that the user input isn’t processed as a string, but
 as an expression. So, if you entered a number, it will process the input
 as a number, or if you entered an variable name, it will be processed as
-an variable, and so on</p>
+an variable, and so&nbsp;on</p>
 <div class="highlight"><pre><span class="c"># x is 5</span>
 <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a number: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;5&#39;</span>
 
@@ -113,16 +113,15 @@ inside a code block cant be used outside of the block. Code blocks are
 used in many places in programming, one of them is the conditional and
 looping statements. Code blocks are expressed in various ways in
 different programming languages, some of them uses the curly braces { }
-(C++, C#, Java), some of them uses the BEGIN and END (VB) keyword, and
+(C++, C#, Java), some of them uses the <span class="caps">BEGIN</span> and <span class="caps">END</span> (<span class="caps">VB</span>) keyword, and
 in Python, we uses indentation (4 spaces), so the codes that are
 indented  are considered as a block of code, and to nest several levels
-of code blocks, just add more indentation to the lines of code.</p>
+of code blocks, just add more indentation to the lines of&nbsp;code.</p>
 <p>Boolean values are basically logical true or false values. Comparison
 operators will always return a boolean value of either true or false,
 even though comparison operators are not the only thing that can return
 a boolean value, it is the basics of it. Comparison operations in Python
-are pretty much self-explanatory, and it is similar to other programming
-language:</p>
+are pretty much self-explanatory, and it is similar to other programming&nbsp;language:</p>
 <div class="highlight"><pre><span class="c">#Equal</span>
 <span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span> <span class="c">#True</span>
 <span class="mi">5</span> <span class="o">!=</span> <span class="mi">5</span> <span class="c">#False</span>
@@ -153,7 +152,7 @@ language:</p>
 
 
 <p>I am not sure how to explain code indentation in plain english, so let
-me just write some example if statement code,</p>
+me just write some example if statement&nbsp;code,</p>
 <div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Please enter a number: &quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
     <span class="k">print</span> <span class="s">&quot;You entered a number greater than 10&quot;</span>
@@ -173,7 +172,7 @@ as you want, and finally, an else statement is put there to specify
 which code to execute if all of the tests before it evaluate to false.
 The elif and the else statement are optional, which means you can write
 a code to only run when a certain condition is met, or do nothing if
-that certain condition is not met. </p>
+that certain condition is not&nbsp;met. </p>
 <div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;Enter your name: &quot;</span><span class="p">)</span>
 
 <span class="c">#Only print these statements if the name is John</span>
@@ -187,7 +186,7 @@ that certain condition is not met. </p>
 to the conditional statement, looping uses code blocks to specify
 several statements of code to run as well. There are two ways to create
 a loop, the first one is the while loop, which will continue to run as
-long as the boolean statement remains true. </p>
+long as the boolean statement remains&nbsp;true. </p>
 <div class="highlight"><pre><span class="c"># This one will run the loop endlessly, because the boolean statement</span>
 <span class="c"># is hardcoded as True</span>
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -207,7 +206,7 @@ long as the boolean statement remains true. </p>
 <p>The second type of loop is the for loop, which will loop through the
 content of a list one by one. (I will talk about list in another post,
 but basically, a list is just a sequence of values that is identified by
-a single variable).</p>
+a single&nbsp;variable).</p>
 <div class="highlight"><pre><span class="c"># the basic syntax of a for loop is:</span>
 <span class="c"># for [variable name] in [list]:</span>
 <span class="c"># #codes for the loop</span>

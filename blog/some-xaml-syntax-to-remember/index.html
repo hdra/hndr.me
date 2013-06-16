@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>    Some XAML syntax to remember
+        <title>    Some XAML syntax to remember
 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
@@ -56,36 +56,36 @@
                         <time class="post-time" datetime="2012-08-14T14:17:00" pubdate>
                             Tue 14 August 2012
                         </time>
-                        <a href="http://hndr.me/blog/some-xaml-syntax-to-remember" rel="bookmark"><h1>Some XAML syntax to remember</h1></a>
+                        <a href="http://hndr.me/blog/some-xaml-syntax-to-remember" rel="bookmark"><h1>Some <span class="caps">XAML</span> syntax to&nbsp;remember</h1></a>
                     </header>
 
                     <section class="post-content">
-                        <p>After developing for WPF/ Silverlight for a while, most people will be
-familiar with using XAML to declare UI elements, but even though I have
-been comfortable with XAML for quite a while, I don’t really know what
+                        <p>After developing for <span class="caps">WPF</span>/ Silverlight for a while, most people will be
+familiar with using <span class="caps">XAML</span> to declare <span class="caps">UI</span> elements, but even though I have
+been comfortable with <span class="caps">XAML</span> for quite a while, I don’t really know what
 is going on behind the stage. Reading Programming Windows by Charles
 Petzold shed some lights on it for me, so this post is here again so
-that I won’t forget.</p>
-<p>One important thing I didn't know before is that XAML file more or less is just
-another way to express the C# code, and the XAML elements in it are
-actually .NET objects, and anything that can be declared in XAML can be
+that I won’t&nbsp;forget.</p>
+<p>One important thing I didn&#8217;t know before is that <span class="caps">XAML</span> file more or less is just
+another way to express the C# code, and the <span class="caps">XAML</span> elements in it are
+actually .<span class="caps">NET</span> objects, and anything that can be declared in <span class="caps">XAML</span> can be
 done in C# as well. Most page consists of two files, a <code>.xaml</code> file and a
 <code>.xaml.cs</code> file, as the partial keyword in the C# file suggest, the
 <code>.xaml.cs</code> file only consist a part of the class declaration. As we can
-guess, the rest are declared in the XAML file. If we look at the
+guess, the rest are declared in the <span class="caps">XAML</span> file. If we look at the
 <code>obj/Debug</code> folder of the Project, we can see there are several files with
 the name of <code>PageName.g.cs</code> and <code>PageName.g.i.cs</code>. During compile time, the
-XAML file is parsed to get the elements and other information declared
+<span class="caps">XAML</span> file is parsed to get the elements and other information declared
 in it to generate the intermediate C# file, which will then be compiled
 together with our <code>.xaml.cs</code> file to generate the class declaration for a
 particular page. In the <code>PageName.g.i.cs</code> file, we can actually see the
 declaration for the <code>InitializeComponent</code> method that we always call in
 the constructor of our <code>.xaml.cs</code> file. The method basically initiates all
-objects declared in the XAML file, which is why if we try to get to
-access an element declared in the XAML before the method is called, we
+objects declared in the <span class="caps">XAML</span> file, which is why if we try to get to
+access an element declared in the <span class="caps">XAML</span> before the method is called, we
 would get a <code>NullReferenceException</code>.</p>
 <p>That’s enough for the backstage stuff, lets move on to the syntax. Most
-XAML pages looks similar to this:</p>
+<span class="caps">XAML</span> pages looks similar to&nbsp;this:</p>
 <div class="highlight"><pre><span class="nt">&lt;Page</span>
     <span class="na">x:Class=</span><span class="s">&quot;App2.MainPage&quot;</span>
     <span class="na">IsTabStop=</span><span class="s">&quot;false&quot;</span>
@@ -103,12 +103,12 @@ XAML pages looks similar to this:</p>
 </pre></div>
 
 
-<p>As mentioned before, a XAML declaration can be expressed in C#, since
-the elements in XAML file are .NET objects. The Page declaration above
+<p>As mentioned before, a <span class="caps">XAML</span> declaration can be expressed in C#, since
+the elements in <span class="caps">XAML</span> file are .<span class="caps">NET</span> objects. The Page declaration above
 basically declare an instance of <code>MainPage</code> in the <code>App2</code> namespace which is
 a subclass from the <code>Page</code> class. The <code>xmlns</code> statements are standard xml
 namespace inclusion which would allows us to use various elements.
-Similarly, with these declaration:</p>
+Similarly, with these&nbsp;declaration:</p>
 <div class="highlight"><pre><span class="nt">&lt;Page</span>
     <span class="na">x:Class=</span><span class="s">&quot;App2.MainPage&quot;</span>
     <span class="na">IsTabStop=</span><span class="s">&quot;false&quot;</span>
@@ -129,7 +129,7 @@ Similarly, with these declaration:</p>
 </pre></div>
 
 
-<p>The same result can be produced with these C# code:</p>
+<p>The same result can be produced with these C#&nbsp;code:</p>
 <div class="highlight"><pre><span class="k">public</span> <span class="k">sealed</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">Page</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="nf">MainPage</span><span class="p">()</span>
@@ -137,14 +137,14 @@ Similarly, with these declaration:</p>
         <span class="k">this</span><span class="p">.</span><span class="n">InitializeComponent</span><span class="p">();</span>
         <span class="n">Grid</span> <span class="n">contentGrid</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Grid</span><span class="p">()</span>
         <span class="p">{</span>
-            <span class="n">Background</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SolidColorBrush</span><span class="p">(</span><span class="n">Windows</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Colors</span><span class="p">.</span><span class="n">CadetBlue</span><span class="p">)</span>
+            <span class="n">Background</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SolidColorBrush</span><span class="p">(</span><span class="n">Windows</span><span class="p">.</span><span class="n"><span class="caps">UI</span></span><span class="p">.</span><span class="n">Colors</span><span class="p">.</span><span class="n">CadetBlue</span><span class="p">)</span>
         <span class="p">};</span>
 
         <span class="n">TextBlock</span> <span class="n">txtBlk</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TextBlock</span><span class="p">()</span>
         <span class="p">{</span>
             <span class="n">Text</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">,</span>
             <span class="n">FontSize</span> <span class="p">=</span> <span class="m">96</span><span class="p">,</span>
-            <span class="n">Foreground</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SolidColorBrush</span><span class="p">(</span><span class="n">Windows</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Colors</span><span class="p">.</span><span class="n">BlanchedAlmond</span><span class="p">),</span>
+            <span class="n">Foreground</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SolidColorBrush</span><span class="p">(</span><span class="n">Windows</span><span class="p">.</span><span class="n"><span class="caps">UI</span></span><span class="p">.</span><span class="n">Colors</span><span class="p">.</span><span class="n">BlanchedAlmond</span><span class="p">),</span>
             <span class="n">HorizontalAlignment</span> <span class="p">=</span> <span class="n">HorizontalAlignment</span><span class="p">.</span><span class="n">Center</span><span class="p">,</span>
             <span class="n">VerticalAlignment</span> <span class="p">=</span> <span class="n">VerticalAlignment</span><span class="p">.</span><span class="n">Center</span>
         <span class="p">};</span>
@@ -155,20 +155,19 @@ Similarly, with these declaration:</p>
 </pre></div>
 
 
-<p>As we can see, the XAML element properties are just another way to set
+<p>As we can see, the <span class="caps">XAML</span> element properties are just another way to set
 the values of the member variables of the objects. As we can see on the
 C# code above, the the Foreground property of a TextBlock is of type
 <code>SolidColorBrush</code> (or any subclass of the <code>Brush</code> class actually), but in
-the XAML syntax, it seems like we are assigning a string to it. This is
-because the compiler will parse and assign the appropriate attribute for
-us.</p>
-<p>The XAML code above shows two ways of setting a property of an XAML
+the <span class="caps">XAML</span> syntax, it seems like we are assigning a string to it. This is
+because the compiler will parse and assign the appropriate attribute for&nbsp;us.</p>
+<p>The <span class="caps">XAML</span> code above shows two ways of setting a property of an <span class="caps">XAML</span>
 element, namely the usual property attributes syntax, and the other one
 is one known as the Property Element syntax. The property-element syntax
 can be used to define some more complex attributes such as defining a
 gradient background that requires defining more than one colours and
 points. For example, the <code>TextBlock</code> above can be defined as such with the
-property-element syntax:</p>
+property-element&nbsp;syntax:</p>
 <div class="highlight"><pre><span class="nt">&lt;TextBlock&gt;</span>
     <span class="nt">&lt;TextBlock.Foreground&gt;</span>
         <span class="nt">&lt;SolidColorBrush&gt;</span>
@@ -201,17 +200,16 @@ We don’t need to explicitly create a element of type <code>Double</code> for t
 the alignment properties. We are still relying on the compiler to
 actually recognize that the <code>Black</code> inside the tag is actually referring
 to the colour enumeration, but there are times where would need to
-explicitly define the property with the usual property-attributes
-syntax.</p>
+explicitly define the property with the usual property-attributes&nbsp;syntax.</p>
 <p>In the previous example, we explicitly define what are the properties
-and its value, but as we see on most XAML we see, there are many cases
+and its value, but as we see on most <span class="caps">XAML</span> we see, there are many cases
 where we don’t do that. For example, we didn’t explicitly define the
 <code>rootGrid</code> element of our page is the value for the Content property of
 the page, nor we need to explicitly define that our <code>TextBlock</code> is a
 member of the <code>Children</code> property of the <code>Grid</code>. This is because every
-classes referenced in XAML can have one and only one property that is
+classes referenced in <span class="caps">XAML</span> can have one and only one property that is
 defined as its <code>ContentProperty</code>, where for these properties, the property
-element tags are not required. So, instead of writing</p>
+element tags are not required. So, instead of&nbsp;writing</p>
 <div class="highlight"><pre><span class="nt">&lt;Page&gt;</span>
     <span class="nt">&lt;Page.Content&gt;</span>
         <span class="nt">&lt;Grid&gt;</span>
@@ -226,7 +224,7 @@ element tags are not required. So, instead of writing</p>
 </pre></div>
 
 
-<p>We can simply write:</p>
+<p>We can simply&nbsp;write:</p>
 <div class="highlight"><pre><span class="nt">&lt;Page&gt;</span>
     <span class="nt">&lt;Grid&gt;</span>
         <span class="nt">&lt;TextBlock/&gt;</span>
@@ -239,7 +237,7 @@ element tags are not required. So, instead of writing</p>
 
 <p>And it would produce the same result. For the same reason, we can use
 the same thing to define the <code>Text</code> property of a <code>TextBlock</code> without
-creating property element tag for it, So,</p>
+creating property element tag for it,&nbsp;So,</p>
 <div class="highlight"><pre><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;Hello&quot;</span><span class="nt">/&gt;</span>
 
 <span class="c">&lt;!-- Is the same as: --&gt;</span>
@@ -259,12 +257,12 @@ creating property element tag for it, So,</p>
 
 
 <p>I guess thats enough for now. Learning about all this made me realise 
-that XAML is a very flexible and powerful language and can
+that <span class="caps">XAML</span> is a very flexible and powerful language and can
 be used for many things that can be done with C#, so knowing it would hopefully
-be very useful in developing for the some of the latest Microsoft platforms (Win 8, WP 8, etc).
+be very useful in developing for the some of the latest Microsoft platforms (Win 8, <span class="caps">WP</span> 8, etc).
 But of course, it is still a markup language, and it has several limitations, 
 such as lack of logic processing, and inability to create instances of objects that requires
-parameters in its contructor.</p>
+parameters in its&nbsp;contructor.</p>
                     </section>
                     <hr/>
                     <aside class="post-meta">
