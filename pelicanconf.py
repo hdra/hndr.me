@@ -13,6 +13,7 @@ DEFAULT_DATE_FORMAT = '%a %d %B %Y'
 DEFAULT_DATE = 'fs'
 
 THEME = "themes/Cait"
+TYPOGRIFY = True
 
 OUTPUT_PATH = 'output'
 PATH = 'content/'
