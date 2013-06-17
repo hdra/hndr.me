@@ -8,17 +8,15 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
+
 FTP_HOST=localhost
 FTP_USER=anonymous
 FTP_TARGET_DIR=/
-
 SSH_HOST=localhost
 SSH_PORT=22
 SSH_USER=root
 SSH_TARGET_DIR=/var/www
-
 S3_BUCKET=my_s3_bucket
-
 DROPBOX_DIR=~/Dropbox/Public/
 
 help:
@@ -64,13 +62,13 @@ stopserver:
 	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
 
 publish:
-	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
+	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS) -v
 
 github: publish
 	ghp-import $(OUTPUTDIR)
 	git push origin gh-pages
 
-update:
+push:
 	git add -A
 	git commit -m "update"
 	git push origin master
