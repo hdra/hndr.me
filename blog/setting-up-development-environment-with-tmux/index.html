@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    Setting up Development Environment with tmux
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+                    <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
+        
+    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
+    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
+                <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
+                        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+                <header id="sidebar" class="side-shadow">
+    <hgroup id="site-header">
+        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
+        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
+    </hgroup>
+    <nav>
+        <ul id="nav-links">
+                                        <li><a href="http://hndr.me/blog">Blog</a></li>
+                            <li><a href="http://hndr.me/contact">Contact</a></li>
+                            <li><a href="http://hndr.me/pages/projects">Projects</a></li>
+                                </ul>
+    </nav>
+    <footer id="site-info">
+    <p>
+        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
+    </p>
+    <p>
+        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
+    </p>
+</footer></header>
+    <div id="post-container">
+        <ol id="post-list">
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2013-07-09T16:02:00" pubdate>
+                            Tue 09 July 2013
+                        </time>
+                        <a href="http://hndr.me/blog/setting-up-development-environment-with-tmux" rel="bookmark"><h1>Setting up Development Environment with&nbsp;tmux</h1></a>
+                    </header>
+
+                    <section class="post-content">
+                        <p>I recently just finished up my bachelor studies, and as I wait for the the convocation, I find
+myself not knowing what to work on. So,  between tying up loose ends with my scholarship sponsor,
+trying to score a freelance projects, and wasting time watching <span class="caps">TV</span> series, I spent my time
+playing around with various web front-end frameworks and libraries without any particular aims. 
+In doing this I ended up creating a bunch of throw-away projects, and I switch around between
+them randomly quite often. Often, I would have to run several commands to get everything up and 
+running again, which would be easy if it involves only starting up an editor, but most of the time,
+I would have to type the same commands many times when I start working on a project.
+Of course, this doesn&#8217;t only apply to this particular situation of me experimenting around with
+various tools, even when working on a more &#8220;serious&#8221; project, I can benefit from automating the
+setup of the development&nbsp;environment.</p>
+<p>The first idea that came to my thought is simply write a batch script to start the tools that I need,
+but I realize that this won&#8217;t work well, since most of the tools that I are long running processes,
+such as a web server, or maybe <span class="caps">CSS</span> pre-compiler set to watch for changes in my project. Also, 
+the log messages that these tools produce on the terminal are things that I would prefer to see.
+So, I would need a something that can help me to manage several terminal processes easily. The first
+thing that came to mind is <a href="http://www.gnu.org/software/screen/"><span class="caps">GNU</span> Screen</a>.</p>
+<p>I read about terminal multiplexer and their use before, but this is the first time I thought of a use
+for them myself. So, I read around trying to look for how to use <code>screen</code> to do the things I need, 
+and it seems like there is a superior alternative to screen, which is <a href="http://tmux.sourceforge.net/">tmux</a>, so I switched my focus
+to it&nbsp;instead.</p>
+<p>So, what tmux does is basically it allows me to easily run multiple programs in a single shell session
+, switch between them, and manage them from the parent terminal. It is almost like a terminal emulator
+within your terminal. Perfect for what I&nbsp;needed.</p>
+<p>In most of my experiment projects, I usually have at least python web server, compass watch, and 
+livereload server running. Instead of starting the one by one, with tmux, I automate it, and at the 
+same time have them arranged neatly in their own window/ pane. 
+I can start a new tmux session, label it, and detach from it with <code>tmux new-session -s my-dev -d</code>.
+I can also pass a new command for it to run. For example, I want it to create a new v-split pane
+and run <code>top</code> in it, I can just enter <code>tmux split-window -v -t my-dev "top"</code>. Awesome. For example, 
+to create a tmux session with the setup consisting of python web server, livereload server, etc I
+mentioned above, I can just run these&nbsp;script:</p>
+<div class="highlight"><pre><span class="n">tmux</span> <span class="n">new</span><span class="o">-</span><span class="n">session</span> <span class="o">-</span><span class="n">s</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="o">-</span><span class="n">d</span> <span class="s">&quot;python -m SimpleHTTPServer 8899&quot;</span>
+<span class="n">tmux</span> <span class="n">split</span><span class="o">-</span><span class="n">window</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="s">&quot;compass watch&quot;</span>
+<span class="n">tmux</span> <span class="n">split</span><span class="o">-</span><span class="n">window</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="s">&quot;guard&quot;</span>
+<span class="n">tmux</span> <span class="n">select</span><span class="o">-</span><span class="n">layout</span> <span class="o">-</span><span class="n">t</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="n">tiled</span>
+</pre></div>
+
+
+<p>And I would have all these 3 process running inside a detached tmux session in the background. If I 
+ever need to see the log messages, I just run <code>tmux attach</code> and have this shown to&nbsp;me:</p>
+<p><a href="http://www.flickr.com/photos/hendra2392/9247967451/" title="Tmux screenshot">
+    <img src="https://farm4.staticflickr.com/3694/9247967451_6169fb7941_c.jpg" width="800" height="433" alt="Tmux">
+</a></p>
+<p>Of course, If you prefer stay inside tmux, you can just leave out the <code>-d</code> flag. You can also
+start a new editor inside it, create an empty tab for you run other commands on, almost anything
+that you can do on a terminal,&nbsp;automated.</p>
+<p>That is awesome. But, you can automate it even further, and make your life even easier. <a href="https://github.com/aziz/tmuxinator">Tmuxinator</a>
+is a tool that allows you to create and manage tmux session easily. You create project with 
+<code>mux new project-name</code>, and open the config with <code>mux open project-name</code> (<code>mux</code> is an alias 
+for tmuxinator). The config will look something like&nbsp;this:</p>
+<div class="highlight"><pre><span class="cp"># ~/.tmuxinator/project-name.yml</span>
+
+<span class="nl">project_name:</span> <span class="n">project</span><span class="o">-</span><span class="n">name</span>
+<span class="nl">project_root:</span> <span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">project</span><span class="o">-</span><span class="n">name</span>
+<span class="nl">tabs:</span>
+  <span class="o">-</span> <span class="n">editor</span><span class="o">:</span> <span class="n">vim</span>
+  <span class="o">-</span> <span class="n">logs</span><span class="o">:</span>
+        <span class="nl">layout:</span> <span class="n">even</span><span class="o">-</span><span class="n">vertical</span>
+        <span class="nl">panes:</span> 
+            <span class="o">-</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">SimpleHTTPServer</span>
+            <span class="o">-</span> <span class="n">compass</span> <span class="n">watch</span>
+            <span class="o">-</span> <span class="n">guard</span>
+  <span class="o">-</span> <span class="n">shell</span><span class="o">:</span> <span class="err">#</span><span class="n">empty</span><span class="p">,</span> <span class="n">run</span> <span class="n">plain</span> <span class="n">shell</span>
+</pre></div>
+
+
+<p>I am sure I don&#8217;t need to explain that file. It stores the configuration of the environment
+in an easy to write (and read) format, and you can start it with <code>mux project-name</code> and it will
+create the session you need with the layout you need. You can read more about it in the project&#8217;s
+<span class="caps">README</span> file. Tmuxinator obviously make something that make our job easier, even easier, but there is
+one caveat though. As you probably have noticed, tmuxinator is written in Ruby, and that means the
+tmux session it create will be a child process of Ruby, instead of your shell. You can read more 
+what does this means <a href="http://natedickson.com/blog/2013/05/10/from-the-desk-of-captain-obvious-tmuxinator-vs-scripted-configurations/">here</a>.</p>
+<p>Obviously, tmux is powerful tools that can be used for more than just automating environment setup,
+I myself am still in discovering its capabilities. Search around for more information on customizing
+and using it, and of course, the <code>man</code> page of the tmux itself is a great source of&nbsp;information.</p>
+                    </section>
+                    <hr/>
+                    <aside class="post-meta">
+                        <p>Category: <a href="http://hndr.me/category/randoms.html">randoms</a></p>
+                                                <p>Tags: <a href="http://hndr.me/tag/programming.html">programming</a>, </p>
+                                            </aside>
+                    <hr/>
+                    <div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+                </article>
+            </li>
+        </ol>
+    </div>
+        </div>
+
+        <script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+        <script src="http://hndr.me/theme/js/main.js"></script>
+    </body>
+</html>

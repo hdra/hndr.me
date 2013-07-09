@@ -1,5 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/all.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-06-14T19:41:00+08:00</updated><entry><title>Setting up stuffs on Linux</title><link href="http://hndr.me/blog/setting-up-stuffs-on-linux" rel="alternate"></link><updated>2013-06-14T19:41:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-14:blog/setting-up-stuffs-on-linux</id><summary type="html">&lt;p&gt;My Linux system has been pretty much set up for most things I need, since of course, Linux Mint
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/all.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-07-09T16:02:00+08:00</updated><entry><title>Setting up Development Environment with tmux</title><link href="http://hndr.me/blog/setting-up-development-environment-with-tmux" rel="alternate"></link><updated>2013-07-09T16:02:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-07-09:blog/setting-up-development-environment-with-tmux</id><summary type="html">&lt;p&gt;I recently just finished up my bachelor studies, and as I wait for the the convocation, I find
+myself not knowing what to work on. So,  between tying up loose ends with my scholarship sponsor,
+trying to score a freelance projects, and wasting time watching &lt;span class="caps"&gt;TV&lt;/span&gt; series, I spent my time
+playing around with various web front-end frameworks and libraries without any particular aims. 
+In doing this I ended up creating a bunch of throw-away projects, and I switch around between
+them randomly quite often. Often, I would have to run several commands to get everything up and 
+running again, which would be easy if it involves only starting up an editor, but most of the time,
+I would have to type the same commands many times when I start working on a project.
+Of course, this doesn&amp;#8217;t only apply to this particular situation of me experimenting around with
+various tools, even when working on a more &amp;#8220;serious&amp;#8221; project, I can benefit from automating the
+setup of the development&amp;nbsp;environment.&lt;/p&gt;
+&lt;p&gt;The first idea that came to my thought is simply write a batch script to start the tools that I need,
+but I realize that this won&amp;#8217;t work well, since most of the tools that I are long running processes,
+such as a web server, or maybe &lt;span class="caps"&gt;CSS&lt;/span&gt; pre-compiler set to watch for changes in my project. Also, 
+the log messages that these tools produce on the terminal are things that I would prefer to see.
+So, I would need a something that can help me to manage several terminal processes easily. The first
+thing that came to mind is &lt;a href="http://www.gnu.org/software/screen/"&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; Screen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I read about terminal multiplexer and their use before, but this is the first time I thought of a use
+for them myself. So, I read around trying to look for how to use &lt;code&gt;screen&lt;/code&gt; to do the things I need, 
+and it seems like there is a superior alternative to screen, which is &lt;a href="http://tmux.sourceforge.net/"&gt;tmux&lt;/a&gt;, so I switched my focus
+to it&amp;nbsp;instead.&lt;/p&gt;
+&lt;p&gt;So, what tmux does is basically it allows me to easily run multiple programs in a single shell session
+, switch between them, and manage them from the parent terminal. It is almost like a terminal emulator
+within your terminal. Perfect for what I&amp;nbsp;needed.&lt;/p&gt;
+&lt;p&gt;In most of my experiment projects, I usually have at least python web server, compass watch, and 
+livereload server running. Instead of starting the one by one, with tmux, I automate it, and at the 
+same time have them arranged neatly in their own window/ pane. 
+I can start a new tmux session, label it, and detach from it with &lt;code&gt;tmux new-session -s my-dev -d&lt;/code&gt;.
+I can also pass a new command for it to run. For example, I want it to create a new v-split pane
+and run &lt;code&gt;top&lt;/code&gt; in it, I can just enter &lt;code&gt;tmux split-window -v -t my-dev "top"&lt;/code&gt;. Awesome. For example, 
+to create a tmux session with the setup consisting of python web server, livereload server, etc I
+mentioned above, I can just run these&amp;nbsp;script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;tmux&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;python -m SimpleHTTPServer 8899&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;tmux&lt;/span&gt; &lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;compass watch&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;tmux&lt;/span&gt; &lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;guard&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;tmux&lt;/span&gt; &lt;span class="n"&gt;select&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;layout&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;tiled&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And I would have all these 3 process running inside a detached tmux session in the background. If I 
+ever need to see the log messages, I just run &lt;code&gt;tmux attach&lt;/code&gt; and have this shown to&amp;nbsp;me:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/9247967451/" title="Tmux screenshot"&gt;
+    &lt;img src="https://farm4.staticflickr.com/3694/9247967451_6169fb7941_c.jpg" width="800" height="433" alt="Tmux"&gt;
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Of course, If you prefer stay inside tmux, you can just leave out the &lt;code&gt;-d&lt;/code&gt; flag. You can also
+start a new editor inside it, create an empty tab for you run other commands on, almost anything
+that you can do on a terminal,&amp;nbsp;automated.&lt;/p&gt;
+&lt;p&gt;That is awesome. But, you can automate it even further, and make your life even easier. &lt;a href="https://github.com/aziz/tmuxinator"&gt;Tmuxinator&lt;/a&gt;
+is a tool that allows you to create and manage tmux session easily. You create project with 
+&lt;code&gt;mux new project-name&lt;/code&gt;, and open the config with &lt;code&gt;mux open project-name&lt;/code&gt; (&lt;code&gt;mux&lt;/code&gt; is an alias 
+for tmuxinator). The config will look something like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# ~/.tmuxinator/project-name.yml&lt;/span&gt;
+
+&lt;span class="nl"&gt;project_name:&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+&lt;span class="nl"&gt;project_root:&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+&lt;span class="nl"&gt;tabs:&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;editor&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;vim&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;logs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="nl"&gt;layout:&lt;/span&gt; &lt;span class="n"&gt;even&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;vertical&lt;/span&gt;
+        &lt;span class="nl"&gt;panes:&lt;/span&gt; 
+            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;SimpleHTTPServer&lt;/span&gt;
+            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;compass&lt;/span&gt; &lt;span class="n"&gt;watch&lt;/span&gt;
+            &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;guard&lt;/span&gt;
+  &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="n"&gt;plain&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I am sure I don&amp;#8217;t need to explain that file. It stores the configuration of the environment
+in an easy to write (and read) format, and you can start it with &lt;code&gt;mux project-name&lt;/code&gt; and it will
+create the session you need with the layout you need. You can read more about it in the project&amp;#8217;s
+&lt;span class="caps"&gt;README&lt;/span&gt; file. Tmuxinator obviously make something that make our job easier, even easier, but there is
+one caveat though. As you probably have noticed, tmuxinator is written in Ruby, and that means the
+tmux session it create will be a child process of Ruby, instead of your shell. You can read more 
+what does this means &lt;a href="http://natedickson.com/blog/2013/05/10/from-the-desk-of-captain-obvious-tmuxinator-vs-scripted-configurations/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Obviously, tmux is powerful tools that can be used for more than just automating environment setup,
+I myself am still in discovering its capabilities. Search around for more information on customizing
+and using it, and of course, the &lt;code&gt;man&lt;/code&gt; page of the tmux itself is a great source of&amp;nbsp;information.&lt;/p&gt;</summary><category term="programming"></category></entry><entry><title>Setting up stuffs on Linux</title><link href="http://hndr.me/blog/setting-up-stuffs-on-linux" rel="alternate"></link><updated>2013-06-14T19:41:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-14:blog/setting-up-stuffs-on-linux</id><summary type="html">&lt;p&gt;My Linux system has been pretty much set up for most things I need, since of course, Linux Mint
 itself comes with a lot of stuffs such as python, and such. I myself am pretty surprised
 how much I have settled in. Still, there are still a number of stuffs that I need to add.
 First of, the utilities that includes stuffs such as gcc, cmake, curl, and all the&amp;nbsp;stuff.&lt;/p&gt;
