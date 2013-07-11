@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-07-09T16:02:00+08:00</updated><entry><title>Setting up Development Environment with tmux</title><link href="http://hndr.me/blog/setting-up-development-environment-with-tmux" rel="alternate"></link><updated>2013-07-09T16:02:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-07-09:blog/setting-up-development-environment-with-tmux</id><summary type="html">&lt;p&gt;I recently just finished up my bachelor studies, and as I wait for the the convocation, I find
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-07-11T23:15:00+08:00</updated><entry><title>When Noise Gets Too Much</title><link href="http://hndr.me/blog/when-noise-gets-too-much" rel="alternate"></link><updated>2013-07-11T23:15:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-07-11:blog/when-noise-gets-too-much</id><summary type="html">&lt;p&gt;The World Wide Web is an amazing thing. The amount of resources available on it is enormous.
+You can learn just about anything you can think of with these resources. Recently though,
+I noticed that amount of low quality content is getting way a lot&amp;nbsp;higher.&lt;/p&gt;
+&lt;p&gt;Until a few months ago, I collected almost everything I can get my hands on. I bookmarked 
+every programming article I found that looked interesting, even though I barely know anything
+about the topic. When major tech conferences like Microsoft&amp;#8217;s &lt;a href="http://www.buildwindows.com"&gt;Build&lt;/a&gt;, &lt;a href="https://www.google.com/io/‎"&gt;Google I/O&lt;/a&gt;, 
+or &lt;a href="http://www.pycon.org"&gt;Pycon&lt;/a&gt; were held, I scanned the videos for titles that looked interesting and 
+downloaded them a bunch of them. I saved a bunch of videos from channels like Marakana or
+Google Tech Talks. I downloaded every single free programming books that people that people 
+on sites like &lt;span class="caps"&gt;HN&lt;/span&gt; or reddit, even though I don&amp;#8217;t know what the book talk about that much.
+As you may have guessed, only a very small portion of those bookmarks ever get visited for 
+the second time, I barely watched any of the videos I downloaded, and most of the ebooks
+I downloaded never even got extracted from the zip&amp;nbsp;archive.&lt;/p&gt;
+&lt;p&gt;Up until Google announced the plan to shutdown Google Reader, I subscribed to a bunch of 
+tech blogs, blogs like Techcrunch, or Gizmodo. Every morning, I would have 700+ new items
+on the reader, and I would scanned through all of them, click on what I find interesting, 
+and mark everything else as read. It lasted for several months, but not only it was tedious,
+I started to realize many of their article are low-quality link-bait, not fact-based articles 
+that fishes for stupid fan-boy arguments. I don&amp;#8217;t want to link to them for examples, but I 
+am sure they aren&amp;#8217;t hard to&amp;nbsp;find.&lt;/p&gt;
+&lt;p&gt;So, when Google Reader was shut down, I moved to [feedly][feed], and I took the chance to 
+clean up my feeds. I use &lt;span class="caps"&gt;RSS&lt;/span&gt; only to keep updated with some blogs of people whose writing
+I find interesting. Most of the are only updated occasionally, and I find myself reading
+almost every single one of them. The only tech blogs I follow are few that I find still publish
+actual professional news and pieces, like &lt;a href="http://theverge.com/"&gt;The Verge&lt;/a&gt;, or &lt;a href="http://pandodaily.com/"&gt;PandoDaily&lt;/a&gt;,
+and I keep up with their updates through channels like Twitter and/ or&amp;nbsp;Facebook.&lt;/p&gt;
+&lt;p&gt;Same case with the stuffs I kept on my hard drive. I deleted every videos and books that I
+find not too relevant because of the technology changes, or those that I found not too interesting 
+after I went through them&amp;nbsp;briefly.&lt;/p&gt;
+&lt;p&gt;It felt great. I feel much more relaxed. During the time I was living with these noises, I 
+felt obligated to read or watch them. Now, not so much. Nowadays, I get my fix from channels
+such as Twitter, some highly-curated mailing-lists, also the top news on sites like &lt;span class="caps"&gt;HN&lt;/span&gt; and Reddit.
+I also keep my reading list with Pocket, and keep track of my projects with Trello. It feels good
+not having to manage them myself (Yes, I know that these cloud services could be shut down 
+any time, but I really hope they won&amp;#8217;t for anytime&amp;nbsp;soon). &lt;/p&gt;
+&lt;p&gt;It turns out, there is a downside to the abundance of information these&amp;nbsp;days.&lt;/p&gt;</summary></entry><entry><title>Setting up Development Environment with tmux</title><link href="http://hndr.me/blog/setting-up-development-environment-with-tmux" rel="alternate"></link><updated>2013-07-09T16:02:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-07-09:blog/setting-up-development-environment-with-tmux</id><summary type="html">&lt;p&gt;I recently just finished up my bachelor studies, and as I wait for the the convocation, I find
 myself not knowing what to work on. So,  between tying up loose ends with my scholarship sponsor,
 trying to score a freelance projects, and wasting time watching &lt;span class="caps"&gt;TV&lt;/span&gt; series, I spent my time
 playing around with various web front-end frameworks and libraries without any particular aims. 
