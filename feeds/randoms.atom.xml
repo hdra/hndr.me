@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-07-11T23:15:00+08:00</updated><entry><title>When Noise Gets Too Much</title><link href="http://hndr.me/blog/when-noise-gets-too-much" rel="alternate"></link><updated>2013-07-11T23:15:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-07-11:blog/when-noise-gets-too-much</id><summary type="html">&lt;p&gt;The World Wide Web is an amazing thing. The amount of resources available on it is enormous.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/randoms.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-08-20T14:33:00+08:00</updated><entry><title>A Tiny bit on Firefox Extension</title><link href="http://hndr.me/blog/a-tiny-bit-on-firefox-extension" rel="alternate"></link><updated>2013-08-20T14:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-08-20:blog/a-tiny-bit-on-firefox-extension</id><summary type="html">&lt;p&gt;I stumbled on &lt;a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/"&gt;this&lt;/a&gt; article on creating Chrome extension, and really, it seems really
+simple to do build an extension for the browser. So, I thought what would it take to build
+the same thing for&amp;nbsp;Firefox?&lt;/p&gt;
+&lt;p&gt;It turns out, it is pretty simple as well, but when you are just getting started, find out
+where to get started aren&amp;#8217;t really straightforward. The getting started documents aren&amp;#8217;t
+exactly well organized. To start with, there are two different ways to build an add-on for Firefox.
+The &lt;span class="caps"&gt;XUL&lt;/span&gt; tool set, and also, the new Add-on &lt;span class="caps"&gt;SDK&lt;/span&gt;. The &lt;a href="https://addons.mozilla.org/developers/"&gt;add-ons developer page&lt;/a&gt; highlights the
+Add-on &lt;span class="caps"&gt;SDK&lt;/span&gt;, but the links below mostly deal with the &lt;span class="caps"&gt;XUL&lt;/span&gt; tools. The difference between the two
+can be found on &lt;a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/sdk-vs-xul.html"&gt;this page&lt;/a&gt;. Basically, the Add-on &lt;span class="caps"&gt;SDK&lt;/span&gt; is the one that is simpler, the
+documentation can be found &lt;a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/index.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Anyway, once you found the documentation, everything should be pretty easy to follow. Mozilla
+provides &lt;a href="https://builder.addons.mozilla.org/"&gt;Add-on Builder&lt;/a&gt;, a web-app that allows you to build add-ons for Firefox, but 
+I prefer to download the &lt;span class="caps"&gt;SDK&lt;/span&gt; to my computer and use my preferred text editor. The &lt;span class="caps"&gt;SDK&lt;/span&gt;
+is basically a python environment setup with everything you need to build an add-on, so you
+would need to have python installed on your computer. Whichever method you chose, the method
+are basically the&amp;nbsp;same.&lt;/p&gt;
+&lt;h2&gt;Building the&amp;nbsp;Add-on&lt;/h2&gt;
+&lt;p&gt;So, moving on to building actual add-on. Like the example in the post linked above, it is 
+a  simple add-ons that adds a context menu that allows you to search &lt;span class="caps"&gt;MDN&lt;/span&gt; for the selected text. 
+To be honest, I am not sure what to write in this post, because it is much more simpler than 
+I&amp;nbsp;thought. &lt;/p&gt;
+&lt;p&gt;Like the Chrome extension, a Firefox add-on is built with &lt;span class="caps"&gt;HTML&lt;/span&gt;/&lt;span class="caps"&gt;CSS&lt;/span&gt; and Javascript. There is a
+&lt;code&gt;package.json&lt;/code&gt; that contains the meta-data of the add-on that is a generated for you anyway.
+Your code will mainly goes to the &lt;code&gt;main.js&lt;/code&gt; file in the &lt;code&gt;lib&lt;/code&gt; folder of your add-on directory.
+You can put your extra data, such as to the &lt;span class="caps"&gt;CSS&lt;/span&gt; files, extra javascript libraries, images, etc
+in the &lt;code&gt;data&lt;/code&gt; folder. All these folders are generated automatically with the initialization of the
+add-on, along with a &lt;code&gt;doc&lt;/code&gt; and &lt;code&gt;test&lt;/code&gt; folder, which pretty much describe&amp;nbsp;themselves.&lt;/p&gt;
+&lt;p&gt;Here is the whole code for the&amp;nbsp;add-on:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;contextMenu&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sdk/context-menu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;tabs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sdk/tabs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;script&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;self.on(&amp;quot;context&amp;quot;, function(){&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s2"&gt;&amp;quot;    return &amp;#39;Search &lt;span class="caps"&gt;MDN&lt;/span&gt; for \&amp;quot;&amp;#39;+window.getSelection().toString()+&amp;#39;\&amp;quot;&amp;#39;;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;});&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;self.on(&amp;quot;click&amp;quot;, function(){&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;   self.postMessage(window.getSelection().toString());&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;});&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;menuItem&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;contextMenu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+    &lt;span class="nx"&gt;label&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Search on &lt;span class="caps"&gt;MDN&lt;/span&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;context&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;contextMenu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;SelectionContext&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+    &lt;span class="nx"&gt;contentScript&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;script&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;onMessage&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;selectionText&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://google.com/search?btnI&amp;amp;q=site:developer.mozilla.org &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;selectionText&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;+&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="nx"&gt;tabs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As you can see there, there isn&amp;#8217;t much to do. The first two lines are the import statement
+to access some of the browser feature. Skip the &lt;code&gt;script&lt;/code&gt; variable for now. Next, the we create
+a new context menu, give it a label, and we declare the context so that the item only shows
+up when there is a something&amp;nbsp;selected.&lt;/p&gt;
+&lt;p&gt;Next, we pass the &lt;code&gt;contentScript&lt;/code&gt; argument, which defines the behavior of the menu item even 
+further. Many things can be done through the &lt;code&gt;contentScript&lt;/code&gt;, such as to scope down the
+context even further, set the click behaviour, etc. The argument takes a string, and we passed
+the &lt;code&gt;script&lt;/code&gt; variable as the argument. In this case, the &lt;code&gt;context&lt;/code&gt; event is
+are fired just before the context menu is displayed, and we change the label further to add
+the selected text. We also handles the &lt;code&gt;click&lt;/code&gt; event, and with it, we call the &lt;code&gt;postMessage&lt;/code&gt;
+to pass the the selected text, which we handle with the function passed to the &lt;code&gt;onMessage&lt;/code&gt; 
+argument, and in it, we open a new tab with the search&amp;nbsp;&lt;span class="caps"&gt;URL&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;As you might imagine, passing the script that defines the behavior of the add-on as a string
+literal isn&amp;#8217;t really nice when script is something a little more complicated. You can pass
+external javascript files to the &lt;code&gt;contentScriptFile&lt;/code&gt; argument to accomplish the same thing.
+Although there are several differences in the way the script is executed, but I won&amp;#8217;t go into
+it too much in this post. More on it &lt;a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/content-scripts/loading.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There is a lot more you can do with the add-on. You can scan through more features available
+on the documentation. There are more examples on the add-ons &lt;span class="caps"&gt;SDK&lt;/span&gt;&amp;#8217;s &lt;a href="https://github.com/mozilla/addon-sdk"&gt;Github&lt;/a&gt; repository.
+By the way, the add-on mentioned above is available on &lt;a href="https://github.com/hdra/ff-MDNSearch"&gt;Github&lt;/a&gt; as well. Also, 
+the add-on we built here is just a simple plugin to show the basics of the Firefox plugin &lt;span class="caps"&gt;API&lt;/span&gt;,
+not really meant for actual use. It doesn&amp;#8217;t handle plenty of use cases, and it also relies 
+on Google&amp;#8217;s Feeling Lucky version to directly open the first search first result. so 
+I don&amp;#8217;t really recommend you actually using it for anything&amp;nbsp;serious.&lt;/p&gt;</summary><category term="Programming"></category></entry><entry><title>When Noise Gets Too Much</title><link href="http://hndr.me/blog/when-noise-gets-too-much" rel="alternate"></link><updated>2013-07-11T23:15:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-07-11:blog/when-noise-gets-too-much</id><summary type="html">&lt;p&gt;The World Wide Web is an amazing thing. The amount of resources available on it is enormous.
 You can learn just about anything you can think of with these resources. Recently though,
 I noticed that amount of low quality content is getting way a lot&amp;nbsp;higher.&lt;/p&gt;
 &lt;p&gt;Until a few months ago, I collected almost everything I can get my hands on. I bookmarked 
