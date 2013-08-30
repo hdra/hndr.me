@@ -29,8 +29,9 @@ So, when Google Reader was shut down, I moved to [feedly][feed], and I took the 
 clean up my feeds. I use RSS only to keep updated with some blogs of people whose writing
 I find interesting. Most of the are only updated occasionally, and I find myself reading
 almost every single one of them. The only tech blogs I follow are few that I find still publish
-actual professional news and pieces, like [The Verge][verge], or [PandoDaily][pando],
-and I keep up with their updates through channels like Twitter and/ or Facebook.
+actual professional news and pieces I enjoy reading, like [The Verge][verge].
+I keep up with their updates selectively through channels like Twitter and/ or Facebook instead
+of trying to keep up with everything they published.
 
 Same case with the stuffs I kept on my hard drive. I deleted every videos and books that I
 find not too relevant because of the technology changes, or those that I found not too interesting 
@@ -45,10 +46,11 @@ any time, but I really hope they won't for anytime soon).
 
 It turns out, there is a downside to the abundance of information these days.
 
+*Edit:* Changed on my opinion on the news site.
+
 [pocket]: http://getpocket.com
 [trello]: http://trello.com
 [verge]: http://theverge.com/
-[pando]: http://pandodaily.com/
 [din]: http:feedly.com
 [reader]: http://googlereader.blogspot.com/2013/03/powering-down-google-reader.html
 [io]: https://www.google.com/io/‎
