@@ -1,0 +1,24 @@
+Title: New stage in life
+Date: 2013-11-16 19:47
+
+It's been a while since I posted anything. The last time I posted something
+was in August, so it has been around two months. Since then, many things
+have changed. 
+
+I had my last day in college on July. I had my convocation ceremony on October, 
+so yep. I am officially holding a B.Sc. degree. It was pretty exciting. Also,
+now I am working as a Software Engineer! I am now officially a professional
+programmer. I write code for a living. I also just moved to a new place today,
+so things has been very hectic in the past few months. From the job search,
+tying things up with my scholarship, looking for a place to rent, starting
+a new job, all these things has been taking up most of my time.
+
+The last project I worked on was the WordPress theme that I uploaded on
+[WordPress.org][http://wordpress.org/themes/mog/], and thankfully the support email has 
+slowed down ever since the theme was moved from the featured themes. I haven't
+even been spending my free time coding that much. Lack of proper workspace and
+my dying laptop are what I would blame, but I guess I was kind of tired with
+all the changes that are happening as well.
+
+I am rather excited this new stage of life, and I hope I can learn more from
+my job and the people around it.
