@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/all-en.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-08-20T14:33:00+08:00</updated><entry><title>A Tiny bit on Firefox Extension</title><link href="http://hndr.me/blog/a-tiny-bit-on-firefox-extension" rel="alternate"></link><updated>2013-08-20T14:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-08-20:blog/a-tiny-bit-on-firefox-extension</id><summary type="html">&lt;p&gt;I stumbled on &lt;a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/"&gt;this&lt;/a&gt; article on creating Chrome extension, and really, it seems really
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hndr (dot) me</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/all-en.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2013-11-16T19:47:00+08:00</updated><entry><title>New stage in life</title><link href="http://hndr.me/blog/new-stage-in-life" rel="alternate"></link><updated>2013-11-16T19:47:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-11-16:blog/new-stage-in-life</id><summary type="html">&lt;p&gt;It&amp;#8217;s been a while since I posted anything. The last time I posted something
+was in August, so it has been around two months. Since then, many things
+have&amp;nbsp;changed. &lt;/p&gt;
+&lt;p&gt;I had my last day in college on July. I had my convocation ceremony on October, 
+so yep. I am officially holding a B.Sc. degree. It was pretty exciting. Also,
+now I am working as a Software Engineer! I am now officially a professional
+programmer. I write code for a living. I also just moved to a new place today,
+so things has been very hectic in the past few months. From the job search,
+tying things up with my scholarship, looking for a place to rent, starting
+a new job, all these things has been taking up most of my&amp;nbsp;time.&lt;/p&gt;
+&lt;p&gt;The last project I worked on was the WordPress theme that I uploaded on
+[WordPress.org][http://wordpress.org/themes/mog/], and thankfully the support email has 
+slowed down ever since the theme was moved from the featured themes. I haven&amp;#8217;t
+even been spending my free time coding that much. Lack of proper workspace and
+my dying laptop are what I would blame, but I guess I was kind of tired with
+all the changes that are happening as&amp;nbsp;well.&lt;/p&gt;
+&lt;p&gt;I am rather excited this new stage of life, and I hope I can learn more from
+my job and the people around&amp;nbsp;it.&lt;/p&gt;</summary></entry><entry><title>A Tiny bit on Firefox Extension</title><link href="http://hndr.me/blog/a-tiny-bit-on-firefox-extension" rel="alternate"></link><updated>2013-08-20T14:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-08-20:blog/a-tiny-bit-on-firefox-extension</id><summary type="html">&lt;p&gt;I stumbled on &lt;a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/"&gt;this&lt;/a&gt; article on creating Chrome extension, and really, it seems really
 simple to do build an extension for the browser. So, I thought what would it take to build
 the same thing for&amp;nbsp;Firefox?&lt;/p&gt;
 &lt;p&gt;It turns out, it is pretty simple as well, but when you are just getting started, find out
