@@ -46,7 +46,12 @@ CONTACT_EMAIL = "hendra2392@gmail.com"
 CONTACTS = (('github', 'https://github.com/hdra'),
             ('twitter', 'https://twitter.com/_hdra'),)
 
-FILES_TO_COPY = (('extra/favicon.ico', 'favicon.ico'),
-                 ('extra/humans.txt', 'humans.txt'),
-                 ('extra/CNAME', 'CNAME'),
-                 ('extra/robots.txt', 'robots.txt'),)
+# STATIC_PATHS = (('extra/favicon.ico', 'favicon.ico'),
+#                  ('extra/humans.txt', 'humans.txt'),
+#                  ('extra/CNAME', 'CNAME'),
+#                  ('extra/robots.txt', 'robots.txt'),)
+
+STATIC_PATHS =   ['extra/favicon.ico',
+                 'extra/humans.txt',
+                 'extra/CNAME',
+                 'extra/robots.txt']
