@@ -9,16 +9,16 @@
         <title>hndr (dot) me - C#</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-                    <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
+            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
         <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
         <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-        
+
     <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
     <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-                <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-                        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
+        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -26,19 +26,19 @@
         <![endif]-->
 
         <div id="wrapper">
-                <header id="sidebar" class="side-shadow">
+<header id="sidebar" class="side-shadow">
     <hgroup id="site-header">
         <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
         <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
     </hgroup>
     <nav>
         <ul id="nav-links">
-                                        <li><a href="http://hndr.me/blog">Blog</a></li>
-                            <li><a href="http://hndr.me/contact">Contact</a></li>
-                            <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-                                </ul>
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+                <li><a href="http://hndr.me/contact">Contact</a></li>
+                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
+        </ul>
     </nav>
-    <footer id="site-info">
+<footer id="site-info">
     <p>
         Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
     </p>
@@ -48,7 +48,30 @@
 </footer></header>
     <div id="post-container">
         <ol id="post-list">
-                        <li>
+            <li>
+                <article class="post-entry">
+                    <header class="entry-header">
+                        <time class="post-time" datetime="2012-05-22T23:19:00" pubdate>
+                            Tue 22 May 2012
+                        </time>
+                        <a href="http://hndr.me/blog/c-optional-arguments-and-constructor-chaining" rel="bookmark"><h1>C#–Optional Arguments and Constructor&nbsp;Chaining</h1></a>
+                    </header>
+                    <section class="post-content">
+                        <p>Learned something new about C# today, first thing is Constructor
+Chaining.  Constructor chaining enables constructors to call another
+overloaded constructor, with it, the amount of duplicate code can be
+reduced significantly, here is an&nbsp;example:</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span><span class="p">{</span>
+    <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">address</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">Person</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">):</span><span class="k">this</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty ...</span></pre></div>
+                    </section>
+                </article>
+            </li>
+            <hr/>
+            <li>
                 <article class="post-entry">
                     <header class="entry-header">
                         <time class="post-time" datetime="2012-05-20T23:12:00" pubdate>
@@ -65,18 +88,18 @@ result in me having to guess the magic behind ...</p>
                 </article>
             </li>
             <hr/>
-                    </ol>
-                <div class="paginator">
-                                                <a href="http://hndr.me/tag/c.html">
+        </ol>
+        <div class="paginator">
+                    <a href="http://hndr.me/tag/c.html">
                         <i class="icon-circle-arrow-left"></i>
                     </a>
-                                        Page 2 / 2
-                    </div>
-        
+            Page 2 / 2
+        </div>
+
     </div>
         </div>
 
-        <script>
+<script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
