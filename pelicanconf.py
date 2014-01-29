@@ -51,14 +51,16 @@ CONTACTS = (('github', 'https://github.com/hdra'),
 #                  ('extra/CNAME', 'CNAME'),
 #                  ('extra/robots.txt', 'robots.txt'),)
 
+EXTRA_PATH_METADATA = {
+    'extra/favicon.ico': {'path': 'favicon.ico'},
+    'extra/humans.txt': {'path': 'humans.txt'},
+    'extra/CNAME': {'path': 'CNAME'},
+    'extra/robots.txt': {'path': 'robots.txt'},
+}
+
+
 STATIC_PATHS =   ['extra/favicon.ico',
                  'extra/humans.txt',
                  'extra/CNAME',
                  'extra/robots.txt']
 
-EXTRA_PATH_METADATA = {
-    'extra/favicon.icon': {'path': 'favicon.icon'},
-    'extra/humans.txt': {'path': 'humans.txt'},
-    'extra/CNAME': {'path': 'CNAME'},
-    'extra/robots.txt': {'path': 'robots.txt'},
-}
