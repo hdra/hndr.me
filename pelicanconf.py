@@ -55,3 +55,10 @@ STATIC_PATHS =   ['extra/favicon.ico',
                  'extra/humans.txt',
                  'extra/CNAME',
                  'extra/robots.txt']
+
+EXTRA_PATH_METADATA = {
+    'extra/favicon.icon': {'path': 'favicon.icon'},
+    'extra/humans.txt': {'path': 'humans.txt'},
+    'extra/CNAME': {'path': 'CNAME'},
+    'extra/robots.txt': {'path': 'robots.txt'},
+}
