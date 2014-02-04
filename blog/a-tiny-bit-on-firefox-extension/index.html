@@ -59,33 +59,12 @@
                     </header>
 
                     <section class="post-content">
-                        <p>I stumbled on <a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/">this</a> article on creating Chrome extension, and really, it seems really
-simple to do build an extension for the browser. So, I thought what would it take to build
-the same thing for&nbsp;Firefox?</p>
-<p>It turns out, it is pretty simple as well, but when you are just getting started, find out
-where to get started aren&#8217;t really straightforward. The getting started documents aren&#8217;t
-exactly well organized. To start with, there are two different ways to build an add-on for Firefox.
-The <span class="caps">XUL</span> tool set, and also, the new Add-on <span class="caps">SDK</span>. The <a href="https://addons.mozilla.org/developers/">add-ons developer page</a> highlights the
-Add-on <span class="caps">SDK</span>, but the links below mostly deal with the <span class="caps">XUL</span> tools. The difference between the two
-can be found on <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/sdk-vs-xul.html">this page</a>. Basically, the Add-on <span class="caps">SDK</span> is the one that is simpler, the
-documentation can be found <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/index.html">here</a>.</p>
-<p>Anyway, once you found the documentation, everything should be pretty easy to follow. Mozilla
-provides <a href="https://builder.addons.mozilla.org/">Add-on Builder</a>, a web-app that allows you to build add-ons for Firefox, but 
-I prefer to download the <span class="caps">SDK</span> to my computer and use my preferred text editor. The <span class="caps">SDK</span>
-is basically a python environment setup with everything you need to build an add-on, so you
-would need to have python installed on your computer. Whichever method you chose, the method
-are basically the&nbsp;same.</p>
+                        <p>I stumbled on <a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/">this</a> article on creating Chrome extension, and really, it seems really simple to do build an extension for the browser. So, I thought what would it take to build the same thing for&nbsp;Firefox?</p>
+<p>It turns out, it is pretty simple as well, but when you are just getting started, find out where to get started aren&#8217;t really straightforward. The getting started documents aren&#8217;t exactly well organized. To start with, there are two different ways to build an add-on for Firefox. The <span class="caps">XUL</span> tool set, and also, the new Add-on <span class="caps">SDK</span>. The <a href="https://addons.mozilla.org/developers/">add-ons developer page</a> highlights the Add-on <span class="caps">SDK</span>, but the links below mostly deal with the <span class="caps">XUL</span> tools. The difference between the two can be found on <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/sdk-vs-xul.html">this page</a>. Basically, the Add-on <span class="caps">SDK</span> is the one that is simpler, the documentation can be found <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/index.html">here</a>.</p>
+<p>Anyway, once you found the documentation, everything should be pretty easy to follow. Mozilla provides <a href="https://builder.addons.mozilla.org/">Add-on Builder</a>, a web-app that allows you to build add-ons for Firefox, but I prefer to download the <span class="caps">SDK</span> to my computer and use my preferred text editor. The <span class="caps">SDK</span> is basically a python environment setup with everything you need to build an add-on, so you would need to have python installed on your computer. Whichever method you chose, the method are basically the&nbsp;same.</p>
 <h2>Building the&nbsp;Add-on</h2>
-<p>So, moving on to building actual add-on. Like the example in the post linked above, it is 
-a  simple add-ons that adds a context menu that allows you to search <span class="caps">MDN</span> for the selected text. 
-To be honest, I am not sure what to write in this post, because it is much more simpler than 
-I&nbsp;thought. </p>
-<p>Like the Chrome extension, a Firefox add-on is built with <span class="caps">HTML</span>/<span class="caps">CSS</span> and Javascript. There is a
-<code>package.json</code> that contains the meta-data of the add-on that is a generated for you anyway.
-Your code will mainly goes to the <code>main.js</code> file in the <code>lib</code> folder of your add-on directory.
-You can put your extra data, such as to the <span class="caps">CSS</span> files, extra javascript libraries, images, etc
-in the <code>data</code> folder. All these folders are generated automatically with the initialization of the
-add-on, along with a <code>doc</code> and <code>test</code> folder, which pretty much describe&nbsp;themselves.</p>
+<p>So, moving on to building actual add-on. Like the example in the post linked above, it is a  simple add-ons that adds a context menu that allows you to search <span class="caps">MDN</span> for the selected text. To be honest, I am not sure what to write in this post, because it is much more simpler than I&nbsp;thought.</p>
+<p>Like the Chrome extension, a Firefox add-on is built with <span class="caps">HTML</span>/<span class="caps">CSS</span> and Javascript. There is a <code>package.json</code> that contains the meta-data of the add-on that is a generated for you anyway. Your code will mainly goes to the <code>main.js</code> file in the <code>lib</code> folder of your add-on directory. You can put your extra data, such as to the <span class="caps">CSS</span> files, extra javascript libraries, images, etc in the <code>data</code> folder. All these folders are generated automatically with the initialization of the add-on, along with a <code>doc</code> and <code>test</code> folder, which pretty much describe&nbsp;themselves.</p>
 <p>Here is the whole code for the&nbsp;add-on:</p>
 <div class="highlight"><pre><span class="kd">var</span> <span class="nx">contextMenu</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;sdk/context-menu&quot;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">tabs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;sdk/tabs&quot;</span><span class="p">);</span>
@@ -111,30 +90,10 @@ add-on, along with a <code>doc</code> and <code>test</code> folder, which pretty
 </pre></div>
 
 
-<p>As you can see there, there isn&#8217;t much to do. The first two lines are the import statement
-to access some of the browser feature. Skip the <code>script</code> variable for now. Next, the we create
-a new context menu, give it a label, and we declare the context so that the item only shows
-up when there is a something&nbsp;selected.</p>
-<p>Next, we pass the <code>contentScript</code> argument, which defines the behavior of the menu item even 
-further. Many things can be done through the <code>contentScript</code>, such as to scope down the
-context even further, set the click behaviour, etc. The argument takes a string, and we passed
-the <code>script</code> variable as the argument. In this case, the <code>context</code> event is
-are fired just before the context menu is displayed, and we change the label further to add
-the selected text. We also handles the <code>click</code> event, and with it, we call the <code>postMessage</code>
-to pass the the selected text, which we handle with the function passed to the <code>onMessage</code> 
-argument, and in it, we open a new tab with the search&nbsp;<span class="caps">URL</span>.</p>
-<p>As you might imagine, passing the script that defines the behavior of the add-on as a string
-literal isn&#8217;t really nice when script is something a little more complicated. You can pass
-external javascript files to the <code>contentScriptFile</code> argument to accomplish the same thing.
-Although there are several differences in the way the script is executed, but I won&#8217;t go into
-it too much in this post. More on it <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/content-scripts/loading.html">here</a>.</p>
-<p>There is a lot more you can do with the add-on. You can scan through more features available
-on the documentation. There are more examples on the add-ons <span class="caps">SDK</span>&#8217;s <a href="https://github.com/mozilla/addon-sdk">Github</a> repository.
-By the way, the add-on mentioned above is available on <a href="https://github.com/hdra/ff-MDNSearch">Github</a> as well. Also, 
-the add-on we built here is just a simple plugin to show the basics of the Firefox plugin <span class="caps">API</span>,
-not really meant for actual use. It doesn&#8217;t handle plenty of use cases, and it also relies 
-on Google&#8217;s Feeling Lucky version to directly open the first search first result. so 
-I don&#8217;t really recommend you actually using it for anything&nbsp;serious.</p>
+<p>As you can see there, there isn&#8217;t much to do. The first two lines are the import statement to access some of the browser feature. Skip the <code>script</code> variable for now. Next, the we create a new context menu, give it a label, and we declare the context so that the item only shows up when there is a something&nbsp;selected.</p>
+<p>Next, we pass the <code>contentScript</code> argument, which defines the behavior of the menu item even further. Many things can be done through the <code>contentScript</code>, such as to scope down the context even further, set the click behaviour, etc. The argument takes a string, and we passed the <code>script</code> variable as the argument. In this case, the <code>context</code> event is are fired just before the context menu is displayed, and we change the label further to add the selected text. We also handles the <code>click</code> event, and with it, we call the <code>postMessage</code> to pass the the selected text, which we handle with the function passed to the <code>onMessage</code> argument, and in it, we open a new tab with the search&nbsp;<span class="caps">URL</span>.</p>
+<p>As you might imagine, passing the script that defines the behavior of the add-on as a string literal isn&#8217;t really nice when script is something a little more complicated. You can pass external javascript files to the <code>contentScriptFile</code> argument to accomplish the same thing. Although there are several differences in the way the script is executed, but I won&#8217;t go into it too much in this post. More on it <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/content-scripts/loading.html">here</a>.</p>
+<p>There is a lot more you can do with the add-on. You can scan through more features available on the documentation. There are more examples on the add-ons <span class="caps">SDK</span>&#8217;s <a href="https://github.com/mozilla/addon-sdk">Github</a> repository. By the way, the add-on mentioned above is available on <a href="https://github.com/hdra/ff-MDNSearch">Github</a> as well. Also, the add-on we built here is just a simple plugin to show the basics of the Firefox plugin <span class="caps">API</span>, not really meant for actual use. It doesn&#8217;t handle plenty of use cases, and it also relies on Google&#8217;s Feeling Lucky version to directly open the first search first result. so I don&#8217;t really recommend you actually using it for anything&nbsp;serious.</p>
                     </section>
                     <hr/>
                     <aside class="post-meta">

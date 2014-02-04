@@ -59,27 +59,9 @@
                     </header>
 
                     <section class="post-content">
-                        <p>Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just
-create an <code>index.php</code> file, then add another <code>.htaccess</code> file to the root of the site, push, and done.
-In this case, I maintained two separate repositories, one that contains the Pelican project, including
-the configuration file, the build script, etc. The other repositories contains the generated <span class="caps">HTML</span>&nbsp;files.</p>
-<p>Now, I recently wanted to try hosting the site on GitHub Pages. Hosting on GitHub pages requires
-the content of my site to be in the root of <code>gh-pages</code> branch. Of course, this would be simple enough
-if I just keep the project files and the generated <span class="caps">HTML</span> files in separate repositories just like I
-did before, but I would like to keep them in the same repository, and have a build script to do
-everything for&nbsp;me.</p>
-<p>Turns out, it is not that simple to achieve that. The most straightforward way to do this is to 
- create or checkout the <code>gh-pages</code> branch, generate the <span class="caps">HTML</span> files on the same directory, commit, 
-and push as usual. But this would make the <code>gh-pages</code> branch contains some of the project files. 
-Not a big problem, but it just doesn&#8217;t feel too clean of a solution. I also tried other methods,
-but none of them feels satisfactory. Ideally, I wanted to have a solution similar what was done
-with <a href="https://github.com/davisp/ghp-import">ghp-import</a>, but there are some problems that prevents me from using it. I tried looking 
-at the source of the project, in attempting to understand how it works and try to do the same things
-manually, but well, it seems like my Git-fu are insufficient to understand it. In the end, ended up 
-doing the things similar as what outlined <a href="https://gist.github.com/chrisjacob/833223">here</a>. Basially, I am keeping the branches of the 
-same repository in separate directories, but instead of keeping the as a siblings, 
-I made the <code>gh-pages</code> branch as a child of the child directory of the project. Here is the fabric 
-file I used to build the&nbsp;post:</p>
+                        <p>Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just create an <code>index.php</code> file, then add another <code>.htaccess</code> file to the root of the site, push, and done. In this case, I maintained two separate repositories, one that contains the Pelican project, including the configuration file, the build script, etc. The other repositories contains the generated <span class="caps">HTML</span>&nbsp;files.</p>
+<p>Now, I recently wanted to try hosting the site on GitHub Pages. Hosting on GitHub pages requires the content of my site to be in the root of <code>gh-pages</code> branch. Of course, this would be simple enough if I just keep the project files and the generated <span class="caps">HTML</span> files in separate repositories just like I did before, but I would like to keep them in the same repository, and have a build script to do everything for&nbsp;me.</p>
+<p>Turns out, it is not that simple to achieve that. The most straightforward way to do this is to create or checkout the <code>gh-pages</code> branch, generate the <span class="caps">HTML</span> files on the same directory, commit, and push as usual. But this would make the <code>gh-pages</code> branch contains some of the project files. Not a big problem, but it just doesn&#8217;t feel too clean of a solution. I also tried other methods, but none of them feels satisfactory. Ideally, I wanted to have a solution similar what was done with <a href="https://github.com/davisp/ghp-import">ghp-import</a>, but there are some problems that prevents me from using it. I tried looking at the source of the project, in attempting to understand how it works and try to do the same things manually, but well, it seems like my Git-fu are insufficient to understand it. In the end, ended up doing the things similar as what outlined <a href="https://gist.github.com/chrisjacob/833223">here</a>. Basially, I am keeping the branches of the same repository in separate directories, but instead of keeping the as a siblings, I made the <code>gh-pages</code> branch as a child of the child directory of the project. Here is the fabric file I used to build the&nbsp;post:</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">configurations</span> <span class="kn">as</span> <span class="nn">conf</span>
 
@@ -119,11 +101,7 @@ file I used to build the&nbsp;post:</p>
 </pre></div>
 
 
-<p>That seems to work pretty cleanly so far. One problem is when creating a new project and its <code>gh-pages</code>
-branch for the first time. In my case, I dealt with it by creating the a new branch as usual,
-and then deleting the project files in the <code>gh-pages</code> branch manually, but I think it can be done by
-creating an orphan page with the <code>git checkout --orphan gh-pages</code> command as well. Anyway, this 
-needs to be done only once, so it shouldn&#8217;t be too much of a&nbsp;problem.</p>
+<p>That seems to work pretty cleanly so far. One problem is when creating a new project and its <code>gh-pages</code> branch for the first time. In my case, I dealt with it by creating the a new branch as usual, and then deleting the project files in the <code>gh-pages</code> branch manually, but I think it can be done by creating an orphan page with the <code>git checkout --orphan gh-pages</code> command as well. Anyway, this needs to be done only once, so it shouldn&#8217;t be too much of a&nbsp;problem.</p>
                     </section>
                     <hr/>
                     <aside class="post-meta">
