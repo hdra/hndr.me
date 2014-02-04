@@ -3,30 +3,11 @@ Date: 2013-04-26 16:50
 Tags: programming
 
 
-Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just
-create an `index.php` file, then add another `.htaccess` file to the root of the site, push, and done.
-In this case, I maintained two separate repositories, one that contains the Pelican project, including
-the configuration file, the build script, etc. The other repositories contains the generated HTML
-files.
+Previously, I had been hosting this site from Heroku. It was pretty simple to setup, I can just create an `index.php` file, then add another `.htaccess` file to the root of the site, push, and done. In this case, I maintained two separate repositories, one that contains the Pelican project, including the configuration file, the build script, etc. The other repositories contains the generated HTML files.
 
-Now, I recently wanted to try hosting the site on GitHub Pages. Hosting on GitHub pages requires
-the content of my site to be in the root of `gh-pages` branch. Of course, this would be simple enough
-if I just keep the project files and the generated HTML files in separate repositories just like I
-did before, but I would like to keep them in the same repository, and have a build script to do
-everything for me.
+Now, I recently wanted to try hosting the site on GitHub Pages. Hosting on GitHub pages requires the content of my site to be in the root of `gh-pages` branch. Of course, this would be simple enough if I just keep the project files and the generated HTML files in separate repositories just like I did before, but I would like to keep them in the same repository, and have a build script to do everything for me.
 
-Turns out, it is not that simple to achieve that. The most straightforward way to do this is to 
- create or checkout the `gh-pages` branch, generate the HTML files on the same directory, commit, 
-and push as usual. But this would make the `gh-pages` branch contains some of the project files. 
-Not a big problem, but it just doesn't feel too clean of a solution. I also tried other methods,
-but none of them feels satisfactory. Ideally, I wanted to have a solution similar what was done
-with [ghp-import][l2], but there are some problems that prevents me from using it. I tried looking 
-at the source of the project, in attempting to understand how it works and try to do the same things
-manually, but well, it seems like my Git-fu are insufficient to understand it. In the end, ended up 
-doing the things similar as what outlined [here][l1]. Basially, I am keeping the branches of the 
-same repository in separate directories, but instead of keeping the as a siblings, 
-I made the `gh-pages` branch as a child of the child directory of the project. Here is the fabric 
-file I used to build the post:
+Turns out, it is not that simple to achieve that. The most straightforward way to do this is to create or checkout the `gh-pages` branch, generate the HTML files on the same directory, commit, and push as usual. But this would make the `gh-pages` branch contains some of the project files. Not a big problem, but it just doesn't feel too clean of a solution. I also tried other methods, but none of them feels satisfactory. Ideally, I wanted to have a solution similar what was done with [ghp-import][l2], but there are some problems that prevents me from using it. I tried looking at the source of the project, in attempting to understand how it works and try to do the same things manually, but well, it seems like my Git-fu are insufficient to understand it. In the end, ended up doing the things similar as what outlined [here][l1]. Basially, I am keeping the branches of the same repository in separate directories, but instead of keeping the as a siblings, I made the `gh-pages` branch as a child of the child directory of the project. Here is the fabric file I used to build the post:
 
     :::python
     from fabric.api import *
@@ -66,11 +47,7 @@ file I used to build the post:
             local('git commit -m "{0}"'.format(commit_msg))
             local('git push origin gh-pages')
 
-That seems to work pretty cleanly so far. One problem is when creating a new project and its `gh-pages`
-branch for the first time. In my case, I dealt with it by creating the a new branch as usual,
-and then deleting the project files in the `gh-pages` branch manually, but I think it can be done by
-creating an orphan page with the `git checkout --orphan gh-pages` command as well. Anyway, this 
-needs to be done only once, so it shouldn't be too much of a problem.
+That seems to work pretty cleanly so far. One problem is when creating a new project and its `gh-pages` branch for the first time. In my case, I dealt with it by creating the a new branch as usual, and then deleting the project files in the `gh-pages` branch manually, but I think it can be done by creating an orphan page with the `git checkout --orphan gh-pages` command as well. Anyway, this needs to be done only once, so it shouldn't be too much of a problem.
 
 [l1]: https://gist.github.com/chrisjacob/833223
 [l2]: https://github.com/davisp/ghp-import

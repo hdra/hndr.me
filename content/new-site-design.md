@@ -2,21 +2,11 @@ Title: New Site Design!
 Date: 2013-04-13 19:33
 Tags: personal
 
-I finally got to converting the last site design I made to a Pelican theme. The [theme][l1] should
-be in use by the time this post is published. In its current state, I wouldn't say the theme is 
-compeletely finished. I tried to make it responsive to screen size changes, but during my
-testing, I found some problem viewing it in iOS Safari when there is a long line of continuos text
-in the page. For some reason `overflow-wrap: break-word;` doesn't seem to work in it, even though
-it works fine in Chrome and Firefox for Android.
+I finally got to converting the last site design I made to a Pelican theme. The [theme][l1] should be in use by the time this post is published. In its current state, I wouldn't say the theme is compeletely finished. I tried to make it responsive to screen size changes, but during my testing, I found some problem viewing it in iOS Safari when there is a long line of continuos text in the page. For some reason `overflow-wrap: break-word;` doesn't seem to work in it, even though it works fine in Chrome and Firefox for Android.
 
-That aside, the are also a lot of repetition and duplicate codes in the CSS and Jinja2 template.
-The templates in particular aren't very flexible. There are a number of values that needs to be
-specified in the configuration file for it to be usable. Pages also can't be listed 
-the normal way since I turned one of the page template into the index page for my site.
+That aside, the are also a lot of repetition and duplicate codes in the CSS and Jinja2 template. The templates in particular aren't very flexible. There are a number of values that needs to be specified in the configuration file for it to be usable. Pages also can't be listed the normal way since I turned one of the page template into the index page for my site.
 
-All that said, I think it is ready to be put out there. If I sit on it any longer, I am pretty sure
-I would lose interest in it pretty soon. As they say, [ship early, ship often][seso]. Maybe this
-shouldn't even be a version 1, but it is a start.
+All that said, I think it is ready to be put out there. If I sit on it any longer, I am pretty sure I would lose interest in it pretty soon. As they say, [ship early, ship often][seso]. Maybe this shouldn't even be a version 1, but it is a start.
 
 [l1]: https://github.com/hdra/pelican-cait
 [seso]: http://www.codinghorror.com/blog/2009/12/version-1-sucks-but-ship-it-anyway.html

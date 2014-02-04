@@ -2,18 +2,11 @@ Title: My First GitHub Pull Request!
 Date: 2013-04-28 11:44
 Tags: programming
 
-I just had my first pull request! It was a change to the [Pelican themes][l1], where I added
-this [theme][l2] to the directory there. So, yeah, I didn't actually contribute a patch to an
-existing project, it was simply adding my repo to the list of theme.
+I just had my first pull request! It was a change to the [Pelican themes][l1], where I added this [theme][l2] to the directory there. So, yeah, I didn't actually contribute a patch to an existing project, it was simply adding my repo to the list of theme.
 
-I also learned about the whole pull request process itself. Of course, it is not
-that complicated in the first place anyway. Basically it involves forking the source repo,
-create a new branch, make changes on that branch, commit, push to github, and then after the new
-branch is created on github, there will be an option to initiate a pull request there. It is that
-simple.
+I also learned about the whole pull request process itself. Of course, it is not that complicated in the first place anyway. Basically it involves forking the source repo, create a new branch, make changes on that branch, commit, push to github, and then after the new branch is created on github, there will be an option to initiate a pull request there. It is that simple.
 
-I actually drafted this post around a week ago when I sent the pull request, and it just got merged
-to the master branch earlier today, so here I am updating this thing.
+I actually drafted this post around a week ago when I sent the pull request, and it just got merged to the master branch earlier today, so here I am updating this thing.
 
 But, anyway, I got to say, it feels pretty good! and it is also quite a motivation booster for me. :D
 
