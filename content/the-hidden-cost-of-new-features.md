@@ -1,0 +1,29 @@
+Title: The Hidden Costs of New Features
+Date: 2014-06-24 19:42
+Tags: Programming
+
+On my job, I have been working on a product that we have been trying to get to market within this month. There are more-or-less 2 programmers working on this project, an iOS programmer working on an iPad app and an iPhone app, and myself working on the server backend and the data analysis front-end. I said 'more-or-less' because there was another guy working on an Android app, but he currently is working on another project, also, while I do spend the majority of my time working on the project, I am also involved in several other clients projects.
+
+The project is supposed to be launched by the end of this month, but I personally don't think the project is anywhere close to production-ready. Despite this, we keep adding features. The main target market of the product is small business owners, and I do understand why these features might be necessary, but I can't help but feel that we should stop adding features and focus on making the existing features to be ready for production.
+
+I am currently reading a book by [37 Signals, Getting Real](https://gettingreal.37signals.com/). I highly recommend it to anyone who writes software for a living to read it. Its not a technical book, so no need to open up your text editor to try out a code snippet from the book.I haven't finished reading it yet, but the content has been really great so far. It is full of valuable insights on running a software business and designing product. But, the whole fifth chapter on Feature Selection really resonates with me because I have been thinking about what adding features to a software product really means.
+
+One of the hidden cost of a new feature mentioned in the book is feature loop:
+
+>For example, be on the lookout for feature loops (i.e. features that lead to more features). We've had requests to add a meetings tab to Basecamp. Seems simple enough until you examine it closely. Think of all the different items a meetings tab might require: location, time, room, people, email invites, calendar integration, support documentation, etc. That's not to mention that we'd have to change promotional screenshots, tour pages, faq/help pages, the terms of service, and more. Before you know it, a simple idea can snowball into a major headache.
+
+That is exactly what I've been experiencing working on the project. Adding a stock keeping feature leads to inventory features which leads to keeping track of invoices which leads to keeping track of suppliers and so on and so forth.
+
+While that might not seems much, from the technical persepective, adding a feature often involve more than just coding up the feature. Coding up a new feature by itself is not much work, but one thing to keep in mind is that these features rarely work in isolation. That means, programming the feature doesn't only require us to write the code for the new feature, it also means that we need to test it. Not just the new features either, we need to be sure that the few lines of new code doesn't break any existing feature. Those are just code, if the change involve changing the database schema, pulling in new dependencies, or having to coordinate with an additional process that would make things even more complicated.
+
+Especially changes in database schema. The ideal database schema that can accomodate the new feature often aren't backward compatible, it often breaks stuffs in the unexpected places. Also, keeping the backword compatibility while adding hacks on top of hacks to accomodate the new features are even worse, it is basically keeping an active time bomb around.
+
+All these hidden costs adds up, too. Almost like compound interest, you need to make sure not to break existing features when implementing a new one, and when you have added the new feature, that would be one more thing that you need to make sure not to break when adding another feature. All that makes maintaining the code harder. Maintainance doesn't just mean fixing bugs, it also means that while you are fixing a bug, you need to make sure that you don't end up breaking stuff in other place, and do a favor for your future self and make sure the code stays easily modifiable so that future you can do the same thing. Also, while doing all these make sure to keep the code clean and isolated so that you don't end up with a stack of jenga of a code in the first place.
+
+The recent experience makes me think how great would it be if I invested some time to build an automated test infrastructure early in the development process. Of course an automated test won't help you to prevent breaks if the code itself is built like a house of cards, but it does help so that you don't have to manually test all the features by yourself, not to mention that it is not unusual at all for us to miss several parts of the project while performing the test.
+
+So, to summarize up, while working on a software project that doesn't have a clear specification and changes all the time, help your future-self and have an automated test infrastructure. Follow the SOLID principles while writing your code, and keep your classes isolated from each other.
+
+BUT, all of that will not help if new features keep being added all the time. While working on project, with deadlines and features being added and removed all the time, having things break are almost unavoidable. So, as the book says, the best thing is to say No. Keep only the features that are essentials, and make sure these features works really, really well. As mentioned in the book, Steve Jobs once said:
+
+>[Innovation] comes from saying no to 1,000 things to make sure we don't get on the wrong track or try to do too much. We're always thinking about new markets we could enter, but it's only by saying no that you can concentrate on the things that are really important.
