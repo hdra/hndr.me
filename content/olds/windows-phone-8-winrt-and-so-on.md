@@ -1,5 +1,6 @@
 Title: Windows Phone 8, WinRT, and so on.
 Date: 2012-06-24 13:01
+Summary: Some thoughts on the new announcement regarding Windows Phone.
 Tags: rants, windows phone, wp7, wp8
 
 This post is basically a rant. TLDR:

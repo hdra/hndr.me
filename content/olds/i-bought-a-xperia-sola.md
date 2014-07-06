@@ -1,5 +1,6 @@
 Title: I Bought a Xperia Sola
 Date: 2012-07-12 17:40
+Summary: I bought a new phone.
 Tags: android, phone, xperia sola
 
 ![Xperia Sola][sola]

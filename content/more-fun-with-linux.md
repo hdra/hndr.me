@@ -1,5 +1,6 @@
 Title: More fun with Linux
 Date: 2013-06-11 13:04
+Summary: Some stuffs that I did to make working with Linux easier.
 Tags: linux
 
 #Terminal
