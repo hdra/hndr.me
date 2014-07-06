@@ -9,57 +9,31 @@
         <title>    Setting up my Linux to be less ugly
 </title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
-        <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-
-    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
-    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="wrapper">
-<header id="sidebar" class="side-shadow">
-    <hgroup id="site-header">
-        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
-        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
-    </hgroup>
-    <nav>
-        <ul id="nav-links">
-                <li><a href="http://hndr.me/blog">Blog</a></li>
-                <li><a href="http://hndr.me/contact">Contact</a></li>
-                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-        </ul>
-    </nav>
-<footer id="site-info">
-    <p>
-        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
-    </p>
-    <p>
-        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
-    </p>
-</footer></header>
-    <div id="post-container">
-        <ol id="post-list">
-            <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2013-06-01T14:57:00" pubdate>
-                            Sat 01 June 2013
-                        </time>
-                        <a href="http://hndr.me/blog/making-my-new-linux-less-ugly" rel="bookmark"><h1>Setting up my Linux to be less&nbsp;ugly</h1></a>
-                    </header>
+            <div class="container">
 
-                    <section class="post-content">
-                        <p>As I <a href="http://hndr.me/blog/linux-again">decided</a> to setup a new Linux installation that is lightweight, customizable to my taste, can be made look pretty, and of course, usable, I started looking around for the suitable&nbsp;setup.</p>
+<header class="blog-header">
+    <a href="http://hndr.me"><h1>HNDR.ME</h1></a>
+    <p> A nerd pretending as a software engineer. </p>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Setting up my Linux to be less&nbsp;ugly</h1>
+            <p class="date">Written on <time datetime="2013-06-01T14:57:00">Jun 01, 2013</time></p>
+        </header>
+
+        <article>
+            <p>As I <a href="http://hndr.me/blog/linux-again">decided</a> to setup a new Linux installation that is lightweight, customizable to my taste, can be made look pretty, and of course, usable, I started looking around for the suitable&nbsp;setup.</p>
 <p>First thing I need to decide on is which Linux distribution to use. I can either look for something bare bone like the Arch, and then build up everything I need, or I can just take something that is ready to use, like Ubuntu, and take out whatever I don&#8217;t need and replace anything I don&#8217;t like. I am tempted to take the former approach, but looking at some youtube videos on the stuffs I would need to do, there seems to be just way too many things to do before I can even do anything. Even for basic things like network access needs to be setup. So, well, no thanks. Maybe next&nbsp;time.</p>
 <p>I ended up deciding on the distribution I am familiar with, Linux Mint 13 <span class="caps">XFCE</span>. Now, even as it is, the <span class="caps">XFCE</span> distribution is lightweight enough for me to use smoothly. It doesn&#8217;t look bad, and it is very customizable. I was tempted to settle on it, but for some reason, I had frequent crashes during my use with it. Anyway, it is good enough for me to use as a&nbsp;base.</p>
 <p>I had been read a lot about tiling window manager, and has been wanting to try it out. <a href="http://www.xmonad.org">XMonad</a> seems to be the one that is mentioned most frequently, but setting it up seems like a pain. Not to mention the  <span class="caps">500MB</span> I am supposed to download with it. I found another option, <a href="http://www.i3wm.org">i3</a>. And it seems to be a lot easier to setup and use. The configuration is done with plain text file instead of a scripting language like Haskell as is the case with XMonad. People had good things to say about how easy it is to use as well. Once I saw the video demo, I am&nbsp;sold.</p>
@@ -139,12 +113,12 @@
 <p><a href="http://www.flickr.com/photos/hendra2392/8901017483/" title="capt-2013-05-30-114812 by p.hdra, on Flickr"><img src="https://farm6.staticflickr.com/5444/8901017483_1e29ac330a_c.jpg" width="800" height="450" alt="capt-2013-05-30-114812"></a></p>
 <p><a href="http://www.flickr.com/photos/hendra2392/8901630850/" title="capt-2013-05-31-193656 by p.hdra, on Flickr"><img src="https://farm4.staticflickr.com/3724/8901630850_57c45b5fd2_c.jpg" width="800" height="450" alt="capt-2013-05-31-193656"></a></p>
 <p>Next is on setting it up to be more&nbsp;usable!</p>
-                    </section>
-                    <hr/>
-                    <aside class="post-meta">
-                        <p>Category: <a href="http://hndr.me/category/randoms.html">randoms</a></p>
-                    </aside>
-                    <hr/>
+        </article>
+
+        <footer>
+            <p>This article is posted in <a href="http://hndr.me/category/randoms.html">randoms</a>.</p>
+        </footer>
+
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -158,18 +132,29 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-                </article>
-            </li>
-        </ol>
-    </div>
-        </div>
 
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+            <li><a href="mailto:hendra2392@gmail.com">Email</a></li>
+    </ul>
+
+    <p class="disclaimer">Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.</p>
+</footer>
+            </div>
 <script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-        <script src="http://hndr.me/theme/js/main.js"></script>
     </body>
 </html>

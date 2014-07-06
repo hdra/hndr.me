@@ -9,70 +9,43 @@
         <title>    Still Working
 </title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
-        <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-
-    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
-    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="wrapper">
-<header id="sidebar" class="side-shadow">
-    <hgroup id="site-header">
-        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
-        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
-    </hgroup>
-    <nav>
-        <ul id="nav-links">
-                <li><a href="http://hndr.me/blog">Blog</a></li>
-                <li><a href="http://hndr.me/contact">Contact</a></li>
-                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-        </ul>
-    </nav>
-<footer id="site-info">
-    <p>
-        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
-    </p>
-    <p>
-        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
-    </p>
-</footer></header>
-    <div id="post-container">
-        <ol id="post-list">
-            <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2013-04-03T17:16:00" pubdate>
-                            Wed 03 April 2013
-                        </time>
-                        <a href="http://hndr.me/blog/still-working" rel="bookmark"><h1>Still&nbsp;Working</h1></a>
-                    </header>
+            <div class="container">
 
-                    <section class="post-content">
-                        <p>It has been a few weeks since I decided to start blogging again, but well, as usual not much has been done on it. For starter, I initially planned to host it on Heroku, following the tricks outline <a href="http://kennethreitz.org/exposures/static-sites-on-heroku-cedar">here</a>, and it is super simple to setup. I had created a new Heroku app, generated the blog, and pushed the generated content to Heroku in just a few minutes. In another minute, and I had setup the custom domain and had everything working&nbsp;nicely.</p>
+<header class="blog-header">
+    <a href="http://hndr.me"><h1>HNDR.ME</h1></a>
+    <p> A nerd pretending as a software engineer. </p>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Still&nbsp;Working</h1>
+            <p class="date">Written on <time datetime="2013-04-03T17:16:00">Apr 03, 2013</time></p>
+        </header>
+
+        <article>
+            <p>It has been a few weeks since I decided to start blogging again, but well, as usual not much has been done on it. For starter, I initially planned to host it on Heroku, following the tricks outline <a href="http://kennethreitz.org/exposures/static-sites-on-heroku-cedar">here</a>, and it is super simple to setup. I had created a new Heroku app, generated the blog, and pushed the generated content to Heroku in just a few minutes. In another minute, and I had setup the custom domain and had everything working&nbsp;nicely.</p>
 <p>Problem is, even though the site itself is just a bunch of static files, the first time I visited the site, it took a few seconds to load the content, but when I visit it again for the second time, it served the site almost immediately. At first, I thought it was because of the site is cached by the browser, so it loads much quicker, but even when I cleared the browser cache, it still loads the same way. After a bit of googling, I <a href="https://devcenter.heroku.com/articles/dynos">found</a> out that Heroku will turn off the dyno after an hour of inactivity, so everytime I visit the site after a period of idling, the dyno will need to be started again at that time. Not much of a problem, considering I am not even paying for the amazing service that Heroku provide, and there <a href="http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling">ways</a> to get around it anyway. I probably won&#8217;t be using it, since I am still playing around with the hosting options around&nbsp;anyway.</p>
 <p>Other popular service that people use to host their static site seems to be <a href="http://pages.github.com/">Github Pages</a>. After looking around on how to set it up, seems like it is pretty easy to set it up. The Pelican makefile even includes a build option for this setup. The site will be hosted in a repository just like any other git repo, but the site index will need to be on the <code>gh-pages</code> branch. In other words, the content of the site will be open source. Not a problem though, since any webpage that are publicly accessible are basically open source anyway. Maybe I&#8217;ll move the site here after I am done setting the website&nbsp;itself.</p>
 <p>On building the site itself, I just converted some of my old wordpress posts to Markdown, which should be published along with this post. The automatic converter doesn&#8217;t work too well, since many of posts contains some really badly formed markups, so I ended up manually converting the most of posts. I also took the chance to just remove many of the rants/silly posts, not saying that there aren&#8217;t any silly posts left&nbsp;anyway.</p>
 <p>I am still playing around with the pelican configurations and options, on how to setup different static pages, building a theme, etc. Speaking about the theme, I drafted a theme of my&nbsp;own.</p>
 <p><a href="http://www.flickr.com/photos/hendra2392/8615163439/" title="Snap 2013-04-01 at 11.50.50 by p.hdra, on Flickr"><img src="http://farm9.staticflickr.com/8394/8615163439_30ea63f405_c.jpg" width="800" height="788" alt="Screenshot"></a></p>
 <p>Initially I liked it quite a bit, but after leaving it there for a few days, when I came back to work on it again, I found it to be not very attractive anymore. So, no need to say, I scrapped it, and started working from scratch. This time, planning the overall sites, starting from the landing page, static pages, comments, and of course the blog itself. Of course, it won&#8217;t be around anytime soon. For the time being, the default Pelican theme seems more than good enough for&nbsp;me.</p>
-                    </section>
-                    <hr/>
-                    <aside class="post-meta">
-                        <p>Category: <a href="http://hndr.me/category/randoms.html">randoms</a></p>
-                        <p>Tags: <a href="http://hndr.me/tag/personal.html">personal</a>, </p>
-                    </aside>
-                    <hr/>
+        </article>
+
+        <footer>
+            <p>This article is posted in <a href="http://hndr.me/category/randoms.html">randoms</a>.</p>
+        </footer>
+
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -86,18 +59,29 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-                </article>
-            </li>
-        </ol>
-    </div>
-        </div>
 
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+            <li><a href="mailto:hendra2392@gmail.com">Email</a></li>
+    </ul>
+
+    <p class="disclaimer">Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.</p>
+</footer>
+            </div>
 <script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-        <script src="http://hndr.me/theme/js/main.js"></script>
     </body>
 </html>

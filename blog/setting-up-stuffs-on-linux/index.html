@@ -9,57 +9,31 @@
         <title>    Setting up stuffs on Linux
 </title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
-        <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-
-    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
-    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="wrapper">
-<header id="sidebar" class="side-shadow">
-    <hgroup id="site-header">
-        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
-        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
-    </hgroup>
-    <nav>
-        <ul id="nav-links">
-                <li><a href="http://hndr.me/blog">Blog</a></li>
-                <li><a href="http://hndr.me/contact">Contact</a></li>
-                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-        </ul>
-    </nav>
-<footer id="site-info">
-    <p>
-        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
-    </p>
-    <p>
-        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
-    </p>
-</footer></header>
-    <div id="post-container">
-        <ol id="post-list">
-            <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2013-06-14T19:41:00" pubdate>
-                            Fri 14 June 2013
-                        </time>
-                        <a href="http://hndr.me/blog/setting-up-stuffs-on-linux" rel="bookmark"><h1>Setting up stuffs on&nbsp;Linux</h1></a>
-                    </header>
+            <div class="container">
 
-                    <section class="post-content">
-                        <p>My Linux system has been pretty much set up for most things I need, since of course, Linux Mint itself comes with a lot of stuffs such as python, and such. I myself am pretty surprised how much I have settled in. Still, there are still a number of stuffs that I need to add. First of, the utilities that includes stuffs such as gcc, cmake, curl, and all the&nbsp;stuff.</p>
+<header class="blog-header">
+    <a href="http://hndr.me"><h1>HNDR.ME</h1></a>
+    <p> A nerd pretending as a software engineer. </p>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Setting up stuffs on&nbsp;Linux</h1>
+            <p class="date">Written on <time datetime="2013-06-14T19:41:00">Jun 14, 2013</time></p>
+        </header>
+
+        <article>
+            <p>My Linux system has been pretty much set up for most things I need, since of course, Linux Mint itself comes with a lot of stuffs such as python, and such. I myself am pretty surprised how much I have settled in. Still, there are still a number of stuffs that I need to add. First of, the utilities that includes stuffs such as gcc, cmake, curl, and all the&nbsp;stuff.</p>
 <div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">curl</span>
 </pre></div>
 
@@ -125,13 +99,12 @@
 <p>I know I am going to need this sooner or later, but dealing with Java isn&#8217;t just my favorite thing to do. I think the new Android Studio is supposed to make installing the SDKs and Android system images easier without having to deal with eclipse plugins and stuff, but still, removing OpenJDK, installing Oracle-<span class="caps">JDK</span>, and stuff&#8230; later, I&nbsp;guess.</p>
 <h2>Go?</h2>
 <p>I am not sure if I want to install this. The hype around it has been drawing my attention to&nbsp;it.</p>
-                    </section>
-                    <hr/>
-                    <aside class="post-meta">
-                        <p>Category: <a href="http://hndr.me/category/randoms.html">randoms</a></p>
-                        <p>Tags: <a href="http://hndr.me/tag/linux.html">linux</a>, <a href="http://hndr.me/tag/python.html">python</a>, <a href="http://hndr.me/tag/ruby.html">ruby</a>, <a href="http://hndr.me/tag/node.html">node</a>, </p>
-                    </aside>
-                    <hr/>
+        </article>
+
+        <footer>
+            <p>This article is posted in <a href="http://hndr.me/category/randoms.html">randoms</a>.</p>
+        </footer>
+
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -145,18 +118,29 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-                </article>
-            </li>
-        </ol>
-    </div>
-        </div>
 
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+            <li><a href="mailto:hendra2392@gmail.com">Email</a></li>
+    </ul>
+
+    <p class="disclaimer">Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.</p>
+</footer>
+            </div>
 <script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-        <script src="http://hndr.me/theme/js/main.js"></script>
     </body>
 </html>

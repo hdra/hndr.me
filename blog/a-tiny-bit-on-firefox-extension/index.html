@@ -9,57 +9,31 @@
         <title>    A Tiny bit on Firefox Extension
 </title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
-        <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-
-    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
-    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="wrapper">
-<header id="sidebar" class="side-shadow">
-    <hgroup id="site-header">
-        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
-        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
-    </hgroup>
-    <nav>
-        <ul id="nav-links">
-                <li><a href="http://hndr.me/blog">Blog</a></li>
-                <li><a href="http://hndr.me/contact">Contact</a></li>
-                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-        </ul>
-    </nav>
-<footer id="site-info">
-    <p>
-        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
-    </p>
-    <p>
-        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
-    </p>
-</footer></header>
-    <div id="post-container">
-        <ol id="post-list">
-            <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2013-08-20T14:33:00" pubdate>
-                            Tue 20 August 2013
-                        </time>
-                        <a href="http://hndr.me/blog/a-tiny-bit-on-firefox-extension" rel="bookmark"><h1>A Tiny bit on Firefox&nbsp;Extension</h1></a>
-                    </header>
+            <div class="container">
 
-                    <section class="post-content">
-                        <p>I stumbled on <a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/">this</a> article on creating Chrome extension, and really, it seems really simple to do build an extension for the browser. So, I thought what would it take to build the same thing for&nbsp;Firefox?</p>
+<header class="blog-header">
+    <a href="http://hndr.me"><h1>HNDR.ME</h1></a>
+    <p> A nerd pretending as a software engineer. </p>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>A Tiny bit on Firefox&nbsp;Extension</h1>
+            <p class="date">Written on <time datetime="2013-08-20T14:33:00">Aug 20, 2013</time></p>
+        </header>
+
+        <article>
+            <p>I stumbled on <a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/">this</a> article on creating Chrome extension, and really, it seems really simple to do build an extension for the browser. So, I thought what would it take to build the same thing for&nbsp;Firefox?</p>
 <p>It turns out, it is pretty simple as well, but when you are just getting started, find out where to get started aren&#8217;t really straightforward. The getting started documents aren&#8217;t exactly well organized. To start with, there are two different ways to build an add-on for Firefox. The <span class="caps">XUL</span> tool set, and also, the new Add-on <span class="caps">SDK</span>. The <a href="https://addons.mozilla.org/developers/">add-ons developer page</a> highlights the Add-on <span class="caps">SDK</span>, but the links below mostly deal with the <span class="caps">XUL</span> tools. The difference between the two can be found on <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/sdk-vs-xul.html">this page</a>. Basically, the Add-on <span class="caps">SDK</span> is the one that is simpler, the documentation can be found <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/index.html">here</a>.</p>
 <p>Anyway, once you found the documentation, everything should be pretty easy to follow. Mozilla provides <a href="https://builder.addons.mozilla.org/">Add-on Builder</a>, a web-app that allows you to build add-ons for Firefox, but I prefer to download the <span class="caps">SDK</span> to my computer and use my preferred text editor. The <span class="caps">SDK</span> is basically a python environment setup with everything you need to build an add-on, so you would need to have python installed on your computer. Whichever method you chose, the method are basically the&nbsp;same.</p>
 <h2>Building the&nbsp;Add-on</h2>
@@ -94,13 +68,12 @@
 <p>Next, we pass the <code>contentScript</code> argument, which defines the behavior of the menu item even further. Many things can be done through the <code>contentScript</code>, such as to scope down the context even further, set the click behaviour, etc. The argument takes a string, and we passed the <code>script</code> variable as the argument. In this case, the <code>context</code> event is are fired just before the context menu is displayed, and we change the label further to add the selected text. We also handles the <code>click</code> event, and with it, we call the <code>postMessage</code> to pass the the selected text, which we handle with the function passed to the <code>onMessage</code> argument, and in it, we open a new tab with the search&nbsp;<span class="caps">URL</span>.</p>
 <p>As you might imagine, passing the script that defines the behavior of the add-on as a string literal isn&#8217;t really nice when script is something a little more complicated. You can pass external javascript files to the <code>contentScriptFile</code> argument to accomplish the same thing. Although there are several differences in the way the script is executed, but I won&#8217;t go into it too much in this post. More on it <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/content-scripts/loading.html">here</a>.</p>
 <p>There is a lot more you can do with the add-on. You can scan through more features available on the documentation. There are more examples on the add-ons <span class="caps">SDK</span>&#8217;s <a href="https://github.com/mozilla/addon-sdk">Github</a> repository. By the way, the add-on mentioned above is available on <a href="https://github.com/hdra/ff-MDNSearch">Github</a> as well. Also, the add-on we built here is just a simple plugin to show the basics of the Firefox plugin <span class="caps">API</span>, not really meant for actual use. It doesn&#8217;t handle plenty of use cases, and it also relies on Google&#8217;s Feeling Lucky version to directly open the first search first result. so I don&#8217;t really recommend you actually using it for anything&nbsp;serious.</p>
-                    </section>
-                    <hr/>
-                    <aside class="post-meta">
-                        <p>Category: <a href="http://hndr.me/category/randoms.html">randoms</a></p>
-                        <p>Tags: <a href="http://hndr.me/tag/programming.html">Programming</a>, </p>
-                    </aside>
-                    <hr/>
+        </article>
+
+        <footer>
+            <p>This article is posted in <a href="http://hndr.me/category/randoms.html">randoms</a>.</p>
+        </footer>
+
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -114,18 +87,29 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-                </article>
-            </li>
-        </ol>
-    </div>
-        </div>
 
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+            <li><a href="mailto:hendra2392@gmail.com">Email</a></li>
+    </ul>
+
+    <p class="disclaimer">Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.</p>
+</footer>
+            </div>
 <script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-        <script src="http://hndr.me/theme/js/main.js"></script>
     </body>
 </html>

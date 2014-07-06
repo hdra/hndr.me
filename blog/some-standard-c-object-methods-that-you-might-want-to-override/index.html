@@ -9,57 +9,31 @@
         <title>    Some Standard C# Object Methods that you might want to override
 </title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
-        <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-
-    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
-    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="wrapper">
-<header id="sidebar" class="side-shadow">
-    <hgroup id="site-header">
-        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
-        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
-    </hgroup>
-    <nav>
-        <ul id="nav-links">
-                <li><a href="http://hndr.me/blog">Blog</a></li>
-                <li><a href="http://hndr.me/contact">Contact</a></li>
-                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-        </ul>
-    </nav>
-<footer id="site-info">
-    <p>
-        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
-    </p>
-    <p>
-        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
-    </p>
-</footer></header>
-    <div id="post-container">
-        <ol id="post-list">
-            <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2012-05-25T22:22:00" pubdate>
-                            Fri 25 May 2012
-                        </time>
-                        <a href="http://hndr.me/blog/some-standard-c-object-methods-that-you-might-want-to-override" rel="bookmark"><h1>Some Standard C# Object Methods that you might want to&nbsp;override</h1></a>
-                    </header>
+            <div class="container">
 
-                    <section class="post-content">
-                        <p>Alright, I’ll get it straight to the point, since this is just a note to
+<header class="blog-header">
+    <a href="http://hndr.me"><h1>HNDR.ME</h1></a>
+    <p> A nerd pretending as a software engineer. </p>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Some Standard C# Object Methods that you might want to&nbsp;override</h1>
+            <p class="date">Written on <time datetime="2012-05-25T22:22:00">May 25, 2012</time></p>
+        </header>
+
+        <article>
+            <p>Alright, I’ll get it straight to the point, since this is just a note to
 myself&nbsp;anyway,</p>
 <p>First one, the ToString()&nbsp;:</p>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">YourClass</span><span class="p">{</span>
@@ -107,13 +81,12 @@ return false, even if they have the same properties values, unless they
 actually refer to the same object. The reason to override this method
 instead of creating a new one, is the same as the reason to override the
 ToString() method I mentioned&nbsp;above.</p>
-                    </section>
-                    <hr/>
-                    <aside class="post-meta">
-                        <p>Category: <a href="http://hndr.me/category/olds.html">olds</a></p>
-                        <p>Tags: <a href="http://hndr.me/tag/c.html">C#</a>, <a href="http://hndr.me/tag/programming.html">programming</a>, </p>
-                    </aside>
-                    <hr/>
+        </article>
+
+        <footer>
+            <p>This article is posted in <a href="http://hndr.me/category/olds.html">olds</a>.</p>
+        </footer>
+
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -127,18 +100,29 @@ ToString() method I mentioned&nbsp;above.</p>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-                </article>
-            </li>
-        </ol>
-    </div>
-        </div>
 
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+            <li><a href="mailto:hendra2392@gmail.com">Email</a></li>
+    </ul>
+
+    <p class="disclaimer">Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.</p>
+</footer>
+            </div>
 <script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-        <script src="http://hndr.me/theme/js/main.js"></script>
     </body>
 </html>

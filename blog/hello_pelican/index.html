@@ -9,66 +9,40 @@
         <title>    Hello, Pelican
 </title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
-        <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-
-    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
-    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="wrapper">
-<header id="sidebar" class="side-shadow">
-    <hgroup id="site-header">
-        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
-        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
-    </hgroup>
-    <nav>
-        <ul id="nav-links">
-                <li><a href="http://hndr.me/blog">Blog</a></li>
-                <li><a href="http://hndr.me/contact">Contact</a></li>
-                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-        </ul>
-    </nav>
-<footer id="site-info">
-    <p>
-        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
-    </p>
-    <p>
-        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
-    </p>
-</footer></header>
-    <div id="post-container">
-        <ol id="post-list">
-            <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2013-03-15T13:19:00" pubdate>
-                            Fri 15 March 2013
-                        </time>
-                        <a href="http://hndr.me/blog/hello_pelican" rel="bookmark"><h1>Hello,&nbsp;Pelican</h1></a>
-                    </header>
+            <div class="container">
 
-                    <section class="post-content">
-                        <p>Well, it has been a while since I posted anything or do anything with my website for that matter. I think I haven&#8217;t posted anything since I moved to wordpress.com, but well, its time to start playing&nbsp;again.</p>
+<header class="blog-header">
+    <a href="http://hndr.me"><h1>HNDR.ME</h1></a>
+    <p> A nerd pretending as a software engineer. </p>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Hello,&nbsp;Pelican</h1>
+            <p class="date">Written on <time datetime="2013-03-15T13:19:00">Mar 15, 2013</time></p>
+        </header>
+
+        <article>
+            <p>Well, it has been a while since I posted anything or do anything with my website for that matter. I think I haven&#8217;t posted anything since I moved to wordpress.com, but well, its time to start playing&nbsp;again.</p>
 <p>So, again, I moved almost everything. Hosting, domain, and also the blogging platform. I have been wanting to try out some of the static site generator for a while now. The most popular one seems to be <a href="https://github.com/mojombo/jekyll">Jekyll</a>. It is built on Ruby, and seems like a lot of people are using it. Problem is, it is kind of a pain to setup on Windows, and I wanted to be able to built things for it, or at least my own theme for my blog, and my knowledge of Ruby doesn&#8217;t go too far beyond the Hello World. So I continued my search, this time, specifically looking for a static site generator built on something that I can program in, maybe it is C#, Javascript, <span class="caps">PHP</span>, or of course&nbsp;Python.</p>
 <p>And indeed I found quite a lot of awesome projects for Python. The most famous one seems to be <a href="https://github.com/hyde/hyde">Hyde</a>. One problem though, the documentation seems to be severely lacking. I went through the website for almost an hour, and I barely have any idea on how to use and customize it. Maybe I&#8217;ll take another look at it when my Python skills have&nbsp;improved.</p>
 <p>Then, I found <a href="http:///www.github.com/getpelican">Pelican</a>. It is also written in Python, and it&#8217;s <a href="http://docs.getpelican.com">documentation</a> is just delightful. It shows you how to get started easily, and also how to customized it as needed. Simply awesome. It is also super easy to setup. There is also a Make configuration file that can be used to automate a bunch of stuffs, but the basic commands are easy enough to use. There is a also a script to import data from other blogging platforms, which maybe I&#8217;ll take a look at&nbsp;later.</p>
-                    </section>
-                    <hr/>
-                    <aside class="post-meta">
-                        <p>Category: <a href="http://hndr.me/category/randoms.html">randoms</a></p>
-                    </aside>
-                    <hr/>
+        </article>
+
+        <footer>
+            <p>This article is posted in <a href="http://hndr.me/category/randoms.html">randoms</a>.</p>
+        </footer>
+
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -82,18 +56,29 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-                </article>
-            </li>
-        </ol>
-    </div>
-        </div>
 
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+            <li><a href="mailto:hendra2392@gmail.com">Email</a></li>
+    </ul>
+
+    <p class="disclaimer">Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.</p>
+</footer>
+            </div>
 <script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-        <script src="http://hndr.me/theme/js/main.js"></script>
     </body>
 </html>

@@ -9,57 +9,31 @@
         <title>    Setting up Development Environment with tmux
 </title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-            <link rel="stylesheet" href="http://hndr.me/theme/css/normalize.css">
-        <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://hndr.me/theme/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://hndr.me/theme/css/main.css">
-
-    <link rel="stylesheet" href="http://hndr.me/theme/css/blog.css">
-    <link rel="stylesheet" href="http://hndr.me/theme/css/github.css">
-        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="hndr (dot) me Atom Feed" />
-        <script src="http://hndr.me/theme/js/vendor/modernizr-2.6.2.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="wrapper">
-<header id="sidebar" class="side-shadow">
-    <hgroup id="site-header">
-        <a id="site-title" href="http://hndr.me"><h1><i class="icon-coffee"></i> hndr (dot) me</h1></a>
-        <p id="site-desc"> My blog. Consists of mostly broken english and rubbish </p>
-    </hgroup>
-    <nav>
-        <ul id="nav-links">
-                <li><a href="http://hndr.me/blog">Blog</a></li>
-                <li><a href="http://hndr.me/contact">Contact</a></li>
-                <li><a href="http://hndr.me/pages/projects">Projects</a></li>
-        </ul>
-    </nav>
-<footer id="site-info">
-    <p>
-        Proudly powered by <a href="http://getpelican.com/" target="pelican">Pelican</a> and <a href="http://python.org/" target="python">Python</a>. Theme by <a href="https://github.com/hdra/pelican-cait" target="github">hndr</a>.
-    </p>
-    <p>
-        Textures by <a href="http://subtlepatterns.com/" target="subtlepatterns">Subtle Pattern</a>. Font Awesome by <a href="http://fortawesome.github.io/Font-Awesome/" target="github">Dave Grandy</a>.
-    </p>
-</footer></header>
-    <div id="post-container">
-        <ol id="post-list">
-            <li>
-                <article class="post-entry">
-                    <header class="entry-header">
-                        <time class="post-time" datetime="2013-07-09T16:02:00" pubdate>
-                            Tue 09 July 2013
-                        </time>
-                        <a href="http://hndr.me/blog/setting-up-development-environment-with-tmux" rel="bookmark"><h1>Setting up Development Environment with&nbsp;tmux</h1></a>
-                    </header>
+            <div class="container">
 
-                    <section class="post-content">
-                        <p>I recently just finished up my bachelor studies, and as I wait for the the convocation, I find myself not knowing what to work on. So,  between tying up loose ends with my scholarship sponsor, trying to score a freelance projects, and wasting time watching <span class="caps">TV</span> series, I spent my time playing around with various web front-end frameworks and libraries without any particular aims. In doing this I ended up creating a bunch of throw-away projects, and I switch around between them randomly quite often. Often, I would have to run several commands to get everything up and running again, which would be easy if it involves only starting up an editor, but most of the time, I would have to type the same commands many times when I start working on a project. Of course, this doesn&#8217;t only apply to this particular situation of me experimenting around with various tools, even when working on a more &#8220;serious&#8221; project, I can benefit from automating the setup of the development&nbsp;environment.</p>
+<header class="blog-header">
+    <a href="http://hndr.me"><h1>HNDR.ME</h1></a>
+    <p> A nerd pretending as a software engineer. </p>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Setting up Development Environment with&nbsp;tmux</h1>
+            <p class="date">Written on <time datetime="2013-07-09T16:02:00">Jul 09, 2013</time></p>
+        </header>
+
+        <article>
+            <p>I recently just finished up my bachelor studies, and as I wait for the the convocation, I find myself not knowing what to work on. So,  between tying up loose ends with my scholarship sponsor, trying to score a freelance projects, and wasting time watching <span class="caps">TV</span> series, I spent my time playing around with various web front-end frameworks and libraries without any particular aims. In doing this I ended up creating a bunch of throw-away projects, and I switch around between them randomly quite often. Often, I would have to run several commands to get everything up and running again, which would be easy if it involves only starting up an editor, but most of the time, I would have to type the same commands many times when I start working on a project. Of course, this doesn&#8217;t only apply to this particular situation of me experimenting around with various tools, even when working on a more &#8220;serious&#8221; project, I can benefit from automating the setup of the development&nbsp;environment.</p>
 <p>The first idea that came to my thought is simply write a batch script to start the tools that I need, but I realize that this won&#8217;t work well, since most of the tools that I are long running processes, such as a web server, or maybe <span class="caps">CSS</span> pre-compiler set to watch for changes in my project. Also, the log messages that these tools produce on the terminal are things that I would prefer to see. So, I would need a something that can help me to manage several terminal processes easily. The first thing that came to mind is <a href="http://www.gnu.org/software/screen/"><span class="caps">GNU</span> Screen</a>.</p>
 <p>I read about terminal multiplexer and their use before, but this is the first time I thought of a use for them myself. So, I read around trying to look for how to use <code>screen</code> to do the things I need, and it seems like there is a superior alternative to screen, which is <a href="http://tmux.sourceforge.net/">tmux</a>, so I switched my focus to it&nbsp;instead.</p>
 <p>So, what tmux does is basically it allows me to easily run multiple programs in a single shell session , switch between them, and manage them from the parent terminal. It is almost like a terminal emulator within your terminal. Perfect for what I&nbsp;needed.</p>
@@ -95,13 +69,12 @@
 
 <p>I am sure I don&#8217;t need to explain that file. It stores the configuration of the environment in an easy to write (and read) format, and you can start it with <code>mux project-name</code> and it will create the session you need with the layout you need. You can read more about it in the project&#8217;s <span class="caps">README</span> file. Tmuxinator obviously make something that make our job easier, even easier, but there is one caveat though. As you probably have noticed, tmuxinator is written in Ruby, and that means the tmux session it create will be a child process of Ruby, instead of your shell. You can read more what does this means <a href="http://natedickson.com/blog/2013/05/10/from-the-desk-of-captain-obvious-tmuxinator-vs-scripted-configurations/">here</a>.</p>
 <p>Obviously, tmux is powerful tools that can be used for more than just automating environment setup, I myself am still in discovering its capabilities. Search around for more information on customizing and using it, and of course, the <code>man</code> page of the tmux itself is a great source of&nbsp;information.</p>
-                    </section>
-                    <hr/>
-                    <aside class="post-meta">
-                        <p>Category: <a href="http://hndr.me/category/randoms.html">randoms</a></p>
-                        <p>Tags: <a href="http://hndr.me/tag/programming.html">programming</a>, </p>
-                    </aside>
-                    <hr/>
+        </article>
+
+        <footer>
+            <p>This article is posted in <a href="http://hndr.me/category/randoms.html">randoms</a>.</p>
+        </footer>
+
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -115,18 +88,29 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-                </article>
-            </li>
-        </ol>
-    </div>
-        </div>
 
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+            <li><a href="mailto:hendra2392@gmail.com">Email</a></li>
+    </ul>
+
+    <p class="disclaimer">Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.</p>
+</footer>
+            </div>
 <script>
     var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-        <script src="http://hndr.me/theme/js/main.js"></script>
     </body>
 </html>
