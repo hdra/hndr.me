@@ -4,15 +4,17 @@ from __future__ import unicode_literals
 
 
 AUTHOR = u'Hendra'
-SITENAME = u"hndr (dot) me"
-SITESUBTITLE = u"My blog. Consists of mostly broken english and rubbish"
+SITENAME = u"HNDR.ME"
+SITESUBTITLE = u"A nerd pretending as a software engineer."
 TIMEZONE = "Asia/Kuala_Lumpur"
 
 DEFAULT_CATEGORY = 'randoms'
 DEFAULT_DATE_FORMAT = '%a %d %B %Y'
 DEFAULT_DATE = 'fs'
 
-THEME = "themes/Cait"
+SUMMARY_MAX_LENGTH = 15
+
+THEME = "themes/pelican-cid"
 TYPOGRIFY = True
 
 OUTPUT_PATH = 'output'
@@ -34,22 +36,15 @@ DISQUS_SITENAME = 'hndrblog'
 GOOGLE_ANALYTICS = 'UA-40075063-1'
 
 USE_CUSTOM_MENU = True
-CUSTOM_MENUITEMS = (('Blog', INDEX_URL),
-                    ('Contact', 'contact'),
-                    ('Projects', page_dir+'/projects'))
+CUSTOM_MENUITEMS = (('Blog', INDEX_URL),)
 
 SOCIAL = (('twitter', 'https://twitter.com/_hdra'),
-          ('google-plus', 'https://plus.google.com/118295715125687342506'),
           ('github', 'https://github.com/hdra'),)
 
 CONTACT_EMAIL = "hendra2392@gmail.com"
 CONTACTS = (('github', 'https://github.com/hdra'),
             ('twitter', 'https://twitter.com/_hdra'),)
 
-# STATIC_PATHS = (('extra/favicon.ico', 'favicon.ico'),
-#                  ('extra/humans.txt', 'humans.txt'),
-#                  ('extra/CNAME', 'CNAME'),
-#                  ('extra/robots.txt', 'robots.txt'),)
 
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
