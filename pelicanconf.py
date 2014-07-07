@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Hendra'
 SITENAME = u"HNDR.ME"
-SITESUBTITLE = u"A nerd pretending as a software engineer."
+SITESUBTITLE = u"A nerd pretending to be a software engineer."
 TIMEZONE = "Asia/Kuala_Lumpur"
 
 DEFAULT_CATEGORY = 'Journals'
