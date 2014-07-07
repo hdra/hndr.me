@@ -8,7 +8,7 @@ SITENAME = u"HNDR.ME"
 SITESUBTITLE = u"A nerd pretending as a software engineer."
 TIMEZONE = "Asia/Kuala_Lumpur"
 
-DEFAULT_CATEGORY = 'randoms'
+DEFAULT_CATEGORY = 'Journals'
 DEFAULT_DATE_FORMAT = '%a %d %B %Y'
 DEFAULT_DATE = 'fs'
 
