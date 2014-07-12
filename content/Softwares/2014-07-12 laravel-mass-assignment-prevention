@@ -1,0 +1,99 @@
+Title: Laravel Mass Assignment Protection - Blacklist V.S. Whitelist
+Date: 2014-07-12 18:65
+Tags: laravel, programming
+Summary: Difference between using whitelist and blacklist to prevent mass-assignment vulnerability in Laravel.
+
+*tldr*: Use whitelist instead of blacklist. Laravel will attempt to mass-assign all attributes that aren’t in the blacklist, include properties that aren’t present in the table, causing SQL error.
+
+In Laravel (At least on version 4.2.6), there is a convenient method to insert data into the database.
+
+     $user = new User(Input::all());
+
+So, the line of code above will take all of the form data and assign them to the `User` model’s attributes. This means that if we don’t put in any safe guard, there is a possibility that someone could modify the request data and add in attributes that we don’t wan’t them to change. This could includes things like user’s roles and permissions, ids, or any other sensitive data. Of course, we could just assign the attributes one-by-one, but that would make our code a lot more verbose.
+
+Fortunately, Laravel provide two easy ways to safeguard against this kind of mass assignment vulnerability. Either specify a list of fields that can be mass assigned (whitelist), or specify a list of fields that can’t be mass assigned (blacklist). While it seems like the two do the same thing, there are some subtle differences that could cause a bit of confusion.
+
+Say, we got this table of User:
+
+     Schema::create(‘User', function($table)
+     {
+          $table->increments('id');
+          $table->string('name');
+          $table->string('email');
+          $table->unsignedInteger(‘role');
+     });
+
+Say we want to protect the `role` field from being mass-assignment, so, there are two ways to do this in the `User` model. We can either specify a `guarded` property to specify a list of fields that we want to exclude from mass-assignment:
+
+     class User extends Eloquent{
+          public $timestamps = false;
+          protected $guarded = ['role'];
+     }
+
+Or we can specify a `fillable` property to specify a list of fields that we want to allow for mass-assignment:
+
+     class User extends Eloquent{
+          public $timestamps = false;
+          protected $fillable = ['name', 'email'];
+     }
+
+While you would most probably wouldn’t notice any difference, but let's take a look at the Laravel’s `Model.php` source code. First, the code that perform the mass assignment operation.
+
+     public function fill(array $attributes)
+     {
+          $totallyGuarded = $this->totallyGuarded();
+
+          foreach ($this->fillableFromArray($attributes) as $key => $value)
+          {
+               $key = $this->removeTableFromKey($key);
+
+               if ($this->isFillable($key))
+               {
+                    $this->setAttribute($key, $value);
+               }
+               elseif ($totallyGuarded)
+               {
+                    throw new MassAssignmentException($key);
+               }
+          }
+
+          return $this;
+     }
+
+We can see that the code loop through the list fillable attributes via the `fillableFromArray` method, so let’s take a look at it.
+
+     protected function fillableFromArray(array $attributes)
+     {
+          if (count($this->fillable) > 0 && ! static::$unguarded)
+          {
+               return array_intersect_key($attributes, array_flip($this->fillable));
+          }
+
+          return $attributes;
+     }
+
+The method check if we have any value in the `fillable` property, and if so, return a list of properties inside the `attributes` variable that intersect with the `fillable` array, else simply return the `attributes` itself. This means if we have a `fillable` property defined for our model, the mass assignment will not process that attributes that aren’t specified in the `fillable` property.
+
+So, let’s move on to how Laravel guards the attributes in the `guarded` property. Let’s go back to the `fill` method. We can see that for every attributes, the method will check if the key is fillable by calling the `isFillable` method.
+
+     public function isFillable($key)
+     {
+          if (static::$unguarded) return true;
+
+          if (in_array($key, $this->fillable)) return true;
+
+          if ($this->isGuarded($key)) return false;
+
+          return empty($this->fillable) && ! starts_with($key, '_');
+     }
+
+     public function isGuarded($key)
+     {
+          return in_array($key, $this->guarded) || $this->guarded == array('*');
+     }
+
+if the key is not listed in the `fillable` property,  it will call another method `isGuarded`, that checks if the key is specified in the `guarded` property.
+
+This means, if `fillable` is not specified, and the key is not listed in the `guarded` property, the framework will assume that the key can be safely mass-assigned. Sound perfectly fine and should be expected, but when we include a property that is not a field of the table, it will cause an error, because the framework will try to insert a data into a column that doesn’t exists. The same problem will not occur if you use a while list since the framework will only process the keys that are in the array.
+
+In conclusion, the best way to protect against mass-assignment vulnerability is to use the whitelist instead of the blacklist. From a security standpoint, it is better to explicitly specify the things that you want to allow, and it also wouldn’t cause Laravel to try and insert the a non-existing field into the database.
