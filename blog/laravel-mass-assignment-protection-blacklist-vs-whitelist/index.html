@@ -38,94 +38,108 @@
         </header>
 
         <article>
-            <p><em>tldr</em>: Use whitelist instead of blacklist. Laravel will attempt to mass-assign all attributes that aren’t in the blacklist, include properties that aren’t present in the table, causing <span class="caps">SQL</span>&nbsp;error.</p>
+            <p><em><span class="caps">TLDR</span></em>: Use whitelist instead of blacklist. Laravel will attempt to mass-assign all attributes that aren’t in the blacklist, include properties that aren’t present in the table, causing <span class="caps">SQL</span>&nbsp;error.</p>
 <p>In Laravel (At least on version 4.2.6), there is a convenient method to insert data into the&nbsp;database.</p>
-<div class="highlight"><pre> <span class="err">$</span><span class="n">user</span> <span class="o">=</span> <span class="n">new</span> <span class="n">User</span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">all</span><span class="p">());</span>
+<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+ <span class="c1">// ...</span>
+ <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">());</span>
 </pre></div>
 
 
 <p>So, the line of code above will take all of the form data and assign them to the <code>User</code> model’s attributes. This means that if we don’t put in any safe guard, there is a possibility that someone could modify the request data and add in attributes that we don’t wan’t them to change. This could includes things like user’s roles and permissions, ids, or any other sensitive data. Of course, we could just assign the attributes one-by-one, but that would make our code a lot more&nbsp;verbose.</p>
 <p>Fortunately, Laravel provide two easy ways to safeguard against this kind of mass assignment vulnerability. Either specify a list of fields that can be mass assigned (whitelist), or specify a list of fields that can’t be mass assigned (blacklist). While it seems like the two do the same thing, there are some subtle differences that could cause a bit of&nbsp;confusion.</p>
-<p>Say, we got this table of&nbsp;User:</p>
-<div class="highlight"><pre> <span class="nx">Schema</span><span class="o">::</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$table</span><span class="p">)</span>
+<p>For example, we got this table of&nbsp;User:</p>
+<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+ <span class="c1">// ...</span>
+ <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$table</span><span class="p">)</span>
  <span class="p">{</span>
-      <span class="nx">$table</span><span class="o">-&gt;</span><span class="nx">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
-      <span class="nx">$table</span><span class="o">-&gt;</span><span class="nx">string</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
-      <span class="nx">$table</span><span class="o">-&gt;</span><span class="nx">string</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">);</span>
-      <span class="nx">$table</span><span class="o">-&gt;</span><span class="nx">unsignedInteger</span><span class="p">(</span><span class="err">‘</span><span class="nx">role</span><span class="err">&#39;</span><span class="p">);</span>
+      <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+      <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+      <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">);</span>
+      <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">unsignedInteger</span><span class="p">(</span><span class="err">‘</span><span class="nx">role</span><span class="err">&#39;</span><span class="p">);</span>
  <span class="p">});</span>
 </pre></div>
 
 
 <p>Say we want to protect the <code>role</code> field from being mass-assignment, so, there are two ways to do this in the <code>User</code> model. We can either specify a <code>guarded</code> property to specify a list of fields that we want to exclude from&nbsp;mass-assignment:</p>
-<div class="highlight"><pre> <span class="n">class</span> <span class="n">User</span> <span class="n">extends</span> <span class="n">Eloquent</span><span class="p">{</span>
-      <span class="n">public</span> <span class="err">$</span><span class="n">timestamps</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-      <span class="n">protected</span> <span class="err">$</span><span class="n">guarded</span> <span class="o">=</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">role</span><span class="err">&#39;</span><span class="p">];</span>
+<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+ <span class="c1">// ...</span>
+ <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Eloquent</span><span class="p">{</span>
+      <span class="k">public</span> <span class="nv">$timestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+      <span class="k">protected</span> <span class="nv">$guarded</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">];</span>
  <span class="p">}</span>
 </pre></div>
 
 
 <p>Or we can specify a <code>fillable</code> property to specify a list of fields that we want to allow for&nbsp;mass-assignment:</p>
-<div class="highlight"><pre> <span class="n">class</span> <span class="n">User</span> <span class="n">extends</span> <span class="n">Eloquent</span><span class="p">{</span>
-      <span class="n">public</span> <span class="err">$</span><span class="n">timestamps</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-      <span class="n">protected</span> <span class="err">$</span><span class="n">fillable</span> <span class="o">=</span> <span class="p">[</span><span class="err">&#39;</span><span class="n">name</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">email</span><span class="err">&#39;</span><span class="p">];</span>
+<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+ <span class="c1">// ...</span>
+ <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Eloquent</span><span class="p">{</span>
+      <span class="k">public</span> <span class="nv">$timestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+      <span class="k">protected</span> <span class="nv">$fillable</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">];</span>
  <span class="p">}</span>
 </pre></div>
 
 
 <p>While you would most probably wouldn’t notice any difference, but let&#8217;s take a look at the Laravel’s <code>Model.php</code> source code. First, the code that perform the mass assignment&nbsp;operation.</p>
-<div class="highlight"><pre> <span class="kr">public</span> <span class="kd">function</span> <span class="nx">fill</span><span class="p">(</span><span class="nx">array</span> <span class="nx">$attributes</span><span class="p">)</span>
+<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+ <span class="c1">// ...</span>
+ <span class="k">public</span> <span class="k">function</span> <span class="nf">fill</span><span class="p">(</span><span class="k">array</span> <span class="nv">$attributes</span><span class="p">)</span>
  <span class="p">{</span>
-      <span class="nx">$totallyGuarded</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">totallyGuarded</span><span class="p">();</span>
+      <span class="nv">$totallyGuarded</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">totallyGuarded</span><span class="p">();</span>
 
-      <span class="nx">foreach</span> <span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">fillableFromArray</span><span class="p">(</span><span class="nx">$attributes</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">$key</span> <span class="o">=&gt;</span> <span class="nx">$value</span><span class="p">)</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fillableFromArray</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span>
       <span class="p">{</span>
-           <span class="nx">$key</span> <span class="o">=</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">removeTableFromKey</span><span class="p">(</span><span class="nx">$key</span><span class="p">);</span>
+           <span class="nv">$key</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">removeTableFromKey</span><span class="p">(</span><span class="nv">$key</span><span class="p">);</span>
 
-           <span class="k">if</span> <span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">isFillable</span><span class="p">(</span><span class="nx">$key</span><span class="p">))</span>
+           <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isFillable</span><span class="p">(</span><span class="nv">$key</span><span class="p">))</span>
            <span class="p">{</span>
-                <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">setAttribute</span><span class="p">(</span><span class="nx">$key</span><span class="p">,</span> <span class="nx">$value</span><span class="p">);</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
            <span class="p">}</span>
-           <span class="nx">elseif</span> <span class="p">(</span><span class="nx">$totallyGuarded</span><span class="p">)</span>
+           <span class="k">elseif</span> <span class="p">(</span><span class="nv">$totallyGuarded</span><span class="p">)</span>
            <span class="p">{</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="nx">MassAssignmentException</span><span class="p">(</span><span class="nx">$key</span><span class="p">);</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nx">MassAssignmentException</span><span class="p">(</span><span class="nv">$key</span><span class="p">);</span>
            <span class="p">}</span>
       <span class="p">}</span>
 
-      <span class="k">return</span> <span class="nx">$this</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
  <span class="p">}</span>
 </pre></div>
 
 
 <p>We can see that the code loop through the list fillable attributes via the <code>fillableFromArray</code> method, so let’s take a look at&nbsp;it.</p>
-<div class="highlight"><pre> <span class="kr">protected</span> <span class="kd">function</span> <span class="nx">fillableFromArray</span><span class="p">(</span><span class="nx">array</span> <span class="nx">$attributes</span><span class="p">)</span>
+<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+ <span class="c1">// ...</span>
+ <span class="k">protected</span> <span class="k">function</span> <span class="nf">fillableFromArray</span><span class="p">(</span><span class="k">array</span> <span class="nv">$attributes</span><span class="p">)</span>
  <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">count</span><span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">fillable</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="kr">static</span><span class="o">::</span><span class="nx">$unguarded</span><span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fillable</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="k">static</span><span class="o">::</span><span class="nv">$unguarded</span><span class="p">)</span>
       <span class="p">{</span>
-           <span class="k">return</span> <span class="nx">array_intersect_key</span><span class="p">(</span><span class="nx">$attributes</span><span class="p">,</span> <span class="nx">array_flip</span><span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">fillable</span><span class="p">));</span>
+           <span class="k">return</span> <span class="nb">array_intersect_key</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">,</span> <span class="nb">array_flip</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fillable</span><span class="p">));</span>
       <span class="p">}</span>
 
-      <span class="k">return</span> <span class="nx">$attributes</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nv">$attributes</span><span class="p">;</span>
  <span class="p">}</span>
 </pre></div>
 
 
 <p>The method check if we have any value in the <code>fillable</code> property, and if so, return a list of properties inside the <code>attributes</code> variable that intersect with the <code>fillable</code> array, else simply return the <code>attributes</code> itself. This means if we have a <code>fillable</code> property defined for our model, the mass assignment will not process that attributes that aren’t specified in the <code>fillable</code> property.</p>
 <p>So, let’s move on to how Laravel guards the attributes in the <code>guarded</code> property. Let’s go back to the <code>fill</code> method. We can see that for every attributes, the method will check if the key is fillable by calling the <code>isFillable</code> method.</p>
-<div class="highlight"><pre> <span class="kr">public</span> <span class="kd">function</span> <span class="nx">isFillable</span><span class="p">(</span><span class="nx">$key</span><span class="p">)</span>
+<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+ <span class="c1">// ...</span>
+ <span class="k">public</span> <span class="k">function</span> <span class="nf">isFillable</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span>
  <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="kr">static</span><span class="o">::</span><span class="nx">$unguarded</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$unguarded</span><span class="p">)</span> <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
 
-      <span class="k">if</span> <span class="p">(</span><span class="nx">in_array</span><span class="p">(</span><span class="nx">$key</span><span class="p">,</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">fillable</span><span class="p">))</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fillable</span><span class="p">))</span> <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
 
-      <span class="k">if</span> <span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">isGuarded</span><span class="p">(</span><span class="nx">$key</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isGuarded</span><span class="p">(</span><span class="nv">$key</span><span class="p">))</span> <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
 
-      <span class="k">return</span> <span class="nx">empty</span><span class="p">(</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">fillable</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="nx">starts_with</span><span class="p">(</span><span class="nx">$key</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fillable</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="nx">starts_with</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">);</span>
  <span class="p">}</span>
 
- <span class="kr">public</span> <span class="kd">function</span> <span class="nx">isGuarded</span><span class="p">(</span><span class="nx">$key</span><span class="p">)</span>
+ <span class="k">public</span> <span class="k">function</span> <span class="nf">isGuarded</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span>
  <span class="p">{</span>
-      <span class="k">return</span> <span class="nx">in_array</span><span class="p">(</span><span class="nx">$key</span><span class="p">,</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">guarded</span><span class="p">)</span> <span class="o">||</span> <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">guarded</span> <span class="o">==</span> <span class="nx">array</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">guarded</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">guarded</span> <span class="o">==</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">);</span>
  <span class="p">}</span>
 </pre></div>
 
