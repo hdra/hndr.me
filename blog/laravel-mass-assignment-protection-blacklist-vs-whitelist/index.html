@@ -38,7 +38,7 @@
         </header>
 
         <article>
-            <p><em><span class="caps">TLDR</span></em>: Use whitelist instead of blacklist. Laravel will attempt to mass-assign all attributes that aren’t in the blacklist, include properties that aren’t present in the table, causing <span class="caps">SQL</span>&nbsp;error.</p>
+            <p><em><span class="caps">TLDR</span></em>: Use whitelist instead of blacklist. Laravel will attempt to mass-assign all attributes that aren’t in the blacklist, including properties/columns that aren’t on the table, causing <span class="caps">SQL</span>&nbsp;error.</p>
 <p>In Laravel (At least on version 4.2.6), there is a convenient method to insert data into the&nbsp;database.</p>
 <div class="highlight"><pre> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
@@ -46,7 +46,7 @@
 </pre></div>
 
 
-<p>So, the line of code above will take all of the form data and assign them to the <code>User</code> model’s attributes. This means that if we don’t put in any safe guard, there is a possibility that someone could modify the request data and add in attributes that we don’t wan’t them to change. This could includes things like user’s roles and permissions, ids, or any other sensitive data. Of course, we could just assign the attributes one-by-one, but that would make our code a lot more&nbsp;verbose.</p>
+<p>So, the line of code above will take all of the form data and assign them to the <code>User</code> model’s attributes. This means that if we don’t put in any safe guard, anyone could modify the request parameters and set any value for any of the property. This could includes things like user’s roles and permissions, ids, or any other sensitive data. Of course, we could just assign the attributes one-by-one, but that would make our code a lot more&nbsp;verbose.</p>
 <p>Fortunately, Laravel provide two easy ways to safeguard against this kind of mass assignment vulnerability. Either specify a list of fields that can be mass assigned (whitelist), or specify a list of fields that can’t be mass assigned (blacklist). While it seems like the two do the same thing, there are some subtle differences that could cause a bit of&nbsp;confusion.</p>
 <p>For example, we got this table of&nbsp;User:</p>
 <div class="highlight"><pre> <span class="cp">&lt;?php</span>
@@ -146,7 +146,7 @@
 
 <p>if the key is not listed in the <code>fillable</code> property,  it will call another method <code>isGuarded</code>, that checks if the key is specified in the <code>guarded</code> property.</p>
 <p>This means, if <code>fillable</code> is not specified, and the key is not listed in the <code>guarded</code> property, the framework will assume that the key can be safely mass-assigned. Sound perfectly fine and should be expected, but when we include a property that is not a field of the table, it will cause an error, because the framework will try to insert a data into a column that doesn’t exists. The same problem will not occur if you use a while list since the framework will only process the keys that are in the&nbsp;array.</p>
-<p>In conclusion, the best way to protect against mass-assignment vulnerability is to use the whitelist instead of the blacklist. From a security standpoint, it is better to explicitly specify the things that you want to allow, and it also wouldn’t cause Laravel to try and insert the a non-existing field into the&nbsp;database.</p>
+<p>In conclusion, the best way to protect against mass-assignment vulnerability is to use the whitelist instead of the blacklist. From a security standpoint, it is better to explicitly specify the things that you want to allow anyway, and it also wouldn’t make Laravel try and insert the a non-existing field into the&nbsp;database.</p>
         </article>
 
         <footer>
