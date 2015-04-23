@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>    On Strict Domain Design or Pragmatism
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+            <div class="container">
+
+<header class="blog-header">
+    <h1><a href="http://hndr.me">HNDR.ME</a></h1>
+    <p> A nerd pretending to be a software engineer. </p>
+    <nav>
+        <a href="http://hndr.me/blog">INDEX</a>
+        <a href="http://hndr.me/archives">ARCHIVES</a>
+        <a href="http://hndr.me/categories">CATEGORIES</a>
+    </nav>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>On Strict Domain Design or&nbsp;Pragmatism</h1>
+            <p class="date">Written on <time datetime="2015-04-10T19:22:00">Apr 10, 2015</time></p>
+        </header>
+
+        <article>
+            <p>When I first learned <a href="http://laravel.com/">Laravel</a>, I was exposed to <a href="http://martinfowler.com/eaaCatalog/repository.html">various</a> <a href="http://en.wikipedia.org/wiki/Domain-driven_design">software design</a> <a href="http://en.wikipedia.org/wiki/Event-driven_programming">patterns</a> <a href="http://stackoverflow.com/questions/3058/what-is-inversion-of-control">and</a> <a href="http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29">principles</a> that was so widely used in the community.  Sure, I had known many of them before, but being involved in the community where such things were so strongly agreed to be the &#8220;one true way&#8221; affected how I think about writing software as well. I was sold to the idea of Domain Driven&nbsp;Design.</p>
+<p>I read tons of <a href="https://sites.google.com/site/unclebobconsultingllc/home/articles">uncle bob articles</a> and watched  dozens of <a href="https://www.youtube.com/watch?v=3uV3ngl1Z8g">youtube videos</a> on the topic, and I always tried to model the business rules of the software perfectly in the code I write. I started using repositories for every business logic code, and having even a bit of business logic scattered around the controllers code bugs me to no end. I made sure the program can&#8217;t go into a state that violates any of the business rules, and of course, I made sure to <a href="https://www.youtube.com/watch?v=WpkDN78P884">separate the domain code from the implementation detail</a> so that I can easily switch out the caching or authentication&nbsp;code.</p>
+<p>It all went quite well, but I soon realized that sometimes, the frameworks that are meant to help you write code faster and be more productive are starting to get in the way of modelling the business domain. This shouldn&#8217;t be too surprising as trying to model the general purpose framework code into your domain would require you to bend a number of features provided by the framework to your needs. Like most people, the active record <span class="caps">ORM</span> is the first that gets in the way of separating the business logic and the database storage detail, and soon enough I&#8217;m wishing for a micro framework where I can pick and choose the components to be&nbsp;used.</p>
+<p>The second thing I realized is that writing a product for a startup company, the business logic change very rapidly, and you need to deliver these changes very quickly to the customers. While it is a good idea to model the software very closely to the domain, you would have to tear down the model and build it over again very often, and soon enough the abstractions are going to leak here and there. Of course there is the side effect on your morale for having to tear down the model that you have designed so&nbsp;toughtfully.</p>
+<p>Another unintended side effect is on the barrier of entry to the code. Sure, the code written this way can help managing a pretty high level of complexity, and there is a certain sense of elegance to code, but it is not going to be the easiest code to understand. A new team member would have to learn and understand how the code is structured to begin contributing, and he/she would also need to adhere to the practise or the code would be a mess of a chimera code in no&nbsp;time.</p>
+<p>After a while, I started to question myself whats the point of adhering to these practise. It certainly doesn&#8217;t make my job easier. Then I remembered one of the reasoning that convinced me to buy into the idea; It is the only way to manage the complexity of the program. And sure, I still agree with that sentiment, but is my program really that complex&nbsp;though?</p>
+<p>I recently listened to the <a href="http://fullstackradio.com/episodes/9/">an episode of the Full Stack Radio</a>, where <span class="caps">DHH</span>, the creator of Ruby on Rails talked about how most web applications is not all that unique or complex, and when I take a second to think about it, I believe it is actually is&nbsp;true.</p>
+<p>The conclusion that I came to is most applications, or at least the applications that I write, are not all that complex at all. Most of the time, there is no need to write your code in such a round about way just to keep the code within the model. It is perfectly fine to call your active record model from your controller method. The code you write exists to achieve a certain goal, which most of the time is to make things easier for its user. There is no point in blindly adhering to a practise if it gets in your way of achieving that&nbsp;goal. </p>
+<p>Of course, it doesn&#8217;t mean that there is no need to put any thought into the code you write, or that Domain Driven Design have no place in writing software. It is still important to keep your code <span class="caps">DRY</span>, and if the code to instansiate that new blog post with tags and categories is being repeated many times at different places, it is still a good idea to extract them to a post repository class. It is important not only to know all these software engineering principles, but also to understand why and when they should be&nbsp;applied.</p>
+<p>Earlier I mentioned about frameworks getting in your way of modelling your domain, which should&#8217;ve been expected, since if you&#8217;re going to write your code to strictly adhere to your domain logic, you would do better starting from scratch and pick up the libraries you need as you go along. Understanding this logic really made me appreciate the thoughts that went into frameworks such as Laravel and RoR even&nbsp;more.</p>
+<p>Having learned my lessons, I came to appreciate beautiful clean, simple code even if the code is a 5-line active record model being saved from a controller&nbsp;method.</p>
+        </article>
+
+        <footer>
+            <p>This entry is posted in <a href="http://hndr.me/category/softwares.html">Softwares</a>.</p>
+        </footer>
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</h3>
+            </a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</h3>
+            </a></li>
+    <script type="text/javascript">
+        // JS ROT13 by http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/
+        document.write( "<yv><n uers=\"znvygb:uraqen2392@tznvy.pbz\" ery=\"absbyybj\">Rznvy</n></yv>".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+    </script>
+    </ul>
+
+    <p class="disclaimer">
+        Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.
+    </p>
+</footer>
+            </div>
+<script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+    </body>
+</html>
