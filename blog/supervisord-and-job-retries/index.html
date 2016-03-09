@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>    Supervisord and Job Retries
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic|Merriweather:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+            <div class="container">
+
+<header class="blog-header">
+    <h1><a href="http://hndr.me">HNDR.ME</a></h1>
+    <p> A nerd pretending to be a software engineer. </p>
+    <nav>
+        <a href="http://hndr.me/blog">INDEX</a>
+        <a href="http://hndr.me/archives">ARCHIVES</a>
+        <a href="http://hndr.me/categories">CATEGORIES</a>
+    </nav>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Supervisord and Job&nbsp;Retries</h1>
+            <p class="date">Written on <time datetime="2016-03-09T22:59:00">Mar 09, 2016</time></p>
+        </header>
+
+        <article>
+            <p>When you are deploying an application to production that includes a background queue,
+it is important to also setup a process monitor to make sure the worker stays&nbsp;up.</p>
+<p>One of the most popular process monitor is <a href="http://supervisord.org/">supervisord</a>, which also happens
+to be the one included in the <a href="https://laravel.com/docs/master/queues#supervisor-configuration">Laravel guide on queues</a> which
+makes it pretty much the default process monitor on a Laravel&nbsp;deployment.</p>
+<p>Many background queue libraries, including the one that came with Laravel
+will automatically retry jobs that fails due to an exception. They usually also include
+a way to control how many times the jobs should be retried before giving up and
+moving it to the failed jobs&nbsp;store.</p>
+<div class="highlight"><pre><span class="n">php</span> <span class="n">artisan</span> <span class="n">queue</span><span class="o">:</span><span class="n">listen</span> <span class="n">connection</span><span class="o">-</span><span class="n">name</span> <span class="o">--</span><span class="n">tries</span><span class="o">=</span><span class="mi">3</span>
+</pre></div>
+
+
+<p>One thing to keep in mind is that supervisord also includes a way to control the 
+<a href="http://supervisord.org/configuration.html">maximum number of attempts to start a process after serial crashes</a>.
+When this limit is reached, it will stop trying to restart the process and the process will be put into 
+the <code>FATAL</code> state. This number is controlled via the configuration entry called <code>startretries</code>, and it defaults to <code>3</code>.</p>
+<p>In most cases, one wouldn&#8217;t need to change this setting. But, if you set the number of retries
+on job queue to be larger than <code>3</code>, you need to make sure that the <code>startretries</code> is also
+increased accordingly. If the <code>startretries</code> is set to a number that is less than the <code>tries</code> attempt,
+it could cause an issue where <em>the supervisord retry limit is reached before the job retries
+limit is reached</em>. When this happens, the process is put into a <code>FATAL</code> state, and the worker process
+doesn&#8217;t get started anymore, <em>halting the entire job queue</em>.</p>
+<div class="highlight"><pre><span class="k">[program:laravel-worker]</span>
+<span class="na">process_name</span><span class="o">=</span><span class="s">%(program_name)s_%(process_num)02d</span>
+<span class="na">command</span><span class="o">=</span><span class="s">php /home/forge/app.com/artisan queue:work sqs --sleep=3 --tries=5</span>
+<span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">startretries</span><span class="o">=</span><span class="s">5</span>
+<span class="na">user</span><span class="o">=</span><span class="s">forge</span>
+<span class="na">numprocs</span><span class="o">=</span><span class="s">8</span>
+<span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
+<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/home/forge/app.com/worker.log</span>
+</pre></div>
+
+
+<p>So, remember, make sure to keep the queue worker tries equal to or smaller than the supervisord&#8217;s <code>startretries</code>
+to make sure the failing jobs get moved to the failed jobs queue before they halt the entire job queue.
+Of course this won&#8217;t help if the queue is full of jobs that keeps failing, but in that scenario, you 
+should really take a look at your queue worker code&nbsp;anyway.</p>
+        </article>
+
+        <footer>
+            <p>This entry is posted in <a href="http://hndr.me/category/softwares.html">Softwares</a>.</p>
+        </footer>
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</a></li>
+    <script type="text/javascript">
+        // JS ROT13 by http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/
+        document.write( "<yv><n uers=\"znvygb:uraqen2392@tznvy.pbz\" ery=\"absbyybj\">Rznvy</n></yv>".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+    </script>
+    </ul>
+
+    <p class="disclaimer">
+        Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.
+    </p>
+</footer>
+            </div>
+<script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+    </body>
+</html>
