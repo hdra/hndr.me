@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>HNDR.ME</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/all.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2016-03-09T22:59:00+08:00</updated><entry><title>Supervisord and Job Retries</title><link href="http://hndr.me/blog/supervisord-and-job-retries" rel="alternate"></link><updated>2016-03-09T22:59:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2016-03-09:blog/supervisord-and-job-retries</id><summary type="html">&lt;p&gt;When you are deploying an application to production that includes a background queue,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>HNDR.ME</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/all.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2016-07-02T18:23:00+08:00</updated><entry><title>What You Should Learn as a Programmer</title><link href="http://hndr.me/blog/what-you-should-learn-as-a-programmer" rel="alternate"></link><updated>2016-07-02T18:23:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2016-07-02:blog/what-you-should-learn-as-a-programmer</id><summary type="html">&lt;p&gt;In the past few years, there has been an explosion in the availability of various tools, database,
+frameworks, libraries, and so on, all of which are supposed to help you write software better and faster.
+For someone who is starting to learn programming, all these noise can be very confusing. Even for an experienced
+programmer, all these stuff can be very distracting as well. The much discussed Javascript fatigue is a symptom
+of the problem.  Unfortunately, I&amp;#8217;m not here to offer an anwer on how to deal with all that. I simply
+would like to point out some of the things that you should be aware of while wading through all these&amp;nbsp;noise.&lt;/p&gt;
+&lt;p&gt;The content of this post is inspired by this talk by Ross Tuck below, which you should definitely check out.
+He talked about a lot of the things that I have been thinking, and he was able to present those ideas more
+eloquently than I&amp;nbsp;could.&lt;/p&gt;
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/nTi8jw86-_s" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;So, here is the thing; no one really knows what is the &amp;#8220;best&amp;#8221; tools or framework out there is. Like most things
+in software engineering, the answer to such question is, and has always been &amp;#8220;it depends&amp;#8221;. The best tools for the
+job depends on what the problem you need to solve, the constraints you face, what you already know, and so on, and
+any claims of &amp;#8220;The One True Way&amp;#8221; should be faced with a generous amount of&amp;nbsp;scepticism.&lt;/p&gt;
+&lt;p&gt;For better or worse, the startup booms that has been going on in the past few years has made the field of software very lucrative,
+and there are money to be made in selling the tools that supports the making of software. One side effect of that is,
+like what Ross said in his talk, developers are becoming more of both the target and the &lt;strong&gt;source&lt;/strong&gt; of marketing.
+The problem is, many developers (myself included) like to think of themselves as being immune to marketing, and that
+all their decisions are made based on objective evaluations of strengths and weaknesses of the available options.
+&amp;#8220;Meritocracy&amp;#8221; definitely ranks pretty high up there among programmers&amp;#8217; favorite&amp;nbsp;words.&lt;/p&gt;
+&lt;p&gt;There are many factors that come into consideration when you&amp;#8217;re trying to make a decision on which tools/framework
+to use for a project. What you already know, what are the requirements of the project, and of course, the popularity
+of the tool. That last one is becoming more and more of a deciding factor nowadays, which may sounds a little weird.
+Shouldn&amp;#8217;t a tool be picked for what it is able to provide? Why does it matter how popular it is? The fact is, the popularity of a tool does matter. More popular tools would have more libraries written around it,
+and there will also be more resources that can help you learn&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;What makes a software popular though? And what does it mean for a software tool to be&amp;nbsp;popular?&lt;/p&gt;
+&lt;p&gt;It is not necessarily by being the &amp;#8220;best&amp;#8221;. Not necessarily by being the choice of many software developers to build
+their projects with. It is because there are people who want them to be popular, and they put the effort to make
+them so. So, yes, marketing. Not that marketing is bad thing, just that this means that just because
+something is popular, doesn&amp;#8217;t mean it is also&amp;nbsp;good.&lt;/p&gt;
+&lt;p&gt;Once a software reach a certain level of popularity, much of the marketing for the tool comes from the users (the programmers)
+themselves. Most are doing this because they have benefitted from the tool and would like to
+promote the software because they truly believe these tools would help other people write better software faster
+and easier. Some though, may simply jumped on the bandwagon because it can be profitable. Being positioned
+as an expert on a popular software tool can be lucrative. From speaking engagement, workshops opportunity,
+knowledge product sales, or job offers are some of the things that can come from such position. Which is one of the
+driver of the hypes surrounding software&amp;nbsp;tools.&lt;/p&gt;
+&lt;p&gt;So, how does one wade through all these hype-driven software development resources? Unfortunately, I don&amp;#8217;t have
+an answer. I am still trying to figure it out myself. But that is something that you need to keep in mind
+while consuming all these abundance of learning resources. If someone often speaks of a software tool
+in absolute term, being overly critical of any criticism of the tool, or dismissing the value of learning
+and taking ideas from alternative tools, you should assume that person may have objectives other than
+sharing knowldge and promote good software engineering&amp;nbsp;ideas.&lt;/p&gt;
+&lt;p&gt;Learn the basics, and know your tools well. Try not to get distracted by all the hype-noise because that is
+all there is; noise.  All that noise aren&amp;#8217;t necessarily the gospel of the software development that you must learn.
+People often have their own incentives for driving up the hype, and you won&amp;#8217;t be missing out on anything
+important by ignoring&amp;nbsp;them.&lt;/p&gt;</summary><category term="programming"></category><category term="learning"></category><category term="rant"></category></entry><entry><title>Supervisord and Job Retries</title><link href="http://hndr.me/blog/supervisord-and-job-retries" rel="alternate"></link><updated>2016-03-09T22:59:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2016-03-09:blog/supervisord-and-job-retries</id><summary type="html">&lt;p&gt;When you are deploying an application to production that includes a background queue,
 it is important to also setup a process monitor to make sure the worker stays&amp;nbsp;up.&lt;/p&gt;
 &lt;p&gt;One of the most popular process monitor is &lt;a href="http://supervisord.org/"&gt;supervisord&lt;/a&gt;, which also happens
 to be the one included in the &lt;a href="https://laravel.com/docs/master/queues#supervisor-configuration"&gt;Laravel guide on queues&lt;/a&gt; which

@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>HNDR.ME</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/journals.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2014-06-01T20:44:00+08:00</updated><entry><title>Random Updates</title><link href="http://hndr.me/blog/random-updates" rel="alternate"></link><updated>2014-06-01T20:44:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2014-06-01:blog/random-updates</id><summary type="html">&lt;p&gt;Starting from this month, I have been officially in my current job for 6 months, which also means I just got out of the probation period for the company. During the past 6 months, I have been doing a bunch of various things, and also learned a lot of stuffs that I have never really thought&amp;nbsp;about.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>HNDR.ME</title><link href="http://hndr.me/" rel="alternate"></link><link href="http://hndr.me/feeds/journals.atom.xml" rel="self"></link><id>http://hndr.me/</id><updated>2016-07-02T18:23:00+08:00</updated><entry><title>What You Should Learn as a Programmer</title><link href="http://hndr.me/blog/what-you-should-learn-as-a-programmer" rel="alternate"></link><updated>2016-07-02T18:23:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2016-07-02:blog/what-you-should-learn-as-a-programmer</id><summary type="html">&lt;p&gt;In the past few years, there has been an explosion in the availability of various tools, database,
+frameworks, libraries, and so on, all of which are supposed to help you write software better and faster.
+For someone who is starting to learn programming, all these noise can be very confusing. Even for an experienced
+programmer, all these stuff can be very distracting as well. The much discussed Javascript fatigue is a symptom
+of the problem.  Unfortunately, I&amp;#8217;m not here to offer an anwer on how to deal with all that. I simply
+would like to point out some of the things that you should be aware of while wading through all these&amp;nbsp;noise.&lt;/p&gt;
+&lt;p&gt;The content of this post is inspired by this talk by Ross Tuck below, which you should definitely check out.
+He talked about a lot of the things that I have been thinking, and he was able to present those ideas more
+eloquently than I&amp;nbsp;could.&lt;/p&gt;
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/nTi8jw86-_s" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;So, here is the thing; no one really knows what is the &amp;#8220;best&amp;#8221; tools or framework out there is. Like most things
+in software engineering, the answer to such question is, and has always been &amp;#8220;it depends&amp;#8221;. The best tools for the
+job depends on what the problem you need to solve, the constraints you face, what you already know, and so on, and
+any claims of &amp;#8220;The One True Way&amp;#8221; should be faced with a generous amount of&amp;nbsp;scepticism.&lt;/p&gt;
+&lt;p&gt;For better or worse, the startup booms that has been going on in the past few years has made the field of software very lucrative,
+and there are money to be made in selling the tools that supports the making of software. One side effect of that is,
+like what Ross said in his talk, developers are becoming more of both the target and the &lt;strong&gt;source&lt;/strong&gt; of marketing.
+The problem is, many developers (myself included) like to think of themselves as being immune to marketing, and that
+all their decisions are made based on objective evaluations of strengths and weaknesses of the available options.
+&amp;#8220;Meritocracy&amp;#8221; definitely ranks pretty high up there among programmers&amp;#8217; favorite&amp;nbsp;words.&lt;/p&gt;
+&lt;p&gt;There are many factors that come into consideration when you&amp;#8217;re trying to make a decision on which tools/framework
+to use for a project. What you already know, what are the requirements of the project, and of course, the popularity
+of the tool. That last one is becoming more and more of a deciding factor nowadays, which may sounds a little weird.
+Shouldn&amp;#8217;t a tool be picked for what it is able to provide? Why does it matter how popular it is? The fact is, the popularity of a tool does matter. More popular tools would have more libraries written around it,
+and there will also be more resources that can help you learn&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;What makes a software popular though? And what does it mean for a software tool to be&amp;nbsp;popular?&lt;/p&gt;
+&lt;p&gt;It is not necessarily by being the &amp;#8220;best&amp;#8221;. Not necessarily by being the choice of many software developers to build
+their projects with. It is because there are people who want them to be popular, and they put the effort to make
+them so. So, yes, marketing. Not that marketing is bad thing, just that this means that just because
+something is popular, doesn&amp;#8217;t mean it is also&amp;nbsp;good.&lt;/p&gt;
+&lt;p&gt;Once a software reach a certain level of popularity, much of the marketing for the tool comes from the users (the programmers)
+themselves. Most are doing this because they have benefitted from the tool and would like to
+promote the software because they truly believe these tools would help other people write better software faster
+and easier. Some though, may simply jumped on the bandwagon because it can be profitable. Being positioned
+as an expert on a popular software tool can be lucrative. From speaking engagement, workshops opportunity,
+knowledge product sales, or job offers are some of the things that can come from such position. Which is one of the
+driver of the hypes surrounding software&amp;nbsp;tools.&lt;/p&gt;
+&lt;p&gt;So, how does one wade through all these hype-driven software development resources? Unfortunately, I don&amp;#8217;t have
+an answer. I am still trying to figure it out myself. But that is something that you need to keep in mind
+while consuming all these abundance of learning resources. If someone often speaks of a software tool
+in absolute term, being overly critical of any criticism of the tool, or dismissing the value of learning
+and taking ideas from alternative tools, you should assume that person may have objectives other than
+sharing knowldge and promote good software engineering&amp;nbsp;ideas.&lt;/p&gt;
+&lt;p&gt;Learn the basics, and know your tools well. Try not to get distracted by all the hype-noise because that is
+all there is; noise.  All that noise aren&amp;#8217;t necessarily the gospel of the software development that you must learn.
+People often have their own incentives for driving up the hype, and you won&amp;#8217;t be missing out on anything
+important by ignoring&amp;nbsp;them.&lt;/p&gt;</summary><category term="programming"></category><category term="learning"></category><category term="rant"></category></entry><entry><title>Random Updates</title><link href="http://hndr.me/blog/random-updates" rel="alternate"></link><updated>2014-06-01T20:44:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2014-06-01:blog/random-updates</id><summary type="html">&lt;p&gt;Starting from this month, I have been officially in my current job for 6 months, which also means I just got out of the probation period for the company. During the past 6 months, I have been doing a bunch of various things, and also learned a lot of stuffs that I have never really thought&amp;nbsp;about.&lt;/p&gt;
 &lt;p&gt;Anyway, the main reason I am writing this post right now is simple: I am procrastinating. I have several conference videos that I wanted to watch, and also several libraries and frameworks that I want to try out, but for some reason, my mind keeps drifting away. This week, three developers I work with left the company, one of which is the person who mentored me during my internship with them. I have known about the departure a few weeks prior, and I didn&amp;#8217;t actually thought about it much, but it turns out, the departure of these colleagues does affect me quite a bit. I thought I am used to changes, but it seems like I&amp;#8217;m not. It made me think about stuffs. Stuffs that are hard to put in writing, stuffs that are uncomfortable to think&amp;nbsp;about.&lt;/p&gt;
 &lt;p&gt;Anyway, most of my work now revolves around the back end, I had to learn a bunch of stuffs on server administration, distributed architecture, and I also ended up using the Laravel &lt;span class="caps"&gt;PHP&lt;/span&gt; framework a lot. Which is actually very fun and exciting, until something blows up and data are lost, that is. Anyway, all that stuffs that I learned during the period makes for a lot of materials that I wanted to write up, but for various reasons (mainly me being lazy), I never ended up getting to it. While using the static site generator is excellent in terms of simplicity, it also meant that I have to open up my text editor and generate a new site even just to post a short draft. I considered migrating my site to &lt;a href="https://ghost.org/"&gt;Ghost&lt;/a&gt;, but having to manage a server pushed me sticking with Pelican. What I do now is to write my drafts in Evernote, and then paste them here when it is ready, which isn&amp;#8217;t exactly a seamless process considering Evernote&amp;#8217;s lacking support for Markdown. That being said, I do hope it would help me to write&amp;nbsp;more.&lt;/p&gt;</summary></entry><entry><title>2014 - Thoughts</title><link href="http://hndr.me/blog/2014-thoughts" rel="alternate"></link><updated>2014-01-29T14:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2014-01-29:blog/2014-thoughts</id><summary type="html">&lt;p&gt;It&amp;#8217;s rather late for a new year posting, considering we are almost entering the second month 2014 by now, but well, what can I say, I haven&amp;#8217;t got much time to write the past few months, and now I am only writing because I&amp;#8217;m stuck waiting for the next ferry back to my hometown that isn&amp;#8217;t coming for 2&amp;nbsp;hours.&lt;/p&gt;
 &lt;p&gt;2014 is pretty special for myself. New years are usually a chance to start something for most people, a fresh start, where any unpleasant things that has happened happened &amp;#8220;last year&amp;#8221;. That said, for most people, these words are simply figurative speech. While the calendar has indeed changed, most people&amp;#8217;s live didn&amp;#8217;t, and life still goes on as usual. I myself have never really celebrated new year as anything other than a chance to get together with friends and do some catching&amp;nbsp;up.&lt;/p&gt;
