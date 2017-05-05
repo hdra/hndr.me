@@ -34,7 +34,7 @@
 
         <header>
             <h1>Setting up Development Environment with&nbsp;Tmux</h1>
-            <p class="date">Written on <time datetime="2013-07-09T16:02:00">Jul 09, 2013</time></p>
+            <p class="date">Written on <time datetime="2013-07-09T16:02:00+08:00">Jul 09, 2013</time></p>
         </header>
 
         <article>
@@ -43,10 +43,10 @@
 <p>I read about terminal multiplexer and their use before, but this is the first time I thought of a use for them myself. So, I read around trying to look for how to use <code>screen</code> to do the things I need, and it seems like there is a superior alternative to screen, which is <a href="http://tmux.sourceforge.net/">tmux</a>, so I switched my focus to it&nbsp;instead.</p>
 <p>So, what tmux does is basically it allows me to easily run multiple programs in a single shell session , switch between them, and manage them from the parent terminal. It is almost like a terminal emulator within your terminal. Perfect for what I&nbsp;needed.</p>
 <p>In most of my experiment projects, I usually have at least python web server, compass watch, and livereload server running. Instead of starting the one by one, with tmux, I automate it, and at the same time have them arranged neatly in their own window/ pane. I can start a new tmux session, label it, and detach from it with <code>tmux new-session -s my-dev -d</code>. I can also pass a new command for it to run. For example, I want it to create a new v-split pane and run <code>top</code> in it, I can just enter <code>tmux split-window -v -t my-dev "top"</code>. Awesome. For example, to create a tmux session with the setup consisting of python web server, livereload server, etc I mentioned above, I can just run these&nbsp;script:</p>
-<div class="highlight"><pre><span class="n">tmux</span> <span class="n">new</span><span class="o">-</span><span class="n">session</span> <span class="o">-</span><span class="n">s</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="o">-</span><span class="n">d</span> <span class="s">&quot;python -m SimpleHTTPServer 8899&quot;</span>
-<span class="n">tmux</span> <span class="n">split</span><span class="o">-</span><span class="n">window</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="s">&quot;compass watch&quot;</span>
-<span class="n">tmux</span> <span class="n">split</span><span class="o">-</span><span class="n">window</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="s">&quot;guard&quot;</span>
-<span class="n">tmux</span> <span class="n">select</span><span class="o">-</span><span class="n">layout</span> <span class="o">-</span><span class="n">t</span> <span class="n">my</span><span class="o">-</span><span class="n">dev</span> <span class="n">tiled</span>
+<div class="highlight"><pre><span></span>tmux new-session -s my-dev -d &quot;python -m SimpleHTTPServer 8899&quot;
+tmux split-window -v -t my-dev &quot;compass watch&quot;
+tmux split-window -v -t my-dev &quot;guard&quot;
+tmux select-layout -t my-dev tiled
 </pre></div>
 
 
@@ -56,19 +56,19 @@
 </a></p>
 <p>Of course, If you prefer stay inside tmux, you can just leave out the <code>-d</code> flag. You can also start a new editor inside it, create an empty tab for you run other commands on, almost anything that you can do on a terminal,&nbsp;automated.</p>
 <p>That is awesome. But, you can automate it even further, and make your life even easier. <a href="https://github.com/aziz/tmuxinator">Tmuxinator</a> is a tool that allows you to create and manage tmux session easily. You create project with <code>mux new project-name</code>, and open the config with <code>mux open project-name</code> (<code>mux</code> is an alias for tmuxinator). The config will look something like&nbsp;this:</p>
-<div class="highlight"><pre><span class="cp"># ~/.tmuxinator/project-name.yml</span>
+<div class="highlight"><pre><span></span># ~/.tmuxinator/project-name.yml
 
-<span class="nl">project_name:</span> <span class="n">project</span><span class="o">-</span><span class="n">name</span>
-<span class="nl">project_root:</span> <span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">project</span><span class="o">-</span><span class="n">name</span>
-<span class="nl">tabs:</span>
-  <span class="o">-</span> <span class="n">editor</span><span class="o">:</span> <span class="n">vim</span>
-  <span class="o">-</span> <span class="n">logs</span><span class="o">:</span>
-        <span class="nl">layout:</span> <span class="n">even</span><span class="o">-</span><span class="n">vertical</span>
-        <span class="nl">panes:</span>
-            <span class="o">-</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">SimpleHTTPServer</span>
-            <span class="o">-</span> <span class="n">compass</span> <span class="n">watch</span>
-            <span class="o">-</span> <span class="n">guard</span>
-  <span class="o">-</span> <span class="n">shell</span><span class="o">:</span> <span class="err">#</span><span class="n">empty</span><span class="p">,</span> <span class="n">run</span> <span class="n">plain</span> <span class="n">shell</span>
+project_name: project-name
+project_root: ~/project/project-name
+tabs:
+  - editor: vim
+  - logs:
+        layout: even-vertical
+        panes:
+            - python -m SimpleHTTPServer
+            - compass watch
+            - guard
+  - shell: #empty, run plain shell
 </pre></div>
 
 

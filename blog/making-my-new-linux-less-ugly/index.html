@@ -34,7 +34,7 @@
 
         <header>
             <h1>Setting Up My Linux to be Less&nbsp;Ugly</h1>
-            <p class="date">Written on <time datetime="2013-06-01T14:57:00">Jun 01, 2013</time></p>
+            <p class="date">Written on <time datetime="2013-06-01T14:57:00+08:00">Jun 01, 2013</time></p>
         </header>
 
         <article>
@@ -46,49 +46,49 @@
 
 <h2>Installing&nbsp;i3</h2>
 <p>Installing i3 is easy enough. It is listed in the Ubuntu package repository, so it is also available for Linux Mint that is based on Ubuntu, but I find the version available in the repository to be severely outdated and have some problem with rendering some fonts, so installing the latest stable version from i3&#8217;s repository is recommended. The instruction on their download page is easy enough to&nbsp;follow:</p>
-<div class="highlight"><pre><span class="c"># echo &quot;deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe&quot; &gt;&gt; /etc/apt/sources.list</span>
-<span class="c"># apt-get update</span>
-<span class="c"># apt-get --allow-unauthenticated install sur5r-keyring</span>
-<span class="c"># apt-get update</span>
-<span class="c"># apt-get install i3</span>
+<div class="highlight"><pre><span></span># echo &quot;deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe&quot; &gt;&gt; /etc/apt/sources.list
+# apt-get update
+# apt-get --allow-unauthenticated install sur5r-keyring
+# apt-get update
+# apt-get install i3
 </pre></div>
 
 
 <p>One thing to take notice here is the first line, which is used to add the repository to our sources. Only problem is, the <code>lsb_release -c -s</code> in my system will output <code>maya</code>, since that is indeed what my system is. That will cause the link to return me an 404, since, of course, the repository was meant for Ubuntu, and there is not Ubuntu version code named <code>maya</code>. Since I know Linux Mint 13 was build on Ubuntu Precise, I can just replace it with&nbsp;that.</p>
-<div class="highlight"><pre><span class="c"># echo &quot;deb http://debian.sur5r.net/i3/ maya universe&quot; &gt;&gt; /etc/apt/sources.list</span>
+<div class="highlight"><pre><span></span># echo &quot;deb http://debian.sur5r.net/i3/ maya universe&quot; &gt;&gt; /etc/apt/sources.list
 </pre></div>
 
 
 <p>After the installation is done, I log out, log in again, this time selecting i3 in the session manager, and I am&nbsp;in.</p>
 <h2>Making it less&nbsp;ugly</h2>
 <p>Out of the box, i3 looks pretty hideous. I didn&#8217;t take any screenshot because at that point I haven&#8217;t even figured out how to take a screenshot yet. But it is just a black screen with a little black bar at the bottom anyway. In any case, it is time to to do some makeover. The documentation for the i3 is really clear and nice to read. So, there wasn&#8217;t much problem to figure out what to do. The configuration file is stored at <code>~/.i3/config</code>. First thing to change is the color. I don&#8217;t know much about design, but I do know when to avoid using the pure black and pure white color. Thing #1 to change: the window title&nbsp;color.</p>
-<div class="highlight"><pre><span class="n">client</span><span class="p">.</span><span class="n">focused</span>          <span class="err">#</span><span class="mf">3F</span><span class="mi">8</span><span class="n"><span class="caps">AC2</span></span> <span class="err">#</span><span class="mi">096</span><span class="n"><span class="caps">BAA</span></span> <span class="err">#</span><span class="mo">00</span><span class="n"><span class="caps">BAA7</span></span> <span class="err">#</span><span class="mo">00</span><span class="n"><span class="caps">DA8E</span></span>
-<span class="n">client</span><span class="p">.</span><span class="n">focused_inactive</span> <span class="err">#</span><span class="mi">333333</span> <span class="err">#</span><span class="mf">5F</span><span class="mi">676</span><span class="n">A</span> <span class="err">#</span><span class="n">ffffff</span> <span class="err">#</span><span class="mf">484e50</span>
-<span class="n">client</span><span class="p">.</span><span class="n">unfocused</span>        <span class="err">#</span><span class="mi">333333</span> <span class="err">#</span><span class="mi">424242</span> <span class="err">#</span><span class="mi">888888</span> <span class="err">#</span><span class="mi">292</span><span class="n">d2e</span>
-<span class="n">client</span><span class="p">.</span><span class="n">urgent</span>           <span class="err">#</span><span class="n">C10004</span> <span class="err">#</span><span class="mi">900000</span> <span class="err">#</span><span class="n">ffffff</span> <span class="err">#</span><span class="mi">900000</span>
+<div class="highlight"><pre><span></span>client.focused          #<span class="caps">3F8AC2</span> #<span class="caps">096BAA</span> #<span class="caps">00BAA7</span> #<span class="caps">00DA8E</span>
+client.focused_inactive #333333 #<span class="caps">5F676A</span> #ffffff #484e50
+client.unfocused        #333333 #424242 #888888 #292d2e
+client.urgent           #C10004 #900000 #ffffff #900000
 </pre></div>
 
 
 <p>Next, the status bar. I prefer mine on top of the screen. Also, the&nbsp;color.</p>
-<div class="highlight"><pre><span class="n">bar</span> <span class="p">{</span>
-    <span class="n">position</span> <span class="n">top</span>
-    <span class="n">status_command</span> <span class="n">i3status</span>
-    <span class="n">tray_output</span> <span class="n"><span class="caps">LVDS</span></span>
-    <span class="n">colors</span><span class="p">{</span>
-        <span class="n">background</span> <span class="err">#</span><span class="mi">232323</span>
-        <span class="n">statusline</span> <span class="err">#</span><span class="n"><span class="caps">DCDCDC</span></span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span>bar {
+    position top
+    status_command i3status
+    tray_output <span class="caps">LVDS</span>
+    colors{
+        background #232323
+        statusline #<span class="caps">DCDCDC</span>
+    }
+}
 </pre></div>
 
 
 <p>Next thing, time to change that 80s font&nbsp;face.</p>
-<div class="highlight"><pre><span class="n">font</span> <span class="n">pango</span><span class="o">:</span> <span class="n">Ubuntu</span> <span class="n">Mono</span> <span class="mi">10</span>
+<div class="highlight"><pre><span></span>font pango: Ubuntu Mono 10
 </pre></div>
 
 
 <p>By now, it looks much better. Next is the wallpaper. I use <code>feh</code> to set my&nbsp;wallpaper.</p>
-<div class="highlight"><pre><span class="n">exec</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">startup</span><span class="o">-</span><span class="n">id</span> <span class="n">feh</span> <span class="o">--</span><span class="n">bg</span><span class="o">-</span><span class="n">fill</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">hdra</span><span class="o">/</span><span class="n">Pictures</span><span class="o">/</span><span class="n">Wallpapers</span><span class="o">/</span><span class="n">city</span><span class="p">.</span><span class="n">jpg</span>
+<div class="highlight"><pre><span></span>exec --no-startup-id feh --bg-fill /home/hdra/Pictures/Wallpapers/city.jpg
 </pre></div>
 
 
@@ -97,14 +97,14 @@
 <h1>Setting up&nbsp;<span class="caps">GTK</span></h1>
 <p>By now my desktop doesn&#8217;t look half bad, but if I open any gtk-based application, especially gtk3 application, it looks like complete crap. So, next thing to deal with is the gtk theme and icons. The configuration file for gtk2 is located at <code>~/.gtkrc-2.0</code>, while for gtk3 is located at <code>~/.config/gtk-3.0/settings.ini</code>. I want the applications to look consistent, so I had to look for one that can provide similar looks for both. There are some of the built-in theme that can do this, but I want something else. I decided on the MediterraneanLight from <a href="http://www.gnome-look.org">gnome-look</a>. I also picked up an icon set from there. Next thing to do is to change the font. I never liked how fonts in Linux <span class="caps">OS</span> are always unnecessarily big. So, I switched to a lower font&nbsp;size.</p>
 <p>Here is my gtk2&nbsp;configuration:</p>
-<div class="highlight"><pre><span class="n">gtk</span><span class="o">-</span><span class="n">theme</span><span class="o">-</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;MediterraneanLight&quot;</span>
-<span class="n">gtk</span><span class="o">-</span><span class="n">font</span><span class="o">-</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Open Sans 8&quot;</span>
-<span class="n">gtk</span><span class="o">-</span><span class="n">icon</span><span class="o">-</span><span class="n">theme</span><span class="o">-</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Faenza-Dark&quot;</span>
+<div class="highlight"><pre><span></span>gtk-theme-name = &quot;MediterraneanLight&quot;
+gtk-font-name = &quot;Open Sans 8&quot;
+gtk-icon-theme-name = &quot;Faenza-Dark&quot;
 </pre></div>
 
 
 <p>And here is the gtk3&nbsp;configuration:</p>
-<div class="highlight"><pre><span class="k">[Settings]</span>
+<div class="highlight"><pre><span></span><span class="k">[Settings]</span>
 <span class="na">gtk-theme-name</span> <span class="o">=</span> <span class="s">MediterraneanLight</span>
 <span class="na">gtk-font-name</span> <span class="o">=</span> <span class="s">Open Sans 8</span>
 <span class="na">gtk-fallback-icon-theme</span> <span class="o">=</span> <span class="s">Mint-X</span>

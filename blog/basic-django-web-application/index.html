@@ -34,7 +34,7 @@
 
         <header>
             <h1>Basic Django Web&nbsp;Application</h1>
-            <p class="date">Written on <time datetime="2012-03-23T15:57:00">Mar 23, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-03-23T15:57:00+08:00">Mar 23, 2012</time></p>
         </header>
 
         <article>
@@ -57,13 +57,13 @@ for the project. We will come back here again later. Now, open up
 the template directory there. Next, on your project’s root directory
 level, create a new file named <code>views.py</code>. Open up the file, and enter
 these code which are the basic  functionalities that are in a view&nbsp;function:</p>
-<div class="highlight"><pre><span class="c"># import the necessary modules</span>
+<div class="highlight"><pre><span></span><span class="c1"># import the necessary modules</span>
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
 
 <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="c"># render the template index.html with the context</span>
-    <span class="c"># text equals to hello world</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;index.html&#39;</span><span class="p">,{</span><span class="err">‘</span><span class="n">title</span><span class="err">’</span><span class="p">:</span><span class="err">’</span><span class="n">Index</span> <span class="n">Page</span><span class="err">’</span><span class="p">,</span><span class="s">&#39;text&#39;</span><span class="p">:</span><span class="s">&#39;Hello, World!&#39;</span><span class="p">})</span>
+    <span class="c1"># render the template index.html with the context</span>
+    <span class="c1"># text equals to hello world</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,{</span><span class="err">‘</span><span class="n">title</span><span class="err">’</span><span class="p">:</span><span class="err">’</span><span class="n">Index</span> <span class="n">Page</span><span class="err">’</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;Hello, World!&#39;</span><span class="p">})</span>
 </pre></div>
 
 
@@ -72,22 +72,22 @@ replace the special tags in the template file with dictionary data you
 passed in the second argument. Next, create the template file itself, in
 the templates folder that you made before, create a new file index.html,
 and put this inside&nbsp;it:</p>
-<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
-    <span class="nt">&lt;head&gt;</span>
-        <span class="nt">&lt;title&gt;</span>{{title}}<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;/head&gt;</span>
-    <span class="nt">&lt;body&gt;</span>
-        <span class="nt">&lt;h1&gt;</span>{{text}}<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{title}}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{text}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 
 
 <p>Now, you got everything setup, and now, you just need to route the
 request to the view function to handle, so to do that, open up urls.py,
 and add this to the url&nbsp;pattern:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">views</span>
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,(</span><span class="s">r&#39;^hello/$&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),)</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">views</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,(</span><span class="sa">r</span><span class="s1">&#39;^hello/$&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),)</span>
 </pre></div>
 
 

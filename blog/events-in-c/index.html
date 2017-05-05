@@ -34,7 +34,7 @@
 
         <header>
             <h1>Events in&nbsp;C#</h1>
-            <p class="date">Written on <time datetime="2012-05-30T00:27:00">May 30, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-05-30T00:27:00+08:00">May 30, 2012</time></p>
         </header>
 
         <article>
@@ -49,7 +49,7 @@ a way for a class to provide notifications to clients when something
 interesting happens. Event is declared with a delegate, in fact, there
 aren’t much difference between a regular delegate and an event. Here is
 an example of an event&nbsp;declaration.</p>
-<div class="highlight"><pre><span class="c1">// declare the delegate</span>
+<div class="highlight"><pre><span></span><span class="c1">// declare the delegate</span>
 <span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="nf">SomethingHappenedEventHandler</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">);</span>
 
 <span class="c1">// On the class that has the event</span>
@@ -84,7 +84,7 @@ think those are too advanced and not too relevant in practical&nbsp;usage.</p>
 <p>Since event is basically a delegate, a firing event is actually just an
 invocation of the method that the delegate points to, which we usually
 refer to as handling the event. So, in <span class="caps">GUI</span> programming, we often see&nbsp;this:</p>
-<div class="highlight"><pre><span class="n">Button</span> <span class="n">x</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Button</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><span class="n">Button</span> <span class="n">x</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Button</span><span class="p">();</span>
 <span class="n">x</span><span class="p">.</span><span class="n">Click</span> <span class="p">+=</span> <span class="k">new</span> <span class="n">RoutedEventHandler</span><span class="p">(</span><span class="n">x_Click</span><span class="p">);</span>
 </pre></div>
 
@@ -92,7 +92,7 @@ refer to as handling the event. So, in <span class="caps">GUI</span> programming
 <p>That means, somewhere in the Button class declaration, they have an
 event of RoutedEventHandler delegate, and will be called when the the
 necessary condition is fulfilled. Something like&nbsp;this:</p>
-<div class="highlight"><pre><span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="nf">RoutedEventHandler</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span><span class="n">m</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="nf">RoutedEventHandler</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span><span class="n">m</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">);</span>
 
 <span class="k">public</span> <span class="k">class</span> <span class="nc">Button</span>
 <span class="p">{</span>

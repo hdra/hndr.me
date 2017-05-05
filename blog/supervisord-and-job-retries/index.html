@@ -34,7 +34,7 @@
 
         <header>
             <h1>Supervisord and Job&nbsp;Retries</h1>
-            <p class="date">Written on <time datetime="2016-03-09T22:59:00">Mar 09, 2016</time></p>
+            <p class="date">Written on <time datetime="2016-03-09T22:59:00+08:00">Mar 09, 2016</time></p>
         </header>
 
         <article>
@@ -47,7 +47,7 @@ makes it pretty much the default process monitor on a Laravel&nbsp;deployment.</
 will automatically retry jobs that fails due to an exception. They usually also include
 a way to control how many times the jobs should be retried before giving up and
 moving it to the failed jobs&nbsp;store.</p>
-<div class="highlight"><pre><span class="n">php</span> <span class="n">artisan</span> <span class="n">queue</span><span class="o">:</span><span class="n">listen</span> <span class="n">connection</span><span class="o">-</span><span class="n">name</span> <span class="o">--</span><span class="n">tries</span><span class="o">=</span><span class="mi">3</span>
+<div class="highlight"><pre><span></span>php artisan queue:listen connection-name --tries=3
 </pre></div>
 
 
@@ -61,7 +61,7 @@ increased accordingly. If the <code>startretries</code> is set to a number that 
 it could cause an issue where <em>the supervisord retry limit is reached before the job retries
 limit is reached</em>. When this happens, the process is put into a <code>FATAL</code> state, and the worker process
 doesn&#8217;t get started anymore, <em>halting the entire job queue</em>.</p>
-<div class="highlight"><pre><span class="k">[program:laravel-worker]</span>
+<div class="highlight"><pre><span></span><span class="k">[program:laravel-worker]</span>
 <span class="na">process_name</span><span class="o">=</span><span class="s">%(program_name)s_%(process_num)02d</span>
 <span class="na">command</span><span class="o">=</span><span class="s">php /home/forge/app.com/artisan queue:work sqs --sleep=3 --tries=5</span>
 <span class="na">autostart</span><span class="o">=</span><span class="s">true</span>

@@ -34,7 +34,7 @@
 
         <header>
             <h1>Some Stuff I Didn’t Know About String in&nbsp;C#</h1>
-            <p class="date">Written on <time datetime="2012-05-25T23:08:00">May 25, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-05-25T23:08:00+08:00">May 25, 2012</time></p>
         </header>
 
         <article>
@@ -43,7 +43,7 @@ extensively for quite a while, but there are indeed some things that
 feels&nbsp;revealing.</p>
 <p>First of all, I knew that strings is a little bit special, in a way that
 it is a reference type, but it behaves very much like a value type, for&nbsp;example:</p>
-<div class="highlight"><pre><span class="n">SomeClass</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><span class="n">SomeClass</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
 <span class="n">a</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">18</span><span class="p">;</span>
 <span class="n">SomeClass</span> <span class="n">b</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
 <span class="n">b</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">30</span><span class="p">;</span>
@@ -60,7 +60,7 @@ it is a reference type, but it behaves very much like a value type, for&nbsp;exa
 <p>So, well, that’s about it. I also knew that string are immutable, as in,
 the value can’t be changed after they are set, so something like this
 would throw an&nbsp;error:</p>
-<div class="highlight"><pre><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
 <span class="n">x</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;j&#39;</span><span class="p">;</span>
 </pre></div>
 
@@ -74,7 +74,7 @@ refer to the same memory&nbsp;location.</p>
 <p>The value of the string itself are stored in the same memory location as
 well, so even if two strings are created separately, if they have the
 same value, they will still point to the same&nbsp;location.</p>
-<div class="highlight"><pre><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kt">string</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
 <span class="kt">string</span> <span class="n">y</span> <span class="p">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
 <span class="c1">// x == y is true</span>
 </pre></div>

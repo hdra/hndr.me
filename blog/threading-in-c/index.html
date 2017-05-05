@@ -34,7 +34,7 @@
 
         <header>
             <h1>Threading in&nbsp;C#</h1>
-            <p class="date">Written on <time datetime="2012-05-31T23:05:00">May 31, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-05-31T23:05:00+08:00">May 31, 2012</time></p>
         </header>
 
         <article>
@@ -48,7 +48,7 @@ threads to send messages from the one that handles incoming messages and
 display it on the&nbsp;screen.</p>
 <p>In .<span class="caps">NET</span>, threading is handled by the <code>Thread</code> class, which lives in
 the <code>System</code> namespace, so to use it, you need to add this&nbsp;first:</p>
-<div class="highlight"><pre><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
 </pre></div>
 
 
@@ -58,7 +58,7 @@ like a pointer to a method? this would mean that the thread will run the
 method that the delegate parameter points to.). ThreadStart itself is a
 delegate that does not return any value or accept any parameter. Here is
 an&nbsp;example:</p>
-<div class="highlight"><pre><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
 <span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
 <span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
 <span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
@@ -100,7 +100,7 @@ prevent, that, we need a way sync the data by locking the data to a
 thread during a section of the program that may cause a race condition.
 In .<span class="caps">NET</span>, the Threading namespace provides us with a Monitor class that
 we can use to lock an object. Here is an&nbsp;example.</p>
-<div class="highlight"><pre><span class="kt">var</span> <span class="n">sharedData</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">sharedData</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SomeClass</span><span class="p">();</span>
 
 <span class="c1">// lock the sharedData</span>
 <span class="n">Monitor</span><span class="p">.</span><span class="n">Enter</span><span class="p">(</span><span class="n">sharedData</span><span class="p">);</span>
@@ -119,7 +119,7 @@ them in another post some time later, when I got a better understanding
 of it. <a href="http://msdn.microsoft.com/en-us/library/ms173179.aspx">Here</a> is an <span class="caps">MSDN</span> article on the&nbsp;topic.</p>
 <p>The Thread class provides several methods to control the execution of
 the thread, here are some of&nbsp;them:</p>
-<div class="highlight"><pre><span class="c1">// these examples are called from within the execution of another thread</span>
+<div class="highlight"><pre><span></span><span class="c1">// these examples are called from within the execution of another thread</span>
 <span class="c1">// e.g. t2</span>
 
 <span class="c1">// Pausing the current thread execution for 2 seconds</span>

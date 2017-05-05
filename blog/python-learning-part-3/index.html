@@ -34,7 +34,7 @@
 
         <header>
             <h1>Python Learning – Part&nbsp;3</h1>
-            <p class="date">Written on <time datetime="2012-01-12T20:10:00">Jan 12, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-01-12T20:10:00+08:00">Jan 12, 2012</time></p>
         </header>
 
         <article>
@@ -49,15 +49,15 @@ conditional statement and&nbsp;loop.</p>
 <code>raw_input()</code>, which gets whatever the user entered, and process it as a
 string. You can pass an optional string argument that will be used as
 the prompt, here is an example&nbsp;code:</p>
-<div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;What is your name?&quot;</span>
+<div class="highlight"><pre><span></span><span class="k">print</span> <span class="s2">&quot;What is your name?&quot;</span>
 
 <span class="n">name</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">&quot;Hello, </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">name</span>
+<span class="k">print</span> <span class="s2">&quot;Hello, </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">name</span>
 
-<span class="c">#or you can pass the prompt as an argument</span>
+<span class="c1">#or you can pass the prompt as an argument</span>
 
-<span class="n">name</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;What is your name?&quot;</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&quot;Hello, </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span><span class="o">%</span><span class="n">name</span>
+<span class="n">name</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s2">&quot;What is your name?&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Hello, </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span><span class="o">%</span><span class="n">name</span>
 </pre></div>
 
 
@@ -66,18 +66,18 @@ the prompt, here is an example&nbsp;code:</p>
 as an expression. So, if you entered a number, it will process the input
 as a number, or if you entered an variable name, it will be processed as
 an variable, and so&nbsp;on</p>
-<div class="highlight"><pre><span class="c"># x is 5</span>
-<span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a number: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;5&#39;</span>
+<div class="highlight"><pre><span></span><span class="c1"># x is 5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a number: &quot;</span><span class="p">)</span> <span class="c1">#enter &#39;5&#39;</span>
 
-<span class="c"># x is 12</span>
-<span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter another number: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;4*3&#39;</span>
+<span class="c1"># x is 12</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter another number: &quot;</span><span class="p">)</span> <span class="c1">#enter &#39;4*3&#39;</span>
 
-<span class="c"># this will produce an error, because John is not defined as a variable</span>
+<span class="c1"># this will produce an error, because John is not defined as a variable</span>
 
-<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a name: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;John&#39;</span>
-<span class="c"># y will be equal to x, because the input will be processed as avariable</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a name: &quot;</span><span class="p">)</span> <span class="c1">#enter &#39;John&#39;</span>
+<span class="c1"># y will be equal to x, because the input will be processed as avariable</span>
 
-<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter a letter: &quot;</span><span class="p">)</span> <span class="c">#enter &#39;x&#39;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a letter: &quot;</span><span class="p">)</span> <span class="c1">#enter &#39;x&#39;</span>
 </pre></div>
 
 
@@ -100,44 +100,44 @@ operators will always return a boolean value of either true or false,
 even though comparison operators are not the only thing that can return
 a boolean value, it is the basics of it. Comparison operations in Python
 are pretty much self-explanatory, and it is similar to other programming&nbsp;language:</p>
-<div class="highlight"><pre><span class="c">#Equal</span>
-<span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span> <span class="c">#True</span>
-<span class="mi">5</span> <span class="o">!=</span> <span class="mi">5</span> <span class="c">#False</span>
+<div class="highlight"><pre><span></span><span class="c1">#Equal</span>
+<span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span> <span class="c1">#True</span>
+<span class="mi">5</span> <span class="o">!=</span> <span class="mi">5</span> <span class="c1">#False</span>
 
-<span class="c">#Greater than/Equal</span>
-<span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="c">#False</span>
-<span class="mi">5</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="c">#True</span>
+<span class="c1">#Greater than/Equal</span>
+<span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="c1">#False</span>
+<span class="mi">5</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="c1">#True</span>
 
-<span class="c">#Less than/Equal</span>
-<span class="mi">5</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="c">#False</span>
-<span class="mi">5</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="c">#True</span>
-<span class="mi">3</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="c">#True</span>
-<span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="c">#True</span>
-<span class="mi">5</span> <span class="o">!=</span> <span class="mi">10</span> <span class="c">#True</span>
+<span class="c1">#Less than/Equal</span>
+<span class="mi">5</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="c1">#False</span>
+<span class="mi">5</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="c1">#True</span>
+<span class="mi">3</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="c1">#True</span>
+<span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="c1">#True</span>
+<span class="mi">5</span> <span class="o">!=</span> <span class="mi">10</span> <span class="c1">#True</span>
 
-<span class="c"># there are also the &#39;and&#39;, &#39;or&#39;, and &#39;not&#39; keyword</span>
-<span class="c"># and will evaluate to true if both are true</span>
-<span class="c"># or will evaluate to true if one of the is true</span>
-<span class="c"># and not will produce the reverse value</span>
+<span class="c1"># there are also the &#39;and&#39;, &#39;or&#39;, and &#39;not&#39; keyword</span>
+<span class="c1"># and will evaluate to true if both are true</span>
+<span class="c1"># or will evaluate to true if one of the is true</span>
+<span class="c1"># and not will produce the reverse value</span>
 
-<span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="c">#True</span>
-<span class="mi">3</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="c">#False</span>
-<span class="mi">3</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">or</span> <span class="mi">2</span> <span class="o">&lt;</span><span class="mi">5</span> <span class="c">#True</span>
-<span class="ow">not</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span> <span class="c">#False</span>
+<span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="c1">#True</span>
+<span class="mi">3</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="c1">#False</span>
+<span class="mi">3</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">or</span> <span class="mi">2</span> <span class="o">&lt;</span><span class="mi">5</span> <span class="c1">#True</span>
+<span class="ow">not</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span> <span class="c1">#False</span>
 
-<span class="c">#and so on</span>
+<span class="c1">#and so on</span>
 </pre></div>
 
 
 <p>I am not sure how to explain code indentation in plain english, so let
 me just write some example if statement&nbsp;code,</p>
-<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Please enter a number: &quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please enter a number: &quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;You entered a number greater than 10&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;You entered a number greater than 10&quot;</span>
 <span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;You entered a number that is less than 5&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;You entered a number that is less than 5&quot;</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;You entered a number between 5 and 10&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;You entered a number between 5 and 10&quot;</span>
 </pre></div>
 
 
@@ -151,12 +151,12 @@ which code to execute if all of the tests before it evaluate to false.
 The elif and the else statement are optional, which means you can write
 a code to only run when a certain condition is met, or do nothing if
 that certain condition is not&nbsp;met.</p>
-<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;Enter your name: &quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span>
 
-<span class="c">#Only print these statements if the name is John</span>
-<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s">&quot;John&quot;</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;Hello, John! Good to see you again.&quot;</span>
-    <span class="k">print</span> <span class="s">&quot;What can I do for you today, </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">x</span>
+<span class="c1">#Only print these statements if the name is John</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;John&quot;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s2">&quot;Hello, John! Good to see you again.&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;What can I do for you today, </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">x</span>
 </pre></div>
 
 
@@ -165,19 +165,19 @@ to the conditional statement, looping uses code blocks to specify
 several statements of code to run as well. There are two ways to create
 a loop, the first one is the while loop, which will continue to run as
 long as the boolean statement remains&nbsp;true.</p>
-<div class="highlight"><pre><span class="c"># This one will run the loop endlessly, because the boolean statement</span>
-<span class="c"># is hardcoded as True</span>
+<div class="highlight"><pre><span></span><span class="c1"># This one will run the loop endlessly, because the boolean statement</span>
+<span class="c1"># is hardcoded as True</span>
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;Never ending loop&quot;</span>
-    <span class="k">print</span> <span class="s">&quot;Press ctrl-c or ctrl-z to terminate&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Never ending loop&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Press ctrl-c or ctrl-z to terminate&quot;</span>
 
-<span class="c"># You should add a statement to eventually cause the boolean statement</span>
-<span class="c"># turns False</span>
-<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="c">#initialize x to 1</span>
-<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c">#continue to run the loop as long as the value of x &lt; 10</span>
-    <span class="k">print</span> <span class="s">&quot;Count no.</span><span class="si">%d</span><span class="s">&quot;</span><span class="o">%</span><span class="n">x</span>
-    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c">#increase the value of x by one on each iterations</span>
-           <span class="c">#so that eventually the x &lt; 10 statement will be false</span>
+<span class="c1"># You should add a statement to eventually cause the boolean statement</span>
+<span class="c1"># turns False</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#initialize x to 1</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c1">#continue to run the loop as long as the value of x &lt; 10</span>
+    <span class="k">print</span> <span class="s2">&quot;Count no.</span><span class="si">%d</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">x</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1">#increase the value of x by one on each iterations</span>
+           <span class="c1">#so that eventually the x &lt; 10 statement will be false</span>
 </pre></div>
 
 
@@ -185,26 +185,26 @@ long as the boolean statement remains&nbsp;true.</p>
 content of a list one by one. (I will talk about list in another post,
 but basically, a list is just a sequence of values that is identified by
 a single&nbsp;variable).</p>
-<div class="highlight"><pre><span class="c"># the basic syntax of a for loop is:</span>
-<span class="c"># for [variable name] in [list]:</span>
-<span class="c"># #codes for the loop</span>
-<span class="c"># for example:</span>
+<div class="highlight"><pre><span></span><span class="c1"># the basic syntax of a for loop is:</span>
+<span class="c1"># for [variable name] in [list]:</span>
+<span class="c1"># #codes for the loop</span>
+<span class="c1"># for example:</span>
 
-<span class="c">#Defining a list, more on this later</span>
-<span class="n">nameList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;John&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Adam&#39;</span><span class="p">]</span>
+<span class="c1">#Defining a list, more on this later</span>
+<span class="n">nameList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;Jack&#39;</span><span class="p">,</span> <span class="s1">&#39;Adam&#39;</span><span class="p">]</span>
 
-<span class="c"># running the loop, printing the content of the list</span>
-<span class="c"># one by one</span>
+<span class="c1"># running the loop, printing the content of the list</span>
+<span class="c1"># one by one</span>
 
 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">nameList</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;Hello,</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">name</span>
+    <span class="k">print</span> <span class="s2">&quot;Hello,</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">name</span>
 
-<span class="c"># The code above will print John,Jack and Adam on the console</span>
-<span class="c"># You can also generate a list of numbers by using the range function</span>
-<span class="c"># the range function takes two arguments, the beginning and the end of</span>
+<span class="c1"># The code above will print John,Jack and Adam on the console</span>
+<span class="c1"># You can also generate a list of numbers by using the range function</span>
+<span class="c1"># the range function takes two arguments, the beginning and the end of</span>
 <span class="n">the</span> <span class="nb">list</span>
 
-<span class="c"># Will print the numbers 2-10</span>
+<span class="c1"># Will print the numbers 2-10</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">print</span> <span class="n">i</span>
 </pre></div>

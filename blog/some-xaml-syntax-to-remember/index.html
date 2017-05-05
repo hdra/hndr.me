@@ -34,7 +34,7 @@
 
         <header>
             <h1>Some <span class="caps">XAML</span> Syntax to&nbsp;Remember</h1>
-            <p class="date">Written on <time datetime="2012-08-14T14:17:00">Aug 14, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-08-14T14:17:00+08:00">Aug 14, 2012</time></p>
         </header>
 
         <article>
@@ -64,7 +64,7 @@ access an element declared in the <span class="caps">XAML</span> before the meth
 would get a <code>NullReferenceException</code>.</p>
 <p>That’s enough for the backstage stuff, lets move on to the syntax. Most
 <span class="caps">XAML</span> pages looks similar to&nbsp;this:</p>
-<div class="highlight"><pre><span class="nt">&lt;Page</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;Page</span>
     <span class="na">x:Class=</span><span class="s">&quot;App2.MainPage&quot;</span>
     <span class="na">IsTabStop=</span><span class="s">&quot;false&quot;</span>
     <span class="na">xmlns=</span><span class="s">&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;</span>
@@ -87,7 +87,7 @@ basically declare an instance of <code>MainPage</code> in the <code>App2</code> 
 a subclass from the <code>Page</code> class. The <code>xmlns</code> statements are standard xml
 namespace inclusion which would allows us to use various elements.
 Similarly, with these&nbsp;declaration:</p>
-<div class="highlight"><pre><span class="nt">&lt;Page</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;Page</span>
     <span class="na">x:Class=</span><span class="s">&quot;App2.MainPage&quot;</span>
     <span class="na">IsTabStop=</span><span class="s">&quot;false&quot;</span>
     <span class="na">xmlns=</span><span class="s">&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;</span>
@@ -108,7 +108,7 @@ Similarly, with these&nbsp;declaration:</p>
 
 
 <p>The same result can be produced with these C#&nbsp;code:</p>
-<div class="highlight"><pre><span class="k">public</span> <span class="k">sealed</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">Page</span>
+<div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">sealed</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">Page</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="nf">MainPage</span><span class="p">()</span>
     <span class="p">{</span>
@@ -146,7 +146,7 @@ can be used to define some more complex attributes such as defining a
 gradient background that requires defining more than one colours and
 points. For example, the <code>TextBlock</code> above can be defined as such with the
 property-element&nbsp;syntax:</p>
-<div class="highlight"><pre><span class="nt">&lt;TextBlock&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;TextBlock&gt;</span>
     <span class="nt">&lt;TextBlock.Foreground&gt;</span>
         <span class="nt">&lt;SolidColorBrush&gt;</span>
             Black
@@ -188,7 +188,7 @@ member of the <code>Children</code> property of the <code>Grid</code>. This is b
 classes referenced in <span class="caps">XAML</span> can have one and only one property that is
 defined as its <code>ContentProperty</code>, where for these properties, the property
 element tags are not required. So, instead of&nbsp;writing</p>
-<div class="highlight"><pre><span class="nt">&lt;Page&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;Page&gt;</span>
     <span class="nt">&lt;Page.Content&gt;</span>
         <span class="nt">&lt;Grid&gt;</span>
             <span class="nt">&lt;Grid.Children&gt;</span>
@@ -203,7 +203,7 @@ element tags are not required. So, instead of&nbsp;writing</p>
 
 
 <p>We can simply&nbsp;write:</p>
-<div class="highlight"><pre><span class="nt">&lt;Page&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;Page&gt;</span>
     <span class="nt">&lt;Grid&gt;</span>
         <span class="nt">&lt;TextBlock/&gt;</span>
         <span class="nt">&lt;TextBlock/&gt;</span>
@@ -216,7 +216,7 @@ element tags are not required. So, instead of&nbsp;writing</p>
 <p>And it would produce the same result. For the same reason, we can use
 the same thing to define the <code>Text</code> property of a <code>TextBlock</code> without
 creating property element tag for it,&nbsp;So,</p>
-<div class="highlight"><pre><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;Hello&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;Hello&quot;</span><span class="nt">/&gt;</span>
 
 <span class="c">&lt;!-- Is the same as: --&gt;</span>
 

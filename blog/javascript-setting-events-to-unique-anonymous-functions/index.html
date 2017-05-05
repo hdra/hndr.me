@@ -34,12 +34,12 @@
 
         <header>
             <h1>Javascript – Setting Events to Unique Anonymous&nbsp;Functions</h1>
-            <p class="date">Written on <time datetime="2012-05-22T22:24:00">May 22, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-05-22T22:24:00+08:00">May 22, 2012</time></p>
         </header>
 
         <article>
             <p>Ok, the easiest way to convey my point is with code,&nbsp;so:</p>
-<div class="highlight"><pre><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">bar</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);}</span>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">bar</span><span class="p">){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);}</span>
 <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;someDiv&#39;</span><span class="o">+</span><span class="nx">i</span><span class="p">).</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span><span class="nx">foo</span><span class="p">(</span><span class="nx">i</span><span class="p">);};</span>
 <span class="p">}</span>
@@ -57,7 +57,7 @@ anonymous functions that we created refer to the same value as&nbsp;well.</p>
 &#8220;instances&#8221; of these anonymous functions individually, with the help of
 this <a href="http://stackoverflow.com/questions/4900029/javascript-context-in-anonymous-functions">stackoverflow thread</a>, I got to know the answer is self executing
 anonymous function and a return statement, so here it&nbsp;is:</p>
-<div class="highlight"><pre><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">bar</span><span class="p">){</span>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">bar</span><span class="p">){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>

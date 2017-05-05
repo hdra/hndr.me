@@ -34,7 +34,7 @@
 
         <header>
             <h1>Data Binding in&nbsp;.<span class="caps">NET</span></h1>
-            <p class="date">Written on <time datetime="2012-06-10T10:37:00">Jun 10, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-06-10T10:37:00+08:00">Jun 10, 2012</time></p>
         </header>
 
         <article>
@@ -51,12 +51,12 @@ but I am not really able to grasp its implementation, I think it is
 because I don&#8217;t really understand the basic features of the framework
 that the pattern rely on. One of which is the Data Binding. So, here it
 is, my attempt to get better understanding on&nbsp;it.</p>
-<div class="highlight"><pre><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;{Binding Name}&quot;</span><span class="nt">&gt;&lt;/TextBlock&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;{Binding Name}&quot;</span><span class="nt">&gt;&lt;/TextBlock&gt;</span>
 </pre></div>
 
 
 <p>while in the code&nbsp;behind,</p>
-<div class="highlight"><pre><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
+<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">PhoneApplicationPage</span>
     <span class="p">{</span>
@@ -88,13 +88,13 @@ changes, the binding target on the <span class="caps">UI</span> won’t change a
 make the value of the binding target change along with the data source,
 we need to have our class implement <code>INotifyPropertyChanged</code>.</p>
 <p>Let’s add a button that will change the value of the data&nbsp;source.</p>
-<div class="highlight"><pre><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;{Binding name}&quot;</span><span class="nt">&gt;&lt;/TextBlock&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;{Binding name}&quot;</span><span class="nt">&gt;&lt;/TextBlock&gt;</span>
 <span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&quot;Button&quot;</span> <span class="na">Name=</span><span class="s">&quot;button1&quot;</span> <span class="na">Click=</span><span class="s">&quot;button1_Click&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 
 
 <p>And change the code behind&nbsp;to:</p>
-<div class="highlight"><pre><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
+<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">PhoneApplicationPage</span>
     <span class="p">{</span>
@@ -158,7 +158,7 @@ data source will be propagated to the target, but not vice versa,
 another mode is <code>TwoWay</code>, which is pretty much self descriptive, and also
 <code>OneTime</code>, which only set the data when the binding is created. So, if we
 add this textbox to the previous&nbsp;example,</p>
-<div class="highlight"><pre><span class="nt">&lt;TextBox</span> <span class="na">Text=</span><span class="s">&quot;{Binding name,Mode=TwoWay}&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;TextBox</span> <span class="na">Text=</span><span class="s">&quot;{Binding name,Mode=TwoWay}&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 
 
@@ -214,13 +214,13 @@ but it is recommended to use the class provided by the .<span class="caps">NET</
 which did the job for us, the <code>ObservabeCollection&lt;T&gt;</code> class. Let’s change
 the previous example to show a little bit of collection binding. Lets
 add a listbox to the our&nbsp;application.</p>
-<div class="highlight"><pre><span class="nt">&lt;ListBox</span> <span class="na">Name=</span><span class="s">&quot;listBox1&quot;</span><span class="na">ItemsSource=</span><span class="s">&quot;{Binding colls}&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;ListBox</span> <span class="na">Name=</span><span class="s">&quot;listBox1&quot;</span><span class="na">ItemsSource=</span><span class="s">&quot;{Binding colls}&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 
 
 <p>Now, let’s change the <code>MyClass</code> a little bit, and change the previous
 button click handler to add more element to the&nbsp;collection.</p>
-<div class="highlight"><pre><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
+<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nn">PhoneApp1</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">PhoneApplicationPage</span>
     <span class="p">{</span>
@@ -294,7 +294,7 @@ property of the source that we want to bind to. So, that declaration
 just now can be written as <code>{Binding Source={StaticResource dataSource},Path=name}</code>. We can use StaticResource to refer to an
 instance that we declare in the <span class="caps">XAML</span>, so to declare our <code>dataSource</code> in
 <span class="caps">XAML</span>, we can use something like&nbsp;this:</p>
-<div class="highlight"><pre><span class="nt">&lt;Page</span> <span class="na">xmlns:c=</span><span class="s">&quot;clr-namespace:PhoneApp1&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;Page</span> <span class="na">xmlns:c=</span><span class="s">&quot;clr-namespace:PhoneApp1&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;phone:PhoneApplicationPage.Resources&gt;</span>
   <span class="nt">&lt;c:MyClass</span> <span class="na">x:Key=</span><span class="s">&quot;dataSource&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/phone:PhoneApplicationPage.Resources&gt;</span>

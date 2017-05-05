@@ -34,7 +34,7 @@
 
         <header>
             <h1>Windows Phone – Context Menu on a&nbsp;ListBox</h1>
-            <p class="date">Written on <time datetime="2012-02-23T22:04:00">Feb 23, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-02-23T22:04:00+08:00">Feb 23, 2012</time></p>
         </header>
 
         <article>
@@ -49,7 +49,7 @@ selectedIndex returns –1, so that means holding down a listbox item
 doesn’t count as selecting it). So, I need a way to get information
 about which item to remove, and after a bit of internet search, here is
 how I do&nbsp;it:</p>
-<div class="highlight"><pre><span class="nt">&lt;ListBox</span> <span class="na">Name=</span><span class="s">&quot;paletteList&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;ListBox</span> <span class="na">Name=</span><span class="s">&quot;paletteList&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;ListBox.ItemTemplate&gt;</span>
         <span class="nt">&lt;DataTemplate&gt;</span>
             <span class="nt">&lt;Grid</span> <span class="na">Margin=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
@@ -68,7 +68,7 @@ how I do&nbsp;it:</p>
 
 <p>Those are the code to set the context menu for the listbox, and here is
 how the C# code on the click&nbsp;event:</p>
-<div class="highlight"><pre><span class="k">private</span> <span class="k">void</span> <span class="nf">removeFromPalette_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">removeFromPalette_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">Item</span> <span class="n">selectedItem</span> <span class="p">=</span> <span class="p">(</span><span class="n">sender</span> <span class="k">as</span> <span class="n">MenuItem</span><span class="p">).</span><span class="n">DataContext</span> <span class="k">as</span> <span class="n">Item</span><span class="p">;</span>
     <span class="c1">// Do whatever with the selectedItem</span>

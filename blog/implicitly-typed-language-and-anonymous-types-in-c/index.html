@@ -34,7 +34,7 @@
 
         <header>
             <h1>Implicitly Typed Language and Anonymous Types in&nbsp;C#</h1>
-            <p class="date">Written on <time datetime="2012-05-30T23:16:00">May 30, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-05-30T23:16:00+08:00">May 30, 2012</time></p>
         </header>
 
         <article>
@@ -44,7 +44,7 @@ note, that this doesn’t mean that it is dynamically typed, it simply
 means that the compiler will infer the data type for you, and it is also
 important to note, that it is strongly typed. So, this code below, will
 simply create a variable called x, with the data type of&nbsp;string.</p>
-<div class="highlight"><pre><span class="kt">var</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">x</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
 </pre></div>
 
 
@@ -56,7 +56,7 @@ create a class/struct to hold it. For example, if I wanted to to query a
 Car database, if I want to put it in a proper data structure,
 I can either put it in a hash table object, or I would have to declare
 a class&nbsp;first.</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Car</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Car</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">price</span><span class="p">;</span>
@@ -66,7 +66,7 @@ a class&nbsp;first.</p>
 
 
 <p>With anonymous type, we can do something like&nbsp;this:</p>
-<div class="highlight"><pre><span class="n">var</span> <span class="n">myCar</span> <span class="o">=</span> <span class="p">{</span><span class="n">year</span><span class="o">=</span><span class="mi">1990</span><span class="p">,</span><span class="n">price</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s">&quot;unknown&quot;</span><span class="p">};</span>
+<div class="highlight"><pre><span></span>var myCar = {year=1990,price=100000,model=&quot;unknown&quot;};
 </pre></div>
 
 

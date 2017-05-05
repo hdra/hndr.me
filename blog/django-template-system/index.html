@@ -34,7 +34,7 @@
 
         <header>
             <h1>Django Template&nbsp;System</h1>
-            <p class="date">Written on <time datetime="2012-03-23T20:19:00">Mar 23, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-03-23T20:19:00+08:00">Mar 23, 2012</time></p>
         </header>
 
         <article>
@@ -43,21 +43,21 @@ the shortest shortcut with the <code>render_to_reponse</code>, but there are man
 way to do the same thing using <code>Template</code> and <code>Context</code> class, and there are
 many scenario where we might want to do it the manual way to have more
 control, so to do it manually, here is the&nbsp;code:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
 <span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Context</span><span class="p">,</span><span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">django.template.loader</span> <span class="kn">import</span> <span class="n">get_template</span>
 
 <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Here is how to do it manually&quot;&quot;&quot;</span>
-    <span class="c"># load the raw template string to the variable,</span>
-    <span class="c"># you can also manually define the string in the same file,</span>
-    <span class="c"># but that wouldn&#39;t be very maintainable, but it is basically</span>
-    <span class="c"># an ordinary string</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">get_template</span><span class="p">(</span><span class="s">&#39;index.html&#39;</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">Context</span><span class="p">({</span><span class="s">&#39;title&#39;</span><span class="p">:</span><span class="s">&#39;The Index Page&#39;</span><span class="p">,</span><span class="s">&#39;text&#39;</span><span class="p">:</span><span class="s">&#39;Hello World!&#39;</span><span class="p">})</span>
+    <span class="c1"># load the raw template string to the variable,</span>
+    <span class="c1"># you can also manually define the string in the same file,</span>
+    <span class="c1"># but that wouldn&#39;t be very maintainable, but it is basically</span>
+    <span class="c1"># an ordinary string</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Context</span><span class="p">({</span><span class="s1">&#39;title&#39;</span><span class="p">:</span><span class="s1">&#39;The Index Page&#39;</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">})</span>
     <span class="n">html</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="c"># return the http request, and pass html as the</span>
-    <span class="c"># body of the response</span>
+    <span class="c1"># return the http request, and pass html as the</span>
+    <span class="c1"># body of the response</span>
     <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 </pre></div>
         </article>

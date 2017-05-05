@@ -34,34 +34,34 @@
 
         <header>
             <h1>Setting Up Stuffs on&nbsp;Linux</h1>
-            <p class="date">Written on <time datetime="2013-06-14T19:41:00">Jun 14, 2013</time></p>
+            <p class="date">Written on <time datetime="2013-06-14T19:41:00+08:00">Jun 14, 2013</time></p>
         </header>
 
         <article>
             <p>My Linux system has been pretty much set up for most things I need, since of course, Linux Mint itself comes with a lot of stuffs such as python, and such. I myself am pretty surprised how much I have settled in. Still, there are still a number of stuffs that I need to add. First of, the utilities that includes stuffs such as gcc, cmake, curl, and all the&nbsp;stuff.</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">curl</span>
+<div class="highlight"><pre><span></span>sudo apt-get install build-essential curl
 </pre></div>
 
 
 <h1>Python</h1>
 <p>Python 2.7 comes pre-installed on most Linux system, so there isn&#8217;t much to do here. Python 3 has started to gain more traction these days, with a lot of projects has been ported to it, and some new ones that are written in it. The day where I would have to deal with Python versions aren&#8217;t too far, but for now, I don&#8217;t have much use for it yet, so 2.7 is good enough for me. I do need to install the development header for some of the libraries that might need it though,&nbsp;so:</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">dev</span>
+<div class="highlight"><pre><span></span>sudo apt-get install python-dev
 </pre></div>
 
 
 <h2>pip, virtualenv,&nbsp;virtualenvwrapper</h2>
 <p>The apt-get for Python, tool to manage isolated Python packages, and a wrapper to make using it&nbsp;easy.</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
-<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pip</span>
-<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenv</span>
-<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenvwrapper</span>
+<div class="highlight"><pre><span></span>sudo apt-get install python-pip
+sudo pip install --upgrade pip
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
 </pre></div>
 
 
 <p>Those command first install <code>pip</code> from the software repository, then use <code>pip</code> to update itself from the PyPI since the one in the software repository can be severely outdated, and then install <code>virtualenv</code> and <code>virtualenvwrapper</code>. To finish up installing <code>virtualenvwrapper</code>, put this somewhere in the startup script (<code>~/.zshrc</code> in my case). Of course change the path according the the&nbsp;configuration.</p>
-<div class="highlight"><pre><span class="n">export</span> <span class="n">WORKON_HOME</span><span class="o">=</span><span class="err">$</span><span class="n"><span class="caps">HOME</span></span><span class="o">/</span><span class="p">.</span><span class="n">venvs</span>
-<span class="n">export</span> <span class="n">PROJECT_HOME</span><span class="o">=</span><span class="err">$</span><span class="n"><span class="caps">HOME</span></span><span class="o">/</span><span class="n">Projects</span>
-<span class="n">source</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">virtualenvwrapper</span><span class="p">.</span><span class="n">sh</span>
+<div class="highlight"><pre><span></span>export WORKON_HOME=$<span class="caps">HOME</span>/.venvs
+export PROJECT_HOME=$<span class="caps">HOME</span>/Projects
+source /usr/local/bin/virtualenvwrapper.sh
 </pre></div>
 
 
@@ -69,26 +69,26 @@
 <p>I don&#8217;t actually know how to program in Ruby. At All. But, there are a bunch of cools tools written in Ruby that are simply can&#8217;t be replaced easily, things like <a href="https://github.com/nex3/sass"><span class="caps">SCSS</span></a> and <a href="https://github.com/guard/guard-livereload">guard-livereload</a>. I don&#8217;t want to spend too much time on this, so I just took the first guide I found and follow it. I am supposed to use <a href="https//rvm.io">rvm</a> to to manage the ruby versions. So, the stuff I&nbsp;did:</p>
 <p>curl -L https://get.rvm.io |&nbsp;bash</p>
 <p>And wait for it to finish, it might take a while. In my case, I ran into an error about it not being able to install some of the requirements, so what I did was check the log, and take the stuffs that failed to install and install them manually via apt-get. Worked for me. After it is done doing its things, put this somewhere in the startup&nbsp;script:</p>
-<div class="highlight"><pre><span class="n">source</span> <span class="err">$</span><span class="n"><span class="caps">HOME</span></span><span class="o">/</span><span class="p">.</span><span class="n">rvm</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">rvm</span>
+<div class="highlight"><pre><span></span>source $<span class="caps">HOME</span>/.rvm/scripts/rvm
 </pre></div>
 
 
 <p>Then, install the version of ruby you want to&nbsp;use:</p>
-<div class="highlight"><pre><span class="n">rvm</span> <span class="n">install</span> <span class="mf">1.9.3</span>
-<span class="n">rvm</span> <span class="o">-</span><span class="k">default</span> <span class="n">use</span> <span class="mf">1.9.3</span>
+<div class="highlight"><pre><span></span>rvm install 1.9.3
+rvm -default use 1.9.3
 </pre></div>
 
 
 <p>It is done. Maybe install some essential&nbsp;gems:</p>
-<div class="highlight"><pre><span class="n">gem</span> <span class="n">install</span> <span class="n">bundler</span><span class="p">,</span> <span class="n">sass</span><span class="p">,</span> <span class="n">guard</span>
+<div class="highlight"><pre><span></span>gem install bundler, sass, guard
 </pre></div>
 
 
 <h1>Node.js</h1>
 <p>I am actually not sure what I am going to do with Node.js, but it is an interesting piece of technology with its full-async execution model. So, I just installed it, maybe I&#8217;ll play with it at sometime. There are many ways to install node.js on a linux system. The official way is to download and install it from source, but since I am don&#8217;t want to spend too much time dealing with something that I am not sure I will use anyway, I installed it from an un-official&nbsp;<span class="caps">PPA</span>:</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="o">:</span><span class="n">chris</span><span class="o">-</span><span class="n">lea</span><span class="o">/</span><span class="n">node</span><span class="p">.</span><span class="n">js</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">nodejs</span>
+<div class="highlight"><pre><span></span>sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
 </pre></div>
 
 
@@ -96,7 +96,7 @@
 <h1>Others</h1>
 <h2>Mono</h2>
 <p>The open source .<span class="caps">NET</span> implementation. Ability to use the awesome C# and&nbsp;MonoGame.</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">mono</span><span class="o">-</span><span class="n">complete</span>
+<div class="highlight"><pre><span></span>sudo apt-get install mono-complete
 </pre></div>
 
 

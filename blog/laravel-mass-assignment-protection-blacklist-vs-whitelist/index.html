@@ -34,13 +34,13 @@
 
         <header>
             <h1>Laravel Mass Assignment Protection - Blacklist V.S.&nbsp;Whitelist</h1>
-            <p class="date">Written on <time datetime="2014-07-12T18:55:00">Jul 12, 2014</time></p>
+            <p class="date">Written on <time datetime="2014-07-12T18:55:00+08:00">Jul 12, 2014</time></p>
         </header>
 
         <article>
             <p><em><span class="caps">TLDR</span></em>: Use whitelist instead of blacklist. Laravel will attempt to mass-assign all attributes that aren’t in the blacklist, including properties/columns that aren’t on the table, causing <span class="caps">SQL</span>&nbsp;error.</p>
 <p>In Laravel (At least on version 4.2.6), there is a convenient method to insert data into the&nbsp;database.</p>
-<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
  <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">Input</span><span class="o">::</span><span class="na">all</span><span class="p">());</span>
 </pre></div>
@@ -49,7 +49,7 @@
 <p>So, the line of code above will take all of the form data and assign them to the <code>User</code> model’s attributes. This means that if we don’t put in any safe guard, anyone could modify the request parameters and set any value for any of the property. This could includes things like user’s roles and permissions, ids, or any other sensitive data. Of course, we could just assign the attributes one-by-one, but that would make our code a lot more&nbsp;verbose.</p>
 <p>Fortunately, Laravel provide two easy ways to safeguard against this kind of mass assignment vulnerability. Either specify a list of fields that can be mass assigned (whitelist), or specify a list of fields that can’t be mass assigned (blacklist). While it seems like the two do the same thing, there are some subtle differences that could cause a bit of&nbsp;confusion.</p>
 <p>For example, we got this table of&nbsp;User:</p>
-<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
  <span class="nx">Schema</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$table</span><span class="p">)</span>
  <span class="p">{</span>
@@ -62,7 +62,7 @@
 
 
 <p>Say we want to protect the <code>role</code> field from being mass-assignment, so, there are two ways to do this in the <code>User</code> model. We can either specify a <code>guarded</code> property to specify a list of fields that we want to exclude from&nbsp;mass-assignment:</p>
-<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
  <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Eloquent</span><span class="p">{</span>
       <span class="k">public</span> <span class="nv">$timestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
@@ -72,7 +72,7 @@
 
 
 <p>Or we can specify a <code>fillable</code> property to specify a list of fields that we want to allow for&nbsp;mass-assignment:</p>
-<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
  <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Eloquent</span><span class="p">{</span>
       <span class="k">public</span> <span class="nv">$timestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
@@ -82,7 +82,7 @@
 
 
 <p>While you would most probably wouldn’t notice any difference, but let&#8217;s take a look at the Laravel’s <code>Model.php</code> source code. First, the code that perform the mass assignment&nbsp;operation.</p>
-<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
  <span class="k">public</span> <span class="k">function</span> <span class="nf">fill</span><span class="p">(</span><span class="k">array</span> <span class="nv">$attributes</span><span class="p">)</span>
  <span class="p">{</span>
@@ -108,7 +108,7 @@
 
 
 <p>We can see that the code loop through the list fillable attributes via the <code>fillableFromArray</code> method, so let’s take a look at&nbsp;it.</p>
-<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
  <span class="k">protected</span> <span class="k">function</span> <span class="nf">fillableFromArray</span><span class="p">(</span><span class="k">array</span> <span class="nv">$attributes</span><span class="p">)</span>
  <span class="p">{</span>
@@ -124,7 +124,7 @@
 
 <p>The method check if we have any value in the <code>fillable</code> property, and if so, return a list of properties inside the <code>attributes</code> variable that intersect with the <code>fillable</code> array, else simply return the <code>attributes</code> itself. This means if we have a <code>fillable</code> property defined for our model, the mass assignment will not process that attributes that aren’t specified in the <code>fillable</code> property.</p>
 <p>So, let’s move on to how Laravel guards the attributes in the <code>guarded</code> property. Let’s go back to the <code>fill</code> method. We can see that for every attributes, the method will check if the key is fillable by calling the <code>isFillable</code> method.</p>
-<div class="highlight"><pre> <span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span> <span class="cp">&lt;?php</span>
  <span class="c1">// ...</span>
  <span class="k">public</span> <span class="k">function</span> <span class="nf">isFillable</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span>
  <span class="p">{</span>

@@ -34,14 +34,14 @@
 
         <header>
             <h1>Some Standard C# Object Methods That You Might Want to&nbsp;Override</h1>
-            <p class="date">Written on <time datetime="2012-05-25T22:22:00">May 25, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-05-25T22:22:00+08:00">May 25, 2012</time></p>
         </header>
 
         <article>
             <p>Alright, I’ll get it straight to the point, since this is just a note to
 myself&nbsp;anyway,</p>
 <p>First one, the ToString()&nbsp;:</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">YourClass</span><span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">YourClass</span><span class="p">{</span>
     <span class="k">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
     <span class="k">private</span> <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
     <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
@@ -59,7 +59,7 @@ the “C# way”, and the ToString method is always there, so why create two
 methods that serve the same purpose? This is similar to the
 <code>__string__</code> method in&nbsp;Python.</p>
 <p>The second one,&nbsp;Equals():</p>
-<div class="highlight"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
 <span class="p">{</span>
     <span class="k">private</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
     <span class="k">private</span> <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>

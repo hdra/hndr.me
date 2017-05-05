@@ -34,7 +34,7 @@
 
         <header>
             <h1>Python Generator&nbsp;Expression</h1>
-            <p class="date">Written on <time datetime="2012-02-25T23:06:00">Feb 25, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-02-25T23:06:00+08:00">Feb 25, 2012</time></p>
         </header>
 
         <article>
@@ -44,12 +44,12 @@ list comprehension, but instead of processing the whole data structures
 at once, it performs the works one at a time. This would mean less
 memory usage and performance when dealing with a massive amount of data.
 To use it, just replace the square brackets on list comprehension with&nbsp;parentheses.</p>
-<div class="highlight"><pre><span class="n">evens</span> <span class="o">=</span> <span class="p">(</span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">evens</span> <span class="o">=</span> <span class="p">(</span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">evens</span><span class="p">:</span>
     <span class="k">print</span> <span class="n">evens</span>
 
-<span class="c"># more example, this can apply to list comprehension as well</span>
-<span class="c"># generate a tuple of possible combinations of odd and even number in the range</span>
+<span class="c1"># more example, this can apply to list comprehension as well</span>
+<span class="c1"># generate a tuple of possible combinations of odd and even number in the range</span>
 <span class="n">permutation</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">y</span><span class="o">%</span><span class="mi">2</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
         </article>

@@ -34,7 +34,7 @@
 
         <header>
             <h1>Python – Custom List Sorting&nbsp;Function</h1>
-            <p class="date">Written on <time datetime="2012-01-30T19:26:00">Jan 30, 2012</time></p>
+            <p class="date">Written on <time datetime="2012-01-30T19:26:00+08:00">Jan 30, 2012</time></p>
         </header>
 
         <article>
@@ -46,9 +46,9 @@ sort a list that contains something else (another list, tuple,
 dictionary, custom classes, etc), we need to define a custom sorting&nbsp;function.</p>
 <p>Sorting in Python is pretty simple, the list class provides a <code>sort()</code>
 function that we can use by&nbsp;default.</p>
-<div class="highlight"><pre><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">ls</span> <span class="c">#[1,2,3,4]</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c1">#[1,2,3,4]</span>
 </pre></div>
 
 
@@ -58,38 +58,38 @@ the class attribute that is used as they sorting key, in this case, we
 will specify the key argument of the sorting function. In the examples,
 the list.sort() method is used, but it can be used with the sorted()
 function as&nbsp;well.</p>
-<div class="highlight"><pre><span class="c"># consider we want to sort a list of string by its length</span>
+<div class="highlight"><pre><span></span><span class="c1"># consider we want to sort a list of string by its length</span>
 
-<span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;car&#39;</span><span class="p">,</span><span class="s">&#39;television&#39;</span><span class="p">,</span><span class="s">&#39;laptop&#39;</span><span class="p">,</span><span class="s">&#39;ok&#39;</span><span class="p">]</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;car&#39;</span><span class="p">,</span><span class="s1">&#39;television&#39;</span><span class="p">,</span><span class="s1">&#39;laptop&#39;</span><span class="p">,</span><span class="s1">&#39;ok&#39;</span><span class="p">]</span>
 
-<span class="c"># specify key=len , for the len() function that will</span>
-<span class="c"># return its length given a string</span>
+<span class="c1"># specify key=len , for the len() function that will</span>
+<span class="c1"># return its length given a string</span>
 
 <span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">ls</span> <span class="c"># [&#39;ok&#39;,&#39;car&#39;,&#39;laptop&#39;,&#39;television&#39;]</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c1"># [&#39;ok&#39;,&#39;car&#39;,&#39;laptop&#39;,&#39;television&#39;]</span>
 </pre></div>
 
 
 <p>The key arguments takes a function name that takes an
 argument and returns an object that will be used as the key, for
 example, to define a custom key&nbsp;function:</p>
-<div class="highlight"><pre><span class="c">#for example, we want to sort a list of tuples based on its</span>
-<span class="c"># last element:</span>
+<div class="highlight"><pre><span></span><span class="c1">#for example, we want to sort a list of tuples based on its</span>
+<span class="c1"># last element:</span>
 
 <span class="k">def</span> <span class="nf">lastElement</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">ls</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
 <span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="n">lastElement</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">ls</span> <span class="c">#[(8,1),(1,2),(5,3),(3,4)]</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c1">#[(8,1),(1,2),(5,3),(3,4)]</span>
 </pre></div>
 
 
 <p>In addition, you can specify the reverse argument to true if you want it
 to sort the list in descending&nbsp;order.</p>
-<div class="highlight"><pre><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">ls</span><span class="o">.</span><span class="n">sort</span><span class="p">[</span><span class="nb">reversed</span><span class="o">=</span><span class="bp">True</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">ls</span> <span class="c">#[4,3,2,1]</span>
+<span class="k">print</span> <span class="n">ls</span> <span class="c1">#[4,3,2,1]</span>
 </pre></div>
         </article>
 
