@@ -8,7 +8,7 @@ SITENAME = u"HNDR.ME"
 SITESUBTITLE = u"A nerd pretending to be a software engineer."
 TIMEZONE = "Asia/Kuala_Lumpur"
 
-SITEFOOTER = u'Hendra &copy; 2014. Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.'
+SITEFOOTER = u'Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.'
 
 DEFAULT_CATEGORY = 'Journals'
 DEFAULT_DATE_FORMAT = '%a %d %B %Y'
