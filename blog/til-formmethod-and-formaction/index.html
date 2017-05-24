@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>    TIL: formmethod and formaction
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic|Merriweather:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://hndr.me/theme/css/cid.css">
+        <link href="http://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+            <div class="container">
+
+<header class="blog-header">
+    <h1><a href="http://hndr.me">HNDR.ME</a></h1>
+    <p> A nerd pretending to be a software engineer. </p>
+    <nav>
+        <a href="http://hndr.me/blog">INDEX</a>
+        <a href="http://hndr.me/archives">ARCHIVES</a>
+        <a href="http://hndr.me/categories">CATEGORIES</a>
+    </nav>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1><span class="caps">TIL</span>: formmethod and&nbsp;formaction</h1>
+            <p class="date">Written on <time datetime="2017-05-24T20:42:00+08:00">May 24, 2017</time></p>
+        </header>
+
+        <article>
+            <p><span class="caps">TIL</span>: <span class="caps">HTML</span> <code>input</code> elements allows you to specify <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formaction"><code>formaction</code></a>
+and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formmethod"><code>formmethod</code></a> attribute that let you override
+<code>action</code> and <code>method</code> attribute of the element&#8217;s parent&nbsp;form.</p>
+<p>In a web application that I&#8217;m working on, there&#8217;s a product listing page that allows the user
+to specify some search criteria and filter the products listing to only display the items that matches
+the search criteria. This product listing is rendered as a <span class="caps">HTML</span> table, and users can also export the entire
+product listing and download them as&nbsp;<span class="caps">CSV</span>.</p>
+<p>There are several ways I can implement that page. I can implement the search form will render the filtered table,
+and along with the filtered table, render the another form that submits the current search parameters in hidden fields
+to the <span class="caps">CSV</span> export endpoint. This means the user must first preview the list in <span class="caps">HTML</span> before they can export&nbsp;them.</p>
+<p>Another option is to pull Javascript thats takes the input values of the first form and use that to generate the second form
+and submit it upon button click. This would mean I had to put Javascript in an otherwise server-rendered page. Neither approach is really&nbsp;satisfactory.</p>
+<p>With the <code>formaction</code>, I can simply add a second submit button to the form and specify the second endpoint there.
+Not only I can avoid unnecessarily making the page depend on Javascript, I also had to write much less code.
+It&#8217;s a nifty little feature of <span class="caps">HTML5</span> that helped me delete many lines of&nbsp;code.</p>
+<h3>Footnote</h3>
+<p>While titled &#8220;<span class="caps">TIL</span>&#8221;, I actually learnt about this a <a href="https://twitter.com/_hdra/status/841481951764594688">while ago</a> while listening
+to my podcast <a href="http://bikeshed.fm/100">backlog</a>, and I&#8217;m really glad the hosts talked about the feature since it was really applicable
+in solving an issue I&#8217;ve been having. Also, I recently decided to start writing more again, but I&#8217;ve been having trouble getting
+block, so just thought I would use this little topic to build up the momentum to write&nbsp;more.</p>
+        </article>
+
+        <footer>
+            <p>This entry is posted in <a href="http://hndr.me/category/softwares.html">Softwares</a>.</p>
+        </footer>
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="http://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</a></li>
+    <script type="text/javascript">
+        // JS ROT13 by http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/
+        document.write( "<yv><n uers=\"znvygb:uraqen2392@tznvy.pbz\" ery=\"absbyybj\">Rznvy</n></yv>".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+    </script>
+    </ul>
+
+    <p class="disclaimer">
+        Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.
+    </p>
+</footer>
+            </div>
+<script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+    </body>
+</html>
