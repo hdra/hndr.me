@@ -61,3 +61,5 @@ STATIC_PATHS =   ['extra/favicon.ico',
                  'extra/CNAME',
                  'extra/robots.txt']
 
+PLUGIN_PATHS = ['./themes/pelican-cid/plugins']
+PLUGINS = ['cid_filters']

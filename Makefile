@@ -8,12 +8,12 @@ help:
 	@echo '                                                                       '
 
 build:
-	pelican content -o output -s pelicanconf.py -d
+	pipenv run pelican content -o output -s pelicanconf.py -d
 
 serve:
-	cd output && python -m pelican.server
+	cd output && pipenv run python -m pelican.server
 
 publish.github:
-	pelican content -o output -s publishconf.py -v
-	ghp-import output
+	pipenv run pelican content -o output -s publishconf.py -v
+	pipenv run ghp-import output
 	git push origin gh-pages

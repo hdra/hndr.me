@@ -2,8 +2,8 @@
 ##
 # This section should match your Makefile
 ##
-PY=python
-PELICAN=pelican
+PY='pipenv run python'
+PELICAN='pipenv run pelican'
 PELICANOPTS=
 
 BASEDIR=$(pwd)
