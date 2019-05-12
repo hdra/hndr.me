@@ -11,7 +11,7 @@ build:
 	pipenv run pelican content -o output -s pelicanconf.py -d
 
 serve:
-	cd output && pipenv run python -m pelican.server
+	cd output && pipenv run python -m pelican.server 4001
 
 publish.github:
 	pipenv run pelican content -o output -s publishconf.py -v

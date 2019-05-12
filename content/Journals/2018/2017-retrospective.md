@@ -2,6 +2,7 @@ Title: Retrospective - 2017
 Date: 2018-01-02 18:33
 Tags: learning, retrospective
 Summary: Thoughts and reflections on the year 2017
+Category: Journals
 
 Another has passed! A day in the new year is a good time as any to take a pause and look back to see how the year has been, and I think as far as a verdict goes, I can only say the year 2017 has been a mixed bag for me.
 

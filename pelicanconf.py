@@ -10,7 +10,8 @@ TIMEZONE = "Asia/Kuala_Lumpur"
 
 SITEFOOTER = u'Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.'
 
-DEFAULT_CATEGORY = 'Journals'
+DEFAULT_CATEGORY = 'Uncategorized'
+USE_FOLDER_AS_CATEGORY = False
 DEFAULT_DATE_FORMAT = '%a %d %B %Y'
 DEFAULT_DATE = 'fs'
 
@@ -56,10 +57,10 @@ EXTRA_PATH_METADATA = {
 }
 
 
-STATIC_PATHS =   ['extra/favicon.ico',
-                 'extra/humans.txt',
-                 'extra/CNAME',
-                 'extra/robots.txt']
+STATIC_PATHS = ['extra/favicon.ico',
+                'extra/humans.txt',
+                'extra/CNAME',
+                'extra/robots.txt']
 
 PLUGIN_PATHS = ['./themes/pelican-cid/plugins']
 PLUGINS = ['cid_filters']
