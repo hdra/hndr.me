@@ -1,5 +1,654 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>HNDR.ME - 2012</title><link href="https://hndr.me/" rel="alternate"></link><link href="https://hndr.me/feeds/2012.atom.xml" rel="self"></link><id>https://hndr.me/</id><updated>2012-08-14T14:17:00+08:00</updated><entry><title>Some XAML Syntax to Remember</title><link href="https://hndr.me/blog/some-xaml-syntax-to-remember" rel="alternate"></link><published>2012-08-14T14:17:00+08:00</published><updated>2012-08-14T14:17:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-08-14:/blog/some-xaml-syntax-to-remember</id><summary type="html">&lt;p&gt;After developing for &lt;span class="caps"&gt;WPF&lt;/span&gt;/ Silverlight for a while, most people will be
+<feed xmlns="http://www.w3.org/2005/Atom"><title>HNDR.ME - Software</title><link href="https://hndr.me/" rel="alternate"></link><link href="https://hndr.me/feeds/software.atom.xml" rel="self"></link><id>https://hndr.me/</id><updated>2019-05-11T20:40:00+08:00</updated><entry><title>Filtering Ecto Queries</title><link href="https://hndr.me/blog/filtering-ecto-queries" rel="alternate"></link><published>2019-05-11T20:40:00+08:00</published><updated>2019-05-11T20:40:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2019-05-11:/blog/filtering-ecto-queries</id><summary type="html">&lt;p&gt;Use pattern matching and recursive function calls to apply filters to an Ecto&amp;nbsp;query&lt;/p&gt;</summary><content type="html">&lt;p&gt;Say you have blogging app with a &lt;code&gt;Post&lt;/code&gt; schema, and you want to be able to search for posts that are written by certain author, posts that where published after a certain date, or posts that contains a certain&amp;nbsp;string.&lt;/p&gt;
+&lt;p&gt;That is pretty simple to do with Ecto. You can start with something like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;defmodule&lt;/span&gt; &lt;span class="nc"&gt;Blog&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;get_posts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nc"&gt;Post&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;author_id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:author_id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:publication_date&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;%&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:title&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;%&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One obvious issue with this is that if you don&amp;#8217;t provide a value for a particular key, Ecto will pass a &lt;code&gt;nil&lt;/code&gt; into the query, which is not what you want. You can easily work around this by pattern-matching for the value passed into the filter, and returning the query as is if it matches &lt;code&gt;nil&lt;/code&gt;. The schema module seems like a pretty good place for this, which also gives the added benefit of abstracting away the column implementation detail for each of the filtering&amp;nbsp;mechanism.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;defmodule&lt;/span&gt; &lt;span class="nc"&gt;Blog.Schema.Post&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;schema&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="c1"&gt;#.....&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;by_author&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="ss"&gt;do&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;by_author&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;author_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;query&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;author_id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;author_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;after_publication_date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="ss"&gt;do&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;after_publication_date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;query&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;publication_date&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;title_contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="ss"&gt;do&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;title_contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;query&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;%&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;%&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;These functions can be consumed as&amp;nbsp;such:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;defmodule&lt;/span&gt; &lt;span class="nc"&gt;Blog&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;get_posts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nc"&gt;Post&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;by_author&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:author_id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;after_publication_date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:publication_date&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title_contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:title&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So far so good, but all the match-clauses for the &lt;code&gt;nil&lt;/code&gt; value is getting pretty repetitive. Plus, if you were to add a new filtering option, you&amp;#8217;d have to make the change on multiple places; once to add the filter function on the schema module, and also another one on the service module/ context module to call the new filter&amp;nbsp;function.&lt;/p&gt;
+&lt;p&gt;There is another way to do this. Since in Elixir a map can be easily converted into a keyword list, and since keyword lists consists of 2-elements tuples, it is a good candidate for pattern&amp;nbsp;matching.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;defmodule&lt;/span&gt; &lt;span class="nc"&gt;Blog.Schema.Post&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;schema&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="c1"&gt;#.....&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;when&lt;/span&gt; &lt;span class="n"&gt;is_map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="ss"&gt;do&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nc"&gt;Map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[]),&lt;/span&gt; &lt;span class="ss"&gt;do&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="ss"&gt;:author_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;author_id&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;author_id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;author_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="ss"&gt;:publication_date&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;publication_date&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="ss"&gt;:title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;%&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;%&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;_&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; &lt;span class="ss"&gt;do&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It can be used with&amp;nbsp;simply:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;defmodule&lt;/span&gt; &lt;span class="nc"&gt;Blog&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="kd"&gt;def&lt;/span&gt; &lt;span class="n"&gt;get_posts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nc"&gt;Post&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It accepts both map and keyword list as argument, as the function will pattern match for a map and convert it into a keyword list. That part can be omitted if you prefer to restrict the filter to a keyword list for some&amp;nbsp;reason.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;filter&lt;/code&gt; function will go through all the keys within the filters that is passed as argument. It uses Elixir&amp;#8217;s pattern matching feature to extract the head and the tails of the filters list. If the head matches a key that it knows how to filter, it will apply the filter to the query and call the same function recursively with the remaining items in the tail. If it run into an unknown key, it will ignore the head and call the function again with the remaining tail and the unchanged query. And finally, when it has gone through all the items in the list, it will return the&amp;nbsp;query.&lt;/p&gt;
+&lt;p&gt;As you can see, it is a pretty simple technique, there is no fancy math concept or complicated algorithms involved. It is implemented with the basic features of Elixir&amp;#8217;s pattern matching, function guard, recursive function&amp;nbsp;call.&lt;/p&gt;
+&lt;p&gt;From what I&amp;#8217;ve seen, one of the more common road-bumps in learning Elixir from a &lt;span class="caps"&gt;OOP&lt;/span&gt; background is figuring out where some of these concepts come to use when you can use conditionals and loops that they are familiar with to achive the same thing. I&amp;#8217;m not going to attempt to explain when/how to use these concepts in this post, but I&amp;#8217;ve heard from some of my junior team members that some of these concepts finally &amp;#8220;clicked&amp;#8221; in their mind when they see it being used in the example above. Hopefully it also does something for you to get a better sense of how to better use Elixir&amp;#8217;s language features to write a more succinct, more declarative idiomatic&amp;nbsp;code.&lt;/p&gt;</content><category term="elixir"></category></entry><entry><title>TIL: formmethod and formaction</title><link href="https://hndr.me/blog/til-formmethod-and-formaction" rel="alternate"></link><published>2017-05-24T20:42:00+08:00</published><updated>2017-05-24T20:42:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2017-05-24:/blog/til-formmethod-and-formaction</id><summary type="html">&lt;p&gt;Little known attribute of &lt;span class="caps"&gt;HTML&lt;/span&gt; &lt;code&gt;input&lt;/code&gt; element&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt;: &lt;span class="caps"&gt;HTML&lt;/span&gt; &lt;code&gt;input&lt;/code&gt; elements allows you to specify &lt;a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formaction"&gt;&lt;code&gt;formaction&lt;/code&gt;&lt;/a&gt;
+and &lt;a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-formmethod"&gt;&lt;code&gt;formmethod&lt;/code&gt;&lt;/a&gt; attribute that let you override
+&lt;code&gt;action&lt;/code&gt; and &lt;code&gt;method&lt;/code&gt; attribute of the element&amp;#8217;s parent&amp;nbsp;form.&lt;/p&gt;
+&lt;p&gt;In a web application that I&amp;#8217;m working on, there&amp;#8217;s a product listing page that allows the user
+to specify some search criteria and filter the products listing to only display the items that matches
+the search criteria. This product listing is rendered as a &lt;span class="caps"&gt;HTML&lt;/span&gt; table, and users can also export the entire
+product listing and download them as&amp;nbsp;&lt;span class="caps"&gt;CSV&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;There are several ways I can implement that page. I can implement the search form will render the filtered table,
+and along with the filtered table, render the another form that submits the current search parameters in hidden fields
+to the &lt;span class="caps"&gt;CSV&lt;/span&gt; export endpoint. This means the user must first preview the list in &lt;span class="caps"&gt;HTML&lt;/span&gt; before they can export&amp;nbsp;them.&lt;/p&gt;
+&lt;p&gt;Another option is to pull Javascript thats takes the input values of the first form and use that to generate the second form
+and submit it upon button click. This would mean I had to put Javascript in an otherwise server-rendered page. Neither approach is really&amp;nbsp;satisfactory.&lt;/p&gt;
+&lt;p&gt;With the &lt;code&gt;formaction&lt;/code&gt;, I can simply add a second submit button to the form and specify the second endpoint there.
+Not only I can avoid unnecessarily making the page depend on Javascript, I also had to write much less code.
+It&amp;#8217;s a nifty little feature of &lt;span class="caps"&gt;HTML5&lt;/span&gt; that helped me delete many lines of&amp;nbsp;code.&lt;/p&gt;
+&lt;h3&gt;Footnote&lt;/h3&gt;
+&lt;p&gt;While titled &amp;#8220;&lt;span class="caps"&gt;TIL&lt;/span&gt;&amp;#8221;, I actually learnt about this a &lt;a href="https://twitter.com/_hdra/status/841481951764594688"&gt;while ago&lt;/a&gt; while listening
+to my podcast &lt;a href="http://bikeshed.fm/100"&gt;backlog&lt;/a&gt;, and I&amp;#8217;m really glad the hosts talked about the feature since it was really applicable
+in solving an issue I&amp;#8217;ve been having. And since I recently decided to start writing more again, but had been having trouble getting over
+the block, I thought I would use this little topic to build up the momentum to write&amp;nbsp;more.&lt;/p&gt;</content><category term="web"></category><category term="html"></category></entry><entry><title>Supervisord and Job Retries</title><link href="https://hndr.me/blog/supervisord-and-job-retries" rel="alternate"></link><published>2016-03-09T22:59:00+08:00</published><updated>2016-03-09T22:59:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2016-03-09:/blog/supervisord-and-job-retries</id><summary type="html">&lt;p&gt;Important note to remember when using supervisord with&amp;nbsp;queues.&lt;/p&gt;</summary><content type="html">&lt;p&gt;When you are deploying an application to production that includes a background queue,
+it is important to also setup a process monitor to make sure the worker stays&amp;nbsp;up.&lt;/p&gt;
+&lt;p&gt;One of the most popular process monitor is &lt;a href="http://supervisord.org/"&gt;supervisord&lt;/a&gt;, which also happens
+to be the one included in the &lt;a href="https://laravel.com/docs/master/queues#supervisor-configuration"&gt;Laravel guide on queues&lt;/a&gt; which
+makes it pretty much the default process monitor on a Laravel&amp;nbsp;deployment.&lt;/p&gt;
+&lt;p&gt;Many background queue libraries, including the one that came with Laravel
+will automatically retry jobs that fails due to an exception. They usually also include
+a way to control how many times the jobs should be retried before giving up and
+moving it to the failed jobs&amp;nbsp;store.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;php artisan queue:listen connection-name --tries=3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One thing to keep in mind is that supervisord also includes a way to control the
+&lt;a href="http://supervisord.org/configuration.html"&gt;maximum number of attempts to start a process after serial crashes&lt;/a&gt;.
+When this limit is reached, it will stop trying to restart the process and the process will be put into
+the &lt;code&gt;FATAL&lt;/code&gt; state. This number is controlled via the configuration entry called &lt;code&gt;startretries&lt;/code&gt;, and it defaults to &lt;code&gt;3&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In most cases, one wouldn&amp;#8217;t need to change this setting. But, if you set the number of retries
+on job queue to be larger than &lt;code&gt;3&lt;/code&gt;, you need to make sure that the &lt;code&gt;startretries&lt;/code&gt; is also
+increased accordingly. If the &lt;code&gt;startretries&lt;/code&gt; is set to a number that is less than the &lt;code&gt;tries&lt;/code&gt; attempt,
+it could cause an issue where &lt;em&gt;the supervisord retry limit is reached before the job retries
+limit is reached&lt;/em&gt;. When this happens, the process is put into a &lt;code&gt;FATAL&lt;/code&gt; state, and the worker process
+doesn&amp;#8217;t get started anymore, &lt;em&gt;halting the entire job queue&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[program:laravel-worker]&lt;/span&gt;
+&lt;span class="na"&gt;process_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;%(program_name)s_%(process_num)02d&lt;/span&gt;
+&lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;php /home/forge/app.com/artisan queue:work sqs --sleep=3 --tries=5&lt;/span&gt;
+&lt;span class="na"&gt;autostart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;autorestart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;startretries&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;5&lt;/span&gt;
+&lt;span class="na"&gt;user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;forge&lt;/span&gt;
+&lt;span class="na"&gt;numprocs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;8&lt;/span&gt;
+&lt;span class="na"&gt;redirect_stderr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/home/forge/app.com/worker.log&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, remember, make sure to keep the queue worker tries equal to or smaller than the supervisord&amp;#8217;s &lt;code&gt;startretries&lt;/code&gt;
+to make sure the failing jobs get moved to the failed jobs queue before they halt the entire job queue.
+Of course this won&amp;#8217;t help if the queue is full of jobs that keeps failing, but in that scenario, you
+should really take a look at your queue worker code&amp;nbsp;anyway.&lt;/p&gt;</content><category term="laravel"></category><category term="programming"></category><category term="devops"></category><category term="supervisord"></category></entry><entry><title>On Strict Domain Design or Pragmatism</title><link href="https://hndr.me/blog/on-strict-domain-design-or-pragmatism" rel="alternate"></link><published>2015-04-10T19:22:00+08:00</published><updated>2015-04-10T19:22:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2015-04-10:/blog/on-strict-domain-design-or-pragmatism</id><summary type="html">&lt;p&gt;Lessons learned in modelling&amp;nbsp;software.&lt;/p&gt;</summary><content type="html">&lt;p&gt;When I first learned &lt;a href="http://laravel.com/"&gt;Laravel&lt;/a&gt;, I was exposed to &lt;a href="http://martinfowler.com/eaaCatalog/repository.html"&gt;various&lt;/a&gt; &lt;a href="http://en.wikipedia.org/wiki/Domain-driven_design"&gt;software design&lt;/a&gt; &lt;a href="http://en.wikipedia.org/wiki/Event-driven_programming"&gt;patterns&lt;/a&gt; &lt;a href="http://stackoverflow.com/questions/3058/what-is-inversion-of-control"&gt;and&lt;/a&gt; &lt;a href="http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29"&gt;principles&lt;/a&gt; that was so widely used in the community.  Sure, I had known many of them before, but being involved in the community where such things were so strongly agreed to be the &amp;#8220;one true way&amp;#8221; affected how I think about writing software as well. I was sold to the idea of Domain Driven&amp;nbsp;Design.&lt;/p&gt;
+&lt;p&gt;I read tons of &lt;a href="https://sites.google.com/site/unclebobconsultingllc/home/articles"&gt;uncle bob articles&lt;/a&gt; and watched  dozens of &lt;a href="https://www.youtube.com/watch?v=3uV3ngl1Z8g"&gt;youtube videos&lt;/a&gt; on the topic, and I always tried to model the business rules of the software perfectly in the code I write. I started using repositories for every business logic code, and having even a bit of business logic scattered around the controllers code bugs me to no end. I made sure the program can&amp;#8217;t go into a state that violates any of the business rules, and of course, I made sure to &lt;a href="https://www.youtube.com/watch?v=WpkDN78P884"&gt;separate the domain code from the implementation detail&lt;/a&gt; so that I can easily switch out the caching or authentication&amp;nbsp;code.&lt;/p&gt;
+&lt;p&gt;It all went quite well, but I soon realized that sometimes, the frameworks that are meant to help you write code faster and be more productive are starting to get in the way of modelling the business domain. This shouldn&amp;#8217;t be too surprising as trying to model the general purpose framework code into your domain would require you to bend a number of features provided by the framework to your needs. Like most people, the active record &lt;span class="caps"&gt;ORM&lt;/span&gt; is the first that gets in the way of separating the business logic and the database storage detail, and soon enough I&amp;#8217;m wishing for a micro framework where I can pick and choose the components to be&amp;nbsp;used.&lt;/p&gt;
+&lt;p&gt;The second thing I realized is that writing a product for a startup company, the business logic change very rapidly, and you need to deliver these changes very quickly to the customers. While it is a good idea to model the software very closely to the domain, you would have to tear down the model and build it over again very often, and soon enough the abstractions are going to leak here and there. Of course there is the side effect on your morale for having to tear down the model that you have designed so&amp;nbsp;toughtfully.&lt;/p&gt;
+&lt;p&gt;Another unintended side effect is on the barrier of entry to the code. Sure, the code written this way can help managing a pretty high level of complexity, and there is a certain sense of elegance to code, but it is not going to be the easiest code to understand. A new team member would have to learn and understand how the code is structured to begin contributing, and he/she would also need to adhere to the practise or the code would be a mess of a chimera code in no&amp;nbsp;time.&lt;/p&gt;
+&lt;p&gt;After a while, I started to question myself whats the point of adhering to these practise. It certainly doesn&amp;#8217;t make my job easier. Then I remembered one of the reasoning that convinced me to buy into the idea; It is the only way to manage the complexity of the program. And sure, I still agree with that sentiment, but is my program really that complex&amp;nbsp;though?&lt;/p&gt;
+&lt;p&gt;I recently listened to the &lt;a href="http://fullstackradio.com/episodes/9/"&gt;an episode of the Full Stack Radio&lt;/a&gt;, where &lt;span class="caps"&gt;DHH&lt;/span&gt;, the creator of Ruby on Rails talked about how most web applications is not all that unique or complex, and when I take a second to think about it, I believe it is actually is&amp;nbsp;true.&lt;/p&gt;
+&lt;p&gt;The conclusion that I came to is most applications, or at least the applications that I write, are not all that complex at all. Most of the time, there is no need to write your code in such a round about way just to keep the code within the model. It is perfectly fine to call your active record model from your controller method. The code you write exists to achieve a certain goal, which most of the time is to make things easier for its user. There is no point in blindly adhering to a practise if it gets in your way of achieving that&amp;nbsp;goal.&lt;/p&gt;
+&lt;p&gt;Of course, it doesn&amp;#8217;t mean that there is no need to put any thought into the code you write, or that Domain Driven Design have no place in writing software. It is still important to keep your code &lt;span class="caps"&gt;DRY&lt;/span&gt;, and if the code to instansiate that new blog post with tags and categories is being repeated many times at different places, it is still a good idea to extract them to a post repository class. It is important not only to know all these software engineering principles, but also to understand why and when they should be applied. Strict adherence to the design discipline of the software have their place, for example when you are writing code for a well-understood domain with little chance for sudden changes, or if you&amp;#8217;re writing a library code that would be used in many different situations. The most important thing to keep in mind is not to let these things get in your way of accomplishing your goal. Writing software, like other engineering disciplines, is about trade offs. Just make sure you understand what you&amp;#8217;re giving up and what you will gain in&amp;nbsp;exchange.&lt;/p&gt;
+&lt;p&gt;Earlier I mentioned about frameworks getting in your way of modelling your domain, which should&amp;#8217;ve been expected, since if you&amp;#8217;re going to write your code to strictly adhere to your domain logic, you would do better starting from scratch and pick up the libraries you need as you go along. Understanding this logic really made me appreciate the thoughts that went into frameworks such as Laravel and RoR even&amp;nbsp;more.&lt;/p&gt;
+&lt;p&gt;Having learned my lessons, I came to appreciate beautiful clean, simple code even if the code is a 5-line active record model being saved from a controller&amp;nbsp;method.&lt;/p&gt;</content><category term="laravel"></category><category term="programming"></category><category term="design patterns"></category></entry><entry><title>Laravel Mass Assignment Protection - Blacklist V.S. Whitelist</title><link href="https://hndr.me/blog/laravel-mass-assignment-protection-blacklist-vs-whitelist" rel="alternate"></link><published>2014-07-12T18:55:00+08:00</published><updated>2014-07-12T18:55:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2014-07-12:/blog/laravel-mass-assignment-protection-blacklist-vs-whitelist</id><summary type="html">&lt;p&gt;Difference between using whitelist and blacklist to prevent mass-assignment vulnerability in&amp;nbsp;Laravel.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;&lt;span class="caps"&gt;TLDR&lt;/span&gt;&lt;/em&gt;: Use whitelist instead of blacklist. Laravel will attempt to mass-assign all attributes that aren’t in the blacklist, including properties/columns that aren’t on the table, causing &lt;span class="caps"&gt;SQL&lt;/span&gt;&amp;nbsp;error.&lt;/p&gt;
+&lt;p&gt;In Laravel (At least on version 4.2.6), there is a convenient method to insert data into the&amp;nbsp;database.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="c1"&gt;// ...&lt;/span&gt;
+ &lt;span class="nv"&gt;$user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Input&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="na"&gt;all&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, the line of code above will take all of the form data and assign them to the &lt;code&gt;User&lt;/code&gt; model’s attributes. This means that if we don’t put in any safe guard, anyone could modify the request parameters and set any value for any of the property. This could includes things like user’s roles and permissions, ids, or any other sensitive data. Of course, we could just assign the attributes one-by-one, but that would make our code a lot more&amp;nbsp;verbose.&lt;/p&gt;
+&lt;p&gt;Fortunately, Laravel provide two easy ways to safeguard against this kind of mass assignment vulnerability. Either specify a list of fields that can be mass assigned (whitelist), or specify a list of fields that can’t be mass assigned (blacklist). While it seems like the two do the same thing, there are some subtle differences that could cause a bit of&amp;nbsp;confusion.&lt;/p&gt;
+&lt;p&gt;For example, we got this table of&amp;nbsp;User:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="c1"&gt;// ...&lt;/span&gt;
+ &lt;span class="nx"&gt;Schema&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="na"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;User&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nv"&gt;$table&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;increments&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="nv"&gt;$table&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="nv"&gt;$table&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;email&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="nv"&gt;$table&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;unsignedInteger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;role&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Say we want to protect the &lt;code&gt;role&lt;/code&gt; field from being mass-assignment, so, there are two ways to do this in the &lt;code&gt;User&lt;/code&gt; model. We can either specify a &lt;code&gt;guarded&lt;/code&gt; property to specify a list of fields that we want to exclude from&amp;nbsp;mass-assignment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="c1"&gt;// ...&lt;/span&gt;
+ &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Eloquent&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nv"&gt;$timestamps&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="nv"&gt;$guarded&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;role&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or we can specify a &lt;code&gt;fillable&lt;/code&gt; property to specify a list of fields that we want to allow for&amp;nbsp;mass-assignment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="c1"&gt;// ...&lt;/span&gt;
+ &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Eloquent&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nv"&gt;$timestamps&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="nv"&gt;$fillable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;email&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;While you would most probably wouldn’t notice any difference, but let&amp;#8217;s take a look at the Laravel’s &lt;code&gt;Model.php&lt;/code&gt; source code. First, the code that perform the mass assignment&amp;nbsp;operation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="c1"&gt;// ...&lt;/span&gt;
+ &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;fill&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;array&lt;/span&gt; &lt;span class="nv"&gt;$attributes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nv"&gt;$totallyGuarded&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;totallyGuarded&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+      &lt;span class="k"&gt;foreach&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;fillableFromArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$attributes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;$key&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;$value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+           &lt;span class="nv"&gt;$key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;removeTableFromKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+           &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;isFillable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+           &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;setAttribute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+           &lt;span class="p"&gt;}&lt;/span&gt;
+           &lt;span class="k"&gt;elseif&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$totallyGuarded&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+           &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;MassAssignmentException&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+           &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We can see that the code loop through the list fillable attributes via the &lt;code&gt;fillableFromArray&lt;/code&gt; method, so let’s take a look at&amp;nbsp;it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="c1"&gt;// ...&lt;/span&gt;
+ &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;fillableFromArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;array&lt;/span&gt; &lt;span class="nv"&gt;$attributes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;fillable&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$unguarded&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+           &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;array_intersect_key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$attributes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;array_flip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;fillable&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$attributes&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The method check if we have any value in the &lt;code&gt;fillable&lt;/code&gt; property, and if so, return a list of properties inside the &lt;code&gt;attributes&lt;/code&gt; variable that intersect with the &lt;code&gt;fillable&lt;/code&gt; array, else simply return the &lt;code&gt;attributes&lt;/code&gt; itself. This means if we have a &lt;code&gt;fillable&lt;/code&gt; property defined for our model, the mass assignment will not process that attributes that aren’t specified in the &lt;code&gt;fillable&lt;/code&gt; property.&lt;/p&gt;
+&lt;p&gt;So, let’s move on to how Laravel guards the attributes in the &lt;code&gt;guarded&lt;/code&gt; property. Let’s go back to the &lt;code&gt;fill&lt;/code&gt; method. We can see that for every attributes, the method will check if the key is fillable by calling the &lt;code&gt;isFillable&lt;/code&gt; method.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+ &lt;span class="c1"&gt;// ...&lt;/span&gt;
+ &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;isFillable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;static&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$unguarded&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;in_array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;fillable&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;isGuarded&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;fillable&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="nx"&gt;starts_with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;_&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+
+ &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;isGuarded&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;in_array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;guarded&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;guarded&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;if the key is not listed in the &lt;code&gt;fillable&lt;/code&gt; property,  it will call another method &lt;code&gt;isGuarded&lt;/code&gt;, that checks if the key is specified in the &lt;code&gt;guarded&lt;/code&gt; property.&lt;/p&gt;
+&lt;p&gt;This means, if &lt;code&gt;fillable&lt;/code&gt; is not specified, and the key is not listed in the &lt;code&gt;guarded&lt;/code&gt; property, the framework will assume that the key can be safely mass-assigned. Sound perfectly fine and should be expected, but when we include a property that is not a field of the table, it will cause an error, because the framework will try to insert a data into a column that doesn’t exists. The same problem will not occur if you use a while list since the framework will only process the keys that are in the&amp;nbsp;array.&lt;/p&gt;
+&lt;p&gt;In conclusion, the best way to protect against mass-assignment vulnerability is to use the whitelist instead of the blacklist. From a security standpoint, it is better to explicitly specify the things that you want to allow anyway, and it also wouldn’t make Laravel try and insert the a non-existing field into the&amp;nbsp;database.&lt;/p&gt;</content><category term="laravel"></category><category term="programming"></category></entry><entry><title>On Adding New Features</title><link href="https://hndr.me/blog/on-adding-new-features" rel="alternate"></link><published>2014-06-24T19:42:00+08:00</published><updated>2014-06-24T19:42:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2014-06-24:/blog/on-adding-new-features</id><summary type="html">&lt;p&gt;On my job, I have been working on a product that we have been trying …&lt;/p&gt;</summary><content type="html">&lt;p&gt;On my job, I have been working on a product that we have been trying to get to market within this month. There are more-or-less 2 programmers working on this project, an iOS programmer working on an iPad app and an iPhone app, and myself working on the server backend and the data analysis front-end. I said &amp;#8216;more-or-less&amp;#8217; because there was another guy working on an Android app, but he currently is working on another project, also, while I do spend the majority of my time working on the project, I am also involved in several other clients&amp;nbsp;projects.&lt;/p&gt;
+&lt;p&gt;The project is supposed to be launched by the end of this month, but I personally don&amp;#8217;t think the project is anywhere close to production-ready. Despite this, we keep adding features. The main target market of the product is small business owners, and I do understand why these features might be necessary, but I can&amp;#8217;t help but feel that we should stop adding features and focus on making the existing features to be ready for&amp;nbsp;production.&lt;/p&gt;
+&lt;p&gt;I am currently reading a book by &lt;a href="https://gettingreal.37signals.com/"&gt;37 Signals, Getting Real&lt;/a&gt;. I highly recommend it to anyone who writes software for a living to read it. Its not a technical book, so no need to open up your text editor to try out a code snippet from the book.I haven&amp;#8217;t finished reading it yet, but the content has been really great so far. It is full of valuable insights on running a software business and designing product. But, the whole fifth chapter on Feature Selection really resonates with me because I have been thinking about what adding features to a software product really&amp;nbsp;means.&lt;/p&gt;
+&lt;p&gt;One of the hidden cost of a new feature mentioned in the book is feature&amp;nbsp;loop:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For example, be on the lookout for feature loops (i.e. features that lead to more features). We&amp;#8217;ve had requests to add a meetings tab to Basecamp. Seems simple enough until you examine it closely. Think of all the different items a meetings tab might require: location, time, room, people, email invites, calendar integration, support documentation, etc. That&amp;#8217;s not to mention that we&amp;#8217;d have to change promotional screenshots, tour pages, faq/help pages, the terms of service, and more. Before you know it, a simple idea can snowball into a major&amp;nbsp;headache.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That is exactly what I&amp;#8217;ve been experiencing working on the project. Adding a stock keeping feature leads to inventory features which leads to keeping track of invoices which leads to keeping track of suppliers and so on and so&amp;nbsp;forth.&lt;/p&gt;
+&lt;p&gt;While that might not seems much, from the technical persepective, adding a feature often involve more than just coding up the feature. Coding up a new feature by itself is not much work, but one thing to keep in mind is that these features rarely work in isolation. That means, programming the feature doesn&amp;#8217;t only require us to write the code for the new feature, it also means that we need to test it. Not just the new features either, we need to be sure that the few lines of new code doesn&amp;#8217;t break any existing feature. Those are just code, if the change involve changing the database schema, pulling in new dependencies, or having to coordinate with an additional process that would make things even more&amp;nbsp;complicated.&lt;/p&gt;
+&lt;p&gt;Especially changes in database schema. The ideal database schema that can accomodate the new feature often aren&amp;#8217;t backward compatible, it often breaks stuffs in the unexpected places. Also, keeping the backword compatibility while adding hacks on top of hacks to accomodate the new features are even worse, it is basically keeping an active time bomb&amp;nbsp;around.&lt;/p&gt;
+&lt;p&gt;All these hidden costs adds up, too. Almost like compound interest, you need to make sure not to break existing features when implementing a new one, and when you have added the new feature, that would be one more thing that you need to make sure not to break when adding another feature. All that makes maintaining the code harder. Maintainance doesn&amp;#8217;t just mean fixing bugs, it also means that while you are fixing a bug, you need to make sure that you don&amp;#8217;t end up breaking stuff in other place, and do a favor for your future self and make sure the code stays easily modifiable so that future you can do the same thing. Also, while doing all these make sure to keep the code clean and isolated so that you don&amp;#8217;t end up with a stack of jenga of a code in the first&amp;nbsp;place.&lt;/p&gt;
+&lt;p&gt;The recent experience makes me think how great would it be if I invested some time to build an automated test infrastructure early in the development process. Of course an automated test won&amp;#8217;t help you to prevent breaks if the code itself is built like a house of cards, but it does help so that you don&amp;#8217;t have to manually test all the features by yourself, not to mention that it is not unusual at all for us to miss several parts of the project while performing the&amp;nbsp;test.&lt;/p&gt;
+&lt;p&gt;So, to summarize up, while working on a software project that doesn&amp;#8217;t have a clear specification and changes all the time, help your future-self and have an automated test infrastructure. Follow the &lt;span class="caps"&gt;SOLID&lt;/span&gt; principles while writing your code, and keep your classes isolated from each&amp;nbsp;other.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;BUT&lt;/span&gt;, all of that will not help if new features keep being added all the time. While working on project, with deadlines and features being added and removed all the time, having things break is almost inevitable. So, as the book says, the best thing is to say No. Keep only the features that are essentials, and make sure these features works really, really well. As mentioned in the book, Steve Jobs once&amp;nbsp;said:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[Innovation] comes from saying no to 1,000 things to make sure we don&amp;#8217;t get on the wrong track or try to do too much. We&amp;#8217;re always thinking about new markets we could enter, but it&amp;#8217;s only by saying no that you can concentrate on the things that are really&amp;nbsp;important.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And I believe that is something we should all keep in mind in developing not only a software, but also for any products that actually&amp;nbsp;works.&lt;/p&gt;</content><category term="Programming"></category></entry><entry><title>A Tiny Bit on Firefox Extension</title><link href="https://hndr.me/blog/a-tiny-bit-on-firefox-extension" rel="alternate"></link><published>2013-08-20T14:33:00+08:00</published><updated>2013-08-20T14:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-08-20:/blog/a-tiny-bit-on-firefox-extension</id><summary type="html">&lt;p&gt;I stumbled on &lt;a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/"&gt;this&lt;/a&gt; article on creating Chrome extension, and really, it seems really simple …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I stumbled on &lt;a href="http://coryg89.github.io/technical/2013/08/13/how-to-create-your-own-chrome-extensions/"&gt;this&lt;/a&gt; article on creating Chrome extension, and really, it seems really simple to do build an extension for the browser. So, I thought what would it take to build the same thing for&amp;nbsp;Firefox?&lt;/p&gt;
+&lt;p&gt;It turns out, it is pretty simple as well, but when you are just getting started, find out where to get started aren&amp;#8217;t really straightforward. The getting started documents aren&amp;#8217;t exactly well organized. To start with, there are two different ways to build an add-on for Firefox. The &lt;span class="caps"&gt;XUL&lt;/span&gt; tool set, and also, the new Add-on &lt;span class="caps"&gt;SDK&lt;/span&gt;. The &lt;a href="https://addons.mozilla.org/developers/"&gt;add-ons developer page&lt;/a&gt; highlights the Add-on &lt;span class="caps"&gt;SDK&lt;/span&gt;, but the links below mostly deal with the &lt;span class="caps"&gt;XUL&lt;/span&gt; tools. The difference between the two can be found on &lt;a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/sdk-vs-xul.html"&gt;this page&lt;/a&gt;. Basically, the Add-on &lt;span class="caps"&gt;SDK&lt;/span&gt; is the one that is simpler, the documentation can be found &lt;a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/index.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Anyway, once you found the documentation, everything should be pretty easy to follow. Mozilla provides &lt;a href="https://builder.addons.mozilla.org/"&gt;Add-on Builder&lt;/a&gt;, a web-app that allows you to build add-ons for Firefox, but I prefer to download the &lt;span class="caps"&gt;SDK&lt;/span&gt; to my computer and use my preferred text editor. The &lt;span class="caps"&gt;SDK&lt;/span&gt; is basically a python environment setup with everything you need to build an add-on, so you would need to have python installed on your computer. Whichever method you chose, the method are basically the&amp;nbsp;same.&lt;/p&gt;
+&lt;h2&gt;Building the&amp;nbsp;Add-on&lt;/h2&gt;
+&lt;p&gt;So, moving on to building actual add-on. Like the example in the post linked above, it is a  simple add-ons that adds a context menu that allows you to search &lt;span class="caps"&gt;MDN&lt;/span&gt; for the selected text. To be honest, I am not sure what to write in this post, because it is much more simpler than I&amp;nbsp;thought.&lt;/p&gt;
+&lt;p&gt;Like the Chrome extension, a Firefox add-on is built with &lt;span class="caps"&gt;HTML&lt;/span&gt;/&lt;span class="caps"&gt;CSS&lt;/span&gt; and Javascript. There is a &lt;code&gt;package.json&lt;/code&gt; that contains the meta-data of the add-on that is a generated for you anyway. Your code will mainly goes to the &lt;code&gt;main.js&lt;/code&gt; file in the &lt;code&gt;lib&lt;/code&gt; folder of your add-on directory. You can put your extra data, such as to the &lt;span class="caps"&gt;CSS&lt;/span&gt; files, extra javascript libraries, images, etc in the &lt;code&gt;data&lt;/code&gt; folder. All these folders are generated automatically with the initialization of the add-on, along with a &lt;code&gt;doc&lt;/code&gt; and &lt;code&gt;test&lt;/code&gt; folder, which pretty much describe&amp;nbsp;themselves.&lt;/p&gt;
+&lt;p&gt;Here is the whole code for the&amp;nbsp;add-on:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;contextMenu&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sdk/context-menu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;tabs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sdk/tabs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;script&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;self.on(&amp;quot;context&amp;quot;, function(){&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s2"&gt;&amp;quot;    return &amp;#39;Search &lt;span class="caps"&gt;MDN&lt;/span&gt; for \&amp;quot;&amp;#39;+window.getSelection().toString()+&amp;#39;\&amp;quot;&amp;#39;;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;});&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;self.on(&amp;quot;click&amp;quot;, function(){&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;   self.postMessage(window.getSelection().toString());&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;
+             &lt;span class="s1"&gt;&amp;#39;});&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;menuItem&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;contextMenu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+    &lt;span class="nx"&gt;label&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Search on &lt;span class="caps"&gt;MDN&lt;/span&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;context&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;contextMenu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;SelectionContext&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+    &lt;span class="nx"&gt;contentScript&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;script&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;onMessage&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;selectionText&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://google.com/search?btnI&amp;amp;q=site:developer.mozilla.org &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;selectionText&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;+&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="nx"&gt;tabs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As you can see there, there isn&amp;#8217;t much to do. The first two lines are the import statement to access some of the browser feature. Skip the &lt;code&gt;script&lt;/code&gt; variable for now. Next, the we create a new context menu, give it a label, and we declare the context so that the item only shows up when there is a something&amp;nbsp;selected.&lt;/p&gt;
+&lt;p&gt;Next, we pass the &lt;code&gt;contentScript&lt;/code&gt; argument, which defines the behavior of the menu item even further. Many things can be done through the &lt;code&gt;contentScript&lt;/code&gt;, such as to scope down the context even further, set the click behaviour, etc. The argument takes a string, and we passed the &lt;code&gt;script&lt;/code&gt; variable as the argument. In this case, the &lt;code&gt;context&lt;/code&gt; event is are fired just before the context menu is displayed, and we change the label further to add the selected text. We also handles the &lt;code&gt;click&lt;/code&gt; event, and with it, we call the &lt;code&gt;postMessage&lt;/code&gt; to pass the the selected text, which we handle with the function passed to the &lt;code&gt;onMessage&lt;/code&gt; argument, and in it, we open a new tab with the search&amp;nbsp;&lt;span class="caps"&gt;URL&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;As you might imagine, passing the script that defines the behavior of the add-on as a string literal isn&amp;#8217;t really nice when script is something a little more complicated. You can pass external javascript files to the &lt;code&gt;contentScriptFile&lt;/code&gt; argument to accomplish the same thing. Although there are several differences in the way the script is executed, but I won&amp;#8217;t go into it too much in this post. More on it &lt;a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/dev-guide/guides/content-scripts/loading.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There is a lot more you can do with the add-on. You can scan through more features available on the documentation. There are more examples on the add-ons &lt;span class="caps"&gt;SDK&lt;/span&gt;&amp;#8217;s &lt;a href="https://github.com/mozilla/addon-sdk"&gt;Github&lt;/a&gt; repository. By the way, the add-on mentioned above is available on &lt;a href="https://github.com/hdra/ff-MDNSearch"&gt;Github&lt;/a&gt; as well. Also, the add-on we built here is just a simple plugin to show the basics of the Firefox plugin &lt;span class="caps"&gt;API&lt;/span&gt;, not really meant for actual use. It doesn&amp;#8217;t handle plenty of use cases, and it also relies on Google&amp;#8217;s Feeling Lucky version to directly open the first search first result. so I don&amp;#8217;t really recommend you actually using it for anything&amp;nbsp;serious.&lt;/p&gt;</content><category term="Programming"></category></entry><entry><title>Setting up Development Environment with Tmux</title><link href="https://hndr.me/blog/setting-up-development-environment-with-tmux" rel="alternate"></link><published>2013-07-09T16:02:00+08:00</published><updated>2013-07-09T16:02:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-07-09:/blog/setting-up-development-environment-with-tmux</id><summary type="html">&lt;p&gt;I recently just finished up my bachelor studies, and as I wait for the the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently just finished up my bachelor studies, and as I wait for the the convocation, I find myself not knowing what to work on. So,  between tying up loose ends with my scholarship sponsor, trying to score a freelance projects, and wasting time watching &lt;span class="caps"&gt;TV&lt;/span&gt; series, I spent my time playing around with various web front-end frameworks and libraries without any particular aims. In doing this I ended up creating a bunch of throw-away projects, and I switch around between them randomly quite often. Often, I would have to run several commands to get everything up and running again, which would be easy if it involves only starting up an editor, but most of the time, I would have to type the same commands many times when I start working on a project. Of course, this doesn&amp;#8217;t only apply to this particular situation of me experimenting around with various tools, even when working on a more &amp;#8220;serious&amp;#8221; project, I can benefit from automating the setup of the development&amp;nbsp;environment.&lt;/p&gt;
+&lt;p&gt;The first idea that came to my thought is simply write a batch script to start the tools that I need, but I realize that this won&amp;#8217;t work well, since most of the tools that I are long running processes, such as a web server, or maybe &lt;span class="caps"&gt;CSS&lt;/span&gt; pre-compiler set to watch for changes in my project. Also, the log messages that these tools produce on the terminal are things that I would prefer to see. So, I would need a something that can help me to manage several terminal processes easily. The first thing that came to mind is &lt;a href="http://www.gnu.org/software/screen/"&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; Screen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I read about terminal multiplexer and their use before, but this is the first time I thought of a use for them myself. So, I read around trying to look for how to use &lt;code&gt;screen&lt;/code&gt; to do the things I need, and it seems like there is a superior alternative to screen, which is &lt;a href="http://tmux.sourceforge.net/"&gt;tmux&lt;/a&gt;, so I switched my focus to it&amp;nbsp;instead.&lt;/p&gt;
+&lt;p&gt;So, what tmux does is basically it allows me to easily run multiple programs in a single shell session , switch between them, and manage them from the parent terminal. It is almost like a terminal emulator within your terminal. Perfect for what I&amp;nbsp;needed.&lt;/p&gt;
+&lt;p&gt;In most of my experiment projects, I usually have at least python web server, compass watch, and livereload server running. Instead of starting the one by one, with tmux, I automate it, and at the same time have them arranged neatly in their own window/ pane. I can start a new tmux session, label it, and detach from it with &lt;code&gt;tmux new-session -s my-dev -d&lt;/code&gt;. I can also pass a new command for it to run. For example, I want it to create a new v-split pane and run &lt;code&gt;top&lt;/code&gt; in it, I can just enter &lt;code&gt;tmux split-window -v -t my-dev "top"&lt;/code&gt;. Awesome. For example, to create a tmux session with the setup consisting of python web server, livereload server, etc I mentioned above, I can just run these&amp;nbsp;script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tmux new-session -s my-dev -d &amp;quot;python -m SimpleHTTPServer 8899&amp;quot;
+tmux split-window -v -t my-dev &amp;quot;compass watch&amp;quot;
+tmux split-window -v -t my-dev &amp;quot;guard&amp;quot;
+tmux select-layout -t my-dev tiled
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And I would have all these 3 process running inside a detached tmux session in the background. If I ever need to see the log messages, I just run &lt;code&gt;tmux attach&lt;/code&gt; and have this shown to&amp;nbsp;me:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/9247967451/" title="Tmux screenshot"&gt;
+    &lt;img src="https://farm4.staticflickr.com/3694/9247967451_6169fb7941_c.jpg" width="800" height="433" alt="Tmux"&gt;
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Of course, If you prefer stay inside tmux, you can just leave out the &lt;code&gt;-d&lt;/code&gt; flag. You can also start a new editor inside it, create an empty tab for you run other commands on, almost anything that you can do on a terminal,&amp;nbsp;automated.&lt;/p&gt;
+&lt;p&gt;That is awesome. But, you can automate it even further, and make your life even easier. &lt;a href="https://github.com/aziz/tmuxinator"&gt;Tmuxinator&lt;/a&gt; is a tool that allows you to create and manage tmux session easily. You create project with &lt;code&gt;mux new project-name&lt;/code&gt;, and open the config with &lt;code&gt;mux open project-name&lt;/code&gt; (&lt;code&gt;mux&lt;/code&gt; is an alias for tmuxinator). The config will look something like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ~/.tmuxinator/project-name.yml
+
+project_name: project-name
+project_root: ~/project/project-name
+tabs:
+  - editor: vim
+  - logs:
+        layout: even-vertical
+        panes:
+            - python -m SimpleHTTPServer
+            - compass watch
+            - guard
+  - shell: #empty, run plain shell
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I am sure I don&amp;#8217;t need to explain that file. It stores the configuration of the environment in an easy to write (and read) format, and you can start it with &lt;code&gt;mux project-name&lt;/code&gt; and it will create the session you need with the layout you need. You can read more about it in the project&amp;#8217;s &lt;span class="caps"&gt;README&lt;/span&gt; file. Tmuxinator obviously make something that make our job easier, even easier, but there is one caveat though. As you probably have noticed, tmuxinator is written in Ruby, and that means the tmux session it create will be a child process of Ruby, instead of your shell. You can read more what does this means &lt;a href="http://natedickson.com/blog/2013/05/10/from-the-desk-of-captain-obvious-tmuxinator-vs-scripted-configurations/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Obviously, tmux is powerful tools that can be used for more than just automating environment setup, I myself am still in discovering its capabilities. Search around for more information on customizing and using it, and of course, the &lt;code&gt;man&lt;/code&gt; page of the tmux itself is a great source of&amp;nbsp;information.&lt;/p&gt;</content><category term="programming"></category></entry><entry><title>Setting Up Stuffs on Linux</title><link href="https://hndr.me/blog/setting-up-stuffs-on-linux" rel="alternate"></link><published>2013-06-14T19:41:00+08:00</published><updated>2013-06-14T19:41:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-14:/blog/setting-up-stuffs-on-linux</id><summary type="html">&lt;p&gt;My Linux system has been pretty much set up for most things I need, since …&lt;/p&gt;</summary><content type="html">&lt;p&gt;My Linux system has been pretty much set up for most things I need, since of course, Linux Mint itself comes with a lot of stuffs such as python, and such. I myself am pretty surprised how much I have settled in. Still, there are still a number of stuffs that I need to add. First of, the utilities that includes stuffs such as gcc, cmake, curl, and all the&amp;nbsp;stuff.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install build-essential curl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Python&lt;/h1&gt;
+&lt;p&gt;Python 2.7 comes pre-installed on most Linux system, so there isn&amp;#8217;t much to do here. Python 3 has started to gain more traction these days, with a lot of projects has been ported to it, and some new ones that are written in it. The day where I would have to deal with Python versions aren&amp;#8217;t too far, but for now, I don&amp;#8217;t have much use for it yet, so 2.7 is good enough for me. I do need to install the development header for some of the libraries that might need it though,&amp;nbsp;so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install python-dev
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;pip, virtualenv,&amp;nbsp;virtualenvwrapper&lt;/h2&gt;
+&lt;p&gt;The apt-get for Python, tool to manage isolated Python packages, and a wrapper to make using it&amp;nbsp;easy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install python-pip
+sudo pip install --upgrade pip
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Those command first install &lt;code&gt;pip&lt;/code&gt; from the software repository, then use &lt;code&gt;pip&lt;/code&gt; to update itself from the PyPI since the one in the software repository can be severely outdated, and then install &lt;code&gt;virtualenv&lt;/code&gt; and &lt;code&gt;virtualenvwrapper&lt;/code&gt;. To finish up installing &lt;code&gt;virtualenvwrapper&lt;/code&gt;, put this somewhere in the startup script (&lt;code&gt;~/.zshrc&lt;/code&gt; in my case). Of course change the path according the the&amp;nbsp;configuration.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;export WORKON_HOME=$&lt;span class="caps"&gt;HOME&lt;/span&gt;/.venvs
+export PROJECT_HOME=$&lt;span class="caps"&gt;HOME&lt;/span&gt;/Projects
+source /usr/local/bin/virtualenvwrapper.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Ruby&lt;/h1&gt;
+&lt;p&gt;I don&amp;#8217;t actually know how to program in Ruby. At All. But, there are a bunch of cools tools written in Ruby that are simply can&amp;#8217;t be replaced easily, things like &lt;a href="https://github.com/nex3/sass"&gt;&lt;span class="caps"&gt;SCSS&lt;/span&gt;&lt;/a&gt; and &lt;a href="https://github.com/guard/guard-livereload"&gt;guard-livereload&lt;/a&gt;. I don&amp;#8217;t want to spend too much time on this, so I just took the first guide I found and follow it. I am supposed to use &lt;a href="https//rvm.io"&gt;rvm&lt;/a&gt; to to manage the ruby versions. So, the stuff I&amp;nbsp;did:&lt;/p&gt;
+&lt;p&gt;curl -L https://get.rvm.io |&amp;nbsp;bash&lt;/p&gt;
+&lt;p&gt;And wait for it to finish, it might take a while. In my case, I ran into an error about it not being able to install some of the requirements, so what I did was check the log, and take the stuffs that failed to install and install them manually via apt-get. Worked for me. After it is done doing its things, put this somewhere in the startup&amp;nbsp;script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;source $&lt;span class="caps"&gt;HOME&lt;/span&gt;/.rvm/scripts/rvm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then, install the version of ruby you want to&amp;nbsp;use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rvm install 1.9.3
+rvm -default use 1.9.3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It is done. Maybe install some essential&amp;nbsp;gems:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gem install bundler, sass, guard
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Node.js&lt;/h1&gt;
+&lt;p&gt;I am actually not sure what I am going to do with Node.js, but it is an interesting piece of technology with its full-async execution model. So, I just installed it, maybe I&amp;#8217;ll play with it at sometime. There are many ways to install node.js on a linux system. The official way is to download and install it from source, but since I am don&amp;#8217;t want to spend too much time dealing with something that I am not sure I will use anyway, I installed it from an un-official&amp;nbsp;&lt;span class="caps"&gt;PPA&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And that will install &lt;code&gt;npm&lt;/code&gt; as well. kind of like &lt;code&gt;pip&lt;/code&gt; of the node.js world I&amp;nbsp;guess.&lt;/p&gt;
+&lt;h1&gt;Others&lt;/h1&gt;
+&lt;h2&gt;Mono&lt;/h2&gt;
+&lt;p&gt;The open source .&lt;span class="caps"&gt;NET&lt;/span&gt; implementation. Ability to use the awesome C# and&amp;nbsp;MonoGame.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install mono-complete
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Android-&lt;span class="caps"&gt;SDK&lt;/span&gt;?&lt;/h2&gt;
+&lt;p&gt;I know I am going to need this sooner or later, but dealing with Java isn&amp;#8217;t just my favorite thing to do. I think the new Android Studio is supposed to make installing the SDKs and Android system images easier without having to deal with eclipse plugins and stuff, but still, removing OpenJDK, installing Oracle-&lt;span class="caps"&gt;JDK&lt;/span&gt;, and stuff&amp;#8230; later, I&amp;nbsp;guess.&lt;/p&gt;
+&lt;h2&gt;Go?&lt;/h2&gt;
+&lt;p&gt;I am not sure if I want to install this. The hype around it has been drawing my attention to&amp;nbsp;it.&lt;/p&gt;</content><category term="linux"></category><category term="python"></category><category term="ruby"></category><category term="node"></category></entry><entry><title>More Fun with Linux</title><link href="https://hndr.me/blog/more-fun-with-linux" rel="alternate"></link><published>2013-06-11T13:04:00+08:00</published><updated>2013-06-11T13:04:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-11:/blog/more-fun-with-linux</id><summary type="html">&lt;p&gt;Some stuffs that I did to make working with Linux&amp;nbsp;easier.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Terminal&lt;/h1&gt;
+&lt;p&gt;The best feature of a Linux system is its &lt;span class="caps"&gt;CLI&lt;/span&gt; tools, so of course, the terminal is an important tool to have. My first choice was &lt;a href="http://software.schmorp.de/pkg/rxvt-unicode.html"&gt;urxvt&lt;/a&gt;, it was lightweight, supports unicode, have quite an active community with various customization with it, and it doesn&amp;#8217;t have a menu bar, which is perfect for the i3wm I am using. Copy and pasting aren&amp;#8217;t as straightforward as I hoped, as I need to setup some script to get the basic function working, but I could live with that. The deal breaker problem is that it for some weird reason produces weird text artifacts when I resizes the window, which is really important to me, since one of the main the reason I am using a tiling window manager is for the flexibility and ability to quickly resize windows using&amp;nbsp;keyboard.&lt;/p&gt;
+&lt;p&gt;So, I settled for Terminator. It wasn&amp;#8217;t ideal, it was rather packed with features I don&amp;#8217;t really need, such as tabs and split windows. I have no need for these features, as I am already using a tiling window manager anyway. But at least it works, and it got a bad ass&amp;nbsp;name.&lt;/p&gt;
+&lt;p&gt;There isn&amp;#8217;t much of a terminal to customize, so I only set the font type, hid the title bar, and changed the color scheme. I wrote a &lt;a href="https://github.com/hdra/itermcolors2terminator"&gt;script&lt;/a&gt; to convert iTerm color schemes to the terminator palettes, since seems like the iTerm users enjoy a great list of color schemes&amp;nbsp;around.&lt;/p&gt;
+&lt;h2&gt;Shell&lt;/h2&gt;
+&lt;p&gt;To be honest, I don&amp;#8217;t really need to change my shell to anything other than what was provided as the default (that is, bash). Its not like I have overgrown bash and need something more powerful anyway. But, since all the cool people are saying &lt;a href="http://fendrich.se/blog/2012/09/28/no/"&gt;how&lt;/a&gt; &lt;a href="http://mikegrouchy.com/blog/2012/01/zsh-is-your-friend.html"&gt;awesome&lt;/a&gt; it is, so I jumped on the &lt;a href="http://www.zsh.org/"&gt;&lt;span class="caps"&gt;ZSH&lt;/span&gt;&lt;/a&gt; bandwagon anyway. And it turns out, it really is cool, among other things, one that I enjoy the most is its autocompletion. Just awesome. I was about to dive deeper and have fun customizing almost every aspects of it, but somewhere along the way, I&amp;nbsp;realized:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/9014788639/" title="its a trap by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8275/9014788639_93815e99c4_o.jpg" width="197" height="256" alt="its a trap"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I am about to spend too much time customizing the system again. So, I simply turned to the awesome &lt;a href="https://github.com/robbyrussell/oh-my-zsh"&gt;oh-my-zsh&lt;/a&gt; package, the default is more than good enough for me, all I need to do is to just add a couple of extra lines to the &lt;code&gt;.zshrc&lt;/code&gt; file to set some alias and environment&amp;nbsp;variables.&lt;/p&gt;
+&lt;h1&gt;Text&amp;nbsp;Editor&lt;/h1&gt;
+&lt;p&gt;The last few times I tried to work in Linux, I never really tried to setup a nice text editor to use. Big mistake. &lt;span class="caps"&gt;IMO&lt;/span&gt; the text editor is the most important tool in a programmer&amp;#8217;s pocket. Last time, I settled with something way too simple, such as gedit, or something way too complex to get to work, vim. No need to say, I never even got any real productivity working in&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;This time, the I have a wonderful text editor that I have been using from Windows. Yep, &lt;a href="http://www.sublimetext.com/"&gt;Sublime Text 2&lt;/a&gt;. It really is the best text editor I have ever used. The plugins, the themes and color schemes, and the community around it are simply awesome. Even without any plugin, it is still a solid text editor, with its command palette, multi-cursor, and many others. Best thing of all? It is cross-platform, available on all 3 major OSes, not the Mono or Java kind of cross platform, but a native application all way&amp;nbsp;through.&lt;/p&gt;
+&lt;p&gt;Installing it in Linux, it is pretty straightforward, downloading it from the website, extracting it, and thats it. For those who are too lazy to go to the website and download the archive, there is this command that you can&amp;nbsp;use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd ~
+wget http://c758482.r82.cf2.rackcdn.com/Sublime Text 2.0.1 x64.tar.bz2
+tar vxjf Sublime\ Text\ 2.0.1\ x64.tar.bz2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There is also an unofficial repository maintained by the people at&amp;nbsp;webupd8:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:webupd8team/sublime-text-2
+sudo apt-get update
+sudo apt-get install sublime-text-2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next thing, adding the the executable to path so that it can be easily&amp;nbsp;started:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s ~/Sublime\ Text\ 2/sublime_text /usr/bin/subl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There is a problem with the script above though. Running the command on the terminal will make the shell to wait for the program to exit, making us unable to do anything else on that terminal. So, to fix that, I made a little script to run it in the background, independent of the&amp;nbsp;terminal.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;subl &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$*&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;All I got to do left is to install the packages that I have been using on Windows. Installing my packages from Windows aren&amp;#8217;t that hard, since I installed my sublime text extras from the &lt;a href="http://wbond.net/sublime_packages/package_control"&gt;Package Control&lt;/a&gt;, all of my installed packages are listed in the &lt;code&gt;Package Control.sublime-settings&lt;/code&gt;, and the only thing left I need to do was to copy all my other configurations over, and just modify a little from the hotkey&amp;nbsp;configuration.&lt;/p&gt;
+&lt;h1&gt;&lt;span class="caps"&gt;LAMP&lt;/span&gt;&amp;nbsp;Stack&lt;/h1&gt;
+&lt;p&gt;I still do a lot of &lt;span class="caps"&gt;PHP&lt;/span&gt; development, however uncool that may be nowadays. From messing around with WordPress and general web development, I still find &lt;span class="caps"&gt;PHP&lt;/span&gt; irreplaceable. I even intend to pick up &lt;a href="http://laravel.com/"&gt;Laravel&lt;/a&gt; to see what it can&amp;nbsp;do.&lt;/p&gt;
+&lt;p&gt;So, easiest way to do it is of course, the combination of Apache web server, MySQL, and the &lt;span class="caps"&gt;PHP&lt;/span&gt; stack. On Windows, I have been spoiled with ease of setup that is &lt;a href="http://sourceforge.net/projects/xampp/"&gt;&lt;span class="caps"&gt;XAMPP&lt;/span&gt;&lt;/a&gt;. Good thing is, it is also available on Linux, but this time, I would like to take the opportunity to do it differently. I want to the parts manually so that I know how they work together. Fortunately, it is not that hard to setup on Linux, as most of the packages needed are readily available on the software&amp;nbsp;repository.&lt;/p&gt;
+&lt;p&gt;So, here are the packages needed, first of all, is the Apache web&amp;nbsp;server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install apache2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;By now, visiting &lt;code&gt;localhost&lt;/code&gt; on your web browser should give you something to be happy about. Next thing to install is the&amp;nbsp;MySQL.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install mysql-server
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When the install is finished, you should get asked to perform the initial setup for the MySQL server, including setting up the user authentication and stuffs. Now the last piece of the stack is to install&amp;nbsp;php.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install php5
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, for them to work together, there are a couple more packages to be&amp;nbsp;installed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install libapache2-mod-php5 libapache2-mod-auth-mysql php5-mysql phpmyadmin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, restart apache with &lt;code&gt;sudo /etc/init.d/apache2 restart&lt;/code&gt;, and try to put some &lt;span class="caps"&gt;PHP&lt;/span&gt; code in &lt;code&gt;/var/www&lt;/code&gt; and navigate to the address to see if it executed properly. Also, add this line to &lt;code&gt;/etc/php5/apache2/php.ini&lt;/code&gt;: &lt;code&gt;extension=mysql.so&lt;/code&gt; to get &lt;span class="caps"&gt;PHP&lt;/span&gt; to work with MySQL. Also, add the line &lt;code&gt;Include /etc/phpmyadmin/apache.conf&lt;/code&gt; to &lt;code&gt;/etc/apache2/apache2.conf&lt;/code&gt; so that the server know where to find phpmyadmin. Restart the server again, and the server is set to&amp;nbsp;go.&lt;/p&gt;
+&lt;p&gt;Now, the server is ready to use, but there are still a few things to do to make it pleasant to use. One is the document root of the apache web server is located at the not so easy to access location of &lt;code&gt;/var/www&lt;/code&gt;, so its better to move that to somewhere inside the home directory. To do that. the file to edit is &lt;code&gt;/etc/apache2/sites-available/default&lt;/code&gt;. It should be pretty obvious which lines to edit once you open that file. Also, while this might not be necessary, you can create an alias for &lt;code&gt;/etc/init.d/apache2&lt;/code&gt; so that it can be easily&amp;nbsp;accessed.&lt;/p&gt;</content><category term="linux"></category></entry><entry><title>WordPress is Big</title><link href="https://hndr.me/blog/wordpress-is-big" rel="alternate"></link><published>2013-06-07T11:22:00+08:00</published><updated>2013-06-07T11:22:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-07:/blog/wordpress-is-big</id><summary type="html">&lt;p&gt;Well, WordPress is big. Yes, that sounds silly, I know how &lt;a href="http://yoast.com/wordpress-stats/"&gt;big&lt;/a&gt; WordPress is, I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Well, WordPress is big. Yes, that sounds silly, I know how &lt;a href="http://yoast.com/wordpress-stats/"&gt;big&lt;/a&gt; WordPress is, I just never really cared about the opportunity that it provides. I am currently looking for some freelance work to do, and I was pretty disappointed that most of what I found are WordPress jobs. Not that there is any problem with that, it was a wonderful blogging software, but it is a terrible &lt;span class="caps"&gt;CMS&lt;/span&gt;. As it tries to be more of a &lt;span class="caps"&gt;CMS&lt;/span&gt;, a terrible &lt;span class="caps"&gt;API&lt;/span&gt; that is hard to work with is what we have. That is the reason why I would prefer to write a web app from scratch rather than bending WordPress to do what I want, it is just too much work, and for some reason people seems to prefer using WordPress for everything. The other day, I received a request to write an event management website with WordPress. I am not confident that I can do that, since I honestly had a hard time understanding its&amp;nbsp;&lt;span class="caps"&gt;API&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;When I uploaded my &lt;a href="http://wordpress.org/extend/themes/mog"&gt;Mog&lt;/a&gt; WordPress theme to the wordpress.org theme directory, I didn&amp;#8217;t have much expectation. It was just a side project that I did for fun, and honestly, it was my first try on building a WordPress theme for myself (I was blogging on WordPress.com at the time). To be honest, it wasn&amp;#8217;t that good of an experience. The &lt;span class="caps"&gt;API&lt;/span&gt; are kind of messy, in no small part are caused by having to accommodate a large variety of use cases by its even larger user base. Somewhere along the way I got fed up and decided to just build the things that I need. So, I left out custom menus support, ability to customize the theme via the WordPress option, and I don&amp;#8217;t even style the drop down menu properly, since I wasn&amp;#8217;t planning to have any nested&amp;nbsp;menu.&lt;/p&gt;
+&lt;p&gt;Then, few days ago, I noticed that the theme has reached 10.000 downloads. I know, that given WordPress&amp;#8217; scale, that number is nothing. It is nowhere near the number of some &amp;#8220;popular&amp;#8221;WordPress plugin or theme. Still, it is kind of different knowing that something that I made was interesting enough that it was downloaded by that many&amp;nbsp;people.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8975138966/" title="Screenshot (141) by p.hdra, on Flickr"&gt;&lt;img src="https://farm6.staticflickr.com/5345/8975138966_64de8e9581.jpg" width="433" height="500" alt="Screenshot (141)"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I came to think that something that I initially considered good enough for me to use, is nowhere near good enough for public consumption, so I decided to start working on the theme again, and make it better. Starting by fixing some of the problems I mentioned above. I still hate how messy the WordPress &lt;span class="caps"&gt;API&lt;/span&gt; is, but it also got me thinking, maybe I should give it a more serious consideration. Even though it is not very likely, I still hope that the WordPress team can consider redesigning the &lt;span class="caps"&gt;API&lt;/span&gt;. There are some &lt;a href="http://john.onolan.org/ghost/"&gt;projects&lt;/a&gt; that seems promising, but while I am sure they are all great projects, I don&amp;#8217;t see it can replace WordPress anytime soon. So, I guess it&amp;#8217;s time to open up the WordPress books&amp;nbsp;again.&lt;/p&gt;</content><category term="wordpress"></category></entry><entry><title>Setting Up My Linux to be Less Ugly</title><link href="https://hndr.me/blog/making-my-new-linux-less-ugly" rel="alternate"></link><published>2013-06-01T14:57:00+08:00</published><updated>2013-06-01T14:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-06-01:/blog/making-my-new-linux-less-ugly</id><summary type="html">&lt;p&gt;As I &lt;a href="https://hndr.me/blog/linux-again"&gt;decided&lt;/a&gt; to setup a new Linux installation that is lightweight, customizable to my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As I &lt;a href="https://hndr.me/blog/linux-again"&gt;decided&lt;/a&gt; to setup a new Linux installation that is lightweight, customizable to my taste, can be made look pretty, and of course, usable, I started looking around for the suitable&amp;nbsp;setup.&lt;/p&gt;
+&lt;p&gt;First thing I need to decide on is which Linux distribution to use. I can either look for something bare bone like the Arch, and then build up everything I need, or I can just take something that is ready to use, like Ubuntu, and take out whatever I don&amp;#8217;t need and replace anything I don&amp;#8217;t like. I am tempted to take the former approach, but looking at some youtube videos on the stuffs I would need to do, there seems to be just way too many things to do before I can even do anything. Even for basic things like network access needs to be setup. So, well, no thanks. Maybe next&amp;nbsp;time.&lt;/p&gt;
+&lt;p&gt;I ended up deciding on the distribution I am familiar with, Linux Mint 13 &lt;span class="caps"&gt;XFCE&lt;/span&gt;. Now, even as it is, the &lt;span class="caps"&gt;XFCE&lt;/span&gt; distribution is lightweight enough for me to use smoothly. It doesn&amp;#8217;t look bad, and it is very customizable. I was tempted to settle on it, but for some reason, I had frequent crashes during my use with it. Anyway, it is good enough for me to use as a&amp;nbsp;base.&lt;/p&gt;
+&lt;p&gt;I had been read a lot about tiling window manager, and has been wanting to try it out. &lt;a href="http://www.xmonad.org"&gt;XMonad&lt;/a&gt; seems to be the one that is mentioned most frequently, but setting it up seems like a pain. Not to mention the  &lt;span class="caps"&gt;500MB&lt;/span&gt; I am supposed to download with it. I found another option, &lt;a href="http://www.i3wm.org"&gt;i3&lt;/a&gt;. And it seems to be a lot easier to setup and use. The configuration is done with plain text file instead of a scripting language like Haskell as is the case with XMonad. People had good things to say about how easy it is to use as well. Once I saw the video demo, I am&amp;nbsp;sold.&lt;/p&gt;
+&lt;iframe width="480" height="360" src="http://www.youtube.com/embed/Wx0eNaGzAZU" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h2&gt;Installing&amp;nbsp;i3&lt;/h2&gt;
+&lt;p&gt;Installing i3 is easy enough. It is listed in the Ubuntu package repository, so it is also available for Linux Mint that is based on Ubuntu, but I find the version available in the repository to be severely outdated and have some problem with rendering some fonts, so installing the latest stable version from i3&amp;#8217;s repository is recommended. The instruction on their download page is easy enough to&amp;nbsp;follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# echo &amp;quot;deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list
+# apt-get update
+# apt-get --allow-unauthenticated install sur5r-keyring
+# apt-get update
+# apt-get install i3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One thing to take notice here is the first line, which is used to add the repository to our sources. Only problem is, the &lt;code&gt;lsb_release -c -s&lt;/code&gt; in my system will output &lt;code&gt;maya&lt;/code&gt;, since that is indeed what my system is. That will cause the link to return me an 404, since, of course, the repository was meant for Ubuntu, and there is not Ubuntu version code named &lt;code&gt;maya&lt;/code&gt;. Since I know Linux Mint 13 was build on Ubuntu Precise, I can just replace it with&amp;nbsp;that.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# echo &amp;quot;deb http://debian.sur5r.net/i3/ maya universe&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;After the installation is done, I log out, log in again, this time selecting i3 in the session manager, and I am&amp;nbsp;in.&lt;/p&gt;
+&lt;h2&gt;Making it less&amp;nbsp;ugly&lt;/h2&gt;
+&lt;p&gt;Out of the box, i3 looks pretty hideous. I didn&amp;#8217;t take any screenshot because at that point I haven&amp;#8217;t even figured out how to take a screenshot yet. But it is just a black screen with a little black bar at the bottom anyway. In any case, it is time to to do some makeover. The documentation for the i3 is really clear and nice to read. So, there wasn&amp;#8217;t much problem to figure out what to do. The configuration file is stored at &lt;code&gt;~/.i3/config&lt;/code&gt;. First thing to change is the color. I don&amp;#8217;t know much about design, but I do know when to avoid using the pure black and pure white color. Thing #1 to change: the window title&amp;nbsp;color.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;client.focused          #&lt;span class="caps"&gt;3F8AC2&lt;/span&gt; #&lt;span class="caps"&gt;096BAA&lt;/span&gt; #&lt;span class="caps"&gt;00BAA7&lt;/span&gt; #&lt;span class="caps"&gt;00DA8E&lt;/span&gt;
+client.focused_inactive #333333 #&lt;span class="caps"&gt;5F676A&lt;/span&gt; #ffffff #484e50
+client.unfocused        #333333 #424242 #888888 #292d2e
+client.urgent           #C10004 #900000 #ffffff #900000
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, the status bar. I prefer mine on top of the screen. Also, the&amp;nbsp;color.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;bar {
+    position top
+    status_command i3status
+    tray_output &lt;span class="caps"&gt;LVDS&lt;/span&gt;
+    colors{
+        background #232323
+        statusline #&lt;span class="caps"&gt;DCDCDC&lt;/span&gt;
+    }
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next thing, time to change that 80s font&amp;nbsp;face.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;font pango: Ubuntu Mono 10
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;By now, it looks much better. Next is the wallpaper. I use &lt;code&gt;feh&lt;/code&gt; to set my&amp;nbsp;wallpaper.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;exec --no-startup-id feh --bg-fill /home/hdra/Pictures/Wallpapers/city.jpg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is how the &amp;#8216;desktop&amp;#8217; looks like right&amp;nbsp;now.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8910945270/" title="desktop by p.hdra, on Flickr"&gt;&lt;img src="https://farm4.staticflickr.com/3665/8910945270_db72193fae_c.jpg" width="800" height="447" alt="desktop"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;Setting up&amp;nbsp;&lt;span class="caps"&gt;GTK&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;By now my desktop doesn&amp;#8217;t look half bad, but if I open any gtk-based application, especially gtk3 application, it looks like complete crap. So, next thing to deal with is the gtk theme and icons. The configuration file for gtk2 is located at &lt;code&gt;~/.gtkrc-2.0&lt;/code&gt;, while for gtk3 is located at &lt;code&gt;~/.config/gtk-3.0/settings.ini&lt;/code&gt;. I want the applications to look consistent, so I had to look for one that can provide similar looks for both. There are some of the built-in theme that can do this, but I want something else. I decided on the MediterraneanLight from &lt;a href="http://www.gnome-look.org"&gt;gnome-look&lt;/a&gt;. I also picked up an icon set from there. Next thing to do is to change the font. I never liked how fonts in Linux &lt;span class="caps"&gt;OS&lt;/span&gt; are always unnecessarily big. So, I switched to a lower font&amp;nbsp;size.&lt;/p&gt;
+&lt;p&gt;Here is my gtk2&amp;nbsp;configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gtk-theme-name = &amp;quot;MediterraneanLight&amp;quot;
+gtk-font-name = &amp;quot;Open Sans 8&amp;quot;
+gtk-icon-theme-name = &amp;quot;Faenza-Dark&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And here is the gtk3&amp;nbsp;configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Settings]&lt;/span&gt;
+&lt;span class="na"&gt;gtk-theme-name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;MediterraneanLight&lt;/span&gt;
+&lt;span class="na"&gt;gtk-font-name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Open Sans 8&lt;/span&gt;
+&lt;span class="na"&gt;gtk-fallback-icon-theme&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Mint-X&lt;/span&gt;
+&lt;span class="na"&gt;gtk-icon-theme-name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Faenza-Dark&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And now here is how it looks&amp;nbsp;like:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8910222885/" title="marlin by p.hdra, on Flickr"&gt;&lt;img src="https://farm6.staticflickr.com/5459/8910222885_22f206f546_c.jpg" width="800" height="450" alt="marlin"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here is some more screenshots with the tiling in&amp;nbsp;action:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8901017483/" title="capt-2013-05-30-114812 by p.hdra, on Flickr"&gt;&lt;img src="https://farm6.staticflickr.com/5444/8901017483_1e29ac330a_c.jpg" width="800" height="450" alt="capt-2013-05-30-114812"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8901630850/" title="capt-2013-05-31-193656 by p.hdra, on Flickr"&gt;&lt;img src="https://farm4.staticflickr.com/3724/8901630850_57c45b5fd2_c.jpg" width="800" height="450" alt="capt-2013-05-31-193656"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Next is on setting it up to be more&amp;nbsp;usable!&lt;/p&gt;</content></entry><entry><title>Setting Up My Linux on My Laptop, Changing My Approach</title><link href="https://hndr.me/blog/linux-again" rel="alternate"></link><published>2013-05-29T20:57:00+08:00</published><updated>2013-05-29T20:57:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-05-29:/blog/linux-again</id><summary type="html">&lt;p&gt;I tried again and again to setup a Linux &lt;span class="caps"&gt;OS&lt;/span&gt; on my laptop, hoping to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I tried again and again to setup a Linux &lt;span class="caps"&gt;OS&lt;/span&gt; on my laptop, hoping to eventually making it my main operating system, but, again and again, I find it just not practical enough. There was always something that doesn&amp;#8217;t work correctly. Things like programs that kept crashing, windows that suddenly froze, drivers not working, or simply, everything being sluggish. All that time, I always kept thinking that Linux on desktop is good enough to be used the same way I use Windows, or maybe, &lt;span class="caps"&gt;OSX&lt;/span&gt;. I was wrong. So, why am I doing this again this time? Well, for one thing, final exams are coming, and I should be studying instead of messing with my computer, so yeah, that dreadful &amp;#8216;P&amp;#8217; word. But, other than that, I also want to try a different approach this&amp;nbsp;time.&lt;/p&gt;
+&lt;p&gt;The usual pitch with Linux on desktop is that they are no longer hard to use as they used to. They require less resources to run. They can be made whatever you want them to. Truth: the ones that are user friendly are nowhere near lightweight, and many of them aren&amp;#8217;t even that configurable by design, in the name of user friendliness. I do believe that overall, they are all moving to the right direction. Especially the work Linux Mint team done with &lt;a href="http://cinnamon.linuxmint.com"&gt;Cinnamon&lt;/a&gt; has been very exciting. Canonical has also been hard at work with Ubuntu, coming up with all kinds of stuff that makes Linux more and more viable as a desktop &lt;span class="caps"&gt;OS&lt;/span&gt;. They even plan to develop &lt;a href="http://www.omgubuntu.co.uk/2013/03/canonical-announce-custom-display-server-mir-not-wayland-not-x"&gt;their own display server&lt;/a&gt;. The trends are going towards an &lt;span class="caps"&gt;OS&lt;/span&gt; that is tightly integrated, better hardware support, and of course, easier to use. Customizability might be the only thing that are going away. I personally don&amp;#8217;t really care for it, as long as they work well enough for me, I wouldn&amp;#8217;t really need to configure much&amp;nbsp;anyway.&lt;/p&gt;
+&lt;p&gt;Seems like easy enough for me to just pick a distribution and use it. Too bad, it is not that simple for me. Here are some of my problem with the existing &amp;#8216;mainstream linux&amp;#8217;: * I mentioned that the ability to configure the &lt;span class="caps"&gt;OS&lt;/span&gt; doesn&amp;#8217;t matter that much to me, as long as it works well enough. Problem is, none of them are good enough, so my only option is to use one that I can customize to suit my use.
+&lt;em&gt; My laptop is almost 4 years old. It runs Windows 8 smoothly. It can even run some of the recent heavyweight games with no problem. But, surprisingly,  believe it or not, running vanilla Ubuntu with Unity doesn&amp;#8217;t come without noticeable lags. I believe the hardware drivers play quite a part in this. Looking around, seems like most people seems pretty happy with the open source graphic card driver, so I guess its time for me to upgrade, but, I am still saving up.
+&lt;/em&gt; Related to my first point, in my attempt trying to bend the &lt;span class="caps"&gt;OS&lt;/span&gt; to suit my taste, many things became a tangled mess. This makes unexpected things to stop working during unexpected times. Since many of the distribution tried to make things easy to use, many things became hidden away. This also makes it hard to reproduce the configuration because I am not even sure what I&amp;nbsp;changed.&lt;/p&gt;
+&lt;p&gt;So, with all that in mind, I decided how I want this attempt on using Linux would be:
+&lt;em&gt; Lightweight. A must. I don&amp;#8217;t think I can use an &lt;span class="caps"&gt;OS&lt;/span&gt; that aren&amp;#8217;t at least as fast as Windows.
+&lt;/em&gt; Customizable. I think I was looking for the wrong thing if I focus on ease of use when trying out Linux out of the box. For now. This time, I would look for something that may requires some configuration overhead, but overall, would make everything easier to use.
+&lt;em&gt; Works. Of course, By this I mean I don&amp;#8217;t want having to install codecs to play music, or not audio jack not working, having to dig for drivers for wireless card, multi-monitor configuration, etc.
+&lt;/em&gt; Doesn&amp;#8217;t hide things from me. I want to know what is going on in as many places as possible. As little magic as possible. I want to be able to reproduce my configuration easily.
+&lt;em&gt; Makes me more productive. The whole point of me thinking to switch to Linux is so that I can do things, especially programming related things, faster, easier, and better. I want to take full advantage of &lt;span class="caps"&gt;UNIX&lt;/span&gt;. I want to use as many keyboard shortcuts as possible. I don&amp;#8217;t expect this to be there out of the box, but I want it to be at least configurable to achieve this.
+&lt;/em&gt; Looks good. I don&amp;#8217;t need shiny and fancy, but at the very least, I don&amp;#8217;t want it to be unbearably&amp;nbsp;ugly.&lt;/p&gt;
+&lt;p&gt;Of course, I can&amp;#8217;t simply blame everything on the &lt;span class="caps"&gt;OS&lt;/span&gt;. There are also mistakes in the way I approached this in the past. I just expected everything to work without making an effort to know what is happening behind the scene. So, this time, here is how I am going to do it.
+&lt;em&gt; No configuration tool such as ubuntu-tweak and such. If there is a file that I need to edit, I want to know what it is, and how to change it.
+&lt;/em&gt; Read the &lt;code&gt;man&lt;/code&gt;. I always avoided having to read the help page of most tools, as I preferred to just have the command to enter presented to me via the great wisdom of Google.
+&lt;em&gt; Take it slow. No need to rush to make the &lt;span class="caps"&gt;OS&lt;/span&gt; for me to use. Making sure things work properly is the priority.
+&lt;/em&gt; Document everything. I want to know the steps I took to achieve something, and I want to make sure it can be easily reproduced. Maybe write a build script for&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;All that covered, I have some plan in mind on how to do it. Lightweight, customizable, reasonably low-level, stable, friendly. Next will be on setting it up. By the way, while I was writing this post, Linux Mint 15 &amp;#8220;Olivia&amp;#8221; was announced! and look at &lt;a href="http://www.linuxmint.com/rel_olivia_whatsnew.php"&gt;them&lt;/a&gt;! So pretty! This can be harder than I expected with that kind of&amp;nbsp;temptation.&lt;/p&gt;</content></entry><entry><title>My First GitHub Pull Request!</title><link href="https://hndr.me/blog/my-first-github-pull-request" rel="alternate"></link><published>2013-04-28T11:44:00+08:00</published><updated>2013-04-28T11:44:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-04-28:/blog/my-first-github-pull-request</id><summary type="html">&lt;p&gt;I just had my first pull request! It was a change to the &lt;a href="https://github.com/getpelican/pelican-themes"&gt;Pelican themes …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I just had my first pull request! It was a change to the &lt;a href="https://github.com/getpelican/pelican-themes"&gt;Pelican themes&lt;/a&gt;, where I added this &lt;a href="https://github.com/hdra/pelican-cait"&gt;theme&lt;/a&gt; to the directory there. So, yeah, I didn&amp;#8217;t actually contribute a patch to an existing project, it was simply adding my repo to the list of&amp;nbsp;theme.&lt;/p&gt;
+&lt;p&gt;I also learned about the whole pull request process itself. Of course, it is not that complicated in the first place anyway. Basically it involves forking the source repo, create a new branch, make changes on that branch, commit, push to github, and then after the new branch is created on github, there will be an option to initiate a pull request there. It is that&amp;nbsp;simple.&lt;/p&gt;
+&lt;p&gt;I actually drafted this post around a week ago when I sent the pull request, and it just got merged to the master branch earlier today, so here I am updating this&amp;nbsp;thing.&lt;/p&gt;
+&lt;p&gt;But, anyway, I got to say, it feels pretty good! and it is also quite a motivation booster for me.&amp;nbsp;:D&lt;/p&gt;</content><category term="programming"></category></entry><entry><title>Setting Up My GitHub Pages</title><link href="https://hndr.me/blog/setting-up-my-github-pages" rel="alternate"></link><published>2013-04-26T16:50:00+08:00</published><updated>2013-04-26T16:50:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-04-26:/blog/setting-up-my-github-pages</id><summary type="html">&lt;p&gt;Previously, I had been hosting this site on Heroku. It was pretty simple to setup …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Previously, I had been hosting this site on Heroku. It was pretty simple to setup, I can just create an &lt;code&gt;index.php&lt;/code&gt; file, then add another &lt;code&gt;.htaccess&lt;/code&gt; file to the root of the site, push, and done. In this case, I maintained two separate repositories, one that contains the Pelican project, including the configuration file, the build script, etc. The other repositories contains the generated &lt;span class="caps"&gt;HTML&lt;/span&gt;&amp;nbsp;files.&lt;/p&gt;
+&lt;p&gt;Now, I recently wanted to try hosting the site on GitHub Pages. Hosting on GitHub pages requires the content of my site to be in the root of &lt;code&gt;gh-pages&lt;/code&gt; branch. Of course, this would be simple enough if I just keep the project files and the generated &lt;span class="caps"&gt;HTML&lt;/span&gt; files in separate repositories just like I did before, but I would like to keep them in the same repository, and have a build script to do everything for&amp;nbsp;me.&lt;/p&gt;
+&lt;p&gt;Turns out, it is not that simple to achieve that. The most straightforward way to do this is to create or checkout the &lt;code&gt;gh-pages&lt;/code&gt; branch, generate the &lt;span class="caps"&gt;HTML&lt;/span&gt; files on the same directory, commit, and push as usual. But this would make the &lt;code&gt;gh-pages&lt;/code&gt; branch contains some of the project files. Not a big problem, but it just doesn&amp;#8217;t feel too clean of a solution. I also tried other methods, but none of them feels satisfactory. Ideally, I wanted to have a solution similar what was done with &lt;a href="https://github.com/davisp/ghp-import"&gt;ghp-import&lt;/a&gt;, but there are some problems that prevents me from using it. I tried looking at the source of the project, in attempting to understand how it works and try to do the same things manually, but well, it seems like my Git-fu are insufficient to understand it. In the end, ended up doing the things similar as what outlined &lt;a href="https://gist.github.com/chrisjacob/833223"&gt;here&lt;/a&gt;. Basially, I am keeping the branches of the same repository in separate directories, but instead of keeping the as a siblings, I made the &lt;code&gt;gh-pages&lt;/code&gt; branch as a child of the child directory of the project. Here is the fabric file I used to build the&amp;nbsp;post:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;fabric.api&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;configurations&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;conf&lt;/span&gt;
+
+
+&lt;span class="n"&gt;output_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;OUTPUT_PATH&lt;/span&gt;
+&lt;span class="n"&gt;remote_git&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;git@github.com:hdra/hndr.me.git&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;activate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;env&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;Scripts&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;activate.bat&amp;#39;&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;init&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mkdir {0}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_dir&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;lcd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_dir&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git clone -b gh-pages {0} .&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;remote_git&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;update&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git add -A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git commit -m &amp;quot;{0}&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git push origin master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git push bitbucket master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;pub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Post update&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# Update master branch&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git add -A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git commit -m &amp;quot;{0}&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git push origin master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git push bitbucket master&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Generate posts&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;activate&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pelican -s configurations.py -v&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Update gh-pages branch&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;lcd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;output&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git add -A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git commit -m &amp;quot;{0}&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commit_msg&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;git push origin gh-pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That seems to work pretty cleanly so far. One problem is when creating a new project and its &lt;code&gt;gh-pages&lt;/code&gt; branch for the first time. In my case, I dealt with it by creating the a new branch as usual, and then deleting the project files in the &lt;code&gt;gh-pages&lt;/code&gt; branch manually, but I think it can be done by creating an orphan page with the &lt;code&gt;git checkout --orphan gh-pages&lt;/code&gt; command as well. Anyway, this needs to be done only once, so it shouldn&amp;#8217;t be too much of a&amp;nbsp;problem.&lt;/p&gt;</content><category term="programming"></category></entry><entry><title>New Site Design!</title><link href="https://hndr.me/blog/new-site-design" rel="alternate"></link><published>2013-04-13T19:33:00+08:00</published><updated>2013-04-13T19:33:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-04-13:/blog/new-site-design</id><summary type="html">&lt;p&gt;I finally got to converting the last site design I made to a Pelican theme …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I finally got to converting the last site design I made to a Pelican theme. The &lt;a href="https://github.com/hdra/pelican-cait"&gt;theme&lt;/a&gt; should be in use by the time this post is published. In its current state, I wouldn&amp;#8217;t say the theme is compeletely finished. I tried to make it responsive to screen size changes, but during my testing, I found some problem viewing it in iOS Safari when there is a long line of continuos text in the page. For some reason &lt;code&gt;overflow-wrap: break-word;&lt;/code&gt; doesn&amp;#8217;t seem to work in it, even though it works fine in Chrome and Firefox for&amp;nbsp;Android.&lt;/p&gt;
+&lt;p&gt;That aside, the are also a lot of repetition and duplicate codes in the &lt;span class="caps"&gt;CSS&lt;/span&gt; and Jinja2 template. The templates in particular aren&amp;#8217;t very flexible. There are a number of values that needs to be specified in the configuration file for it to be usable. Pages also can&amp;#8217;t be listed the normal way since I turned one of the page template into the index page for my&amp;nbsp;site.&lt;/p&gt;
+&lt;p&gt;All that said, I think it is ready to be put out there. If I sit on it any longer, I am pretty sure I would lose interest in it pretty soon. As they say, &lt;a href="http://www.codinghorror.com/blog/2009/12/version-1-sucks-but-ship-it-anyway.html"&gt;ship early, ship often&lt;/a&gt;. Maybe this shouldn&amp;#8217;t even be a version 1, but it is a&amp;nbsp;start.&lt;/p&gt;</content><category term="personal"></category></entry><entry><title>Made Another Design For the Blog</title><link href="https://hndr.me/blog/made-another-design-for-the-blog" rel="alternate"></link><published>2013-04-10T09:02:00+08:00</published><updated>2013-04-10T09:02:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-04-10:/blog/made-another-design-for-the-blog</id><summary type="html">&lt;p&gt;Recently I have been spending my time messing around with website front-end development. Probably because …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently I have been spending my time messing around with website front-end development. Probably because of I have been trying to write a Pelican theme for my own website. For My own use, I wanted the website to have a landing page, and also another design for the blog index. I made another attempt at the design recently. Here is the landing&amp;nbsp;page:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8636534196/" title="Screenshot (69) by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8254/8636534196_ac410cec50_c.jpg" width="800" height="414" alt="Screenshot (69)"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;and here is the blog&amp;nbsp;index:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8636534164/" title="Screenshot (70) by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8519/8636534164_497989410e_c.jpg" width="800" height="415" alt="Screenshot (70)"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I also managed to made the design responsive. Kind of. I just made the sidebar go to the top of the page when the window is resized to below 800 pixels of&amp;nbsp;width.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8635873575/" title="Snap 2013-04-10 at 12.49.21 by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8248/8635873575_153dd6e05e_b.jpg" width="317" height="1024" alt="Snap 2013-04-10 at 12.49.21"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The design itself is currently still a static &lt;span class="caps"&gt;HTML&lt;/span&gt; page that I made on top of the pretty cool &lt;a href="http://html5boilerplate.com/"&gt;&lt;span class="caps"&gt;HTML5&lt;/span&gt; Bootstrap&lt;/a&gt;. For some reason I got a feeling that I am not using it to its full potential, as I don&amp;#8217;t really utilizes anything from it beyond the basic page structure and the included &lt;code&gt;normalize.css&lt;/code&gt;. Obviously I am doing something wrong. One thing that I notice in the main &lt;span class="caps"&gt;CSS&lt;/span&gt; file is this&amp;nbsp;line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;media&lt;/span&gt; &lt;span class="nt"&gt;only&lt;/span&gt; &lt;span class="nt"&gt;screen&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;35em&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I knew about the media query and used it before, but I used to use it with the &lt;code&gt;max-width&lt;/code&gt; instead. So, the idea here is to design for the mobile version first, then make the necessary changes for the larger screen. I have heard about this mobile-first approach a lot before, and I am aware of the arguements for and against it, but I never really gave it any thought, mostly because I am not doing any serious front-end stuff anyway, but I am thinking of trying this approach for my next try on web&amp;nbsp;design.&lt;/p&gt;
+&lt;p&gt;I am also planning to play around more with front-end development. The past few days trying to make the &lt;span class="caps"&gt;HTML&lt;/span&gt; page to look exactly how I want it to look like made me realize that I don&amp;#8217;t really know much about front-end development. Most of the time, web-development for me consists of dealing with generating &lt;span class="caps"&gt;HTML&lt;/span&gt; page from the server and maybe make a Javascript function to make a server call to change the page dynamically, but I never really go deep into &lt;span class="caps"&gt;HTML&lt;/span&gt; and &lt;span class="caps"&gt;CSS&lt;/span&gt; itself. Looking into more than tools and frameworks that I can use to make the job&amp;nbsp;easier.&lt;/p&gt;
+&lt;p&gt;Anyway, as mentioned before, the designs above are still in a static &lt;span class="caps"&gt;HTML&lt;/span&gt; form, and I think it is good enough for me to use. Maybe I&amp;#8217;ll turn it into a proper Pelican theme&amp;nbsp;soon.&lt;/p&gt;</content><category term="programming"></category><category term="design"></category></entry><entry><title>Still Working</title><link href="https://hndr.me/blog/still-working" rel="alternate"></link><published>2013-04-03T17:16:00+08:00</published><updated>2013-04-03T17:16:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-04-03:/blog/still-working</id><summary type="html">&lt;p&gt;It has been a few weeks since I decided to start blogging again, but well …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It has been a few weeks since I decided to start blogging again, but well, as usual not much has been done on it. For starter, I initially planned to host it on Heroku, following the tricks outline &lt;a href="http://kennethreitz.org/exposures/static-sites-on-heroku-cedar"&gt;here&lt;/a&gt;, and it is super simple to setup. I had created a new Heroku app, generated the blog, and pushed the generated content to Heroku in just a few minutes. In another minute, and I had setup the custom domain and had everything working&amp;nbsp;nicely.&lt;/p&gt;
+&lt;p&gt;Problem is, even though the site itself is just a bunch of static files, the first time I visited the site, it took a few seconds to load the content, but when I visit it again for the second time, it served the site almost immediately. At first, I thought it was because of the site is cached by the browser, so it loads much quicker, but even when I cleared the browser cache, it still loads the same way. After a bit of googling, I &lt;a href="https://devcenter.heroku.com/articles/dynos"&gt;found&lt;/a&gt; out that Heroku will turn off the dyno after an hour of inactivity, so everytime I visit the site after a period of idling, the dyno will need to be started again at that time. Not much of a problem, considering I am not even paying for the amazing service that Heroku provide, and there &lt;a href="http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling"&gt;ways&lt;/a&gt; to get around it anyway. I probably won&amp;#8217;t be using it, since I am still playing around with the hosting options around&amp;nbsp;anyway.&lt;/p&gt;
+&lt;p&gt;Other popular service that people use to host their static site seems to be &lt;a href="http://pages.github.com/"&gt;Github Pages&lt;/a&gt;. After looking around on how to set it up, seems like it is pretty easy to set it up. The Pelican makefile even includes a build option for this setup. The site will be hosted in a repository just like any other git repo, but the site index will need to be on the &lt;code&gt;gh-pages&lt;/code&gt; branch. In other words, the content of the site will be open source. Not a problem though, since any webpage that are publicly accessible are basically open source anyway. Maybe I&amp;#8217;ll move the site here after I am done setting the website&amp;nbsp;itself.&lt;/p&gt;
+&lt;p&gt;On building the site itself, I just converted some of my old wordpress posts to Markdown, which should be published along with this post. The automatic converter doesn&amp;#8217;t work too well, since many of posts contains some really badly formed markups, so I ended up manually converting the most of posts. I also took the chance to just remove many of the rants/silly posts, not saying that there aren&amp;#8217;t any silly posts left&amp;nbsp;anyway.&lt;/p&gt;
+&lt;p&gt;I am still playing around with the pelican configurations and options, on how to setup different static pages, building a theme, etc. Speaking about the theme, I drafted a theme of my&amp;nbsp;own.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/8615163439/" title="Snap 2013-04-01 at 11.50.50 by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8394/8615163439_30ea63f405_c.jpg" width="800" height="788" alt="Screenshot"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Initially I liked it quite a bit, but after leaving it there for a few days, when I came back to work on it again, I found it to be not very attractive anymore. So, no need to say, I scrapped it, and started working from scratch. This time, planning the overall sites, starting from the landing page, static pages, comments, and of course the blog itself. Of course, it won&amp;#8217;t be around anytime soon. For the time being, the default Pelican theme seems more than good enough for&amp;nbsp;me.&lt;/p&gt;</content><category term="personal"></category></entry><entry><title>Hello, Pelican</title><link href="https://hndr.me/blog/hello_pelican" rel="alternate"></link><published>2013-03-15T13:19:00+08:00</published><updated>2013-03-15T13:19:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2013-03-15:/blog/hello_pelican</id><summary type="html">&lt;p&gt;Well, it has been a while since I posted anything or do anything with my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Well, it has been a while since I posted anything or do anything with my website for that matter. I think I haven&amp;#8217;t posted anything since I moved to wordpress.com, but well, its time to start playing&amp;nbsp;again.&lt;/p&gt;
+&lt;p&gt;So, again, I moved almost everything. Hosting, domain, and also the blogging platform. I have been wanting to try out some of the static site generator for a while now. The most popular one seems to be &lt;a href="https://github.com/mojombo/jekyll"&gt;Jekyll&lt;/a&gt;. It is built on Ruby, and seems like a lot of people are using it. Problem is, it is kind of a pain to setup on Windows, and I wanted to be able to built things for it, or at least my own theme for my blog, and my knowledge of Ruby doesn&amp;#8217;t go too far beyond the Hello World. So I continued my search, this time, specifically looking for a static site generator built on something that I can program in, maybe it is C#, Javascript, &lt;span class="caps"&gt;PHP&lt;/span&gt;, or of course&amp;nbsp;Python.&lt;/p&gt;
+&lt;p&gt;And indeed I found quite a lot of awesome projects for Python. The most famous one seems to be &lt;a href="https://github.com/hyde/hyde"&gt;Hyde&lt;/a&gt;. One problem though, the documentation seems to be severely lacking. I went through the website for almost an hour, and I barely have any idea on how to use and customize it. Maybe I&amp;#8217;ll take another look at it when my Python skills have&amp;nbsp;improved.&lt;/p&gt;
+&lt;p&gt;Then, I found &lt;a href="http:///www.github.com/getpelican"&gt;Pelican&lt;/a&gt;. It is also written in Python, and it&amp;#8217;s &lt;a href="http://docs.getpelican.com"&gt;documentation&lt;/a&gt; is just delightful. It shows you how to get started easily, and also how to customized it as needed. Simply awesome. It is also super easy to setup. There is also a Make configuration file that can be used to automate a bunch of stuffs, but the basic commands are easy enough to use. There is a also a script to import data from other blogging platforms, which maybe I&amp;#8217;ll take a look at&amp;nbsp;later.&lt;/p&gt;</content></entry><entry><title>Some XAML Syntax to Remember</title><link href="https://hndr.me/blog/some-xaml-syntax-to-remember" rel="alternate"></link><published>2012-08-14T14:17:00+08:00</published><updated>2012-08-14T14:17:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-08-14:/blog/some-xaml-syntax-to-remember</id><summary type="html">&lt;p&gt;After developing for &lt;span class="caps"&gt;WPF&lt;/span&gt;/ Silverlight for a while, most people will be
 familiar with using …&lt;/p&gt;</summary><content type="html">&lt;p&gt;After developing for &lt;span class="caps"&gt;WPF&lt;/span&gt;/ Silverlight for a while, most people will be
 familiar with using &lt;span class="caps"&gt;XAML&lt;/span&gt; to declare &lt;span class="caps"&gt;UI&lt;/span&gt; elements, but even though I have
 been comfortable with &lt;span class="caps"&gt;XAML&lt;/span&gt; for quite a while, I don’t really know what
@@ -202,86 +851,7 @@ be used for many things that can be done with C#, so knowing it would hopefully
 be very useful in developing for the some of the latest Microsoft platforms (Win 8, &lt;span class="caps"&gt;WP&lt;/span&gt; 8, etc).
 But of course, it is still a markup language, and it has several limitations,
 such as lack of logic processing, and inability to create instances of objects that requires
-parameters in its&amp;nbsp;contructor.&lt;/p&gt;</content><category term="programming"></category><category term="xaml"></category><category term="c#"></category></entry><entry><title>I Bought a Xperia Sola</title><link href="https://hndr.me/blog/i-bought-a-xperia-sola" rel="alternate"></link><published>2012-07-12T17:40:00+08:00</published><updated>2012-07-12T17:40:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-07-12:/blog/i-bought-a-xperia-sola</id><summary type="html">&lt;p&gt;I bought a new&amp;nbsp;phone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="Xperia Sola" src="http://api.sonymobile.com/files/xperia-sola-black-464x515.png"&gt;&lt;/p&gt;
-&lt;p&gt;Few days ago, I bought a new phone, &lt;a href="http://www.sonymobile.com/global-en/products/phones/xperia-sola/"&gt;Sony Xperia Sola&lt;/a&gt;. Yes, its an
-Android phone. The Lumia phones are simply fucked up, no upgrade path to
-&lt;span class="caps"&gt;WP8&lt;/span&gt;, and the price that for some reason aren’t going down, I simply
-can’t objectively spend my money on it. In addition, without even any
-news of when the new Windows Phone 8 are coming out and their price, I
-don’t think I can wait. This doesn’t mean that I will stop developing
-for &lt;span class="caps"&gt;WP&lt;/span&gt;, I might buy one for development purpose if they offer a solid
-phone at a reasonable price when &lt;span class="caps"&gt;WP8&lt;/span&gt; comes out, but then again, without
-any news on the new development platform either, it doesn’t mean I will
-continue developing for &lt;span class="caps"&gt;WP&lt;/span&gt;&amp;nbsp;either.&lt;/p&gt;
-&lt;p&gt;Well, enough about &lt;span class="caps"&gt;WP&lt;/span&gt;, lets talk about the new phone instead. The reason
-for me choosing this phone is of course, the price-value ratio. It has a
-dual-core &lt;span class="caps"&gt;CPU&lt;/span&gt;, &lt;span class="caps"&gt;SD&lt;/span&gt; card slot, &lt;span class="caps"&gt;NFC&lt;/span&gt;, and even a promise of &lt;span class="caps"&gt;ICS&lt;/span&gt; upgrade by
-Sony. I also considered other options such as &lt;span class="caps"&gt;HTC&lt;/span&gt; One V and Samsung
-Galaxy S Advance, but after pondering about all kinds of stuff, I
-decided that the Xperia Sola is the best option after all. Now I can
-play with Android without dealing with the &lt;span class="caps"&gt;PITA&lt;/span&gt; emulator that is
-included with the &lt;span class="caps"&gt;SDK&lt;/span&gt;. The screen is pretty bright and clear, and the
-loudspeaker are also pretty loud. It also came with 4 &lt;span class="caps"&gt;NFC&lt;/span&gt; tags that I
-can play&amp;nbsp;with.&lt;/p&gt;
-&lt;p&gt;Using Android is pretty fun. Most of the essential apps out there are
-available for Android, and I can almost do most things that I do on a &lt;span class="caps"&gt;PC&lt;/span&gt;
-with my phone. I installed several reading apps, such as &lt;a href="https://play.google.com/store/apps/details?id=com.aldiko.android&amp;amp;feature=search_result"&gt;Aldiko&lt;/a&gt;,
-&lt;a href="https://play.google.com/store/apps/details?id=flipboard.app&amp;amp;feature=search_result"&gt;Flipboard&lt;/a&gt;, and several others. The email client is also pretty
-awesome. Other than that, I still need to get used to the on-screen
-keyboard, but I think it will be manageable. Although it seems like the
-power of Android is also its weak points, in less than a day of using
-the phone, I had several apps crash and freezes for no reason, only
-cause I can think of is because the many process it is running at once,
-which also causes the battery life to be quite&amp;nbsp;short.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/7554965796/" title="IMG_0007 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7254/7554965796_574e699c83_b.jpg" width="933" height="622" alt="IMG_0007"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Well, that’s all for now, I am looking forward to discovering more of
-this&amp;nbsp;phone.&lt;/p&gt;</content><category term="android"></category><category term="phone"></category><category term="xperia sola"></category></entry><entry><title>End of Internship</title><link href="https://hndr.me/blog/end-of-internship" rel="alternate"></link><published>2012-07-07T16:35:00+08:00</published><updated>2012-07-07T16:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-07-07:/blog/end-of-internship</id><summary type="html">&lt;p&gt;Yesterday was the last day of my internship at Terato Tech, 20 weeks has
-passed …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Yesterday was the last day of my internship at Terato Tech, 20 weeks has
-passed by so quickly. I had a lot of fun, learned a lot of new stuffs,
-and last but not least, met a lot of interesting&amp;nbsp;people.&lt;/p&gt;
-&lt;p&gt;I had to leave the project I was working on, and that is a little bit
-sad, but I hope I can at least tie up some of the loose ends before I
-stop working on it to move on the next project. There are many things
-that I wished I had done better, I wish that I actually write a proper
-framework for  the game instead of just writing a bunch of messy codes,
-but I hope the code that I wrote won’t cause too much&amp;nbsp;trouble.&lt;/p&gt;
-&lt;p&gt;So, well, all in all, I enjoyed my internship very much, and I am very
-grateful for the company for having me. Thank you&amp;nbsp;Terato.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/7559541998/" title="IMG_20120705_230845 by p.hdra, on Flickr"&gt;&lt;img src="http://farm9.staticflickr.com/8294/7559541998_b7f235f911_b.jpg" width="1024" height="768" alt="IMG_20120705_230845"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I would have to go back to &lt;span class="caps"&gt;UTM&lt;/span&gt; to wait for my visa to be ready before I
-go back, so well, we’ll&amp;nbsp;see.&lt;/p&gt;</content><category term="internship"></category></entry><entry><title>Blocking Time Sucking Sites</title><link href="https://hndr.me/blog/blocking-time-sucking-sites" rel="alternate"></link><published>2012-06-26T23:25:00+08:00</published><updated>2012-06-26T23:25:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-26:/blog/blocking-time-sucking-sites</id><summary type="html">&lt;p&gt;This is just one thing that I do, and it involves some editing on a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is just one thing that I do, and it involves some editing on a
-system file, so do it on your own risk. Alright, so one thing that I do to avoid wasting too much time on a
-&lt;a href="http://www.9gag.com"&gt;just-for-fun&lt;/a&gt; site, is to completely block it on my &lt;span class="caps"&gt;OS&lt;/span&gt;. Of course, I
-can still easily unblock it, but since I am very lazy, most of the time
-I simply won’t bother doing&amp;nbsp;it.&lt;/p&gt;
-&lt;p&gt;Ok, the way I do this is by editing the host file on my &lt;span class="caps"&gt;OS&lt;/span&gt;, and point
-the domain name of the website that I wanted to stop visiting to the
-localhost, which unless I am running a web server at the time, will
-simply point to&amp;nbsp;nothing.&lt;/p&gt;
-&lt;p&gt;On Windows, the hosts file is located at
-&lt;code&gt;C:\Windows\System32\drivers\etc\hosts&lt;/code&gt;. Open up that file, and you should
-see some description of the file, and an example of the host entry for
-the localhost, which points to 127.0.0.1. The format for the host file
-is like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;Destination to route to&amp;gt; &amp;lt;Url that you want toroute&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;So, for example, in my hosts file, I have this&amp;nbsp;line:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;127.0.0.1 www.9gag.com
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;So, whenever I enter &lt;code&gt;www.9gag.com&lt;/code&gt;
-to my browser, I would get routed to my localhost. Simple&amp;nbsp;enough.&lt;/p&gt;
-&lt;p&gt;On Linux, the steps are the same, the hosts file is located at
-&lt;code&gt;/etc/hosts&lt;/code&gt;. The format are the same as it is on&amp;nbsp;Windows.&lt;/p&gt;
-&lt;p&gt;Note that to edit these files, you need to have administrator or root
-access on the&amp;nbsp;&lt;span class="caps"&gt;OS&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;If you don’t want to edit individual hosts file on every computer you
-own, an alternative is to use a service such as &lt;code&gt;OpenDNS&lt;/code&gt;_. You can
-register for an account, customize the filtering, and simply configure
-the internet access on your computer to use the service. That’s all for&amp;nbsp;now.&lt;/p&gt;</content><category term="hosts"></category></entry><entry><title>Windows Phone 8, WinRT, and so on.</title><link href="https://hndr.me/blog/windows-phone-8-winrt-and-so-on" rel="alternate"></link><published>2012-06-24T13:01:00+08:00</published><updated>2012-06-24T13:01:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-24:/blog/windows-phone-8-winrt-and-so-on</id><summary type="html">&lt;p&gt;Some thoughts on the new announcement regarding Windows&amp;nbsp;Phone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post is basically a rant.&amp;nbsp;&lt;span class="caps"&gt;TLDR&lt;/span&gt;:&lt;/p&gt;
+parameters in its&amp;nbsp;contructor.&lt;/p&gt;</content><category term="programming"></category><category term="xaml"></category><category term="c#"></category></entry><entry><title>Windows Phone 8, WinRT, and so on.</title><link href="https://hndr.me/blog/windows-phone-8-winrt-and-so-on" rel="alternate"></link><published>2012-06-24T13:01:00+08:00</published><updated>2012-06-24T13:01:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-06-24:/blog/windows-phone-8-winrt-and-so-on</id><summary type="html">&lt;p&gt;Some thoughts on the new announcement regarding Windows&amp;nbsp;Phone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post is basically a rant.&amp;nbsp;&lt;span class="caps"&gt;TLDR&lt;/span&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;span class="caps"&gt;AWESOME&lt;/span&gt;: &lt;span class="caps"&gt;WP8&lt;/span&gt; is awesome! Native code support, multicore processors,
@@ -1626,7 +2196,7 @@ declared with ordinary&amp;nbsp;brackets.&lt;/p&gt;
 &lt;p&gt;Those are the basic data structures in Python, each of those are kind of
 similar to each other, but they have specific purposes that are unique
 to each of them. For example, a tuple can contain a list of another
-list, and a list can also nest several level of&amp;nbsp;lists.&lt;/p&gt;</content></entry><entry><title>WP7 Apps – Swatch 7</title><link href="https://hndr.me/blog/wp7-apps-swatch-7" rel="alternate"></link><published>2012-01-17T00:14:00+08:00</published><updated>2012-01-17T00:14:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-17:/blog/wp7-apps-swatch-7</id><summary type="html">&lt;p&gt;Summary&lt;/p&gt;</summary><content type="html">&lt;p&gt;Another &lt;span class="caps"&gt;WP&lt;/span&gt; app on the marketplace,
+list, and a list can also nest several level of&amp;nbsp;lists.&lt;/p&gt;</content><category term="programming"></category><category term="progress"></category></entry><entry><title>WP7 Apps – Swatch 7</title><link href="https://hndr.me/blog/wp7-apps-swatch-7" rel="alternate"></link><published>2012-01-17T00:14:00+08:00</published><updated>2012-01-17T00:14:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2012-01-17:/blog/wp7-apps-swatch-7</id><summary type="html">&lt;p&gt;Summary&lt;/p&gt;</summary><content type="html">&lt;p&gt;Another &lt;span class="caps"&gt;WP&lt;/span&gt; app on the marketplace,
 &lt;a href="http://www.windowsphone.com/en-US/apps/dca01efc-aaf9-4785-a165-642d8b8def34"&gt;http://www.windowsphone.com/en-&lt;span class="caps"&gt;US&lt;/span&gt;/apps/dca01efc-aaf9-4785-a165-642d8b8def34&lt;/a&gt;.
 It’s a pretty simple color picker that lets you pick a color, and provide you with the &lt;span class="caps"&gt;RGB&lt;/span&gt; value and &lt;span class="caps"&gt;HEX&lt;/span&gt; code. There are two kind of picker available, the usual color slider and a honeycomb&amp;nbsp;picker.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6720680373/" title="4 by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7164/6720680373_4ddbfcb8ef_b.jpg" width="480" height="800" alt="4"&gt;&lt;/a&gt;&lt;/p&gt;
@@ -1873,4 +2443,144 @@ integer, a string, or any other type depending on the&amp;nbsp;value.&lt;/p&gt;
 
 &lt;span class="c1"&gt;#we can still print it in the same way&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="programming"></category><category term="python"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="programming"></category><category term="python"></category></entry><entry><title>Kinect Project Status Update I - Tools For Building a Kinect Applications</title><link href="https://hndr.me/blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications" rel="alternate"></link><published>2011-10-14T12:24:00+08:00</published><updated>2011-10-14T12:24:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-14:/blog/kinect-project-status-update-i-tools-for-building-a-kinect-applications</id><summary type="html">&lt;p&gt;Update on my attempts on working with&amp;nbsp;Kinect.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6266069590/" title="Kinect by p.hdra, on Flickr"&gt;&lt;img src="http://farm7.staticflickr.com/6177/6266069590_5f69b81c46_b.jpg" width="1024" height="681" alt="Kinect"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Previously, I wrote about testing the water with Kinect, and well, it
+seems like I am drowning now. The development process is much more
+complicated that I&amp;nbsp;thought.&lt;/p&gt;
+&lt;p&gt;To begin with, there are several drivers available for the Kinect, the
+most commonly used are the official &lt;a href="http://research.microsoft.com/en-us/um/redmond/projects/kinectsdk/"&gt;Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt; from
+Microsoft&lt;/a&gt;, the &lt;a href="http://www.openni.org"&gt;OpenNI&lt;/a&gt; from PrimeSense, and the community maintained
+&lt;a href="http://www.openkinect.org"&gt;OpenKinect&lt;/a&gt; (libfreenect). So, the first problem is choosing which one
+to install on your system, sounds easy enough, but it is not. All of
+them have their own pro and cons, and they can&amp;#8217;t be installed on the
+same system side by side, so let&amp;#8217;s talk about them one by&amp;nbsp;one.&lt;/p&gt;
+&lt;p&gt;First, the Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt; from Microsoft, as expected, this &lt;span class="caps"&gt;SDK&lt;/span&gt;
+only support Windows systems, so its pretty straight forward to use it.
+The installation is pretty simple as well, download the installer, and
+run it on your computer, then you are ready to develop your own Kinect
+applications. The development process is also straight forward, open up
+Visual Studio, add the reference to the Kinect libraries, and start
+using it. Microsoft also provided us with a series of &lt;a href="http://channel9.msdn.com/coding4fun/kinect/Getting-started-with-the-Kinect-for-Windows-SDK-quickly-with-the-Kinect-Quickstarts"&gt;quick start
+videos&lt;/a&gt;, making it even easier for us get started. Developers also have
+the choice to program in either C# or C++. For the time being this is
+the one installed in my Windows&amp;nbsp;system.&lt;/p&gt;
+&lt;p&gt;But, there are several downsides to this, the &lt;span class="caps"&gt;SDK&lt;/span&gt; is still relatively
+new, so there are limited 3rd party libraries and projects, in addition,
+the license agreement that come with the &lt;span class="caps"&gt;SDK&lt;/span&gt; is pretty restricting,
+added with the fact the the source are not available, the aren&amp;#8217;t many
+hackers out there are experimenting with it compared with the other two
+options. Another catch is that it has a minimum range of 850mm from the
+sensor for the depth camera to work, this is very important, as I think
+there is a possibility that I am going to deal with finger gestures
+pretty often, the distance would make it difficult to track the fingers.
+I also haven&amp;#8217;t seen any libraries for gesture recognition provided for
+this, even the AForge.&lt;span class="caps"&gt;NET&lt;/span&gt; libraries only support the libfreenect. But
+then, the &lt;span class="caps"&gt;SDK&lt;/span&gt; is still in its beta stage, so I hope Microsoft can get
+the official release out soon, with more features and less restricting
+license&amp;nbsp;agreement.&lt;/p&gt;
+&lt;p&gt;Next up is the PrimeSense&amp;#8217;s OpenNI. PrimeSense is the company who
+developed the Kinect hardware for Microsoft. The are three primary
+components of the driver they provide. They are the OpenNI library
+itself, the &lt;span class="caps"&gt;NITE&lt;/span&gt; libraries, and the Sensor Driver. The Sensor Driver are
+used so that the computer can recognize the sensor hardware (the OpenNI
+doesn&amp;#8217;t only support the Microsoft Kinect, but it also support other
+PrimeSense compliant hardware, such as Asus&amp;#8217;s Xtion), an alternative to
+this is the &lt;a href="https://github.com/avin2/SensorKinect"&gt;avin&amp;#8217;s Sensor Kinect&lt;/a&gt; which is a fork of the OpenNI&amp;#8217;s
+Sensor driver. Next is the &lt;span class="caps"&gt;NITE&lt;/span&gt; libraries, the &lt;span class="caps"&gt;NITE&lt;/span&gt; libraries is an
+optional component, it provides the algorithms for skeletal tracking and
+other functionalities, and this library is not open source. Last, is the
+OpenNI library itself, this component provides the functionality so that
+the computer can consume the audio, color video, and depth video data
+from the&amp;nbsp;sensor.&lt;/p&gt;
+&lt;p&gt;OpenNI has been around for quite a while, and there are a lot of
+projects developed using it, it is also cross-platform. There are many
+software components that are built for it, such as the Point Cloud
+Library, and OpenCV and many others. Of course, those libraries can also
+be used for other drivers, but it would take quite a lot of work to do
+it. The main language used in this &lt;span class="caps"&gt;SDK&lt;/span&gt; is C, but there are wrappers for
+other languages provided. The driver is open source, and the license
+provide quite a lot of freedom for the developers, so there are a lot of
+projects built on&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;There is a installer wizard for Windows provided, but since I already
+installed the Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt;, I can&amp;#8217;t install it on my Windows
+system. Since I also have Ubuntu installed on my laptop, I tried to
+install it on it, but it is not as easy as I thought, after several
+build errors and other stuff, I downloaded the binaries of all three
+components, and installed it, but when i try to run any of the samples,
+bit it gives me this&amp;nbsp;error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;InitFromXml failed: Failed to set &lt;span class="caps"&gt;USB&lt;/span&gt; interface!
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I tried to build manually from the source, same error. Tried to built
+with the RedistMaker provided with the source, same error. So, I haven&amp;#8217;t
+been able to try it&amp;nbsp;out.&lt;/p&gt;
+&lt;p&gt;Last but not least, is the OpenKinect. This one is open source as well,
+and since it was one of the first Kinect hack available, there aren&amp;#8217;t
+any shortage of project samples and 3rd party software components, the
+AForge.&lt;span class="caps"&gt;NET&lt;/span&gt; framework also support this driver. Like the OpenNI,
+OpenKinect is also a cross platform sofware, so we can install it on
+Windows, Linux, or Mac &lt;span class="caps"&gt;OSX&lt;/span&gt;. The installation is much more
+straightforward compared to OpenNI, there are only one component to
+install, which is the libfreenect. The other dependencies can be easily
+found as well. The one of the optional component is the
+libfreenect-demos, which provides you with several sample project. Just
+like the OpenNI, i tried to install it on my Ubuntu system. Tried to run
+the sample, an&amp;nbsp;error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Could not claim interface on camera: -6
+Could not open device
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, I haven&amp;#8217;t been able to run this one&amp;nbsp;either.&lt;/p&gt;
+&lt;p&gt;So for now, I only have access to the Kinect for Windows &lt;span class="caps"&gt;SDK&lt;/span&gt;, I guess I
+should just meddle with the Kinect &lt;span class="caps"&gt;SDK&lt;/span&gt; for now, and keep looking for
+solutions on the other two&amp;nbsp;alternatives.&lt;/p&gt;</content><category term="kinect"></category><category term="programming"></category></entry><entry><title>Testing the Water on Kinect Applications</title><link href="https://hndr.me/blog/testing-the-water-on-kinect-applications" rel="alternate"></link><published>2011-10-02T16:01:00+08:00</published><updated>2011-10-02T16:01:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-10-02:/blog/testing-the-water-on-kinect-applications</id><summary type="html">&lt;p&gt;Okay, so I am started planning my final year project this semester, and
+for this …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Okay, so I am started planning my final year project this semester, and
+for this first phase, I am only required to do the planning, the
+documentation and well, the report stuffs, but, since I don&amp;#8217;t have any
+pictures of the Microsoft Kinect application development, I decided to
+do some coding on it as&amp;nbsp;well.&lt;/p&gt;
+&lt;p&gt;Since there are so many possibilities on what the Kinect can do, there
+are several choices on what kind of application I am going to do, I need
+to narrow it down. My project is trying to use the Kinect to recognize
+sign language, and translate them. In other words, besides doing the
+skeleton tracking, I also need to do some form of gesture recognition,
+and also, I need to at least know a little bit of the sign language
+itself. Of course, I still know very little of those&amp;nbsp;things.&lt;/p&gt;
+&lt;p&gt;First thing to do, of course I need to look up for some samples of the
+Kinect hack itself, even though it is not doing the same thing, at least
+it can help me get an idea what the Kinect is capable of. It is not a
+difficult thing, a little bit of search on any search engine would get
+me a lot of&amp;nbsp;results.&lt;/p&gt;
+&lt;p&gt;Here is the one that impressed me the most: &lt;a href="http://www.youtube.com/watch?v=quGhaggn3cQ"&gt;http://www.youtube.com/watch?v=quGhaggn3cQ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The program can scan the room with the Kinect, and the program will
+process the input from the Kinect, and create a 3d scene with it.
+Imagine what it can do if the Kinect&amp;#8217;s image sensor have higher
+resolution. I wonder how they did that. Of course, that is much more
+sophisticated than what I am trying to do, just by looking at the people
+involved in the project, you can see how serious that project&amp;nbsp;is.&lt;/p&gt;
+&lt;p&gt;Here are some of the impressive works: &lt;a href="http://www.youtube.com/watch?v=ho8KVOe_y08"&gt;http://www.youtube.com/watch?v=ho8KVOe_y08&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;and this video shows how it can be integrated with other devices from
+Microsoft: &lt;a href="http://www.youtube.com/watch?v=2mktWd0-WGs"&gt;http://www.youtube.com/watch?v=2mktWd0-WGs&lt;/a&gt;&lt;/p&gt;</content><category term="kinect"></category><category term="programming"></category></entry><entry><title>My First Android Application</title><link href="https://hndr.me/blog/my-first-android-application" rel="alternate"></link><published>2011-07-02T22:35:00+08:00</published><updated>2011-07-02T22:35:00+08:00</updated><author><name>Hendra</name></author><id>tag:hndr.me,2011-07-02:/blog/my-first-android-application</id><summary type="html">&lt;p&gt;Ok, I think I mentioned that I (with a partner in my group) am
+developing …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Ok, I think I mentioned that I (with a partner in my group) am
+developing an Android application for a class assignment, and here it
+is, its finished, but not a really usable apps&amp;nbsp;though.&lt;/p&gt;
+&lt;p&gt;It’s a app to encrypt &lt;span class="caps"&gt;SMS&lt;/span&gt; before sending it. It uses an asymmetric
+encryption algorithm, &lt;span class="caps"&gt;RSA&lt;/span&gt;, meaning that the key exchange needs to be
+done before sending any encrypted message. The encryption and decryption
+can only be done within the apps&amp;nbsp;itself.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.flickr.com/photos/hendra2392/6678908805/" title="Untitled by p.hdra, on Flickr"&gt;&lt;img src="http://farm8.staticflickr.com/7015/6678908805_b0da41bdb0_z.jpg" width="517" height="282" alt="Untitled"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The development process aren’t very intuitive &lt;span class="caps"&gt;IMO&lt;/span&gt;, the emulator are just
+plain unusable, and eclipse integration just didn’t feel ‘native’.
+Switching between code view and design view takes several seconds to
+load, but then, maybe that’s just my laptop. The main programming
+language used is Java, so there isn’t too much problem there, but I am
+not really used to the &lt;span class="caps"&gt;UI&lt;/span&gt; markup system, maybe I need more experience to
+get into it. Still, the biggest problem is the emulator, honestly,
+during the development process, whenever I did some change, I always
+feel reluctant to test it, because everything is just so slow. I don’t
+have any plan yet, but maybe I will look more into this sometime in the&amp;nbsp;future.&lt;/p&gt;
+&lt;p&gt;Well, as mentioned before, its not a really usable app, I don’t really
+understand the &lt;span class="caps"&gt;RSA&lt;/span&gt; algorithm, and I don’t put any effort in making the
+interface good looking either. But then,&amp;nbsp;whatever,&lt;/p&gt;</content><category term="android"></category><category term="programming"></category><category term="school"></category></entry></feed>

@@ -51,9 +51,9 @@ moving it to the failed jobs&nbsp;store.</p>
 </pre></div>
 
 
-<p>One thing to keep in mind is that supervisord also includes a way to control the 
+<p>One thing to keep in mind is that supervisord also includes a way to control the
 <a href="http://supervisord.org/configuration.html">maximum number of attempts to start a process after serial crashes</a>.
-When this limit is reached, it will stop trying to restart the process and the process will be put into 
+When this limit is reached, it will stop trying to restart the process and the process will be put into
 the <code>FATAL</code> state. This number is controlled via the configuration entry called <code>startretries</code>, and it defaults to <code>3</code>.</p>
 <p>In most cases, one wouldn&#8217;t need to change this setting. But, if you set the number of retries
 on job queue to be larger than <code>3</code>, you need to make sure that the <code>startretries</code> is also
@@ -76,12 +76,12 @@ doesn&#8217;t get started anymore, <em>halting the entire job queue</em>.</p>
 
 <p>So, remember, make sure to keep the queue worker tries equal to or smaller than the supervisord&#8217;s <code>startretries</code>
 to make sure the failing jobs get moved to the failed jobs queue before they halt the entire job queue.
-Of course this won&#8217;t help if the queue is full of jobs that keeps failing, but in that scenario, you 
+Of course this won&#8217;t help if the queue is full of jobs that keeps failing, but in that scenario, you
 should really take a look at your queue worker code&nbsp;anyway.</p>
         </article>
 
         <footer>
-            <p>This entry is posted in <a href="https://hndr.me/category/2016.html">2016</a>.</p>
+            <p>This entry is posted in <a href="https://hndr.me/category/software.html">Software</a>.</p>
         </footer>
 
 <div class="comments">

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>    Filtering Ecto Queries
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic|Merriweather:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://hndr.me/theme/css/cid.css">
+        <link href="https://hndr.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HNDR.ME Atom Feed" />
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+            <div class="container">
+
+<header class="blog-header">
+    <h1><a href="https://hndr.me">HNDR.ME</a></h1>
+    <p> A nerd pretending to be a software engineer. </p>
+    <nav>
+        <a href="https://hndr.me/blog">INDEX</a>
+        <a href="https://hndr.me/archives">ARCHIVES</a>
+        <a href="https://hndr.me/categories">CATEGORIES</a>
+    </nav>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Filtering Ecto&nbsp;Queries</h1>
+            <p class="date">Written on <time datetime="2019-05-11T20:40:00+08:00">May 11, 2019</time></p>
+        </header>
+
+        <article>
+            <p>Say you have blogging app with a <code>Post</code> schema, and you want to be able to search for posts that are written by certain author, posts that where published after a certain date, or posts that contains a certain&nbsp;string.</p>
+<p>That is pretty simple to do with Ecto. You can start with something like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Blog</span> <span class="k">do</span>
+  <span class="kd">def</span> <span class="n">get_posts</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span> <span class="k">do</span>
+    <span class="nc">Post</span>
+    <span class="o">|&gt;</span> <span class="n">where</span><span class="p">(</span><span class="ss">author_id</span><span class="p">:</span> <span class="n">filters</span><span class="p">[</span><span class="ss">:author_id</span><span class="p">])</span>
+    <span class="o">|&gt;</span> <span class="n">where</span><span class="p">([</span><span class="n">p</span><span class="p">],</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">filter</span><span class="p">[</span><span class="ss">:publication_date</span><span class="p">])</span>
+    <span class="o">|&gt;</span> <span class="n">where</span><span class="p">([</span><span class="n">p</span><span class="p">],</span> <span class="n">like</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="o">^</span><span class="n">filters</span><span class="p">[</span><span class="ss">:title</span><span class="p">]</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">))</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>One obvious issue with this is that if you don&#8217;t provide a value for a particular key, Ecto will pass a <code>nil</code> into the query, which is not what you want. You can easily work around this by pattern-matching for the value passed into the filter, and returning the query as is if it matches <code>nil</code>. The schema module seems like a pretty good place for this, which also gives the added benefit of abstracting away the column implementation detail for each of the filtering&nbsp;mechanism.</p>
+<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Blog.Schema.Post</span> <span class="k">do</span>
+  <span class="n">schema</span> <span class="s2">&quot;posts&quot;</span> <span class="k">do</span>
+    <span class="c1">#.....</span>
+  <span class="k">end</span>
+
+  <span class="kd">def</span> <span class="n">by_author</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="no">nil</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">query</span>
+  <span class="kd">def</span> <span class="n">by_author</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">author_id</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">query</span>
+    <span class="o">|&gt;</span> <span class="n">where</span><span class="p">(</span><span class="ss">author_id</span><span class="p">:</span> <span class="n">author_id</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="kd">def</span> <span class="n">after_publication_date</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="no">nil</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">query</span>
+  <span class="kd">def</span> <span class="n">after_publication_date</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">query</span>
+    <span class="o">|&gt;</span> <span class="n">where</span><span class="p">([</span><span class="n">p</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">publication_date</span> <span class="o">&gt;</span> <span class="o">^</span><span class="n">date</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="kd">def</span> <span class="n">title_contains</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="no">nil</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">query</span>
+  <span class="kd">def</span> <span class="n">title_contains</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">query</span>
+    <span class="o">|&gt;</span> <span class="n">where</span><span class="p">([</span><span class="n">p</span><span class="p">],</span> <span class="n">like</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="o">^</span><span class="n">title</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">))</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>These functions can be consumed as&nbsp;such:</p>
+<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Blog</span> <span class="k">do</span>
+  <span class="kd">def</span> <span class="n">get_posts</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span> <span class="k">do</span>
+    <span class="nc">Post</span>
+    <span class="o">|&gt;</span> <span class="nc">Post</span><span class="o">.</span><span class="n">by_author</span><span class="p">(</span><span class="n">filter</span><span class="p">[</span><span class="ss">:author_id</span><span class="p">])</span>
+    <span class="o">|&gt;</span> <span class="nc">Post</span><span class="o">.</span><span class="n">after_publication_date</span><span class="p">(</span><span class="n">filter</span><span class="p">[</span><span class="ss">:publication_date</span><span class="p">])</span>
+    <span class="o">|&gt;</span> <span class="nc">Post</span><span class="o">.</span><span class="n">title_contains</span><span class="p">(</span><span class="n">filter</span><span class="p">[</span><span class="ss">:title</span><span class="p">])</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>So far so good, but all the match-clauses for the <code>nil</code> value is getting pretty repetitive. Plus, if you were to add a new filtering option, you&#8217;d have to make the change on multiple places; once to add the filter function on the schema module, and also another one on the service module/ context module to call the new filter&nbsp;function.</p>
+<p>There is another way to do this. Since in Elixir a map can be easily converted into a keyword list, and since keyword lists consists of 2-elements tuples, it is a good candidate for pattern&nbsp;matching.</p>
+<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Blog.Schema.Post</span> <span class="k">do</span>
+  <span class="n">schema</span> <span class="s2">&quot;posts&quot;</span> <span class="k">do</span>
+    <span class="c1">#.....</span>
+  <span class="k">end</span>
+
+  <span class="kd">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_map</span><span class="p">(</span><span class="n">filters</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nc">Map</span><span class="o">.</span><span class="n">to_list</span><span class="p">(</span><span class="n">filters</span><span class="p">))</span>
+  <span class="kd">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[]),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">query</span>
+  <span class="kd">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[{</span><span class="ss">:author_id</span><span class="p">,</span> <span class="n">author_id</span><span class="p">}</span> <span class="o">|</span> <span class="n">filters</span><span class="p">])</span> <span class="k">do</span>
+    <span class="n">where</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="ss">author_id</span><span class="p">:</span> <span class="n">author_id</span><span class="p">)</span>
+    <span class="o">|&gt;</span> <span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="kd">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[{</span><span class="ss">:publication_date</span><span class="p">,</span> <span class="n">date</span><span class="p">}</span> <span class="o">|</span> <span class="n">filters</span><span class="p">])</span> <span class="k">do</span>
+    <span class="n">where</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">publication_date</span> <span class="o">&gt;</span> <span class="o">^</span><span class="n">date</span><span class="p">)</span>
+    <span class="o">|&gt;</span> <span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="kd">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[{</span><span class="ss">:title</span><span class="p">,</span> <span class="n">title</span><span class="p">}</span> <span class="o">|</span> <span class="n">filters</span><span class="p">])</span> <span class="k">do</span>
+    <span class="n">where</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">like</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="o">^</span><span class="n">title</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">))</span>
+    <span class="o">|&gt;</span> <span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="kd">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="bp">_</span> <span class="o">|</span> <span class="n">filters</span><span class="p">]),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>It can be used with&nbsp;simply:</p>
+<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Blog</span> <span class="k">do</span>
+  <span class="kd">def</span> <span class="n">get_posts</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span> <span class="k">do</span>
+    <span class="nc">Post</span>
+    <span class="o">|&gt;</span> <span class="nc">Post</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>It accepts both map and keyword list as argument, as the function will pattern match for a map and convert it into a keyword list. That part can be omitted if you prefer to restrict the filter to a keyword list for some&nbsp;reason.</p>
+<p>The <code>filter</code> function will go through all the keys within the filters that is passed as argument. It uses Elixir&#8217;s pattern matching feature to extract the head and the tails of the filters list. If the head matches a key that it knows how to filter, it will apply the filter to the query and call the same function recursively with the remaining items in the tail. If it run into an unknown key, it will ignore the head and call the function again with the remaining tail and the unchanged query. And finally, when it has gone through all the items in the list, it will return the&nbsp;query.</p>
+<p>As you can see, it is a pretty simple technique, there is no fancy math concept or complicated algorithms involved. It is implemented with the basic features of Elixir&#8217;s pattern matching, function guard, recursive function&nbsp;call.</p>
+<p>From what I&#8217;ve seen, one of the more common road-bumps in learning Elixir from a <span class="caps">OOP</span> background is figuring out where some of these concepts come to use when you can use conditionals and loops that they are familiar with to achive the same thing. I&#8217;m not going to attempt to explain when/how to use these concepts in this post, but I&#8217;ve heard from some of my junior team members that some of these concepts finally &#8220;clicked&#8221; in their mind when they see it being used in the example above. Hopefully it also does something for you to get a better sense of how to better use Elixir&#8217;s language features to write a more succinct, more declarative idiomatic&nbsp;code.</p>
+        </article>
+
+        <footer>
+            <p>This entry is posted in <a href="https://hndr.me/category/software.html">Software</a>.</p>
+        </footer>
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hndrblog';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+                <li><a href="https://hndr.me/blog">Blog</a></li>
+            <li><a href="https://github.com/hdra">Github</a></li>
+            <li><a href="https://twitter.com/_hdra">Twitter</a></li>
+    <script type="text/javascript">
+        // JS ROT13 by http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/
+        document.write( "<yv><n uers=\"znvygb:uraqen2392@tznvy.pbz\" ery=\"absbyybj\">Rznvy</n></yv>".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+    </script>
+    </ul>
+
+    <p class="disclaimer">
+        Contents is <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">cc by-nc-sa</a>. All opinions are of my own.
+    </p>
+</footer>
+            </div>
+<script>
+    var _gaq=[['_setAccount','UA-40075063-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+    </body>
+</html>
